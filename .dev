@@ -1,6 +1,0 @@
-08-04-2024
-- Fix Jurnal Presensi Bagian Absen Keluar
-- Penyesuaian Routing Presensi Absen, Hadir, Izin ( Masih Belum Fix All )
-- Penambahan Kolom Approved Pada tabel u_attendance
-- Penambahan Input Form Gender Pada UserManager Bagian Admin, Staff
--
