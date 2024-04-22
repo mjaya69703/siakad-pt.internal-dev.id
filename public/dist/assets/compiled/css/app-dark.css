@@ -8709,10 +8709,10 @@ html[data-bs-theme="dark"] .dropdown-menu {
 html[data-bs-theme="dark"] .dropdown-item {
     transition: all 0.5s;
 }
-html[data-bs-theme="dark"] .dropdown-menu-end.show {
+/* html[data-bs-theme="dark"] .dropdown-menu-end.show {
     top: 100%;
     right: 0;
-}
+} */
 html[data-bs-theme="dark"] .dropdown .avatar {
     margin-right: 0.6rem;
 }
@@ -8720,6 +8720,12 @@ html[data-bs-theme="dark"] .user-dropdown-status,
 html[data-bs-theme="dark"] .user-dropdown-name {
     margin: 0;
 }
+@media screen and (max-width: 576px) {
+    .dropdown-center[data-bs-popper] {
+        left: 50%;
+        transform: translateX(-50%)
+
+        }    }
 html[data-bs-theme="dark"] .form-group {
     margin-bottom: 0.7rem;
 }

@@ -3415,6 +3415,10 @@ fieldset:disabled .btn {
         right: 0;
         left: auto;
     }
+    .dropdown-center[data-bs-popper] {
+        left: 50%;
+        transform: translateX(-50%)
+    }
 }
 @media (min-width: 768px) {
     .dropdown-menu-md-start {
