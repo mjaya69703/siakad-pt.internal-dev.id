@@ -1,0 +1,30 @@
+## CARA KERJA DEVOPS
+
+A. Tahap Pertama - Planning
+    1. Riset Dan Mencatat Semua Kebutuhan Aplikasi
+        a. Menganalisa role apa saja yang dibutuhkan
+        b. Menganalisa fitur apa saja yang dibutuhkan
+        c. Menganalisa tampilan apa saja yang dibutuhkan
+            i. Halaman Utama Website ( For Guest )
+            ii. Halaman Admin Website ( For Auth )
+        d. Membuat penjadwalan mengenai Fase Fase DevOps
+
+    2. Perancangan Tampilan dan Halaman Website
+        a. Mendesain Halaman Utama Website ( For Guest )
+        b. Mendesain Halaman Admin Website ( For Auth )
+
+B. Tahap Kedua - Code
+    1. Melakukan Coding Halaman Website dan Tampilan Website
+        a. Melakukan Coding Halaman Utama Website
+        b. Melakukan Coding Halaman Admin Website
+
+    2. Melakukan Coding Fitur Untuk Halaman Website
+        a. Melakukan Coding Fitur Halaman Utama Website
+        b. Melakukan Coding Fitur Halaman Admin Website
+
+C. Tahap Ketiga - Build
+    1. Melakukan pull ke GitHub
+D. Tahap Keempat - Test
+E. Tahap Kelima - Release
+F. Tahap Keenam - Deploy
+G. Tahap ketujuh - Monitor

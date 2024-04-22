@@ -14,22 +14,29 @@ Nah pada model User ini kita memiliki beberapa Hak Akses diantaranya
 - Hak Akses Koordinator Fakultas ( value type = 1)
     Hak Akses Koordinator Fakultas merupakan roles yang difungsikan sebagai pengelola Program Studi, Mata Kuliah, Kurikulum, dan Kalender Akademik. Lalu sebagai langkah keamanan untuk meminimalisir terjadinya resiko terhadap perubahan atau penghapusan data secara tidak sengaja, Maka kita akan menambahkan Pop-Up "Security Code" setiap user yang ingin melakukan action Update data dan Delete Data.Berikut rencana fitur khusus yang akan dimiliki oleh Role Fakultas Koordinator :
 
-    0. Fitur Kelola Fakultas
-    Pada fitur kelola Kurikulum ini nantinya sebagai koordinator akan bisa melakukan Create Data, Read Data, Update Data dan Delete Data. Lalu untuk fitur ini akan terdapat beberapa kolom diantaranya yaitu Nama Fakultas, Kode Fakultas ( 3 Huruf Kapital ), Kepala Fakultas. Pada kolom Kode Fakultas ini akan digunakan sebagai "Key" atau "Kunci" untuk menghubungkan ke beberapa tabel lain seperti Program Studi untuk mengambil data nama Fakultas, Kurikulum untuk mengambil data nama Fakultas dan Mata Kuliah untuk dijadikan sebagai Format kode mata kuliah.
+    0. Fitur Kelola Fakultas ( CRUD )
+    Pada fitur kelola Kurikulum ini nantinya sebagai koordinator akan bisa melakukan Create Data, Read Data, Update Data dan Delete Data Fakultas yang tersedia di kampus. Lalu untuk fitur ini akan terdapat beberapa kolom diantaranya yaitu Nama Fakultas, Kode Fakultas ( 3 Huruf Kapital ), Kepala Fakultas. Pada kolom Kode Fakultas ini akan digunakan sebagai "Key" atau "Kunci" untuk menghubungkan ke beberapa tabel lain seperti Program Studi untuk mengambil data nama Fakultas, Kurikulum untuk mengambil data nama Fakultas dan Mata Kuliah untuk dijadikan sebagai Format kode mata kuliah.
 
     1. Fitur Kelola Program Studi ( CRUD )
-    Pada fitur kelola program studi ini nantinya sebagai koordinator akan bisa melakukan Create Data, Read Data, Update Data dan Delete Data. Lalu untuk fitur akan terdapat beberapa kolom diantaranya yaitu Nama Fakultas, Nama Program Studi, Kode Program Studi ( 2 Angka 0 - 9 ), Kepala Program Studi.
+    Pada fitur kelola program studi ini nantinya sebagai koordinator akan bisa melakukan Create Data, Read Data, Update Data dan Delete Data Program Studi. Lalu untuk fitur akan terdapat beberapa kolom diantaranya yaitu Nama Fakultas, Nama Program Studi, Kode Program Studi ( 2 Angka 0 - 9 ), Kepala Program Studi.
 
     2. Fitur Kelola Kurikulum ( CRUD )
-    Pada fitur kelola Kurikulum ini nantinya sebagai koordinator akan bisa melakukan Create Data, Read Data, Update Data dan Delete Data.
+    Pada fitur kelola Kurikulum ini nantinya sebagai koordinator akan bisa melakukan Create Data, Read Data, Update Data dan Delete Data Kurikulum.
 
     3. Fitur Kelola Mata Kuliah ( CRUD )
+    Pada fitur ini Koordinator akan membuat matakuliah dan memasukkannya kedalam kurikulum yang telah dibuat sebelumnya.
 
     4. Fitur Kelola Tahun Akademik / Semester ( CRUD )
+    Pada fitur ini koordinator akan membuat Semester berdasarkan berdasarkan Nama Semester, Tipe Semester,Kode Semester, Tahun Akademik
 
     5. Fitur Approval Kalender Akademik ( Approval Only )
-    
+    Pada fitur ini Koordinator akan memberikan terkait persetujuan terhadap Kalender Akademik yang telah dibuat oleh Staff Administrasi. 
+   
     6. Fitur Approval Jadwal Perkuliahan ( Approval Only )
+    Pada fitur ini Koordinator akan memberikan terkait persetujuan terhadap jadwal Perkuliahan yang telah dibuat oleh Staff Administrasi. 
+
+    7. Fitur Kelola Program Perkuliahan ( CRUD )
+    Pada fitur ini Koordinator akan membuat Jenis jenis program perkuliahan seperti Regular Pagi, Regular Sore, Kelas Beasiswa dan membagi jenis jenis estimasi waktu perkuliahannya semisal Regular Pagi pada Jam 08.00 - 16.00
 
 - Hak Akses Staff Administrasi ( value type = 0 )
     Hak akses Staff Administrasi merupakan roles yang difungsikan untuk mengelola data akademik yang berkaitan dengan mahasiswa. Berikut rencana fitur khusus yang akan dimiliki oleh Roles ini :
@@ -37,7 +44,16 @@ Nah pada model User ini kita memiliki beberapa Hak Akses diantaranya
     0. Fitur Kelola Kalender Akademik ( CRUD )
     Pada fitur Kelola Kalender Akademik nantinya Staff Administrasi akan menentukan tanggal tanggal krusial seperti Periode Pendaftaran, Persiapan, Registrasi Semester, Perkuliahan, Evaluasi, Wisuda dan Pelaporan PDDIKTI.
 
-    1. Kelola Data Mahasiswa dan Kelas Mahasiswa
+    1. Kelola Data Mahasiswa ( CRUD )
+    Pada fitur ini Staff Administrasi dapat melakukan pengelolaan data mahasiswa yang berkaitan dengan identitas, berkas, dan kelas semua mahasiswa.
 
-    1. Fitur Kelola Jadwal Perkuliahan ( CRUD )
-    Seperti namanya pada fitur ini staff administrasi akan membuat Jadwal Perkuliahan mahasiswa
+    2. Kelola Kelas Mahasiswa ( CRUD )
+    Pada fitur ini Staff Administrasi akan membuat kelas berdasarkan Program Perkuliahan yang telah dipilih oleh mahasiswa.
+
+    3. Kelola Data Dosen ( CRUD )
+    Pada fitur ini staff administrasi akan membagi data dosen yang ada dan mengelompokkan ke matakuliah berdasarkan keahliannya.
+
+    4. Fitur Kelola Jadwal Perkuliahan ( CRUD )
+    Seperti namanya pada fitur ini staff administrasi akan membuat Jadwal Perkuliahan mahasiswa berdasarkan ketersediaan ruangan, dosen, kelas dan matakuliah.
+
+    5. Fitur Penerbitan Surat Menyurat 
