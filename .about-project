@@ -38,7 +38,7 @@ Nah pada model User ini kita memiliki beberapa Hak Akses diantaranya
     7. Fitur Kelola Program Perkuliahan ( CRUD )
     Pada fitur ini Koordinator akan membuat Jenis jenis program perkuliahan seperti Regular Pagi, Regular Sore, Kelas Beasiswa dan membagi jenis jenis estimasi waktu perkuliahannya semisal Regular Pagi pada Jam 08.00 - 16.00
 
-- Hak Akses Staff Administrasi ( value type = 0 )
+- Hak Akses Staff Akademik ( value type = 4 )
     Hak akses Staff Administrasi merupakan roles yang difungsikan untuk mengelola data akademik yang berkaitan dengan mahasiswa. Berikut rencana fitur khusus yang akan dimiliki oleh Roles ini :
 
     0. Fitur Kelola Kalender Akademik ( CRUD )

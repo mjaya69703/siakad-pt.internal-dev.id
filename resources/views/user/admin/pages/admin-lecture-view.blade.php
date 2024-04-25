@@ -186,8 +186,8 @@ switch ($rawType) {
                                     <select name="dsn_stat" id="dsn_stat" class="form-select">
                                         {{-- <option selected disabled>Pilih Tipe Member</option> --}}
                                         <optgroup label="Pilih Status Users">
-                                            <option value="0" {{$dosen->dsn_stat == '0' ? 'selected' : '' }} >Non-Active</option>
-                                            <option value="1" {{$dosen->dsn_stat == '1' ? 'selected' : '' }} >Active</option>
+                                            <option value="0" {{$dosen->raw_dsn_stat == '0' ? 'selected' : '' }} >Non-Active</option>
+                                            <option value="1" {{$dosen->raw_dsn_stat == '1' ? 'selected' : '' }} >Active</option>
                                         </optgroup>
                                     </select>
                                     @error('dsn_stat')

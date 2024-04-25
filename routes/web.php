@@ -90,6 +90,8 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
         // PAGES USER MANAGER GLOBAL
         Route::post('/staff-manager/create/save',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'createSave'])->name('staffmanager-create-save');
         Route::patch('/staff-manager/update/{id}/status',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateStatus'])->name('staffmanager-update-stat');
+        Route::patch('/staff-manager/update/{code}/save/dosen',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateSave'])->name('staffmanager-update-save');
+        Route::patch('/staff-manager/update/{id}/status/dosen',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateStatus'])->name('staffmanager-update-stat');
         Route::patch('/staff-manager/update/{code}/save/dosen',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateSaveDosen'])->name('staffmanager-update-save-dosen');
         Route::patch('/staff-manager/update/{id}/status/dosen',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateStatusDosen'])->name('staffmanager-update-stat-dosen');
         // PAGES USER MANAGER GLOBAL => ONLY STAFF
@@ -107,6 +109,19 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
         Route::get('/staff-manager/lecture/create',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'createDosen'])->name('staffmanager-create-dosen');
         Route::get('/staff-manager/lecture/view/{code}',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'viewDosen'])->name('staffmanager-dosen-view');
         Route::delete('/staff-manager/lecture/delete/{code}',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'deleteDosen'])->name('staffmanager-dosen-destroy');
+        
+        // MENU KHUSUS DATA MASTER => DATA FAKULTAS
+        Route::get('/master/data-fakultas',[App\Http\Controllers\Admin\Pages\Core\FakultasController::class, 'index'])->name('master.fakultas-index');
+        Route::post('/master/data-fakultas/store',[App\Http\Controllers\Admin\Pages\Core\FakultasController::class, 'store'])->name('master.fakultas-store');
+        Route::patch('/master/data-fakultas/{code}/update',[App\Http\Controllers\Admin\Pages\Core\FakultasController::class, 'update'])->name('master.fakultas-update');
+        Route::delete('/master/data-fakultas/{code}/destroy',[App\Http\Controllers\Admin\Pages\Core\FakultasController::class, 'destroy'])->name('master.fakultas-destroy');
+        // MENU KHUSUS DATA MASTER => DATA PROGRAM STUDI
+        Route::get('/master/data-pstudi',[App\Http\Controllers\Admin\Pages\Core\ProgramStudiController::class, 'index'])->name('master.pstudi-index');
+        Route::post('/master/data-pstudi/store',[App\Http\Controllers\Admin\Pages\Core\ProgramStudiController::class, 'store'])->name('master.pstudi-store');
+        Route::patch('/master/data-pstudi/{code}/update',[App\Http\Controllers\Admin\Pages\Core\ProgramStudiController::class, 'update'])->name('master.pstudi-update');
+        Route::delete('/master/data-pstudi/{code}/destroy',[App\Http\Controllers\Admin\Pages\Core\ProgramStudiController::class, 'destroy'])->name('master.pstudi-destroy');
+        
+
 
     });
 

@@ -72,10 +72,10 @@ switch ($rawType) {
                         <td class="text-center">{{ $item->dsn_nidn }}</td>
                         <td class="text-center">{{ $item->dsn_mail }}</td>
                         <td class="text-center">{{ $item->dsn_phone }}</td>
-                        @if ($item->dsn_stat === 1)
+                        @if ($item->raw_dsn_stat === 1)
                             
                         <td class="text-center"><span class="btn btn-success">Active</span></td>
-                        @elseif($item->dsn_stat === 0)
+                        @elseif($item->raw_dsn_stat === 0)
                         <td class="text-center"><span class="btn btn-danger">Non-Active</span></td>
                         @endif
                         @if(Route::is('web-admin.staffmanager-dosen-index', request()->path()))
@@ -138,8 +138,8 @@ switch ($rawType) {
                                 <select name="dsn_stat" id="dsn_stat" class="form-select">
                                     {{-- <option selected disabled>Pilih Tipe Member</option> --}}
                                     <optgroup label="Pilih Status Dosen">
-                                        <option value="0" {{ $item->dsn_stat == '0' ? 'selected' : '' }} >Non-Active</option>
-                                        <option value="1" {{ $item->dsn_stat == '1' ? 'selected' : '' }} >Active</option>
+                                        <option value="0" {{ $item->raw_dsn_stat == '0' ? 'selected' : '' }} >Non-Active</option>
+                                        <option value="1" {{ $item->raw_dsn_stat == '1' ? 'selected' : '' }} >Active</option>
                                     </optgroup>
                                 </select>
                                 @error('status')

@@ -25,6 +25,21 @@
         </li>
         @if (Auth::user()->raw_type === 0)
         {{-- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
+        <li class="sidebar-title">Data Master Akademik</li>
+        <li class="sidebar-item has-sub">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-school"></i>
+                <span>Data Master</span>
+            </a>
+            <ul class="submenu">
+                <li class="submenu-item">
+                    <a href="{{ route('web-admin.master.fakultas-index') }}" class="submenu-link">Data Fakultas</a>
+                </li>
+                <li class="submenu-item">
+                    <a href="{{ route('web-admin.master.pstudi-index') }}" class="submenu-link">Data Program Studi</a>
+                </li>
+            </ul>
+        </li>
         <li class="sidebar-title">Talent Management</li>
         <li class="sidebar-item has-sub">
             <a href="#" class='sidebar-link'>
