@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('program_studis', function (Blueprint $table) {
+        Schema::create('tahun_akademiks', function (Blueprint $table) {
             $table->id();
-            $table->integer('faku_id');  // ID Fakultas
-            $table->string('name');     // Nama Program Studi
-            $table->string('code');     // Kode Program Studi
-            $table->integer('head_id');  // Kepala Program Studi
+            $table->string('name'); // NAMA PERIODE TAHUN AKADEMIK ex: Tahun Akademik 2023/2024 Ganjil
+            $table->string('code'); // KODE TAHUN AKADEMIK ex: Kode Semester - Tahun Akademik => Semester 2 - TA. 2023/2024 => 022023
+            $table->string('semester');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('program_studis');
+        Schema::dropIfExists('tahun_akademiks');
     }
 };

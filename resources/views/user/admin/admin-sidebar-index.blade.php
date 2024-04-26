@@ -12,6 +12,12 @@
                 <li class="submenu-item {{ Route::is('web-admin.master.pstudi-index', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.pstudi-index') }}" class="submenu-link">Data Program Studi</a>
                 </li>
+                <li class="submenu-item {{ Route::is('web-admin.master.taka-index', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.master.taka-index') }}" class="submenu-link">Data Tahun Akademik</a>
+                </li>
+                <li class="submenu-item {{ Route::is('web-admin.master.proku-index', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.master.proku-index') }}" class="submenu-link">Data Program Kuliah</a>
+                </li>
             </ul>
         </li>
         <li class="sidebar-title">Talent Management</li>
