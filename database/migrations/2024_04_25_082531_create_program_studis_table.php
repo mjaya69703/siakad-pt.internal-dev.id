@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('program_studis', function (Blueprint $table) {
             $table->id();
             $table->integer('faku_id');  // ID Fakultas
-            $table->string('name');     // Nama Program Studi
-            $table->string('code');     // Kode Program Studi
+            $table->string('name');      // Nama Program Studi
+            $table->string('code');      // Kode Program Studi
             $table->integer('head_id');  // Kepala Program Studi
+            $table->string('title');     // Gelar Program Studi
             $table->timestamps();
         });
     }

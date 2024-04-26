@@ -18,6 +18,9 @@
                 <li class="submenu-item {{ Route::is('web-admin.master.proku-index', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.proku-index') }}" class="submenu-link">Data Program Kuliah</a>
                 </li>
+                <li class="submenu-item {{ Route::is('web-admin.master.kelas-index', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.master.kelas-index') }}" class="submenu-link">Data Kelas</a>
+                </li>
             </ul>
         </li>
         <li class="sidebar-title">Talent Management</li>

@@ -66,18 +66,15 @@ switch ($rawType) {
                     </div>
                     <div class="form-group">
                         <label for="semester">Semester Perkuliahan</label>
-                        <select name="semester" id="semester" class="form-select">
-                            <option value="" selected>Pilih Semester</option>
-                            <option value="01">Semester 1</option>
-                            <option value="02">Semester 2</option>
-                            <option value="03">Semester 3</option>
-                            <option value="04">Semester 4</option>
-                            <option value="05">Semester 5</option>
-                            <option value="06">Semester 6</option>
-                            <option value="07">Semester 7</option>
-                            <option value="08">Semester 8</option>
-                        </select>
+                        <input type="text" class="form-control" name="semester" id="semester" placeholder="Inputkan kode tahun akademik..." >
                         @error('semester')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="year_start">Pilih Tahun Masuk</label>
+                        <input type="number" class="form-control" name="year_start" id="year_start" min="2000" max="2100" maxlength="4" value="{{ \Carbon\Carbon::now()->format('Y') }}" placeholder="Inputkan tahun masuk...">
+                        @error('year_start')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -176,18 +173,15 @@ switch ($rawType) {
                             </div>
                             <div class="form-group">
                                 <label for="semester">Semester Perkuliahan</label>
-                                <select name="semester" id="semester" class="form-select">
-                                    <option value="" selected>Pilih Semester</option>
-                                    <option value="01" {{ $item->semester == '01' ? 'selected' : '' }}>Semester 1</option>
-                                    <option value="02" {{ $item->semester == '02' ? 'selected' : '' }}>Semester 2</option>
-                                    <option value="03" {{ $item->semester == '03' ? 'selected' : '' }}>Semester 3</option>
-                                    <option value="04" {{ $item->semester == '04' ? 'selected' : '' }}>Semester 4</option>
-                                    <option value="05" {{ $item->semester == '05' ? 'selected' : '' }}>Semester 5</option>
-                                    <option value="06" {{ $item->semester == '06' ? 'selected' : '' }}>Semester 6</option>
-                                    <option value="07" {{ $item->semester == '07' ? 'selected' : '' }}>Semester 7</option>
-                                    <option value="08" {{ $item->semester == '08' ? 'selected' : '' }}>Semester 8</option>
-                                </select>
+                                <input type="text" class="form-control" name="semester" id="semester" placeholder="Inputkan kode tahun akademik..." value="{{ $item->semester }}" >
                                 @error('semester')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="year_start">Pilih Tahun Masuk</label>
+                                <input type="number" class="form-control" name="year_start" id="year_start" min="2000" max="2100" maxlength="4" value="{{ $item->year_start }}" placeholder="Inputkan tahun masuk...">
+                                @error('year_start')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -199,4 +193,6 @@ switch ($rawType) {
     </form>
     @endforeach
 </div>
+@endsection
+@section('custom-js')
 @endsection

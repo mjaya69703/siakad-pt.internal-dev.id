@@ -33,12 +33,14 @@ class TahunAkademikController extends Controller
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:999999',
             'semester' => 'required|string',
+            'year_start' => 'required|integer',
         ]);
 
         $taka = new TahunAkademik;
         $taka->name = $request->name;
         $taka->code = $request->code;
         $taka->semester = $request->semester;
+        $taka->year_start = $request->year_start;
         $taka->save();
 
         Alert::success('success', 'Data telah berhasil disimpan');
@@ -51,12 +53,14 @@ class TahunAkademikController extends Controller
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:999999',
             'semester' => 'required|string',
+            'year_start' => 'required|integer',
         ]);
 
         $taka = TahunAkademik::where('code', $code)->first();
         $taka->name = $request->name;
         $taka->code = $request->code;
         $taka->semester = $request->semester;
+        $taka->year_start = $request->year_start;
         $taka->save();
 
         Alert::success('success', 'Data telah berhasil diupdate');

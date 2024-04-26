@@ -53,6 +53,48 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        // SEEDER KHUSUS DATA MASTER
+        \App\Models\Fakultas::create([
+            'name'       => 'Fakultas Ilmu Komputer',
+            'code'       => 'FIK',
+            'head_id'    => '1',
+        ]);
+        \App\Models\ProgramStudi::create([
+            'name'       => 'Teknik Informatika',
+            'code'       => 'TI',
+            'title'      => ', S.Kom',
+            'head_id'    => '1',
+            'faku_id'    => '1',
+        ]);
+        \App\Models\TahunAkademik::create([
+            'name'       => 'TA. 2023/2024',
+            'code'       => '012023',
+            'semester'   => 'Semester I',
+            'year_start' => '2023',
+        ]);
+        \App\Models\TahunAkademik::create([
+            'name'       => 'TA. 2023/2024',
+            'code'       => '022023',
+            'semester'   => 'Semester II',
+            'year_start' => '2023',
+        ]);
+        \App\Models\ProgramKuliah::create([
+            'name'       => 'Regular Pagi',
+            'code'       => 'RPG1-2023',
+            'wave'       => 'Gelombang I',
+            'taka_id'    => '1',
+            'pstudi_id'  => '1',
+        ]);
+        \App\Models\Kelas::create([
+            'name'       => 'TI-2023-RP-1A',
+            'code'       => 'TI-2023-RP-1A',
+            'capacity'   => '32',
+            'dosen_id'   => '1',
+            'proku_id'   => '1',
+            'taka_id'    => '1',
+            'pstudi_id'  => '1',
+        ]);
+
 
     }
 }

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');      // Nama Program Kuliah ex: Regular Pagi
             $table->string('code');      // Kode Program Kuliah ex: Gelombang-Singkatan-Taka => G1-RP-2023
             $table->string('wave');      // Gelombang Program Kuliah ex: Gelombang I, Gelombang II
-            $table->date('wave_start');     // Tanggal Mulai Gelombang
-            $table->date('wave_ended');     // Tanggal Akhir Gelombang
+            $table->date('wave_start')->nullable();     // Tanggal Mulai Gelombang
+            $table->date('wave_ended')->nullable();     // Tanggal Akhir Gelombang
             $table->timestamps();
         });
 
