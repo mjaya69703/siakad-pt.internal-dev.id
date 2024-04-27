@@ -7,64 +7,82 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Cara Installasi SiakadPT By Internal Dev
+## About Project SiakadPT By Internal-Dev
+Web Siakad Perguruan Tinggi yang dibuat oleh Muhamad Jaya Kusuma menggunakan Base Framework Laravel 10 yang kini telah diupdate ke Laravel 11. Siakad ini dibangun untuk mempermudah para mahasiswa, dosen dan para staff dalam melakukan akvitas pekerjaannya dilingkungan kampus.
+
+
+## Feature Project Siakad PT ( IN DEVELOPMENT )
+
+Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authentikasi yaitu User, Mahasiswa dan Dosen. Berikut deretan fitur yang sudah dibangun pada SiakadPT ini:
+
+- Authentikasi User / Staff / Admin, Mahasiswa dan Dosen
+- Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
+- Fitur Kelola Data Akademik
+    - ( CRUD ) Data Fakultas ( CRUD )
+    - ( CRUD ) Data Program Studi ( CRUD )
+    - ( CRUD ) Data Tahun Akademik ( CRUD )
+    - ( CRUD ) Data Program Kuliah ( CRUD )
+    - ( CRUD ) Data Kelas 
+
+- Fitur Kelola Data Inventaris
+    - ( CRUD ) Data Fakultas 
+
+- Fitur Kelola Data Users
+    - ( CRUD ) Data Admin 
+    - ( CRUD ) Data Staff ( Web Administrator, Staff Akademik , Staff Administrasi & Keuangan, Staff SarPras) 
+    - ( CRUD ) Data Dosen
 
 
 
-## About Project SiakadPT By Internal Dev
+## How to Install
+1. Persyaratan Install
+    - Support Windows and Linux
+    - Sudah Menginstall Composer
+    - Sudah Menginstall PHP 8.2 atau diatasnya
+    - Sudah Menginstall MySQL atau MariaDB
+    - Sudah Menginstall Git / GitBash
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+2. Clone Repository
+```
+git clone https://github.com/mjaya69703/siakad-pt.internal-dev.id.git
+cd siakad-pt.internal-dev.id
+composer install
+npm install
+cp .env.example .env
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+3. Edit File Environment ( .env )
+- Sesuaikan Database Kamu
+```
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+- Sesuaikan Konfigurasi Email
+```
+# BILA MENGGUNAKAN BREVO
+MAIL_DRIVER=smtp
+MAIL_HOST="smtp-relay.brevo.com"
+MAIL_PORT=587
+MAIL_USERNAME="your@email.xyz"
+MAIL_PASSWORD="yourpassword"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="${MAIL_USERNAME}"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+4. Installasi Project 
+```
+php artisan key:generate
+php artisan migrate --seed
+```
+5. Menjalankan Project
+```
+php artisan serve
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## CREDITS
+- Framework PHP <a href="https://laravel.com">Laravel 11</a>
+- Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
+- Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>

@@ -3,7 +3,7 @@
         <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
-                <span>Data Master</span>
+                <span>Data Master Akademik</span>
             </a>
             <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.master.fakultas-index', request()->path()) ? 'active' : '' }}">
@@ -20,6 +20,17 @@
                 </li>
                 <li class="submenu-item {{ Route::is('web-admin.master.kelas-index', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.kelas-index') }}" class="submenu-link">Data Kelas</a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-item has-sub {{ Route::is('web-admin.inventory.*', request()->path()) ? 'active' : '' }}">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-school"></i>
+                <span>Data Master Inventaris</span>
+            </a>
+            <ul class="submenu">
+                <li class="submenu-item {{ Route::is('web-admin.inventory.gedung-index', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.inventory.gedung-index') }}" class="submenu-link">Data Gedung</a>
                 </li>
             </ul>
         </li>

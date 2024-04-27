@@ -51,13 +51,13 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fa-solid fa-id-card" style="margin-right: 5px"></i> Data Personal</a>
+                            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"> Personal</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><i class="fa-solid fa-address-book" style="margin-right: 5px"></i> Data Kontak</a>
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"> Kontak</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fa-solid fa-user-lock" style="margin-right: 5px;"></i> Pengaturan Akun</a>
+                            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"> Security</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -71,15 +71,54 @@
                                 <div class="row">
                                     <div class="form-group col-lg-6 col-12">
                                         <label for="mhs_name">Nama Lengkap</label>
-                                        <input type="text" name="mhs_name" id="mhs_name" class="form-control" placeholder="Nama lengkap..." value="{{ Auth::guard('mahasiswa')->user()->mhs_name }}">
+                                        <input type="text" name="mhs_name" id="mhs_name" class="form-control" placeholder="Nama lengkap..." readonly value="{{ Auth::guard('mahasiswa')->user()->mhs_name }}">
                                         @error('mhs_name')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="form-group col-lg-6 col-12">
                                         <label for="mhs_nim">Nomor NIM</label>
-                                        <input type="text" name="mhs_nim" id="mhs_nim" class="form-control" placeholder="Nomor NIM..." value="{{ Auth::guard('mahasiswa')->user()->mhs_nim }}">
+                                        <input type="text" name="mhs_nim" id="mhs_nim" class="form-control" placeholder="Nomor NIM..." readonly value="{{ Auth::guard('mahasiswa')->user()->mhs_nim }}" >
                                         @error('mhs_nim')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="years_id">Tahun Masuk</label>
+                                        <input type="text" name="years_id" id="years_id" class="form-control" placeholder="Nama Program Studi..." readonly value="Angkatan {{ Auth::guard('mahasiswa')->user()->kelas->taka->year_start }}">
+                                        @error('years_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="faku_id">Fakultas</label>
+                                        <input type="text" name="faku_id" id="faku_id" class="form-control" placeholder="Nama Program Studi..." readonly value="{{ Auth::guard('mahasiswa')->user()->kelas->pstudi->fakultas->name }}">
+                                        @error('faku_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="class_id">Program Studi</label>
+                                        <input type="text" name="class_id" id="class_id" class="form-control" placeholder="Nama Program Studi..." readonly value="{{ Auth::guard('mahasiswa')->user()->kelas->pstudi->name . ' - ' . Auth::guard('mahasiswa')->user()->kelas->taka->semester }}">
+                                        @error('class_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="class_id">Kelas</label>
+                                        <input type="text" name="class_id" id="class_id" class="form-control" placeholder="Nama Kelas..." readonly value="{{ Auth::guard('mahasiswa')->user()->kelas->code }}">
+                                        @error('class_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_gend">Jenis Kelamin</label>
+                                        <select name="mhs_gend" id="mhs_gend" class="form-select" >
+                                            <option value="" selected>Pilih Jenis Kelamin</option>
+                                            <option value="L" {{ Auth::guard('mahasiswa')->user()->mhs_gend === 'L' ? 'selected' : ''}}>Laki Laki</option>
+                                            <option value="P" {{ Auth::guard('mahasiswa')->user()->mhs_gend === 'P' ? 'selected' : ''}}>Perempuan</option>
+                                        </select>
+                                        @error('mhs_gend')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -94,6 +133,21 @@
                                         <label for="mhs_birthdate">Tanggal Lahir</label>
                                         <input type="date" name="mhs_birthdate" id="mhs_birthdate" class="form-control" placeholder="Tanggal Lahir..." value="{{ Auth::guard('mahasiswa')->user()->mhs_birthdate }}">
                                         @error('mhs_birthdate')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_reli">Agama</label>
+                                        <select name="mhs_reli" id="mhs_reli" class="form-select" >
+                                            <option value="" selected>Pilih Agama</option>
+                                            <option value="1" {{ Auth::guard('mahasiswa')->user()->raw_mhs_reli === '1' ? 'selected' : ''}}>Agama Islam</option>
+                                            <option value="2" {{ Auth::guard('mahasiswa')->user()->raw_mhs_reli === '2' ? 'selected' : ''}}>Agama Kristen Protestan</option>
+                                            <option value="3" {{ Auth::guard('mahasiswa')->user()->raw_mhs_reli === '3' ? 'selected' : ''}}>Agama Kriten Katholik</option>
+                                            <option value="4" {{ Auth::guard('mahasiswa')->user()->raw_mhs_reli === '4' ? 'selected' : ''}}>Agama Hindu</option>
+                                            <option value="5" {{ Auth::guard('mahasiswa')->user()->raw_mhs_reli === '5' ? 'selected' : ''}}>Agama Buddha</option>
+                                            <option value="6" {{ Auth::guard('mahasiswa')->user()->raw_mhs_reli === '6' ? 'selected' : ''}}>Agama Konghuchu</option>
+                                        </select>
+                                        @error('mhs_reli')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -121,11 +175,89 @@
                                     </div>
                                     <div class="form-group col-lg-6 col-12">
                                         <label for="mhs_mail">Alamat Email</label>
-                                        <input type="text" class="form-control" name="mhs_mail" id="mhs_mail" value="{{ Auth::guard('mahasiswa')->user()->mhs_mail }}">
+                                        <input type="text" class="form-control" name="mhs_mail" id="mhs_mail" readonly value="{{ Auth::guard('mahasiswa')->user()->mhs_mail }}">
                                         @error('mhs_mail')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_parent_father">Nama Ayah</label>
+                                        <input type="text" class="form-control" name="mhs_parent_father" id="mhs_parent_father" placeholder="nama ayah..." value="{{ Auth::guard('mahasiswa')->user()->mhs_parent_father }}">
+                                        @error('mhs_parent_father')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_parent_father_phone">Nomor Telepon Ayah</label>
+                                        <input type="text" class="form-control" name="mhs_parent_father_phone" id="mhs_parent_father_phone" placeholder="nomor telepon ayah..." value="{{ Auth::guard('mahasiswa')->user()->mhs_parent_father_phone }}">
+                                        @error('mhs_parent_father_phone')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_parent_mother">Nama Ibu</label>
+                                        <input type="text" class="form-control" name="mhs_parent_mother" id="mhs_parent_mother" placeholder="nama ibu..." value="{{ Auth::guard('mahasiswa')->user()->mhs_parent_mother }}">
+                                        @error('mhs_parent_mother')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_parent_mother_phone">Nomor Telepon Ibu</label>
+                                        <input type="text" class="form-control" name="mhs_parent_mother_phone" id="mhs_parent_mother_phone" placeholder="nomor telepon ibu..." value="{{ Auth::guard('mahasiswa')->user()->mhs_parent_mother_phone }}">
+                                        @error('mhs_parent_mother_phone')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_wali_name">Nama Wali Mahasiswa</label>
+                                        <input type="text" class="form-control" name="mhs_wali_name" id="mhs_wali_name" placeholder="nama wali..." value="{{ Auth::guard('mahasiswa')->user()->mhs_wali_name }}">
+                                        @error('mhs_wali_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_wali_phone">Nomor Telepon Wali</label>
+                                        <input type="text" class="form-control" name="mhs_wali_phone" id="mhs_wali_phone" placeholder="nomor telepon wali..." value="{{ Auth::guard('mahasiswa')->user()->mhs_wali_phone }}">
+                                        @error('mhs_wali_phone')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-12 col-12">
+                                        <label for="mhs_addr_domisili">Alamat Lengkap Domisili / Tempat Tinggal</label>
+                                        <textarea cols="15" rows="4" class="form-control" name="mhs_addr_domisili" id="mhs_addr_domisili" placeholder="alamat lengkap domisili / tempat tinggal..." value="{{ Auth::guard('mahasiswa')->user()->mhs_addr_domisili }}">{{ Auth::guard('mahasiswa')->user()->mhs_addr_domisili == null ? 'inputkan alamat lengkap / domisili' : Auth::guard('mahasiswa')->user()->mhs_addr_domisili }}</textarea>
+                                        @error('mhs_addr_domisili')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_addr_kelurahan">Kelurahan</label>
+                                        <input type="text" class="form-control" name="mhs_addr_kelurahan" id="mhs_addr_kelurahan" placeholder="nama kelurahan..." value="{{ Auth::guard('mahasiswa')->user()->mhs_addr_kelurahan }}">
+                                        @error('mhs_addr_kelurahan')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_addr_kecamatan">Kecamatan</label>
+                                        <input type="text" class="form-control" name="mhs_addr_kecamatan" id="mhs_addr_kecamatan" placeholder="nama kecamatan..." value="{{ Auth::guard('mahasiswa')->user()->mhs_addr_kecamatan }}">
+                                        @error('mhs_addr_kecamatan')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_addr_kota">Kota</label>
+                                        <input type="text" class="form-control" name="mhs_addr_kota" id="mhs_addr_kota" placeholder="nama kota..." value="{{ Auth::guard('mahasiswa')->user()->mhs_addr_kota }}">
+                                        @error('mhs_addr_kota')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-6 col-12">
+                                        <label for="mhs_addr_provinsi">Provinsi</label>
+                                        <input type="text" class="form-control" name="mhs_addr_provinsi" id="mhs_addr_provinsi" placeholder="nama provinsi..." value="{{ Auth::guard('mahasiswa')->user()->mhs_addr_provinsi }}">
+                                        @error('mhs_addr_provinsi')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
                                     <div class="d-flex justify-content-end align-items-center">
                                         <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-save"></i> Save</button>
                                     </div>

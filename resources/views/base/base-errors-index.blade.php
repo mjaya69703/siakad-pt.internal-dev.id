@@ -8,6 +8,8 @@
 @section('submenu')
     Errors Authorization
 @endsection
+@if (Auth::check())
+    
 @section('urlmenu')
 @php
 $prefix = '';
@@ -32,6 +34,8 @@ switch ($rawType) {
 @endphp
 {{ route($prefix . 'home-index') }}
 @endsection
+@else
+@endif
 @section('subdesc')
     Errors Pages Authorization
 @endsection

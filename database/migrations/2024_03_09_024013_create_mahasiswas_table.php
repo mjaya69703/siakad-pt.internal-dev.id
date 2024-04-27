@@ -25,6 +25,20 @@ return new class extends Migration
             $table->string('mhs_birthplace')->nullable();
             $table->date('mhs_birthdate')->nullable();
             $table->string('mhs_gend')->nullable();
+            $table->string('mhs_reli')->nullable();
+            $table->string('mhs_addr_domisili')->nullable();  
+            $table->string('mhs_addr_kelurahan')->nullable();
+            $table->string('mhs_addr_kecamatan')->nullable();
+            $table->string('mhs_addr_kota')->nullable();
+            $table->string('mhs_addr_provinsi')->nullable();
+            // DATA ORANG TUA / Wali
+            $table->string('mhs_parent_mother')->nullable();
+            $table->string('mhs_parent_father')->nullable();
+            $table->string('mhs_parent_mother_phone')->nullable();
+            $table->string('mhs_parent_father_phone')->nullable();
+            $table->string('mhs_wali_name')->nullable();
+            $table->string('mhs_wali_phone')->nullable();
+
             // DATA AKUN
             $table->string('mhs_user')->unique();
             $table->string('password');

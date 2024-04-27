@@ -98,6 +98,8 @@ class HomeController extends Controller
 
         $user->mhs_name = $request->mhs_name;
         $user->mhs_nim = $request->mhs_nim;
+        $user->mhs_reli = $request->mhs_reli;
+        $user->mhs_gend = $request->mhs_gend;
         $user->mhs_birthplace = $request->mhs_birthplace; // New field
         $user->mhs_birthdate = $request->mhs_birthdate; // New field
 
@@ -113,11 +115,33 @@ class HomeController extends Controller
         $request->validate([
             'mhs_phone' => 'required|numeric|unique:users,phone,' . Auth::guard('mahasiswa')->user()->id,
             'mhs_mail' => 'required|email|max:255|unique:users,email,' . Auth::guard('mahasiswa')->user()->id,
+            'mhs_parent_father' => 'nullable|string|max:255',
+            'mhs_parent_mother' => 'nullable|string|max:255',
+            'mhs_parent_father_phone' => 'nullable|string|max:14',
+            'mhs_parent_mother_phone' => 'nullable|string|max:14',
+            'mhs_parent_wali_name' => 'string|max:14',
+            'mhs_parent_wali_phone' => 'string|max:14',
+            'mhs_addr_domisili' => 'nullable|string|max:4192',
+            'mhs_addr_kelurahan' => 'nullable|string|max:255',
+            'mhs_addr_kecamatan' => 'nullable|string|max:255',
+            'mhs_addr_kota' => 'nullable|string|max:255',
+            'mhs_addr_provinsi' => 'nullable|string|max:255',
         ]);
         $user = Auth::guard('mahasiswa')->user();
 
         $user->mhs_phone = $request->mhs_phone;
         $user->mhs_mail = $request->mhs_mail;
+        $user->mhs_parent_father = $request->mhs_parent_father;
+        $user->mhs_parent_father_phone = $request->mhs_parent_father_phone;
+        $user->mhs_parent_mother = $request->mhs_parent_mother;
+        $user->mhs_parent_mother_phone = $request->mhs_parent_mother_phone;
+        $user->mhs_wali_name = $request->mhs_wali_name;
+        $user->mhs_wali_phone = $request->mhs_wali_phone;
+        $user->mhs_addr_domisili = $request->mhs_addr_domisili;
+        $user->mhs_addr_kelurahan = $request->mhs_addr_kelurahan;
+        $user->mhs_addr_kecamatan = $request->mhs_addr_kecamatan;
+        $user->mhs_addr_kota = $request->mhs_addr_kota;
+        $user->mhs_addr_provinsi = $request->mhs_addr_provinsi;
 
 
         $user->save();
