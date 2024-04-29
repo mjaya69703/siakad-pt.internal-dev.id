@@ -23,11 +23,11 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     - ( CRUD ) Data Tahun Akademik 
     - ( CRUD ) Data Program Kuliah
     - ( CRUD ) Data Kelas
-    - ( CRUD ) Data Kurikulum ( 29-03-2024 ) <p class="color:red">New</p>
+    - ( CRUD ) Data Kurikulum ( 29-03-2024 ) <p style="color:red">New</p>
 
 - Fitur Kelola Data Inventaris
     - ( CRUD ) Data Gedung 
-    - ( CRUD ) Data Ruang ( 29-03-2024 ) <p class="color:red">New</p>
+    - ( CRUD ) Data Ruang ( 29-03-2024 ) <p style="color:red">New</p>
 
 - Fitur Kelola Data Users
     - ( CRUD ) Data Admin 
