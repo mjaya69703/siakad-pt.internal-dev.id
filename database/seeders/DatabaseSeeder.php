@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // SEEDER KHUSUS DATA MASTER
+        // SEEDER KHUSUS DATA MASTER AKADEMIK
         \App\Models\Fakultas::create([
             'name'       => 'Fakultas Ilmu Komputer',
             'code'       => 'FIK',
@@ -99,7 +99,22 @@ class DatabaseSeeder extends Seeder
             'pstudi_id'  => '1',
         ]);
 
-
+        // SEEDER KHUSUS DATA MASTER INVENTARIS
+        \App\Models\Gedung::create([
+            'name'       => 'Area Luar Gedung',
+            'code'       => 'ALG',
+        ]);
+        \App\Models\Gedung::create([
+            'name'       => 'Gedung A',
+            'code'       => 'GDA',
+        ]);
+        \App\Models\Ruang::create([
+            'gedu_id'    => '1',
+            'floor'      => '0',
+            'type'       => '1',
+            'name'       => 'Kelas 101',
+            'code'       => 'C-101',
+        ]);
 
     }
 }

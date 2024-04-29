@@ -11,32 +11,33 @@
 Web Siakad Perguruan Tinggi yang dibuat oleh Muhamad Jaya Kusuma menggunakan Base Framework Laravel 10 yang kini telah diupdate ke Laravel 11. Siakad ini dibangun untuk mempermudah para mahasiswa, dosen dan para staff dalam melakukan akvitas pekerjaannya dilingkungan kampus.
 
 
-## Feature Project Siakad PT ( IN DEVELOPMENT )
+## Feature Project Siakad PT ( In Development )
 
 Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authentikasi yaitu User, Mahasiswa dan Dosen. Berikut deretan fitur yang sudah dibangun pada SiakadPT ini:
 
 - Authentikasi User / Staff / Admin, Mahasiswa dan Dosen
 - Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
 - Fitur Kelola Data Akademik
-    - ( CRUD ) Data Fakultas ( CRUD )
-    - ( CRUD ) Data Program Studi ( CRUD )
-    - ( CRUD ) Data Tahun Akademik ( CRUD )
-    - ( CRUD ) Data Program Kuliah ( CRUD )
-    - ( CRUD ) Data Kelas 
+    - ( CRUD ) Data Fakultas 
+    - ( CRUD ) Data Program Studi 
+    - ( CRUD ) Data Tahun Akademik 
+    - ( CRUD ) Data Program Kuliah
+    - ( CRUD ) Data Kelas
+    - ( CRUD ) Data Kurikulum ( 29-03-2024 ) <p class="color:red">New</p>
 
 - Fitur Kelola Data Inventaris
-    - ( CRUD ) Data Fakultas 
+    - ( CRUD ) Data Gedung 
+    - ( CRUD ) Data Ruang ( 29-03-2024 ) <p class="color:red">New</p>
 
 - Fitur Kelola Data Users
     - ( CRUD ) Data Admin 
-    - ( CRUD ) Data Staff ( Web Administrator, Staff Akademik , Staff Administrasi & Keuangan, Staff SarPras) 
+    - ( CRUD ) Data Staff ( Web Administrator, Staff Akademik , Staff Administrasi & Keuangan, Staff SarPras ) 
     - ( CRUD ) Data Dosen
 
 
 
 ## How to Install
 1. Persyaratan Install
-    - Support Windows and Linux
     - Sudah Menginstall Composer
     - Sudah Menginstall PHP 8.2 atau diatasnya
     - Sudah Menginstall MySQL atau MariaDB
@@ -47,6 +48,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
 git clone https://github.com/mjaya69703/siakad-pt.internal-dev.id.git
 cd siakad-pt.internal-dev.id
 composer install
+composer update
 npm install
 cp .env.example .env
 ```

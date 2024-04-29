@@ -18,6 +18,9 @@
                 <li class="submenu-item {{ Route::is('web-admin.master.proku-index', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.proku-index') }}" class="submenu-link">Data Program Kuliah</a>
                 </li>
+                <li class="submenu-item {{ Route::is('web-admin.master.kurikulum-index', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.master.kurikulum-index') }}" class="submenu-link">Data Kurikulum</a>
+                </li>
                 <li class="submenu-item {{ Route::is('web-admin.master.kelas-index', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.kelas-index') }}" class="submenu-link">Data Kelas</a>
                 </li>
@@ -31,6 +34,9 @@
             <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.inventory.gedung-index', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.inventory.gedung-index') }}" class="submenu-link">Data Gedung</a>
+                </li>
+                <li class="submenu-item {{ Route::is('web-admin.inventory.ruang-index', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.inventory.ruang-index') }}" class="submenu-link">Data Ruangan</a>
                 </li>
             </ul>
         </li>
