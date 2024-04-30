@@ -43,7 +43,7 @@ switch ($rawType) {
                 @yield('submenu')
                 <div class="">
                     @if(Route::is('web-admin.staffmanager-dosen-index', request()->path()))
-                    <a href="{{ route('web-admin.staffmanager-create-admin') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
+                    <a href="{{ route('web-admin.staffmanager-create-dosen') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
                     @elseif(Route::is('web-admin.staffmanager-staff-index', request()->path()))
                     <a href="{{ route('web-admin.staffmanager-create-staff') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
                     @endif

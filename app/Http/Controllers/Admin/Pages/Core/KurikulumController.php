@@ -14,7 +14,11 @@ use Alert;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
+use App\Models\ProgramStudi;
+use App\Models\MataKuliah;
 use App\Models\Kurikulum;
+use App\Models\Dosen;
+use App\Models\TahunAkademik;
 
 class KurikulumController extends Controller
 {
@@ -23,6 +27,16 @@ class KurikulumController extends Controller
         $data['kurikulum'] = Kurikulum::all();
 
         return view('user.admin.master.admin-kurikulum-index', $data);
+    }
+    public function view($id)
+    {
+        $data['kuri'] = Kurikulum::all();
+        $data['taka'] = TahunAkademik::all();
+        $data['pstudi'] = ProgramStudi::all();
+        $data['dosen'] = Dosen::all();
+        $data['matkul'] = MataKuliah::where('kuri_id', $id)->get();
+
+        return view('user.admin.master.admin-matkul-index', $data);
     }
 
     public function store(Request $request)

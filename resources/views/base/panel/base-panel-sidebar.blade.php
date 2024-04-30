@@ -37,18 +37,7 @@
 
     <!-- Menu untuk mahasiswa -->
     @auth('mahasiswa')
-        <li class="sidebar-item">
-            <a href="{{ route('mahasiswa.home-index') }}" class='sidebar-link'>
-                <i class="fa-solid fa-home"></i>
-                <span>Home</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a href="/mahasiswa/profile" class='sidebar-link'>
-                <i class="fa-solid fa-user-edit"></i>
-                <span>Profile User</span>
-            </a>
-        </li>
+    @include('mahasiswa.sidebar-index')
     @endauth
 
     <!-- Menu untuk dosen -->

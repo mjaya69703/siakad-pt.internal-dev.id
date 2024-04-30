@@ -4,14 +4,25 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// UNTUK PLUGIN TAMBAHAN
+// SECTION ADDONS SYSTEM
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
-use Alert;
 use Auth;
 use Hash;
+use Str;
+// SECTION ADDONS EXTERNAL
+use Alert;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+// SECTION MODELS
+use App\Models\ProgramStudi;
+use App\Models\MataKuliah;
+use App\Models\Kurikulum;
+use App\Models\Dosen;
+use App\Models\TahunAkademik;
+use App\Models\JadwalKuliah;
+use App\Models\Ruang;
+use App\Models\Kelas;
+use App\Models\AbsensiMahasiswa;
 
 class HomeController extends Controller
 {
@@ -25,6 +36,85 @@ class HomeController extends Controller
 
 
         return view('mahasiswa.home-profile');
+
+    }
+
+    public function jadkulIndex()
+    {
+        $data['kuri'] = Kurikulum::all();
+        $data['taka'] = TahunAkademik::all();
+        // $data['dosen'] = MataKuliah::where('dosen');
+        $data['pstudi'] = ProgramStudi::all();
+        $data['matkul'] = MataKuliah::all();
+        $data['jadkul'] = JadwalKuliah::where('kelas_id', Auth::guard('mahasiswa')->user()->class_id)->get();
+        $data['ruang'] = Ruang::all();
+        $data['kelas'] = Kelas::all();
+
+
+        return view('mahasiswa.pages.mhs-jadkul-index', $data);
+    }
+    public function jadkulAbsen($code)
+    {
+        
+        $checkAbsen = AbsensiMahasiswa::where('jadkul_code', $code)->where('author_id', Auth::guard('mahasiswa')->user()->id)->count();
+        
+        // dd($checkAbsen);
+        if($checkAbsen === 0){
+            $data['kuri'] = Kurikulum::all();
+            $data['taka'] = TahunAkademik::all();
+            // $data['dosen'] = MataKuliah::where('dosen');
+            $data['pstudi'] = ProgramStudi::all();
+            $data['matkul'] = MataKuliah::all();
+            $data['jadkul'] = JadwalKuliah::where('code', $code)->first();
+            $data['ruang'] = Ruang::all();
+            $data['kelas'] = Kelas::all();
+
+            // dd($data['jadkul']);
+
+            return view('mahasiswa.pages.mhs-jadkul-absen', $data);
+        } else {
+            Alert::error('Error', 'Kamu sudah absen untuk matakuliah ini.');
+            return back();
+        }
+    }
+
+    public function jadkulAbsenStore(Request $request)
+    {
+        $request->validate([
+            'absen_proof' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8192',
+            'absen_type' => 'required|string',
+        ]);
+    
+        $absen = new AbsensiMahasiswa;
+    
+        if ($request->hasFile('absen_proof')) {
+            $image = $request->file('absen_proof');
+            $name = 'profile-'. $request->jadkul_code. '-' . $request->absen_date . '-' . $request->author_id .'-' .uniqid().'.'.$image->getClientOriginalExtension();
+            $destinationPath = storage_path('app/public/images/profile/absen/');
+            $destinationPaths = storage_path('app/public/images');
+    
+            // Compress image
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($image->getRealPath());
+            // $image->resize(width: 250);
+            $image->scaleDown(height: 300);
+            $image->toPng()->save($destinationPath.'/'.$name);
+    
+            if ($absen->absen_proof != 'default/default-profile.jpg') {
+                File::delete($destinationPaths.'/'.$absen->absen_proof); // hapus gambar lama
+            }
+            $absen->absen_proof = "profile/absen/".$name;
+            $absen->author_id = $request->author_id;
+            $absen->jadkul_code = $request->jadkul_code;
+            $absen->absen_date = $request->absen_date;
+            $absen->absen_time = $request->absen_time;
+            $absen->absen_type = $request->absen_type;
+            $absen->code = uniqid();
+            $absen->save();
+    
+            Alert::success('Success', 'Kamu telah berhasil absen pada matakuliah ini');
+            return redirect()->route('mahasiswa.home-jadkul-index');
+        }
 
     }
 

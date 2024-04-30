@@ -6,23 +6,29 @@
                 <span>Data Master Akademik</span>
             </a>
             <ul class="submenu">
-                <li class="submenu-item {{ Route::is('web-admin.master.fakultas-index', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.fakultas-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.fakultas-index') }}" class="submenu-link">Data Fakultas</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.pstudi-index', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.pstudi-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.pstudi-index') }}" class="submenu-link">Data Program Studi</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.taka-index', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.taka-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.taka-index') }}" class="submenu-link">Data Tahun Akademik</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.proku-index', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.proku-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.proku-index') }}" class="submenu-link">Data Program Kuliah</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.kurikulum-index', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.kurikulum-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.kurikulum-index') }}" class="submenu-link">Data Kurikulum</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.kelas-index', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.kelas-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.kelas-index') }}" class="submenu-link">Data Kelas</a>
+                </li>
+                <li class="submenu-item {{ Route::is('web-admin.master.matkul-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.master.matkul-index') }}" class="submenu-link">Data Mata Kuliah</a>
+                </li>
+                <li class="submenu-item {{ Route::is('web-admin.master.jadkul-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.master.matkul-index') }}" class="submenu-link">Data Jadwal Kuliah</a>
                 </li>
             </ul>
         </li>
@@ -32,10 +38,10 @@
                 <span>Data Master Inventaris</span>
             </a>
             <ul class="submenu">
-                <li class="submenu-item {{ Route::is('web-admin.inventory.gedung-index', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.inventory.gedung-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.inventory.gedung-index') }}" class="submenu-link">Data Gedung</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.inventory.ruang-index', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.inventory.ruang-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.inventory.ruang-index') }}" class="submenu-link">Data Ruangan</a>
                 </li>
             </ul>

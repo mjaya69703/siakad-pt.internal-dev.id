@@ -30,11 +30,21 @@ class DatabaseSeeder extends Seeder
         Dosen::create([
             'dsn_nidn' => str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT),
             'dsn_stat' => '1',
-            'dsn_name' => 'Akun Demo Dosen',
+            'dsn_name' => 'Dosen A',
             'dsn_code' => Str::random(6),
-            'dsn_user' => 'dosen',
-            'dsn_mail' => 'dosen@example.com',
+            'dsn_user' => 'dosen.a',
+            'dsn_mail' => 'dosen.a@example.com',
             'dsn_phone' => '080012345671',
+            'password' => Hash::make('Dosen123'),
+        ]);
+        Dosen::create([
+            'dsn_nidn' => str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT),
+            'dsn_stat' => '1',
+            'dsn_name' => 'Dosen B',
+            'dsn_code' => Str::random(6),
+            'dsn_user' => 'dosen.b',
+            'dsn_mail' => 'dosen.b@example.com',
+            'dsn_phone' => '080012345672',
             'password' => Hash::make('Dosen123'),
         ]);
         Mahasiswa::create([
@@ -70,6 +80,13 @@ class DatabaseSeeder extends Seeder
             'head_id'    => '1',
             'faku_id'    => '1',
         ]);
+        \App\Models\ProgramStudi::create([
+            'name'       => 'Sistem Informasi',
+            'code'       => 'SI',
+            'title'      => ', S.Kom',
+            'head_id'    => '1',
+            'faku_id'    => '1',
+        ]);
         \App\Models\TahunAkademik::create([
             'name'       => 'TA. 2023/2024',
             'code'       => '012023',
@@ -84,9 +101,37 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\ProgramKuliah::create([
             'name'       => 'Regular Pagi',
-            'code'       => 'RPG1-2023',
+            'code'       => 'G1RP-2023',
             'wave'       => 'Gelombang I',
             'taka_id'    => '1',
+            'pstudi_id'  => '1',
+        ]);
+        \App\Models\Kurikulum::create([
+            'name'       => 'Kurikulum 2020',
+            'code'       => 'K20',
+            'desc'       => 'Kurikulum 2020 adalah kurikulum dirancang 25 Tahun',
+            'year_start' => '2019',
+            'year_ended' => '2024',
+        ]);
+        \App\Models\MataKuliah::create([
+            'name'       => 'Jaringan Komputer Dasar',
+            'code'       => 'JKD',
+            'desc'       => 'Matakuliah yang membahas mengenai jaringan komputer dasar',
+            'bsks'       => '20',
+            'kuri_id'    => '1',
+            'taka_id'    => '1',
+            'dosen_1'    => '1',
+            'dosen_2'    => '2',
+            'pstudi_id'  => '1',
+        ]);
+        \App\Models\MataKuliah::create([
+            'name'       => 'Jaringan Komputer Expert',
+            'code'       => 'JKD',
+            'desc'       => 'Matakuliah yang membahas mengenai jaringan komputer dasar',
+            'bsks'       => '20',
+            'kuri_id'    => '1',
+            'taka_id'    => '2',
+            'dosen_1'    => '2',
             'pstudi_id'  => '1',
         ]);
         \App\Models\Kelas::create([
@@ -98,22 +143,79 @@ class DatabaseSeeder extends Seeder
             'taka_id'    => '1',
             'pstudi_id'  => '1',
         ]);
+        \App\Models\Kelas::create([
+            'name'       => 'TI-2023-RP-1B',
+            'code'       => 'TI-2023-RP-1B',
+            'capacity'   => '32',
+            'dosen_id'   => '2',
+            'proku_id'   => '1',
+            'taka_id'    => '1',
+            'pstudi_id'  => '1',
+        ]);
+        \App\Models\JadwalKuliah::create([
+            'makul_id'  => '1',
+            'kelas_id'  => '1',
+            'dosen_id'  => '1',
+            'ruang_id'  => '1',
+            'pert_id'  => '1',
+            'meth_id'  => '1',
+            'days_id'  => '1',
+            'bsks'  => '3',
+            'code'  => Str::random(8),
+            'date'  => '2024-04-30',
+            'start'  => '11:00:00',
+            'ended'  => '16:00:00',
+
+        ]);
+        \App\Models\JadwalKuliah::create([
+            'makul_id'  => '1',
+            'kelas_id'  => '2',
+            'dosen_id'  => '1',
+            'ruang_id'  => '1',
+            'pert_id'  => '1',
+            'meth_id'  => '1',
+            'days_id'  => '1',
+            'bsks'  => '3',
+            'code'  => Str::random(8),
+            'date'  => '2024-04-30',
+            'start'  => '11:00:00',
+            'ended'  => '16:00:00',
+
+        ]);
 
         // SEEDER KHUSUS DATA MASTER INVENTARIS
         \App\Models\Gedung::create([
-            'name'       => 'Area Luar Gedung',
-            'code'       => 'ALG',
+            'name'       => 'Area Luar Kampus',
+            'code'       => 'ALK',
+        ]);
+        \App\Models\Gedung::create([
+            'name'       => 'Area Sekitar Gedung',
+            'code'       => 'ASG',
         ]);
         \App\Models\Gedung::create([
             'name'       => 'Gedung A',
             'code'       => 'GDA',
         ]);
         \App\Models\Ruang::create([
-            'gedu_id'    => '1',
-            'floor'      => '0',
+            'gedu_id'    => '3',
+            'floor'      => '1',
             'type'       => '1',
             'name'       => 'Kelas 101',
             'code'       => 'C-101',
+        ]);
+        \App\Models\Ruang::create([
+            'gedu_id'    => '3',
+            'floor'      => '1',
+            'type'       => '1',
+            'name'       => 'Kelas 102',
+            'code'       => 'C-102',
+        ]);
+        \App\Models\Ruang::create([
+            'gedu_id'    => '3',
+            'floor'      => '1',
+            'type'       => '1',
+            'name'       => 'Kelas 103',
+            'code'       => 'C-103',
         ]);
 
     }
