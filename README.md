@@ -15,6 +15,7 @@ Web Siakad Perguruan Tinggi yang dibuat oleh Muhamad Jaya Kusuma menggunakan Bas
 
 Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authentikasi yaitu User, Mahasiswa dan Dosen. Berikut deretan fitur yang sudah dibangun pada SiakadPT ini:
 
+<b>Fitur Role Web Admininstrator</b>
 - Authentikasi User / Staff / Admin, Mahasiswa dan Dosen
 - Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
 - Fitur Kelola Data Akademik
@@ -23,18 +24,22 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     - ( CRUD ) Data Tahun Akademik 
     - ( CRUD ) Data Program Kuliah
     - ( CRUD ) Data Kelas
-    - ( CRUD ) Data Kurikulum ( 29-03-2024 ) <span style="color:red">New</span>
+    - ( CRUD ) Data Kurikulum
+    - ( CRUD ) Data MataKuliah ( 30-03-2024 ) <span style="color:red">New</span>
+    - ( CRUD ) Data JadwalKuliah ( 30-03-2024 ) <span style="color:red">New</span>
 
 - Fitur Kelola Data Inventaris
     - ( CRUD ) Data Gedung 
-    - ( CRUD ) Data Ruang ( 29-03-2024 ) <span style="color:red">New</span>
+    - ( CRUD ) Data Ruang
 
 - Fitur Kelola Data Users
     - ( CRUD ) Data Admin 
     - ( CRUD ) Data Staff ( Web Administrator, Staff Akademik , Staff Administrasi & Keuangan, Staff SarPras ) 
     - ( CRUD ) Data Dosen
 
-
+<b>Fitur Role Mahasiswa Aktif</b>
+- Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
+- Fitur Lihat Jadwal Kuliah dan Absensi ( 30-03-2024 ) <span style="color:red">New</span>
 
 ## How to Install
 1. Persyaratan Install

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('dosen_2')->nullable();     // Dosen Cadangan 1 
             $table->integer('dosen_3')->nullable();     // Dosen Cadangan 2
             $table->string('name');                     // Nama Mata Kuliah    
-            $table->string('code');                     // Kode Mata Kuliah
+            $table->string('code')->unique();           // Kode Mata Kuliah
             $table->string('bsks');                     // Beban SKS
             $table->longText('desc');                   // Deskripsi Mata Kuliah
             $table->timestamps();

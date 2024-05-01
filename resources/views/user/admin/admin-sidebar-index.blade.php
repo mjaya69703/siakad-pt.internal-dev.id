@@ -28,7 +28,7 @@
                     <a href="{{ route('web-admin.master.matkul-index') }}" class="submenu-link">Data Mata Kuliah</a>
                 </li>
                 <li class="submenu-item {{ Route::is('web-admin.master.jadkul-*', request()->path()) ? 'active' : '' }}">
-                    <a href="{{ route('web-admin.master.matkul-index') }}" class="submenu-link">Data Jadwal Kuliah</a>
+                    <a href="{{ route('web-admin.master.jadkul-index') }}" class="submenu-link">Data Jadwal Kuliah</a>
                 </li>
             </ul>
         </li>

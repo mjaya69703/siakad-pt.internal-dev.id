@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('taka_id');  // Tahun Akademik ID
             $table->integer('pstudi_id'); // Program Studi
             $table->string('name');      // Nama Program Kuliah ex: Regular Pagi
-            $table->string('code');      // Kode Program Kuliah ex: Gelombang-Singkatan-Taka => G1-RP-2023
+            $table->string('code')->unique();      // Kode Program Kuliah ex: Gelombang-Singkatan-Taka => G1-RP-2023
             $table->string('wave');      // Gelombang Program Kuliah ex: Gelombang I, Gelombang II
             $table->date('wave_start')->nullable();     // Tanggal Mulai Gelombang
             $table->date('wave_ended')->nullable();     // Tanggal Akhir Gelombang

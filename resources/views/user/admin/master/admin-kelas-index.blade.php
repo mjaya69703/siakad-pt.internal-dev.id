@@ -64,7 +64,8 @@ switch ($rawType) {
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $item->proku->name . ' - ' . $item->name }}</td>
                                 <td>{{ $item->pstudi->name . ' - ' . $item->taka->semester}}</td>
-                                <td>{{ $item->capacity . ' Mahasiswa' }}</td>
+                                @php $mhs = \App\Models\Mahasiswa::where('class_id', $item->id)->count();                              @endphp
+                                <td>{{ $mhs . ' / ' . $item->capacity . ' Mahasiswa' }}</td>
                                 <td>{{ $item->dosen->dsn_name }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateKelas{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>

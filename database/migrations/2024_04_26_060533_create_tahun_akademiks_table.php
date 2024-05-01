@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tahun_akademiks', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // NAMA PERIODE TAHUN AKADEMIK ex: Tahun Akademik 2023/2024 Ganjil
-            $table->string('code'); // KODE TAHUN AKADEMIK ex: Kode Semester - Tahun Akademik => Semester 2 - TA. 2023/2024 => 022023
+            $table->string('code')->unique(); // KODE TAHUN AKADEMIK ex: Kode Semester - Tahun Akademik => Semester 2 - TA. 2023/2024 => 022023
             $table->string('semester');
             $table->year('year_start');
             $table->timestamps();

@@ -48,7 +48,7 @@ class JadwalKuliahController extends Controller
         $data['dosen'] = Dosen::all();
         $data['pstudi'] = ProgramStudi::all();
         $data['matkul'] = MataKuliah::all();
-        $data['jadkul'] = JadwalKuliah::all();
+        $data['jadkul'] = JadwalKuliah::latest()->paginate(2);
         $data['ruang'] = Ruang::all();
         $data['kelas'] = kelas::all();
 

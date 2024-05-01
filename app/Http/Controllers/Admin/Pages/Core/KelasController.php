@@ -19,6 +19,7 @@ use App\Models\Dosen;
 use App\Models\TahunAkademik;
 use App\Models\ProgramStudi;
 use App\Models\ProgramKuliah;
+use App\Models\Mahasiswa;
 
 class KelasController extends Controller
 {

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('fakultas', function (Blueprint $table) {
             $table->id();
             $table->string('name');     // Nama Fakultas
-            $table->string('code');     // Kode Fakultas
+            $table->string('code')->unique();     // Kode Fakultas
             $table->string('head_id');  // Kepala Fakultas
             $table->timestamps();
         });

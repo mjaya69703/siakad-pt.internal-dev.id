@@ -152,7 +152,7 @@ table th {
                         <td data-label="Number">{{ ++$key }}</td>
                         <td data-label="Program Studi">{{ $item->kelas->pstudi->fakultas->name }} <br> {{ $item->kelas->pstudi->name }}</td>
                         <td data-label="Nama Kelas">{{ $item->kelas->code }}</td>
-                        <td data-label="Mata Kuliah">{{ $item->matkul->name }} <br> {{ $item->pert_id . ' ( ' . $item->bsks . ' SKS )' }}</td>
+                        <td data-label="Mata Kuliah">{{ $item->matkul->name }} <br> {{ $item->pert_id . ' - ' . $item->bsks . ' SKS' }}</td>
                         <td data-label="Nama Dosen">{{ $item->dosen->dsn_name }}</td>
                         <td data-label="Metode">{{ $item->meth_id }}</td>
                         <td data-label="Tanggal Kuliah">{{ $item->days_id }} <br> - <br> {{ \Carbon\Carbon::parse($item->date)->format('d M Y') }}</td>
@@ -210,62 +210,25 @@ table th {
                     </div>
                     <div class="modal-body">
                         <div class="row">
+
                             <div class="form-group col-lg-3 col-12">
-                                <label for="bsks">Bebas SKS Hari Ini</label>
-                                <input type="number" min="1" max="8" name="bsks" id="bsks" class="form-control" value="{{ $item->bsks }}">
-                                @error('bsks')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-3 col-12">
-                                <label for="date">Tanggal Perkuliahan</label>
-                                <input type="date" name="date" id="date" class="form-control" value="{{ $item->date }}">
-                                @error('date')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-3 col-12">
-                                <label for="start">Waktu Mulai Perkuliahan</label>
-                                <input type="time" name="start" id="start" class="form-control" value="{{ $item->start }}">
-                                @error('start')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-3 col-12">
-                                <label for="ended">Waktu Mulai Perkuliahan</label>
-                                <input type="time" name="ended" id="ended" class="form-control" value="{{ $item->ended }}">
-                                @error('ended')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="days_id">Hari</label>
-                                <select name="days_id" id="days_id" class="form-select" name="days_id" id="days_id">
-                                    <option value="" selected>Pilih Hari</option>
-                                    <option value="0" {{ $item->raw_days_id == 0 ? 'selected' : '' }}>Hari Minggu</option>
-                                    <option value="1" {{ $item->raw_days_id == 1 ? 'selected' : '' }}>Hari Senin</option>
-                                    <option value="2" {{ $item->raw_days_id == 2 ? 'selected' : '' }}>Hari Selasa</option>
-                                    <option value="3" {{ $item->raw_days_id == 3 ? 'selected' : '' }}>Hari Rabu</option>
-                                    <option value="4" {{ $item->raw_days_id == 4 ? 'selected' : '' }}>Hari Kamis</option>
-                                    <option value="5" {{ $item->raw_days_id == 5 ? 'selected' : '' }}>Hari Jum'at</option>
-                                    <option value="6" {{ $item->raw_days_id == 6 ? 'selected' : '' }}>Hari Sabtu</option>
+                                <label for="makul_id">Mata Kuliah</label>
+                                <select name="makul_id" id="makul_id" class="form-select" name="makul_id" id="makul_id">
+                                    <option value="" selected>Pilih Mata Kuliah</option>
+                                    @foreach ($matkul as $item_m)
+                                    @php
+                                        $dosen1_name = $item_m->dosen1 ? $item_m->dosen1->dsn_name : null;
+                                        $dosen2_name = $item_m->dosen2 ? $item_m->dosen2->dsn_name : null;
+                                        $dosen3_name = $item_m->dosen3 ? $item_m->dosen3->dsn_name : null;
+                                    @endphp
+                                    <option value="{{ $item_m->id }}" {{ $item->makul_id == $item_m->id ? 'selected' : '' }} data-dosen1="{{ $item_m->dosen_1 }}" data-dosen2="{{ $item_m->dosen_2 }}" data-dosen3="{{ $item_m->dosen_3 }}" data-dosen1-name="{{ $dosen1_name }}" data-dosen2-name="{{ $dosen2_name }}" data-dosen3-name="{{ $dosen3_name }}">{{ $item_m->name }}</option>
+                                    @endforeach
                                 </select>
-                                @error('days_id')
+                                @error('makul_id')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="meth_id">Metode Perkuliahan</label>
-                                <select name="meth_id" id="meth_id" class="form-select" name="meth_id" id="meth_id">
-                                    <option value="" selected>Pilih Metode Perkuliahan</option>
-                                    <option value="0" {{ $item->raw_meth_id == 0 ? 'selected' : '' }}>Tatap Muka</option>
-                                    <option value="1" {{ $item->raw_meth_id == 1 ? 'selected' : '' }}>Teleconference</option>
-                                </select>
-                                @error('meth_id')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
+                            <div class="form-group col-lg-3 col-12">
                                 <label for="pert_id">Pertemuan</label>
                                 <select name="pert_id" id="pert_id" class="form-select" name="pert_id" id="pert_id">
                                     <option value="" selected>Pilih Pertemuan</option>
@@ -290,8 +253,62 @@ table th {
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-
-                            <div class="form-group col-lg-6 col-12">
+                            <div class="form-group col-lg-3 col-12">
+                                <label for="meth_id">Metode Perkuliahan</label>
+                                <select name="meth_id" id="meth_id" class="form-select" name="meth_id" id="meth_id">
+                                    <option value="" selected>Pilih Metode Perkuliahan</option>
+                                    <option value="0" {{ $item->raw_meth_id == 0 ? 'selected' : '' }}>Tatap Muka</option>
+                                    <option value="1" {{ $item->raw_meth_id == 1 ? 'selected' : '' }}>Teleconference</option>
+                                </select>
+                                @error('meth_id')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-3 col-12">
+                                <label for="bsks">Bebas SKS Hari Ini</label>
+                                <input type="number" min="1" max="8" name="bsks" id="bsks" class="form-control" value="{{ $item->bsks }}">
+                                @error('bsks')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-3 col-12">
+                                <label for="days_id">Hari</label>
+                                <select name="days_id" id="days_id" class="form-select" name="days_id" id="days_id">
+                                    <option value="" selected>Pilih Hari</option>
+                                    <option value="0" {{ $item->raw_days_id == 0 ? 'selected' : '' }}>Hari Minggu</option>
+                                    <option value="1" {{ $item->raw_days_id == 1 ? 'selected' : '' }}>Hari Senin</option>
+                                    <option value="2" {{ $item->raw_days_id == 2 ? 'selected' : '' }}>Hari Selasa</option>
+                                    <option value="3" {{ $item->raw_days_id == 3 ? 'selected' : '' }}>Hari Rabu</option>
+                                    <option value="4" {{ $item->raw_days_id == 4 ? 'selected' : '' }}>Hari Kamis</option>
+                                    <option value="5" {{ $item->raw_days_id == 5 ? 'selected' : '' }}>Hari Jum'at</option>
+                                    <option value="6" {{ $item->raw_days_id == 6 ? 'selected' : '' }}>Hari Sabtu</option>
+                                </select>
+                                @error('days_id')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-3 col-12">
+                                <label for="date">Tanggal Perkuliahan</label>
+                                <input type="date" name="date" id="date" class="form-control" value="{{ $item->date }}">
+                                @error('date')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-3 col-12">
+                                <label for="start">Waktu Mulai Perkuliahan</label>
+                                <input type="time" name="start" id="start" class="form-control" value="{{ $item->start }}">
+                                @error('start')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-3 col-12">
+                                <label for="ended">Waktu Selesai Perkuliahan</label>
+                                <input type="time" name="ended" id="ended" class="form-control" value="{{ $item->ended }}">
+                                @error('ended')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-4 col-12">
                                 <label for="ruang_id">Ruangan</label>
                                 <select name="ruang_id" id="ruang_id" class="form-select" name="ruang_id" id="ruang_id">
                                     <option value="" selected>Pilih Ruangan</option>
@@ -303,36 +320,6 @@ table th {
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="makul_id">Mata Kuliah</label>
-                                <select name="makul_id" id="makul_id" class="form-select" name="makul_id" id="makul_id">
-                                    <option value="" selected>Pilih Mata Kuliah</option>
-                                    @foreach ($matkul as $item_m)
-                                    @php
-                                        $dosen1_name = $item_m->dosen1 ? $item_m->dosen1->dsn_name : null;
-                                        $dosen2_name = $item_m->dosen2 ? $item_m->dosen2->dsn_name : null;
-                                        $dosen3_name = $item_m->dosen3 ? $item_m->dosen3->dsn_name : null;
-                                    @endphp
-                                    <option value="{{ $item_m->id }}" {{ $item->makul_id == $item_m->id ? 'selected' : '' }} data-dosen1="{{ $item_m->dosen_1 }}" data-dosen2="{{ $item_m->dosen_2 }}" data-dosen3="{{ $item_m->dosen_3 }}" data-dosen1-name="{{ $dosen1_name }}" data-dosen2-name="{{ $dosen2_name }}" data-dosen3-name="{{ $dosen3_name }}">{{ $item_m->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('makul_id')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="dosen_id">Dosen</label>
-                                <select name="dosen_id" id="dosen" class="form-select" name="dosen_id" id="dosen_id">
-                                    <option value="" selected>Pilih Dosen</option>
-                                </select>
-                                @error('dosen_id')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
                             <div class="form-group col-lg-4 col-12">
                                 <label for="kelas_id">Kelas</label>
                                 <select name="kelas_id" id="kelas_id" class="form-select" name="kelas_id" id="kelas_id">
@@ -345,6 +332,18 @@ table th {
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+
+                            <div class="form-group col-lg-4 col-12">
+                                <label for="dosen_id">Dosen</label>
+                                <select name="dosen_id" id="dosen" class="form-select" name="dosen_id" id="dosen_id">
+                                    <option value="" selected>Pilih Dosen</option>
+                                </select>
+                                @error('dosen_id')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+
 
                         </div>
                     </div>

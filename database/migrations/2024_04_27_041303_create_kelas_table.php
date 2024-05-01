@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('dosen_id')->nullable();    // Wali Kelas 
             $table->integer('capacity')->nullable();    // Kapasitas Mahasiswa 
             $table->string('name');                     // Nama Kelas
-            $table->string('code');                     // Kode Kelas => Jurusan-Tahun-Proku-Semester(A-Z)
+            $table->string('code')->unique();           // Kode Kelas => Jurusan-Tahun-Proku-Semester(A-Z)
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kurikulums', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->string('desc');
             $table->year('year_start');
             $table->year('year_ended');

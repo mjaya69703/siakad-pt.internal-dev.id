@@ -126,7 +126,7 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\MataKuliah::create([
             'name'       => 'Jaringan Komputer Expert',
-            'code'       => 'JKD',
+            'code'       => 'JKE',
             'desc'       => 'Matakuliah yang membahas mengenai jaringan komputer dasar',
             'bsks'       => '20',
             'kuri_id'    => '1',
