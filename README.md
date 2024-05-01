@@ -25,8 +25,8 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     - ( CRUD ) Data Program Kuliah
     - ( CRUD ) Data Kelas
     - ( CRUD ) Data Kurikulum
-    - ( CRUD ) Data MataKuliah ( 30-03-2024 ) <span style="color:red">New</span>
-    - ( CRUD ) Data JadwalKuliah ( 30-03-2024 ) <span style="color:red">New</span>
+    - ( CRUD ) Data MataKuliah
+    - ( CRUD ) Data JadwalKuliah
 
 - Fitur Kelola Data Inventaris
     - ( CRUD ) Data Gedung 
@@ -39,7 +39,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
 
 <b>Fitur Role Mahasiswa Aktif</b>
 - Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
-- Fitur Lihat Jadwal Kuliah dan Absensi ( 30-03-2024 ) <span style="color:red">New</span>
+- Fitur Lihat Jadwal Kuliah dan Absensi
 
 ## How to Install
 1. Persyaratan Install

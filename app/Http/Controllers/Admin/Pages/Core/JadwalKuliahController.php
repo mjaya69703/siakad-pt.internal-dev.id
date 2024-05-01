@@ -71,6 +71,16 @@ class JadwalKuliahController extends Controller
         
         return view('user.admin.master.admin-jadkul-view-absen', $data);
     }
+    public function updateAbsen(Request $request,$code)
+    {
+        $absen = AbsensiMahasiswa::where('code', $code)->first();
+
+        $absen->absen_desc = $request->absen_desc;
+        $absen->save();
+
+        Alert::success('success', 'Data telah berhasil diupdate');
+        return back();
+    }
     
     public function cetakAbsen(Request $request, $code)
     {

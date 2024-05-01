@@ -146,7 +146,7 @@ switch ($rawType) {
                         @enderror
                     </div>
                     <div class="form-group col-lg-3 col-12">
-                        <label for="ended">Waktu Mulai Perkuliahan</label>
+                        <label for="ended">Waktu Selesai Perkuliahan</label>
                         <input type="time" name="ended" id="ended" class="form-control" placeholder="Pilih jam selesai perkuliahan...">
                         @error('ended')
                             <small class="text-danger">{{ $message }}</small>

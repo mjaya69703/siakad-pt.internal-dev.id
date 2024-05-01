@@ -41,12 +41,13 @@
             text-align: center;
         }
         .signature {
-            margin-top: 20px;
+            margin-top: 10px;
+            /* margin-bottom: 10px; */
             text-align: right;
         }
         .signature p {
             font-size: 16px;
-            margin-top: 60px;
+            /* margin-top: 80px; */
         }
         .info {
             margin-bottom: 20px;
@@ -134,7 +135,7 @@
                     <td style="text-align: left; border: none;">{{ \Carbon\Carbon::parse($jadkul->start)->format('H:i') . ' - ' . \Carbon\Carbon::parse($jadkul->ended)->format('H:i') }} WIB</td>
                 </tr>
                 <tr>
-                    <td style="text-align: left; border: none;">Dosen</td>
+                    <td style="text-align: left; border: none;">Dosen Pengajar</td>
                     <td style="border: none;">:</td>
                     <td style="text-align: left; border: none;">{{ $jadkul->dosen->dsn_name }}</td>
                     <td style="border: none;"></td>
@@ -164,18 +165,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($absen as $item)
-                    @for ($i = 1; $i <= 32; $i++)
+                    @forelse ($absen as $key => $item)
 
                     <tr>
-                        <td style="text-align: center">{{ $item->id }}</td>
+                        <td style="text-align: center">{{ ++$key }}</td>
                         <td style="text-align: center">{{ $item->mahasiswa->mhs_nim }}</td>
                         <td>{{ $item->mahasiswa->mhs_name }}</td>
                         <td style="text-align: center">{{ $item->mahasiswa->kelas->name }}</td>
                         <td style="text-align: center">{{ $item->absen_type }}</td>
                         <td style="text-align: center">{{ \Carbon\Carbon::parse($item->absen_time)->format('H:i') }} WIB</td>
                     </tr>
-                    @endfor
                     @empty
                     <tr>
                         <td colspan="7" class="empty">Tidak ada data mahasiswa yang absen pada kelas ini</td>
@@ -186,8 +185,26 @@
         </div>
 
         <div class="signature">
-            <p>Hormat Saya</p>
-            <p>{{ Auth::user()->name }} <br>{{ Auth::user()->type }}</p>
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 33%; text-align: left; border: none;">
+
+                        <p style="margin-top: 50px;">Cirebon, {{ \Carbon\Carbon::now()->format('d M Y') }}</p>
+                        <p style="margin-top: 75px;"><b>{{ Auth::user()->name }}</b> <br>{{ Auth::user()->type }}</p>
+                    </td>
+                    <td style="width: 33%; text-align: left; border: none;">
+
+                        <p style="margin-top: 50px;">Mengetahui,</p>
+                        <p style="margin-top: 75px;"><b>{{ $jadkul->dosen->dsn_name }}</b> <br>Dosen Pengajar</p>
+                    </td>
+                    <td style="width: 33%; text-align: left; border: none;">
+
+                        <p style="margin-top: 50px;">Mengesahkan,</p>
+                        <p style="margin-top: 75px;"><b>{{ $jadkul->matkul->pstudi->head->dsn_name }}</b> <br>Kepala Program Studi</p>
+                    </td>
+                </tr>
+
+            </table>
         </div>
     </div>
 </body>

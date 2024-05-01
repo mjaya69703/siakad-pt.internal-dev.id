@@ -159,7 +159,7 @@ table th {
                         <td data-label="Tanggal Absen">{{ \Carbon\Carbon::parse($item->absen_date)->format('d M Y') }}</td>
                         <td data-label="Waktu Absen">{{ \Carbon\Carbon::parse($item->absen_time)->format('H:i') }} WIB</td>
                         <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateJadkul{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
+                            <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateAbsen{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                             {{-- <a href="{{ route('web-admin.master.jadkul-view-absen', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-user-check"></i></a> --}}
                             {{-- <form id="delete-form-{{ $item->code }}"
                                 action="{{ route('web-admin.master.jadkul-destroy', $item->code) }}" method="POST">
@@ -188,10 +188,10 @@ table th {
 
     <!--Extra Large Modal -->
     @foreach ($absen as $item)
-    <form action="{{ route('web-admin.master.jadkul-update', $item->code) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('web-admin.master.jadkul-absen-update', $item->code) }}" method="POST" enctype="multipart/form-data">
         @method('patch')
         @csrf
-        <div class="modal fade text-left w-100" id="updateJadkul{{$item->code}}" tabindex="-1" role="dialog"
+        <div class="modal fade text-left w-100" id="updateAbsen{{$item->code}}" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel16" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
                 role="document">
@@ -214,7 +214,7 @@ table th {
                             <div class="form-control col-lg-12 col-12">
                                 <img src="{{ asset('storage/images/'.$item->absen_proof) }}" class="card-img-top mb-2" alt="">
                                 <label for="absen_desc">Deskripsi Absen</label>
-                                <textarea name="absen_desc" id="absen_desc" class="form-control" cols="30" rows="10" placeholder="Inputkan deskripsi absen..."></textarea>
+                                <textarea name="absen_desc" id="absen_desc" class="form-control" cols="30" rows="10" placeholder="Inputkan deskripsi absen...">{{ $item->absen_desc == null ? null : $item->absen_desc }}</textarea>
                             </div>
 
 

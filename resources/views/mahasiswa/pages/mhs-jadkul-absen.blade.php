@@ -108,6 +108,8 @@ table th {
               @yield('submenu')
               <div class="">
                   {{-- <a href="{{ route('web-admin.master.jadkul-create') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a> --}}
+                  <a href="{{ route('mahasiswa.home-jadkul-index') }}" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
+
                   <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-paper-plane"></i></button>
               </div>
           </h5>

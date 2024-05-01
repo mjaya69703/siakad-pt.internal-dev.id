@@ -55,23 +55,31 @@ class HomeController extends Controller
     }
     public function jadkulAbsen($code)
     {
-        
+        $date = \Carbon\Carbon::now()->format('Y-m-d');
         $checkAbsen = AbsensiMahasiswa::where('jadkul_code', $code)->where('author_id', Auth::guard('mahasiswa')->user()->id)->count();
+        $checkDate = JadwalKuliah::where('code', $code)->where('date', $date)->count();
         
-        // dd($checkAbsen);
+        // dd($timeStart);
         if($checkAbsen === 0){
-            $data['kuri'] = Kurikulum::all();
-            $data['taka'] = TahunAkademik::all();
-            // $data['dosen'] = MataKuliah::where('dosen');
-            $data['pstudi'] = ProgramStudi::all();
-            $data['matkul'] = MataKuliah::all();
-            $data['jadkul'] = JadwalKuliah::where('code', $code)->first();
-            $data['ruang'] = Ruang::all();
-            $data['kelas'] = Kelas::all();
+            if($checkDate !== 0){
 
-            // dd($data['jadkul']);
+                $data['kuri'] = Kurikulum::all();
+                $data['taka'] = TahunAkademik::all();
+                // $data['dosen'] = MataKuliah::where('dosen');
+                $data['pstudi'] = ProgramStudi::all();
+                $data['matkul'] = MataKuliah::all();
+                $data['jadkul'] = JadwalKuliah::where('code', $code)->first();
+                $data['ruang'] = Ruang::all();
+                $data['kelas'] = Kelas::all();
+    
+                // dd($data['jadkul']);
+    
+                return view('mahasiswa.pages.mhs-jadkul-absen', $data);
+            } else {
 
-            return view('mahasiswa.pages.mhs-jadkul-absen', $data);
+                Alert::error('Error', 'Kamu belum bisa absen pada saat ini.');
+                return back();
+            }
         } else {
             Alert::error('Error', 'Kamu sudah absen untuk matakuliah ini.');
             return back();
@@ -85,6 +93,10 @@ class HomeController extends Controller
             'absen_type' => 'required|string',
         ]);
     
+        $timeStart = \Carbon\Carbon::now()->format('H:i:s');
+        $checkStart = JadwalKuliah::where('code', $request->jadkul_code)->first();
+
+
         $absen = new AbsensiMahasiswa;
     
         if ($request->hasFile('absen_proof')) {
@@ -110,7 +122,18 @@ class HomeController extends Controller
             $absen->absen_time = $request->absen_time;
             $absen->absen_type = $request->absen_type;
             $absen->code = uniqid();
-            $absen->save();
+            if ($timeStart >= $checkStart->ended) {
+                // Jika waktu saat ini sudah melewati waktu selesai perkuliahan
+                Alert::error('Error', 'Waktu perkuliahan telah selesai. Anda sudah tidak bisa absen hari ini.');
+                return back();
+            } elseif ($timeStart >= $checkStart->start) {
+                // Jika waktu saat ini sudah sama atau setelah waktu mulai perkuliahan
+                $absen->save();
+            } else {
+                // Jika waktu saat ini masih sebelum waktu mulai perkuliahan
+                Alert::error('Error', 'Waktu absen belum dimulai. Silahkan coba kembali nanti.');
+                return back();
+            }
     
             Alert::success('Success', 'Kamu telah berhasil absen pada matakuliah ini');
             return redirect()->route('mahasiswa.home-jadkul-index');
