@@ -159,7 +159,7 @@ table th {
                         <td data-label="Waktu Perkuliahan">{{ $item->start }} <br> - <br> {{ $item->ended }}</td>
                         <td class="d-flex justify-content-center align-items-center">
                             <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateJadkul{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
-                            {{-- <a href="{{ route('web-admin.master.jadkul-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}
+                            <a href="{{ route('web-admin.master.jadkul-absen-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-user-check"></i></a>
                             <form id="delete-form-{{ $item->code }}"
                                 action="{{ route('web-admin.master.jadkul-destroy', $item->code) }}" method="POST">
                                 @csrf

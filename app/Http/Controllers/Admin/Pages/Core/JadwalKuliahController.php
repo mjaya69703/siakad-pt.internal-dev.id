@@ -11,6 +11,7 @@ use Hash;
 use Str;
 // SECTION ADDONS EXTERNAL
 use Alert;
+use PDF;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
@@ -20,6 +21,7 @@ use App\Models\Kurikulum;
 use App\Models\Dosen;
 use App\Models\TahunAkademik;
 use App\Models\JadwalKuliah;
+use App\Models\AbsensiMahasiswa;
 use App\Models\Ruang;
 use App\Models\Kelas;
 
@@ -53,6 +55,46 @@ class JadwalKuliahController extends Controller
         $data['kelas'] = kelas::all();
 
         return view('user.admin.master.admin-jadkul-create', $data);
+    }
+
+    public function viewAbsen($code)
+    {
+        $data['kuri'] = Kurikulum::all();
+        $data['taka'] = TahunAkademik::all();
+        $data['dosen'] = Dosen::all();
+        $data['pstudi'] = ProgramStudi::all();
+        $data['absen'] = AbsensiMahasiswa::where('jadkul_code', $code)->get();
+        $data['matkul'] = MataKuliah::all();
+        $data['jadkul'] = JadwalKuliah::where('code', $code)->first();
+        $data['ruang'] = Ruang::all();
+        $data['kelas'] = kelas::all();
+        
+        return view('user.admin.master.admin-jadkul-view-absen', $data);
+    }
+    
+    public function cetakAbsen(Request $request, $code)
+    {
+
+        // Validasi input
+        // $request->validate([
+        //     'kode_kelas' => 'required|exists:jadwal_kuliahs,code',
+        // ]);
+
+        // Dapatkan data absensi mahasiswa berdasarkan kode kelas yang dipilih 
+        $jadwal = JadwalKuliah::where('code', $code)->first();
+        $data['jadkul'] = JadwalKuliah::where('code', $code)->first();
+        $data['absen'] = AbsensiMahasiswa::whereHas('jadkul', function ($query) use ($request) {
+            $query->whereHas('kelas', function ($q) use ($request) {
+                $q->where('code', $request->kode_kelas);
+            });
+        })->where('jadkul_code', $code)->get();
+        // dd($absensiMahasiswa);
+
+        // return view('base.cetak.cetak-data-absensi', $data);
+        $pdf = PDF::loadView('base.cetak.cetak-data-absensi', $data);
+       
+        return $pdf->download('Daftar-Absen-'.$jadwal->matkul->name.'-'.$jadwal->pert_id.'-'.$request->kode_kelas.'.pdf');
+
     }
 
     public function store(Request $request)
