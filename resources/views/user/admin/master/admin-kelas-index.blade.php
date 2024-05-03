@@ -69,7 +69,7 @@ switch ($rawType) {
                                 <td>{{ $item->dosen->dsn_name }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateKelas{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
-                                    {{-- <a href="{{ route('web-admin.staffmanager-dosen-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}
+                                    <a href="{{ route('web-admin.master.kelas-mahasiswa-view', $item->code) }}" style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-users"></i></a>
                                     <form id="delete-form-{{ $item->code }}"
                                         action="{{ route('web-admin.master.kelas-destroy', $item->code) }}" method="POST">
                                         @csrf

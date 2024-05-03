@@ -33,6 +33,31 @@ class KelasController extends Controller
 
         return view('user.admin.master.admin-kelas-index', $data);
     }
+    public function viewMahasiswa($code)
+    {
+        $class = Kelas::where('code', $code)->first();
+        $data['kelas'] = Kelas::where('code', $code)->first();
+        $data['taka'] = TahunAkademik::all();
+        $data['mahasiswa'] = Mahasiswa::where('class_id', $class->id)->get();
+        $data['pstudi'] = ProgramStudi::all();
+        $data['proku'] = ProgramKuliah::all();
+        $data['dosen'] = Dosen::all();
+
+        // dd($data['mahasiswa']);
+
+        return view('user.admin.master.admin-kelas-view-mahasiswa', $data);
+    }
+    public function cetakMahasiswa($code)
+    {
+        $class = Kelas::where('code', $code)->first();
+        $data['kelas'] = Kelas::where('code', $code)->first();
+        $data['mahasiswa'] = Mahasiswa::where('class_id', $class->id)->get();
+
+        return view('base.cetak.cetak-data-kehadiran', $data);
+        // $pdf = PDF::loadView('base.cetak.cetak-data-kehadiran', $data);
+       
+        return $pdf->download('Daftar-Absen-'.$jadwal->matkul->name.'-'.$jadwal->pert_id.'-'.$request->kode_kelas.'.pdf');
+    }
 
     public function store(Request $request)
     {

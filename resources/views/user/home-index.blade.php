@@ -66,8 +66,8 @@ switch ($rawType) {
                     <a href="http://newprojectfoto.test/admin/manage-balance/pending">
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
-                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-clock" style="font-size: 42px"></i></span>
-                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Absensi Kehadiran <br>0</span>
+                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-graduate" style="font-size: 42px"></i></span>
+                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Mahasiswa <br>{{ \App\Models\Mahasiswa::all()->count() }}</span>
                             </div>
                         </div>
                     </a>
@@ -76,28 +76,68 @@ switch ($rawType) {
                     <a href="http://newprojectfoto.test/admin/manage-balance/pending">
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
-                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-clock" style="font-size: 42px"></i></span>
-                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Absensi Kehadiran <br>0</span>
+                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-tie" style="font-size: 42px"></i></span>
+                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Dosen <br>{{ \App\Models\Dosen::all()->count() }}</span>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-6 mb-2">
-                    <a href="http://newprojectfoto.test/admin/manage-balance/pending">
+                    <a href="{{ route('web-admin.master.jadkul-index') }}">
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
-                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-clock" style="font-size: 42px"></i></span>
-                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Absensi Kehadiran <br>0</span>
+                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-tag" style="font-size: 42px"></i></span>
+                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Karyawan <br>{{ \App\Models\User::where('type', ['1','2','3','4'])->count() }}</span>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-6 mb-2">
-                    <a href="http://newprojectfoto.test/admin/manage-balance/pending">
+                    <a href="{{ route('web-admin.master.jadkul-index') }}">
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
-                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-clock" style="font-size: 42px"></i></span>
-                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Absensi Kehadiran <br>0</span>
+                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-book-open-reader" style="font-size: 42px"></i></span>
+                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Perkuliahan <br>{{ \App\Models\JadwalKuliah::all()->count() }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-6 mb-2">
+                    <a href="{{ route('web-admin.master.fakultas-index') }}">
+                        <div class="card btn btn-outline-success">
+                            <div class="card-body d-flex justify-content-around align-items-center">
+                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-building-columns" style="font-size: 42px"></i></span>
+                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Fakultas <br>{{ \App\Models\Fakultas::all()->count() }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-6 mb-2">
+                    <a href="{{ route('web-admin.master.pstudi-index') }}">
+                        <div class="card btn btn-outline-success">
+                            <div class="card-body d-flex justify-content-around align-items-center">
+                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-graduation-cap" style="font-size: 42px"></i></span>
+                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Program Studi <br>{{ \App\Models\ProgramStudi::all()->count() }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-6 mb-2">
+                    <a href="{{ route('web-admin.master.kelas-index') }}">
+                        <div class="card btn btn-outline-success">
+                            <div class="card-body d-flex justify-content-around align-items-center">
+                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-building-user" style="font-size: 42px"></i></span>
+                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Kelas <br>{{ \App\Models\Kelas::all()->count() }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-6 mb-2">
+                    <a href="{{ route('web-admin.master.matkul-index') }}">
+                        <div class="card btn btn-outline-success">
+                            <div class="card-body d-flex justify-content-around align-items-center">
+                                <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-book-open" style="font-size: 42px"></i></span>
+                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Mata Kuliah <br>{{ \App\Models\MataKuliah::all()->count() }}</span>
                             </div>
                         </div>
                     </a>
