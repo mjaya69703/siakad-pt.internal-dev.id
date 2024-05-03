@@ -61,6 +61,7 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
     
     // GLOBAL MENU
     Route::get('/home',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home-index');
+    Route::get('/home/ajax/GetMhsGender',[App\Http\Controllers\Admin\HomeController::class, 'getMhsGender'])->name('home.ajax-mhs-gender');
     Route::get('/profile',[App\Http\Controllers\Admin\HomeController::class, 'profile'])->name('home-profile');
     Route::get('/presensi',[App\Http\Controllers\Admin\PresensiController::class, 'index'])->name('home-presensi');
     Route::get('/presensi/view',[App\Http\Controllers\Admin\PresensiController::class, 'presensiList'])->name('home-presensi-list');

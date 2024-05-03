@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('mhs_image')->default('default/default-profile.jpg');
             $table->string('mhs_birthplace')->nullable();
             $table->date('mhs_birthdate')->nullable();
-            $table->string('mhs_gend')->nullable();
+            $table->string('mhs_gend')->nullable(); // Value L = Laki-laki ; P = Perempuan
             $table->string('mhs_reli')->nullable();
             $table->string('mhs_addr_domisili')->nullable();  
             $table->string('mhs_addr_kelurahan')->nullable();

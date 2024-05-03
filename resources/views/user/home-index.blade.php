@@ -3,10 +3,10 @@
     SIAKAD PT - Internal Developer
 @endsection
 @section('menu')
-    Contoh Menu
+    Dashboard
 @endsection
 @section('submenu')
-    Contoh SubMenu
+    Dashboard Admin
 @endsection
 @section('urlmenu')
 @php
@@ -33,7 +33,7 @@ switch ($rawType) {
     #
 @endsection
 @section('subdesc')
-    Contoh Deskripsi Menu
+    Halaman dashboard admin
 @endsection
 @section('custom-css')
     <style>
@@ -117,7 +117,7 @@ switch ($rawType) {
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-graduation-cap" style="font-size: 42px"></i></span>
-                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Program Studi <br>{{ \App\Models\ProgramStudi::all()->count() }}</span>
+                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">Prodi <br>{{ \App\Models\ProgramStudi::all()->count() }}</span>
                             </div>
                         </div>
                     </a>
@@ -146,14 +146,68 @@ switch ($rawType) {
             <div class="col-lg-3 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Log Activity - {{ \Carbon\Carbon::now()->format('d M Y') }}</h4>
+                        <h4 class="card-title text-center">Presentasi Gender</h4>
                     </div>
                     <div class="card-body">
-                        <span>16.24 <b>Administrator</b> - telah login</span><br>
-                        <span>16.28 <b>Administrator</b> - telah mengubah password</span><br>
+                        <div class="form-group">
+                            <div id="genderChart"></div>
+                        </div>
+                        <div class="text-center">
+                            <small>Grafik Presentasi Gender Mahasiswa</small>
+                        </div>
+                        <hr>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+@endsection
+@section('custom-js')
+<script src="{{ asset('dist') }}/assets/extensions/apexcharts/apexcharts.min.js"></script>
+<script src="{{ asset('dist') }}/assets/static/js/pages/dashboard.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
+<script>
+var ajaxRunning = false;
+
+$(document).ready(function() {
+    // Fungsi untuk melakukan permintaan AJAX
+    function fetchData() {
+        // Jika sedang berjalan, hentikan fungsi
+        if (ajaxRunning) {
+            return;
+        }
+
+        ajaxRunning = true;
+
+        $.ajax({
+            url: '{{ route('web-admin.home.ajax-mhs-gender') }}',
+            method: 'GET',
+            success: function(response) {
+                var maleCount = response.male;
+                var femaleCount = response.female;
+
+                var options = {
+                    chart: {
+                        type: 'pie',
+                    },
+                    series: [maleCount, femaleCount],
+                    labels: ['Laki-laki', 'Perempuan'],
+                };
+
+                var chart = new ApexCharts(document.querySelector('#genderChart'), options);
+                chart.render();
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            },
+            complete: function() {
+                ajaxRunning = false; // Setelah permintaan selesai, set status menjadi false
+            }
+        });
+    }
+
+    // Panggil fungsi untuk pertama kalinya
+    fetchData();
+});
+</script>
 @endsection

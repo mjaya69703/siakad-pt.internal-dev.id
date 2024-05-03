@@ -14,6 +14,7 @@ use Auth;
 use Hash;
 use App\Models\uAttendance;
 use Carbon\Carbon;
+use App\Models\Mahasiswa;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,14 @@ class HomeController extends Controller
     public function profile(){
 
         return view('user.home-profile');
+    }
+    
+    public function getMhsGender(){
+
+        $maleCount = Mahasiswa::where('mhs_gend', 'L')->count();
+        $femaleCount = Mahasiswa::where('mhs_gend', 'P')->count();
+
+        return response()->json(['male' => $maleCount, 'female' => $femaleCount]);
     }
 
 

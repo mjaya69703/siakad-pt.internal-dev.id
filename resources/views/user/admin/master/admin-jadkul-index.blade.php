@@ -199,10 +199,10 @@ table th {
                         <h4 class="modal-title" id="myModalLabel16">Edit Jadwal Perkuliahan - {{ $item->matkul->name . ' ' .$item->pert_id }}</h4>
                         <div class="">
     
-                            <button type="submit" class="btn btn-outline-primary" >
+                            <button type="submit" class="mt-1 btn btn-outline-primary" >
                                 <i class="fas fa-paper-plane"></i>
                             </button>
-                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                            <button type="button" class="mt-1 btn btn-outline-danger" data-bs-dismiss="modal"
                                 aria-label="Close">
                                 <i class="fas fa-times"></i>
                             </button>
@@ -213,7 +213,7 @@ table th {
 
                             <div class="form-group col-lg-3 col-12">
                                 <label for="makul_id">Mata Kuliah</label>
-                                <select name="makul_id" id="makul_id" class="form-select" name="makul_id" id="makul_id">
+                                <select name="makul_id" id="makul_id" class="form-select" disabled>
                                     <option value="" selected>Pilih Mata Kuliah</option>
                                     @foreach ($matkul as $item_m)
                                     @php
@@ -230,7 +230,7 @@ table th {
                             </div>
                             <div class="form-group col-lg-3 col-12">
                                 <label for="pert_id">Pertemuan</label>
-                                <select name="pert_id" id="pert_id" class="form-select" name="pert_id" id="pert_id">
+                                <select name="pert_id" id="pert_id" class="form-select" >
                                     <option value="" selected>Pilih Pertemuan</option>
                                     <option value="1" {{ $item->raw_pert_id == 1 ? 'selected' : '' }}>Pertemuan 1</option>
                                     <option value="2" {{ $item->raw_pert_id == 2 ? 'selected' : '' }}>Pertemuan 2</option>
@@ -255,7 +255,7 @@ table th {
                             </div>
                             <div class="form-group col-lg-3 col-12">
                                 <label for="meth_id">Metode Perkuliahan</label>
-                                <select name="meth_id" id="meth_id" class="form-select" name="meth_id" id="meth_id">
+                                <select name="meth_id" id="meth_id" class="form-select" >
                                     <option value="" selected>Pilih Metode Perkuliahan</option>
                                     <option value="0" {{ $item->raw_meth_id == 0 ? 'selected' : '' }}>Tatap Muka</option>
                                     <option value="1" {{ $item->raw_meth_id == 1 ? 'selected' : '' }}>Teleconference</option>
@@ -273,7 +273,7 @@ table th {
                             </div>
                             <div class="form-group col-lg-3 col-12">
                                 <label for="days_id">Hari</label>
-                                <select name="days_id" id="days_id" class="form-select" name="days_id" id="days_id">
+                                <select name="days_id" id="days_id" class="form-select" >
                                     <option value="" selected>Pilih Hari</option>
                                     <option value="0" {{ $item->raw_days_id == 0 ? 'selected' : '' }}>Hari Minggu</option>
                                     <option value="1" {{ $item->raw_days_id == 1 ? 'selected' : '' }}>Hari Senin</option>
@@ -310,7 +310,7 @@ table th {
                             </div>
                             <div class="form-group col-lg-4 col-12">
                                 <label for="ruang_id">Ruangan</label>
-                                <select name="ruang_id" id="ruang_id" class="form-select" name="ruang_id" id="ruang_id">
+                                <select name="ruang_id" id="ruang_id" class="form-select" >
                                     <option value="" selected>Pilih Ruangan</option>
                                     @foreach ($ruang as $item_r)
                                     <option value="{{ $item_r->id }}" {{ $item->ruang_id == $item_r->id ? 'selected' : '' }}>{{ $item_r->name }}</option>
@@ -322,7 +322,7 @@ table th {
                             </div>
                             <div class="form-group col-lg-4 col-12">
                                 <label for="kelas_id">Kelas</label>
-                                <select name="kelas_id" id="kelas_id" class="form-select" name="kelas_id" id="kelas_id">
+                                <select name="kelas_id" id="kelas_id" class="form-select" >
                                     <option value="" selected>Pilih Kelas</option>
                                     @foreach ($kelas as $item_k)
                                     <option value="{{ $item_k->id }}" {{ $item->kelas_id == $item_k->id ? 'selected' : '' }}>{{ $item_k->name }}</option>
@@ -335,8 +335,11 @@ table th {
 
                             <div class="form-group col-lg-4 col-12">
                                 <label for="dosen_id">Dosen</label>
-                                <select name="dosen_id" id="dosen" class="form-select" name="dosen_id" id="dosen_id">
+                                <select name="dosen_id" id="dosen_id" class="form-select">
                                     <option value="" selected>Pilih Dosen</option>
+                                    <option value="{{ $item->matkul->dosen_1 == null ? '' : $item->matkul->dosen_1 }}" {{ $item->matkul->dosen_1 == $item->dosen_id ? 'selected' : ''  }} {{ $item->matkul->dosen_1 == null ? 'disabled' : '' }}>{{ $item->matkul->dosen_1 == null ? 'Tidak Tersedia' : $item->matkul->dosen1->dsn_name }}</option>
+                                    <option value="{{ $item->matkul->dosen_2 == null ? '' : $item->matkul->dosen_2 }}" {{ $item->matkul->dosen_2 == $item->dosen_id ? 'selected' : ''  }} {{ $item->matkul->dosen_2 == null ? 'disabled' : '' }}>{{ $item->matkul->dosen_2 == null ? 'Tidak Tersedia' : $item->matkul->dosen2->dsn_name }}</option>
+                                    <option value="{{ $item->matkul->dosen_3 == null ? '' : $item->matkul->dosen_3 }}" {{ $item->matkul->dosen_3 == $item->dosen_id ? 'selected' : ''  }} {{ $item->matkul->dosen_3 == null ? 'disabled' : '' }}>{{ $item->matkul->dosen_3 == null ? 'Tidak Tersedia' : $item->matkul->dosen3->dsn_name }}</option>
                                 </select>
                                 @error('dosen_id')
                                 <small class="text-danger">{{ $message }}</small>
@@ -355,45 +358,6 @@ table th {
 </div>
 @endsection
 @section('custom-js')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-        // Event saat mata kuliah dipilih
-        $('#makul_id').on('change', function(){
-            var mataKuliahId = $(this).val();
-            var selectedOption = $(this).find('option:selected');
-            var dosen1Id = selectedOption.attr('data-dosen1');
-            var dosen2Id = selectedOption.attr('data-dosen2');
-            var dosen3Id = selectedOption.attr('data-dosen3');
-
-            // Mengambil nama dosen berdasarkan ID
-            var dosen1Name = selectedOption.attr('data-dosen1-name');
-            var dosen2Name = selectedOption.attr('data-dosen2-name');
-            var dosen3Name = selectedOption.attr('data-dosen3-name');
-
-            // Menetapkan nama dosen sebagai teks opsi
-            $('#dosen').empty(); // Kosongkan opsi dosen sebelum menambahkan yang baru
-            $('#dosen').append('<option value="" selected>Pilih Dosen</option>');
-
-            // Menambahkan opsi dosen jika ID dan nama dosen ada
-            if (dosen1Id && dosen1Name) {
-                $('#dosen').append('<option value="' + dosen1Id + '">' + dosen1Name + '</option>');
-            }
-            if (dosen2Id && dosen2Name) {
-                $('#dosen').append('<option value="' + dosen2Id + '">' + dosen2Name + '</option>');
-            }
-            if (dosen3Id && dosen3Name) {
-                $('#dosen').append('<option value="' + dosen3Id + '">' + dosen3Name + '</option>');
-            }
-
-            // Menetapkan opsi dosen yang sesuai dengan dosen_id yang telah dipilih sebelumnya
-            var selectedDosenId = '{{ $item->dosen_id }}';
-            if (selectedDosenId) {
-                $('#dosen').val(selectedDosenId);
-            }
-        });
-    });
-</script>
 
 
 @endsection

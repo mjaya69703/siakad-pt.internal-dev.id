@@ -48,14 +48,14 @@ switch ($rawType) {
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="card-title">@yield('submenu')</h5>
                     <div class="">
-                        <a href="{{ route('web-admin.master.jadkul-index') }}" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
-                        <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-paper-plane"></i></button>
+                        <a href="{{ route('web-admin.master.jadkul-index') }}" class="mt-1 btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
+                        <button type="submit" class="mt-1 btn btn-outline-primary"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
                 <div class="card-body row">
                     <div class="form-group col-lg-3 col-12">
                         <label for="makul_id">Mata Kuliah</label>
-                        <select name="makul_id" id="makul_id" class="form-select" name="makul_id" id="makul_id">
+                        <select name="makul_id" id="makul_id" class="form-select">
                             <option value="" selected>Pilih Mata Kuliah</option>
                             @foreach ($matkul as $item_m)
                             @php
@@ -74,7 +74,7 @@ switch ($rawType) {
 
                     <div class="form-group col-lg-3 col-12">
                         <label for="pert_id">Pertemuan</label>
-                        <select name="pert_id" id="pert_id" class="form-select" name="pert_id" id="pert_id">
+                        <select name="pert_id" id="pert_id" class="form-select">
                             <option value="" selected>Pilih Pertemuan</option>
                             <option value="1">Pertemuan 1</option>
                             <option value="2">Pertemuan 2</option>
@@ -99,7 +99,7 @@ switch ($rawType) {
                     </div>
                     <div class="form-group col-lg-3 col-12">
                         <label for="meth_id">Metode Perkuliahan</label>
-                        <select name="meth_id" id="meth_id" class="form-select" name="meth_id" id="meth_id">
+                        <select name="meth_id" id="meth_id" class="form-select">
                             <option value="" selected>Pilih Metode Perkuliahan</option>
                             <option value="0">Tatap Muka</option>
                             <option value="1">Teleconference</option>
@@ -117,7 +117,7 @@ switch ($rawType) {
                     </div>
                     <div class="form-group col-lg-3 col-12">
                         <label for="days_id">Hari</label>
-                        <select name="days_id" id="days_id" class="form-select" name="days_id" id="days_id">
+                        <select name="days_id" id="days_id" class="form-select" >
                             <option value="" selected>Pilih Hari</option>
                             <option value="0">Hari Minggu</option>
                             <option value="1">Hari Senin</option>
@@ -155,7 +155,7 @@ switch ($rawType) {
 
                     <div class="form-group col-lg-4 col-12">
                         <label for="ruang_id">Ruangan</label>
-                        <select name="ruang_id" id="ruang_id" class="form-select" name="ruang_id" id="ruang_id">
+                        <select name="ruang_id" id="ruang_id" class="form-select" >
                             <option value="" selected>Pilih Ruangan</option>
                             @foreach ($ruang as $item_r)
                             <option value="{{ $item_r->id }}" >{{ $item_r->name }}</option>
@@ -167,7 +167,7 @@ switch ($rawType) {
                     </div>
                     <div class="form-group col-lg-4 col-12">
                         <label for="kelas_id">Kelas</label>
-                        <select name="kelas_id" id="kelas_id" class="form-select" name="kelas_id" id="kelas_id">
+                        <select name="kelas_id" id="kelas_id" class="form-select" >
                             <option value="" selected>Pilih Kelas</option>
                             @foreach ($kelas as $item_k)
                             <option value="{{ $item_k->id }}" >{{ $item_k->name }}</option>
@@ -179,7 +179,7 @@ switch ($rawType) {
                     </div>
                     <div class="form-group col-lg-4 col-12">
                         <label for="dosen_id">Dosen</label>
-                        <select name="dosen_id" id="dosen" class="form-select" name="dosen_id" id="dosen_id">
+                        <select name="dosen_id" id="dosen_id" class="form-select" >
                             <option value="" selected>Pilih Dosen</option>
                         </select>
                         @error('dosen_id')
@@ -274,10 +274,10 @@ switch ($rawType) {
                         <h4 class="modal-title" id="myModalLabel16">Edit Jadwal Perkuliahan - {{ $item->matkul->name . ' ' .$item->pert_id }}</h4>
                         <div class="">
     
-                            <button type="submit" class="btn btn-outline-primary" >
+                            <button type="submit" class="mt-1 btn btn-outline-primary" >
                                 <i class="fas fa-paper-plane"></i>
                             </button>
-                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                            <button type="button" class="mt-1 btn btn-outline-danger" data-bs-dismiss="modal"
                                 aria-label="Close">
                                 <i class="fas fa-times"></i>
                             </button>
@@ -287,8 +287,8 @@ switch ($rawType) {
                         <div class="row">
 
                             <div class="form-group col-lg-3 col-12">
-                                <label for="makul_id">Mata Kuliah</label>
-                                <select name="makul_id" id="matkul_ide" class="form-select" >
+                                <label for="matkul_ide">Mata Kuliah</label>
+                                <select name="makul_id" id="matkul_ide" class="form-select" disabled>
                                     <option value="" selected>Pilih Mata Kuliah</option>
                                     @foreach ($matkul as $item_m)
                                     @php
@@ -299,7 +299,6 @@ switch ($rawType) {
                                     <option value="{{ $item_m->id }}" {{ $item->makul_id == $item_m->id ? 'selected' : '' }} data-dosen1="{{ $item_m->dosen_1 }}" data-dosen2="{{ $item_m->dosen_2 }}" data-dosen3="{{ $item_m->dosen_3 }}" data-dosen1-name="{{ $dosen1_name }}" data-dosen2-name="{{ $dosen2_name }}" data-dosen3-name="{{ $dosen3_name }}">{{ $item_m->name }}</option>
                                     @endforeach
                                 </select>
-                                <small>Pilih Mata Kuliah lagi agar opsi dosen muncul</small>
 
                                 @error('makul_id')
                                 <small class="text-danger">{{ $message }}</small>
@@ -307,7 +306,7 @@ switch ($rawType) {
                             </div>
                             <div class="form-group col-lg-3 col-12">
                                 <label for="pert_id">Pertemuan</label>
-                                <select name="pert_id" id="pert_id" class="form-select" name="pert_id" id="pert_id">
+                                <select name="pert_id" id="pert_id" class="form-select" >
                                     <option value="" selected>Pilih Pertemuan</option>
                                     <option value="1" {{ $item->raw_pert_id == 1 ? 'selected' : '' }}>Pertemuan 1</option>
                                     <option value="2" {{ $item->raw_pert_id == 2 ? 'selected' : '' }}>Pertemuan 2</option>
@@ -332,7 +331,7 @@ switch ($rawType) {
                             </div>
                             <div class="form-group col-lg-3 col-12">
                                 <label for="meth_id">Metode Perkuliahan</label>
-                                <select name="meth_id" id="meth_id" class="form-select" name="meth_id" id="meth_id">
+                                <select name="meth_id" id="meth_id" class="form-select">
                                     <option value="" selected>Pilih Metode Perkuliahan</option>
                                     <option value="0" {{ $item->raw_meth_id == 0 ? 'selected' : '' }}>Tatap Muka</option>
                                     <option value="1" {{ $item->raw_meth_id == 1 ? 'selected' : '' }}>Teleconference</option>
@@ -350,7 +349,7 @@ switch ($rawType) {
                             </div>
                             <div class="form-group col-lg-3 col-12">
                                 <label for="days_id">Hari</label>
-                                <select name="days_id" id="days_id" class="form-select" name="days_id" id="days_id">
+                                <select name="days_id" id="days_id" class="form-select" >
                                     <option value="" selected>Pilih Hari</option>
                                     <option value="0" {{ $item->raw_days_id == 0 ? 'selected' : '' }}>Hari Minggu</option>
                                     <option value="1" {{ $item->raw_days_id == 1 ? 'selected' : '' }}>Hari Senin</option>
@@ -399,7 +398,7 @@ switch ($rawType) {
                             </div>
                             <div class="form-group col-lg-4 col-12">
                                 <label for="kelas_id">Kelas</label>
-                                <select name="kelas_id" id="kelas_id" class="form-select" name="kelas_id" id="kelas_id">
+                                <select name="kelas_id" id="kelas_id" class="form-select" >
                                     <option value="" selected>Pilih Kelas</option>
                                     @foreach ($kelas as $item_k)
                                     <option value="{{ $item_k->id }}" {{ $item->kelas_id == $item_k->id ? 'selected' : '' }}>{{ $item_k->name }}</option>
@@ -412,8 +411,11 @@ switch ($rawType) {
 
                             <div class="form-group col-lg-4 col-12">
                                 <label for="dosen_id">Dosen</label>
-                                <select name="dosen_id" id="dosenb" class="form-select" name="dosen_id" id="dosen_id">
+                                <select name="dosen_id" id="dosen_id" class="form-select">
                                     <option value="" selected>Pilih Dosen</option>
+                                    <option value="{{ $item->matkul->dosen_1 == null ? '' : $item->matkul->dosen_1 }}" {{ $item->matkul->dosen_1 == $item->dosen_id ? 'selected' : ''  }} {{ $item->matkul->dosen_1 == null ? 'disabled' : '' }}>{{ $item->matkul->dosen_1 == null ? 'Tidak Tersedia' : $item->matkul->dosen1->dsn_name }}</option>
+                                    <option value="{{ $item->matkul->dosen_2 == null ? '' : $item->matkul->dosen_2 }}" {{ $item->matkul->dosen_2 == $item->dosen_id ? 'selected' : ''  }} {{ $item->matkul->dosen_2 == null ? 'disabled' : '' }}>{{ $item->matkul->dosen_2 == null ? 'Tidak Tersedia' : $item->matkul->dosen2->dsn_name }}</option>
+                                    <option value="{{ $item->matkul->dosen_3 == null ? '' : $item->matkul->dosen_3 }}" {{ $item->matkul->dosen_3 == $item->dosen_id ? 'selected' : ''  }} {{ $item->matkul->dosen_3 == null ? 'disabled' : '' }}>{{ $item->matkul->dosen_3 == null ? 'Tidak Tersedia' : $item->matkul->dosen3->dsn_name }}</option>
                                 </select>
                                 @error('dosen_id')
                                 <small class="text-danger">{{ $message }}</small>
@@ -449,57 +451,104 @@ $(document).ready(function(){
         var dosen3Name = selectedOption.attr('data-dosen3-name');
 
         // Menetapkan nama dosen sebagai teks opsi
-        $('#dosen').empty(); // Kosongkan opsi dosen sebelum menambahkan yang baru
-        $('#dosen').append('<option value="" selected>Pilih Dosen</option>');
+        $('#dosen_id').empty(); // Kosongkan opsi dosen sebelum menambahkan yang baru
+        $('#dosen_id').append('<option value="" selected>Pilih Dosen</option>');
 
         if (dosen1Id && dosen1Name) {
-            $('#dosen').append('<option value="' + dosen1Id + '">' + dosen1Name + '</option>');
+            $('#dosen_id').append('<option value="' + dosen1Id + '">' + dosen1Name + '</option>');
         }
         if (dosen2Id && dosen2Name) {
-            $('#dosen').append('<option value="' + dosen2Id + '">' + dosen2Name + '</option>');
+            $('#dosen_id').append('<option value="' + dosen2Id + '">' + dosen2Name + '</option>');
         }
         if (dosen3Id && dosen3Name) {
-            $('#dosen').append('<option value="' + dosen3Id + '">' + dosen3Name + '</option>');
+            $('#dosen_id').append('<option value="' + dosen3Id + '">' + dosen3Name + '</option>');
         }
     });
 });
 </script>
-<script>
-    $(document).ready(function(){
-        // Event saat mata kuliah dipilih
-        $('#matkul_ide').on('change', function(){
-            var mataKuliahId = $(this).val();
-            var selectedOption = $(this).find('option:selected');
-            var dosen1Id = selectedOption.attr('data-dosen1');
-            var dosen2Id = selectedOption.attr('data-dosen2');
-            var dosen3Id = selectedOption.attr('data-dosen3');
 
-            // Mengambil nama dosen berdasarkan ID
-            var dosen1Name = selectedOption.attr('data-dosen1-name');
-            var dosen2Name = selectedOption.attr('data-dosen2-name');
-            var dosen3Name = selectedOption.attr('data-dosen3-name');
+@endsection
+@section('custom-css')
+<style>
+    table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
 
-            // Menetapkan nama dosen sebagai teks opsi
-            $('#dosenb').empty(); // Kosongkan opsi dosen sebelum menambahkan yang baru
-            $('#dosenb').append('<option value="" selected>Pilih Dosen</option>');
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
 
-            // Menambahkan opsi dosen jika ID dan nama dosen ada
-            if (dosen1Id && dosen1Name) {
-                $('#dosenb').append('<option value="' + dosen1Id + '">' + dosen1Name + '</option>');
-            }
-            if (dosen2Id && dosen2Name) {
-                $('#dosenb').append('<option value="' + dosen2Id + '">' + dosen2Name + '</option>');
-            }
-            if (dosen3Id && dosen3Name) {
-                $('#dosenb').append('<option value="' + dosen3Id + '">' + dosen3Name + '</option>');
-            }
+table tr {
+  /* background-color: #f8f8f8; */
+  border: 1px solid #ddd;
+  padding: .35em;
+}
 
-            // Menetapkan opsi dosen yang sesuai dengan dosen_id yang telah dipilih sebelumnya
-            var selectedDosenId = '{{ $item->dosen_id }}';
-            if (selectedDosenId) {
-                $('#dosenb').val(selectedDosenId);
-            }
-        });
-    });
-</script>
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+</style>
 @endsection
