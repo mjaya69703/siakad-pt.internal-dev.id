@@ -150,12 +150,25 @@ switch ($rawType) {
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <div id="genderChart"></div>
+                            <div id="genderMhsChart"></div>
                         </div>
                         <div class="text-center">
                             <small>Grafik Presentasi Gender Mahasiswa</small>
                         </div>
                         <hr>
+                        <div class="form-group">
+                            <div id="genderDsnChart"></div>
+                        </div>
+                        <div class="text-center">
+                            <small>Grafik Presentasi Gender Dosen</small>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <div id="genderUsrChart"></div>
+                        </div>
+                        <div class="text-center">
+                            <small>Grafik Presentasi Gender Pegawai</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,6 +198,10 @@ $(document).ready(function() {
             success: function(response) {
                 var maleCount = response.male;
                 var femaleCount = response.female;
+                var dmaleCount = response.dmale;
+                var dfemaleCount = response.dfemale;
+                var umaleCount = response.umale;
+                var ufemaleCount = response.ufemale;
 
                 var options = {
                     chart: {
@@ -194,7 +211,28 @@ $(document).ready(function() {
                     labels: ['Laki-laki', 'Perempuan'],
                 };
 
-                var chart = new ApexCharts(document.querySelector('#genderChart'), options);
+                var chart = new ApexCharts(document.querySelector('#genderMhsChart'), options);
+                chart.render();
+
+                var options = {
+                    chart: {
+                        type: 'pie',
+                    },
+                    series: [dmaleCount, dfemaleCount],
+                    labels: ['Laki-laki', 'Perempuan'],
+                };
+
+                var chart = new ApexCharts(document.querySelector('#genderDsnChart'), options);
+                chart.render();
+                var options = {
+                    chart: {
+                        type: 'pie',
+                    },
+                    series: [umaleCount, ufemaleCount],
+                    labels: ['Laki-laki', 'Perempuan'],
+                };
+
+                var chart = new ApexCharts(document.querySelector('#genderUsrChart'), options);
                 chart.render();
             },
             error: function(xhr, status, error) {

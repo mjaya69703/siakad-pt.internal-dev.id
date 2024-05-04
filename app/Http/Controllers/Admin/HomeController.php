@@ -15,6 +15,8 @@ use Hash;
 use App\Models\uAttendance;
 use Carbon\Carbon;
 use App\Models\Mahasiswa;
+use App\Models\Dosen;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -34,8 +36,19 @@ class HomeController extends Controller
 
         $maleCount = Mahasiswa::where('mhs_gend', 'L')->count();
         $femaleCount = Mahasiswa::where('mhs_gend', 'P')->count();
+        $dmaleCount = Dosen::where('dsn_gend', 'L')->count();
+        $dfemaleCount = Dosen::where('dsn_gend', 'P')->count();
+        $umaleCount = User::where('gend', 'L')->count();
+        $ufemaleCount = User::where('gend', 'P')->count();
 
-        return response()->json(['male' => $maleCount, 'female' => $femaleCount]);
+        return response()->json([
+            'male' => $maleCount, 
+            'dmale' => $dmaleCount, 
+            'umale' => $umaleCount, 
+            'female' => $femaleCount,
+            'dfemale' => $dfemaleCount,
+            'ufemale' => $ufemaleCount,
+        ]);
     }
 
 
