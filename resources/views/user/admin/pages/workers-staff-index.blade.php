@@ -84,7 +84,7 @@ switch ($rawType) {
                                 <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                     data-original-title="Delete"
-                                    data-url="{{ route('web-admin.master.staff-destroy', $item->code) }}"
+                                    data-url="{{ route('web-admin.workers.staff-destroy', $item->code) }}"
                                     data-name="{{ $item->name }}"
                                     onclick="deleteData('{{ $item->code }}')">
                                     <i class="fas fa-trash"></i>

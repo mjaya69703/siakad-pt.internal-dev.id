@@ -12,9 +12,9 @@
                 <li class="submenu-item {{ Route::is('web-admin.workers.staff-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.workers.staff-index') }}" class="submenu-link">Data Pegawai</a>
                 </li>
-                {{-- <li class="submenu-item {{ Route::is('web-admin.workers.admin-*', request()->path()) ? 'active' : '' }}">
-                    <a href="{{ route('web-admin.workers.admin-index') }}" class="submenu-link">Data Dosen</a>
-                </li> --}}
+                <li class="submenu-item {{ Route::is('web-admin.workers.lecture-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.workers.lecture-index') }}" class="submenu-link">Data Dosen</a>
+                </li>
             </ul>
         </li>
         <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">

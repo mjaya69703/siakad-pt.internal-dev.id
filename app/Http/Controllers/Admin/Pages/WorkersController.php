@@ -15,6 +15,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\User;
+use App\Models\Dosen;
 
 class WorkersController extends Controller
 {
@@ -335,6 +336,160 @@ class WorkersController extends Controller
         }
 
         $admin->delete();
+        Alert::success('Success', 'Pengguna berhasil dihapus.');
+        return back();
+    }
+    // KHUSUS KELOLA DATA ROLE DOSEN
+    public function indexLecture()
+    {
+        $data['dosen'] = Dosen::all();
+
+        return view('user.admin.pages.workers-lecture-index', $data);
+
+    }
+    public function createLecture()
+    {
+        $data['dosen'] = Dosen::all();
+
+        return view('user.admin.pages.workers-lecture-create', $data);
+
+    }
+    public function editLecture(Request $request, $code)
+    {
+        $data['dosen'] = Dosen::where('dsn_code', $code)->first();
+
+        return view('user.admin.pages.workers-lecture-edit', $data);
+
+    }
+    public function storeLecture(Request $request)
+    {
+        $user = new Dosen;
+
+        $request->validate([
+            'dsn_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8196',
+            'dsn_name' => 'required|string|max:255',
+            'dsn_user' => 'required|string|max:255|unique:users,user,' . $user->id,
+            'dsn_birthplace' => 'required|string|max:255', // New field
+            'dsn_birthdate' => 'required|date', // New field
+            'dsn_phone' => 'required|numeric|unique:users,phone,' . $user->id,
+            'dsn_mail' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'dsn_gend' => 'nullable|string',
+            'dsn_stat' => 'nullable|string',
+            'password' => 'nullable|string',
+            'password_confirm' => 'nullable|string|same:password',
+        ]);
+
+        
+        $user->dsn_name = $request->dsn_name;
+        $user->dsn_user = $request->dsn_user;
+        $user->dsn_nidn = $request->dsn_nidn;
+        $user->dsn_stat = $request->dsn_stat;
+        $user->dsn_birthplace = $request->dsn_birthplace; // New field
+        $user->dsn_birthdate = $request->dsn_birthdate; // New field
+        $user->dsn_gend = $request->dsn_gend;
+        $user->dsn_phone = $request->dsn_phone;
+        $user->dsn_mail = $request->dsn_mail;
+        // $user->type = $request->type;
+        $user->dsn_code = Str::random(6);
+        
+        $user->password = Hash::make($request->password);
+        $user->save();
+        if ($request->hasFile('dsn_image')) {
+            $image = $request->file('dsn_image');
+            $name = 'profile-'. $user->dsn_code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
+            $destinationPath = storage_path('app/public/images/profile/dosen');
+            $destinationPaths = storage_path('app/public/images');
+            
+            // Compress image
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($image->getRealPath());
+            // $image->resize(width: 250);
+            $image->scaleDown(height: 300);
+            $image->toPng()->save($destinationPath.'/'.$name);
+
+            if ($user->dsn_image != 'default/default-profile.jpg') {
+                File::delete($destinationPaths.'/'.$user->dsn_image); // hapus gambar lama
+            }
+            $user->dsn_image = "profile/dosen/".$name;
+            $user->save();
+
+            // dd($user->image);
+
+            Alert::success('Success', 'Data berhasil ditambahkan');
+            return back();
+        }
+        Alert::success('Success', 'Data berhasil ditambahkan');
+        return back();
+    }
+    public function updateLecture(Request $request, $code)
+    {
+        $user = Dosen::where('dsn_code', $code)->first();
+
+        $request->validate([
+            'dsn_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8196',
+            'dsn_name' => 'required|string|max:255',
+            'dsn_user' => 'required|string|max:255|unique:users,user,' . $user->id,
+            'dsn_birthplace' => 'required|string|max:255', // New field
+            'dsn_birthdate' => 'required|date', // New field
+            'dsn_phone' => 'required|numeric|unique:users,phone,' . $user->id,
+            'dsn_mail' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'dsn_gend' => 'nullable|string',
+            'dsn_stat' => 'nullable|string',
+            'password' => 'nullable|string',
+            'password_confirm' => 'nullable|string|same:password',
+        ]);
+
+        
+        $user->dsn_name = $request->dsn_name;
+        $user->dsn_user = $request->dsn_user;
+        $user->dsn_stat = $request->dsn_stat;
+        $user->dsn_birthplace = $request->dsn_birthplace; // New field
+        $user->dsn_birthdate = $request->dsn_birthdate; // New field
+        $user->dsn_gend = $request->dsn_gend;
+        $user->dsn_phone = $request->dsn_phone;
+        $user->dsn_mail = $request->dsn_mail;
+        // $user->type = $request->type;
+        // $user->code = Str::random(6);
+        
+        $user->password = Hash::make($request->password);
+        $user->save();
+        if ($request->hasFile('dsn_image')) {
+            $image = $request->file('dsn_image');
+            $name = 'profile-'. $user->dsn_code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
+            $destinationPath = storage_path('app/public/images/profile/dosen');
+            $destinationPaths = storage_path('app/public/images');
+            
+            // Compress image
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($image->getRealPath());
+            // $image->resize(width: 250);
+            $image->scaleDown(height: 300);
+            $image->toPng()->save($destinationPath.'/'.$name);
+
+            if ($user->dsn_image != 'default/default-profile.jpg') {
+                File::delete($destinationPaths.'/'.$user->dsn_image); // hapus gambar lama
+            }
+            $user->dsn_image = "profile/dosen/".$name;
+            $user->save();
+
+            // dd($user->image);
+
+            Alert::success('Success', 'Data berhasil diupdate');
+            return back();
+        }
+        Alert::success('Success', 'Data berhasil diupdate');
+        return back();
+    }
+    public function destroyLecture(Request $request, $code)
+    {
+        $destinationPaths = storage_path('app/public/images');
+
+        $dosen = Dosen::where('dsn_code', $code)->first();
+        if ($dosen->image != 'default/default-profile.jpg') {
+            File::delete($destinationPaths.'/'.$dosen->image); // hapus gambar lama
+        }
+
+        $dosen->delete();
         Alert::success('Success', 'Pengguna berhasil dihapus.');
         return back();
     }
