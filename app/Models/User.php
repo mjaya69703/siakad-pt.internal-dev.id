@@ -56,4 +56,26 @@ class User extends Authenticatable
     {
         return $this->attributes['type'];
     }
+
+    public function getAgamaAttribute($value)
+    {
+        $relis = [
+            0 => 'Belum Memilih',
+            1 => 'Agama Islam',
+            2 => 'Agama Kristen Katholik',
+            3 => 'Agama Kristen Protestan',
+            4 => 'Agama Hindu',
+            5 => 'Agama Buddha',
+            6 => 'Agama Konghuchu',
+            7 => 'Kepercayaan Lainnya',
+        ];
+
+        return isset($relis[$value]) ? $relis[$value] : 'Unknown';
+    }
+
+
+    public function getRawReliAttribute()
+    {
+        return $this->attributes['reli'];
+    }
 }

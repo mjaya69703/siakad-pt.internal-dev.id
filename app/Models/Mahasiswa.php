@@ -34,6 +34,10 @@ class Mahasiswa extends Authenticatable
 
         return isset($mhsstats[$value]) ? $mhsstats[$value] : 'Unknown';
     }
+    public function getRawMhsStatAttribute()
+    {
+        return $this->attributes['mhs_stat'];
+    }
     public function getAgamaAttribute($value)
     {
         $mhsrelis = [
@@ -50,10 +54,7 @@ class Mahasiswa extends Authenticatable
         return isset($mhsrelis[$value]) ? $mhsrelis[$value] : 'Unknown';
     }
 
-    public function getRawMhsStatAttribute()
-    {
-        return $this->attributes['mhs_stat'];
-    }
+
     public function getRawMhsReliAttribute()
     {
         return $this->attributes['mhs_reli'];

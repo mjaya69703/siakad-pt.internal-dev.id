@@ -1,5 +1,22 @@
         {{-- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
-        <li class="sidebar-title">Data Master Akademik</li>
+        <li class="sidebar-title">Data Master</li>
+        <li class="sidebar-item has-sub {{ Route::is('web-admin.workers.*', request()->path()) ? 'active' : '' }}">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Data Pengguna</span>
+            </a>
+            <ul class="submenu">
+                <li class="submenu-item {{ Route::is('web-admin.workers.admin-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.workers.admin-index') }}" class="submenu-link">Data Admin</a>
+                </li>
+                <li class="submenu-item {{ Route::is('web-admin.workers.staff-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.workers.staff-index') }}" class="submenu-link">Data Pegawai</a>
+                </li>
+                {{-- <li class="submenu-item {{ Route::is('web-admin.workers.admin-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.workers.admin-index') }}" class="submenu-link">Data Dosen</a>
+                </li> --}}
+            </ul>
+        </li>
         <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
@@ -46,6 +63,7 @@
                 </li>
             </ul>
         </li>
+
         <li class="sidebar-title">Talent Management</li>
         <li class="sidebar-item has-sub">
             <a href="#" class='sidebar-link'>

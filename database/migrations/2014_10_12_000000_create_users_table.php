@@ -21,7 +21,13 @@ return new class extends Migration
             $table->string('image')->default('default/default-profile.jpg');
             $table->string('birth_place')->nullable();
             $table->date('birth_date')->nullable();
-            $table->string('gend')->nullable();
+            $table->string('gend')->nullable(); // GENDER
+            $table->string('reli')->nullable(); // RELIGION
+            // DATA KONTAK DARURAT
+            $table->string('contact_name_1')->nullable();
+            $table->string('contact_name_2')->nullable();
+            $table->string('contact_phone_1')->nullable();
+            $table->string('contact_phone_2')->nullable();
             // DATA AKUN
             $table->string('user');
             $table->string('phone')->unique();

@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('mhs_addr_kecamatan')->nullable();
             $table->string('mhs_addr_kota')->nullable();
             $table->string('mhs_addr_provinsi')->nullable();
-            // DATA ORANG TUA / Wali
+            // DATA ORANG TUA / WALI
             $table->string('mhs_parent_mother')->nullable();
             $table->string('mhs_parent_father')->nullable();
             $table->string('mhs_parent_mother_phone')->nullable();
