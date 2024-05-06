@@ -65,7 +65,7 @@ switch ($rawType) {
                 <div class="row">
 
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="http://newprojectfoto.test/admin/manage-balance/pending">
+                        <a href="{{ route('web-admin.workers.student-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-graduate" style="font-size: 42px"></i></span>
@@ -75,7 +75,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="http://newprojectfoto.test/admin/manage-balance/pending">
+                        <a href="{{ route('web-admin.workers.lecture-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-tie" style="font-size: 42px"></i></span>
@@ -85,7 +85,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route('web-admin.master.jadkul-index') }}">
+                        <a href="{{ route('web-admin.workers.staff-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-tag" style="font-size: 42px"></i></span>

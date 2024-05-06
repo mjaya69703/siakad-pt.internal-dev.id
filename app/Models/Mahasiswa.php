@@ -25,11 +25,7 @@ class Mahasiswa extends Authenticatable
             0 => 'Calon Mahasiswa',
             1 => 'Mahasiswa Aktif',
             2 => 'Mahasiswa Non-Aktif',
-            3 => 'Mahasiswa Cuti',
-            4 => 'Mahasiswa Lulus',
-            5 => 'Mahasiswa Mutasi',
-            6 => 'Mahasiswa Mengundurkan Diri',
-            7 => 'Mahasiswa Drop Out',
+            3 => 'Mahasiswa Alumni',
         ];
 
         return isset($mhsstats[$value]) ? $mhsstats[$value] : 'Unknown';

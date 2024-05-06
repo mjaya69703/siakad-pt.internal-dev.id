@@ -15,6 +15,9 @@
                 <li class="submenu-item {{ Route::is('web-admin.workers.lecture-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.workers.lecture-index') }}" class="submenu-link">Data Dosen</a>
                 </li>
+                <li class="submenu-item {{ Route::is('web-admin.workers.student-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.workers.student-index') }}" class="submenu-link">Data Mahasiswa</a>
+                </li>
             </ul>
         </li>
         <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
