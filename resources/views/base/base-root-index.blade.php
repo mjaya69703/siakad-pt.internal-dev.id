@@ -17,20 +17,48 @@
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/compiled/css/app.css">
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/compiled/css/iconly.css">
+    <link rel="stylesheet" href="{{ asset('dist') }}/assets/custom/css/news-section.css">
     {{-- PLUGIN FONT AWESOME --}}
     <link rel="stylesheet" href="{{ asset('vendor') }}/fontawesome/css/all.min.css" rel="stylesheet">
 
-  <style>
 
-    @media screen and (max-width: 767px) {
-        .footer {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Tulisan menjadi rata tengah secara horizontal */
+    <style>
+        .fontawesome-icons {
+            text-align: center;
+        }
+    
+        article dl {
+            background-color: rgba(0, 0, 0, .02);
+            padding: 20px;
+        }
+    
+        .fontawesome-icons .the-icon {
+            font-size: 24px;
+            line-height: 1.2;
+        }
+        .berita img {
+            max-width: 125px
         }
 
-    }
-  </style>
+        @media screen and (max-width: 767px) {
+            .footer {
+                display: flex;
+                flex-direction: column;
+                align-items: center; /* Tulisan menjadi rata tengah secara horizontal */
+            }
+            .berita img {
+            width: 100%;
+            max-width: none;
+            }
+            .berita a {
+                text-align: center !important; /* Menambahkan !important agar lebih dominan */
+            }
+            .berita p {
+                /* text-align: justify; */
+            }
+
+        }
+    </style>
 </head>
 
 <body>
@@ -75,8 +103,7 @@
                                             <p class="user-dropdown-status text-sm text-muted">{{ Auth::user()->type }}</p>
                                         </div>
                                     @else
-                                    
-
+                                
                                         <div class="avatar avatar-md2" >
                                             <img src="{{ asset('storage/images/default/default-profile.jpg') }}" alt="Avatar">
                                         </div>
@@ -131,13 +158,14 @@
                                     <span><i class="fa-solid fa-home"></i> Home</span>
                                 </a>
                             </li>
-                            
-                            
-                            
-                            
+                            <li class="menu-item">
+                                <a href="#" class='menu-link'>
+                                    <span><i class="fa-solid fa-circle-info"></i> Pelayanan</span>
+                                </a>
+                            </li>
                             <li class="menu-item  has-sub">
                                 <a href="#" class='menu-link'>
-                                    <span><i class="fa-solid fa-square-plus"></i> Extras</span>
+                                    <span><i class="fa-solid fa-graduation-cap"></i> Fakultas</span>
                                 </a>
                                 <div class="submenu">
                                     <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
@@ -145,81 +173,32 @@
                                         
                                         
                                         <ul class="submenu-group">
-                                            
-                                            <li
-                                                class="submenu-item  has-sub">
-                                                <a href="#"
-                                                    class='submenu-link'>Widgets</a>
+                                            @foreach ($fakultas as $faku)
+                                                
+                                                <li class="submenu-item  has-sub">
+                                                    <a href="#" class='submenu-link'>{{ $faku->name }}</a>
 
-                                                
-                                                <!-- 3 Level Submenu -->
-                                                <ul class="subsubmenu">
                                                     
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="ui-widgets-chatbox.html" class="subsubmenu-link">Chatbox</a>
-                                                    </li>
-                                                    
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="ui-widgets-pricing.html" class="subsubmenu-link">Pricing</a>
-                                                    </li>
-                                                    
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="ui-widgets-todolist.html" class="subsubmenu-link">To-do List</a>
-                                                    </li>
-                                                    
-                                                </ul>
-                                                
-                                            </li>
-                                            
-                                        
-                                        
-                                            <li
-                                                class="submenu-item  has-sub">
-                                                <a href="#"
-                                                    class='submenu-link'>Icons</a>
+                                                    <!-- 3 Level Submenu -->
+                                                    <ul class="subsubmenu">
 
-                                                
-                                                <!-- 3 Level Submenu -->
-                                                <ul class="subsubmenu">
+                                                        @php
+                                                            $pstudi = \App\Models\ProgramStudi::where('faku_id', $faku->id)->get();
+                                                        @endphp
+                                                        @foreach ($pstudi as $item)
+                                                            
+                                                        <li class="subsubmenu-item ">
+                                                            <a href="ui-widgets-chatbox.html" class="subsubmenu-link">{{ $item->name }}</a>
+                                                        </li>
+                                                        @endforeach
+                                                        
+                                                        
+                                                    </ul>
                                                     
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="ui-icons-bootstrap-icons.html" class="subsubmenu-link">Bootstrap Icons </a>
-                                                    </li>
-                                                    
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="ui-icons-fontawesome.html" class="subsubmenu-link">Fontawesome</a>
-                                                    </li>
-                                                    
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="ui-icons-dripicons.html" class="subsubmenu-link">Dripicons</a>
-                                                    </li>
-                                                    
-                                                </ul>
-                                                
-                                            </li>
+                                                </li>
+                                            @endforeach
                                             
-                                        
-                                        
-                                            <li
-                                                class="submenu-item  has-sub">
-                                                <a href="#"
-                                                    class='submenu-link'>Charts</a>
-
-                                                
-                                                <!-- 3 Level Submenu -->
-                                                <ul class="subsubmenu">
-                                                    
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="ui-chart-chartjs.html" class="subsubmenu-link">ChartJS</a>
-                                                    </li>
-                                                    
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="ui-chart-apexcharts.html" class="subsubmenu-link">Apexcharts</a>
-                                                    </li>
-                                                    
-                                                </ul>
-                                                
-                                            </li>
+                
                                             
                                         </ul>
                                         
@@ -227,7 +206,32 @@
                                     </div>
                                 </div>
                             </li>
-                            
+
+                            <li class="menu-item active has-sub">
+                                <a href="#" class='menu-link'>
+                                    <span><i class="fa-solid fa-book"></i> Tentang Kami</span>
+                                </a>
+                                <div class="submenu ">
+                                    <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
+                                    <div class="submenu-group-wrapper">
+                                        
+                                        
+                                        <ul class="submenu-group">
+                                            
+                                            <li class="submenu-item">
+                                                <a href="#" class='submenu-link'>Default Layout</a>
+
+                                            </li>
+                                            
+                                        
+
+                                            
+                                        </ul>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </li>
  
                             
                             
@@ -239,289 +243,192 @@
 
             <div class="content-wrapper container">
 
-                <h4 class="text-center">Pages In Development</h4>
-                
-                {{-- <div class="page-content">
-                    <section class="row">
-                        <div class="col-12 col-lg-9">
-                            <div class="row">
-                                <div class="col-6 col-lg-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body px-4 py-4-5">
-                                            <div class="row">
-                                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                    <div class="stats-icon purple mb-2">
-                                                        <i class="iconly-boldShow"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Profile Views</h6>
-                                                    <h6 class="font-extrabold mb-0">112.000</h6>
-                                                </div>
+                <div class="page-content row">
+
+                    <div class="col-lg-8 col-12">
+                        <h4 class="card-title">Pengumuman</h4>
+                        <hr>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="{{ asset('dist') }}/assets/compiled/png/1.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>First slide label</h5>
+                                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="{{ asset('dist') }}/assets/compiled/png/2.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>Second slide label</h5>
+                                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="{{ asset('dist') }}/assets/compiled/png/3.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>Third slide label</h5>
+                                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-6 col-lg-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body px-4 py-4-5">
-                                            <div class="row">
-                                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                    <div class="stats-icon blue mb-2">
-                                                        <i class="iconly-boldProfile"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Followers</h6>
-                                                    <h6 class="font-extrabold mb-0">183.000</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-lg-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body px-4 py-4-5">
-                                            <div class="row">
-                                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                    <div class="stats-icon green mb-2">
-                                                        <i class="iconly-boldAdd-User"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Following</h6>
-                                                    <h6 class="font-extrabold mb-0">80.000</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-lg-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body px-4 py-4-5">
-                                            <div class="row">
-                                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                    <div class="stats-icon red mb-2">
-                                                        <i class="iconly-boldBookmark"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Saved Post</h6>
-                                                    <h6 class="font-extrabold mb-0">112</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4>Profile Visit</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div id="chart-profile-visit"></div>
+                        </div>
+                        <h4 class="card-title">Berita popular</h4>
+                        <hr>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                
+                                <div class="berita row">
+                                    <div class="col-lg-2 text-center">
+                                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+
+                                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
+                                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info" ></i></a>
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="berita row">
+                                    <div class="col-lg-2 text-center">
+                                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+
+                                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
+                                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info" ></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="berita row">
+                                    <div class="col-lg-2 text-center">
+                                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+
+                                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
+                                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info" ></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="berita row">
+                                    <div class="col-lg-2 text-center">
+                                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+
+                                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
+                                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info" ></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="berita row">
+                                    <div class="col-lg-2 text-center">
+                                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+
+                                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
+                                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info" ></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                             </div>
-                            <div class="row">
-                                <div class="col-12 col-xl-4">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4>Profile Visit</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <svg class="bi text-primary" width="32" height="32" fill="blue"
-                                                            style="width:10px">
-                                                            <use
-                                                                xlink:href="{{ asset('dist') }}/assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                        </svg>
-                                                        <h5 class="mb-0 ms-3">Europe</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <h5 class="mb-0">862</h5>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div id="chart-europe"></div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <svg class="bi text-success" width="32" height="32" fill="blue"
-                                                            style="width:10px">
-                                                            <use
-                                                                xlink:href="{{ asset('dist') }}/assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                        </svg>
-                                                        <h5 class="mb-0 ms-3">America</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <h5 class="mb-0">375</h5>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div id="chart-america"></div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-7">
-                                                    <div class="d-flex align-items-center">
-                                                        <svg class="bi text-success" width="32" height="32" fill="blue"
-                                                            style="width:10px">
-                                                            <use
-                                                                xlink:href="{{ asset('dist') }}/assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                        </svg>
-                                                        <h5 class="mb-0 ms-3">India</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="col-5">
-                                                    <h5 class="mb-0 text-end">625</h5>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div id="chart-india"></div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <svg class="bi text-danger" width="32" height="32" fill="blue"
-                                                            style="width:10px">
-                                                            <use
-                                                                xlink:href="{{ asset('dist') }}/assets/static/images/bootstrap-icons.svg#circle-fill" />
-                                                        </svg>
-                                                        <h5 class="mb-0 ms-3">Indonesia</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <h5 class="mb-0">1025</h5>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div id="chart-indonesia"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        </div>
+
+    
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h4 class="card-title text-center">Sambutan Rektor</h4>
+                                <img src="{{ asset('storage/images/default/default-profile.jpg') }}" class="card-img-top mb-2" alt="">
+                                <p class="text-center">Drs. Mulawarman Sudono, S.Tek <br>Rektor Utama Esec Academy</p>
+                                <hr>
+                                <p style="text-align: justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolore laboriosam praesentium quas voluptatem ab facere repellendus reiciendis, fuga odio sequi. Nisi architecto totam eaque magnam hic cum aperiam commodi.</p>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="list-group list-group-horizontal-sm mb-1 text-center" role="tablist">
+                                    <a class="list-group-item list-group-item-action active" id="list-terbaru-list"
+                                        data-bs-toggle="list" href="#list-terbaru" role="tab">Berita Terbaru</a>
+                                    <a class="list-group-item list-group-item-action" id="list-terpopular-list"
+                                        data-bs-toggle="list" href="#list-terpopular" role="tab">Berita Terpopuler</a>
                                 </div>
-                                <div class="col-12 col-xl-8">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4>Latest Comments</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-lg">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Name</th>
-                                                            <th>Comment</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="col-3">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar avatar-md">
-                                                                        <img src="{{ asset('dist') }}/assets/compiled/jpg/5.jpg">
-                                                                    </div>
-                                                                    <p class="font-bold ms-3 mb-0">Cantik</p>
-                                                                </div>
-                                                            </td>
-                                                            <td class="col-auto">
-                                                                <p class=" mb-0">Congratulations on your graduation!</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="col-3">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar avatar-md">
-                                                                        <img src="{{ asset('dist') }}/assets/compiled/jpg/2.jpg">
-                                                                    </div>
-                                                                    <p class="font-bold ms-3 mb-0">Ganteng</p>
-                                                                </div>
-                                                            </td>
-                                                            <td class="col-auto">
-                                                                <p class=" mb-0">Wow amazing design! Can you make another tutorial for
-                                                                    this design?</p>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                <div class="tab-content text-justify" style="text-align: justify">
+                                    <div class="tab-pane fade show active" id="list-terbaru" role="tabpanel"
+                                        aria-labelledby="list-terbaru-list">Irure enim occaecat labore sit qui aliquip
+                                        reprehenderit amet
+                                        velit. Deserunt ullamco ex elit nostrud ut dolore nisi officia magna sit occaecat
+                                        laboris sunt dolor.
+                                        Nisi eu minim cillum occaecat aute est cupidatat aliqua labore aute occaecat ea
+                                        aliquip
+                                        sunt amet.
+                                        Aute mollit dolor ut exercitation irure commodo non amet consectetur quis amet
+                                        culpa.
+                                        Quis ullamco
+                                        nisi amet qui aute irure eu. Magna labore dolor quis ex labore id nostrud deserunt
+                                        dolor
+                                        eiusmod eu
+                                        pariatur culpa mollit in irure Lorem, ipsum dolor sit amet consectetur adipisicing
+                                        elit.
+                                        Iusto quis
+                                        porro doloribus est natus doloremque, eos laudantium
+                                        exercitationem impedit sapiente tenetur soluta reiciendis deserunt!</div>
+                                    <div class="tab-pane fade" id="list-terpopular" role="tabpanel"
+                                        aria-labelledby="list-terpopular-list">Cupidatat
+                                        quis ad sint excepteur laborum in esse qui. Et excepteur consectetur ex nisi eu do
+                                        cillum ad laborum.
+                                        Mollit et eu officia dolore sunt Lorem culpa qui commodo velit ex amet id ex.
+                                        Officia
+                                        anim incididunt
+                                        laboris deserunt anim aute dolor incididunt veniam aute dolore do exercitation.
+                                        Dolor
+                                        nisi culpa ex ad
+                                        irure in elit eu dolore. Ad laboris ipsum reprehenderit irure non commodo enim culpa
+                                        commodo veniam
+                                        incididunt veniam ad. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                        Exercitationem, porro!
+                                        Amet soluta tempora eveniet blanditiis alias eos, dolor qui consectetur!
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-3">
-                            <div class="card">
-                                <div class="card-body py-4 px-5">
-                                    
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-xl">
-                                            <img src="{{ asset('dist') }}/assets/compiled/jpg/1.jpg" alt="Face 1">
-                                        </div>
-                                        <div class="ms-3 name">
-                                            <h5 class="font-bold">John Duck</h5>
-                                            <h6 class="text-muted mb-0">@johnducky</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Recent Messages</h4>
-                                </div>
-                                <div class="card-content pb-4">
-                                    <div class="recent-message d-flex px-4 py-3">
-                                        <div class="avatar avatar-lg">
-                                            <img src="{{ asset('dist') }}/assets/compiled/jpg/4.jpg">
-                                        </div>
-                                        <div class="name ms-4">
-                                            <h5 class="mb-1">Hank Schrader</h5>
-                                            <h6 class="text-muted mb-0">@johnducky</h6>
-                                        </div>
-                                    </div>
-                                    <div class="recent-message d-flex px-4 py-3">
-                                        <div class="avatar avatar-lg">
-                                            <img src="{{ asset('dist') }}/assets/compiled/jpg/5.jpg">
-                                        </div>
-                                        <div class="name ms-4">
-                                            <h5 class="mb-1">Dean Winchester</h5>
-                                            <h6 class="text-muted mb-0">@imdean</h6>
-                                        </div>
-                                    </div>
-                                    <div class="recent-message d-flex px-4 py-3">
-                                        <div class="avatar avatar-lg">
-                                            <img src="{{ asset('dist') }}/assets/compiled/jpg/1.jpg">
-                                        </div>
-                                        <div class="name ms-4">
-                                            <h5 class="mb-1">John Dodol</h5>
-                                            <h6 class="text-muted mb-0">@dodoljohn</h6>
-                                        </div>
-                                    </div>
-                                    <div class="px-4">
-                                        <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
-                                            Conversation</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Visitors Profile</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div id="chart-visitors-profile"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div> --}}
+                    </div>
+                </div>
 
             </div>
 
