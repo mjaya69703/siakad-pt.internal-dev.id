@@ -28,9 +28,13 @@
                                 </form>
                             </div>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                <p class="mb-4 text-sm mx-auto">
+                                <p class="mb-0 text-sm mx-auto">
                                     Have an account?
                                     <a href="{{ route('admin.auth-signin-page') }}" class="text-primary text-gradient font-weight-bold">Login Here</a>
+                                </p>
+                                <p class="mb-0 text-sm mx-auto">
+                                    Back to home?
+                                    <a href="{{ route('root.home-index') }}" class="text-primary text-gradient font-weight-bold">Come Here</a>
                                 </p>
                             </div>
                         </div>

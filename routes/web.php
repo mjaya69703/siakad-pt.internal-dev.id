@@ -14,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ERROR PAGE
+Route::get('/', [App\Http\Controllers\Root\HomeController::class, 'index'])->name('root.home-index');
 Route::get('/error/verify', [App\Http\Controllers\Root\ErrorController::class, 'ErrorVerify'])->name('error.verify');
 Route::get('/error/access', [App\Http\Controllers\Root\ErrorController::class, 'ErrorAccess'])->name('error.access');
 Route::get('/error/notfound', [App\Http\Controllers\Root\ErrorController::class, 'ErrorNotFound'])->name('error.notfound');
 
-Route::get('/', function () {
-    return view('base.base-auth-index');
+// Route::get('/', function () {
+//     return view('base.base-auth-index');
+//     // return view('base.panel.base-panel-content');
+// });
+Route::get('/dev', function () {
+    return view('base.base-root-index');
     // return view('base.panel.base-panel-content');
 });
 
@@ -88,28 +93,6 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
     Route::middleware(['is-active:1'])->group(function () {
         
         // ADMIN AUTHORITY
-        // PAGES USER MANAGER GLOBAL
-        Route::post('/staff-manager/create/save',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'createSave'])->name('staffmanager-create-save');
-        Route::patch('/staff-manager/update/{id}/status',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateStatus'])->name('staffmanager-update-stat');
-        Route::patch('/staff-manager/update/{code}/save/dosen',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateSave'])->name('staffmanager-update-save');
-        Route::patch('/staff-manager/update/{id}/status/dosen',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateStatus'])->name('staffmanager-update-stat');
-        Route::patch('/staff-manager/update/{code}/save/dosen',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateSaveDosen'])->name('staffmanager-update-save-dosen');
-        Route::patch('/staff-manager/update/{id}/status/dosen',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'updateStatusDosen'])->name('staffmanager-update-stat-dosen');
-        // PAGES USER MANAGER GLOBAL => ONLY STAFF
-        Route::get('/staff-manager/create/staff',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'create'])->name('staffmanager-create-staff');
-        Route::get('/staff-manager/staff',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'indexStaff'])->name('staffmanager-staff-index');
-        Route::get('/staff-manager/staff/view/{code}',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'viewStaff'])->name('staffmanager-staff-view');
-        Route::delete('/staff-manager/staff/delete/{code}',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'deleteStaff'])->name('staffmanager-staff-destroy');
-        // PAGES USER MANAGER GLOBAL => ONLY ADMIN
-        Route::get('/staff-manager/create/admin',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'create'])->name('staffmanager-create-admin');
-        Route::get('/staff-manager/admin',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'index'])->name('staffmanager-admin-index');
-        Route::get('/staff-manager/admin/view/{code}',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'viewStaff'])->name('staffmanager-admin-view');
-        Route::delete('/staff-manager/admin/delete/{code}',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'deleteStaff'])->name('staffmanager-admin-destroy');
-        // PAGES USER MANAGER GLOBAL => ONLY LECTURE
-        Route::get('/staff-manager/lecture',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'indexDosen'])->name('staffmanager-dosen-index');
-        Route::get('/staff-manager/lecture/create',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'createDosen'])->name('staffmanager-create-dosen');
-        Route::get('/staff-manager/lecture/view/{code}',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'viewDosen'])->name('staffmanager-dosen-view');
-        Route::delete('/staff-manager/lecture/delete/{code}',[App\Http\Controllers\Admin\Pages\UserManageController::class, 'deleteDosen'])->name('staffmanager-dosen-destroy');
         
         // MENU KHUSUS DATA PENGGUNA => DATA ADMIN
         Route::get('/workers/data-admin',[App\Http\Controllers\Admin\Pages\WorkersController::class, 'indexAdmin'])->name('workers.admin-index');

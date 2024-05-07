@@ -132,7 +132,7 @@ switch ($rawType) {
 
                             <div class="form-group col-lg-3 col-12">
                                 <label for="makul_id">Mata Kuliah</label>
-                                <select name="makul_id" id="makul_id" class="form-select" disabled>
+                                <select name="makul_id" id="makul_id" class="form-select" readonly>
                                     <option value="" selected>Pilih Mata Kuliah</option>
                                     @foreach ($matkul as $item_m)
                                     @php
@@ -149,7 +149,7 @@ switch ($rawType) {
                             </div>
                             <div class="form-group col-lg-3 col-12">
                                 <label for="pert_id">Pertemuan</label>
-                                <select name="pert_id" id="pert_id" class="form-select" disabled>
+                                <select name="pert_id" id="pert_id" class="form-select" readonly>
                                     <option value="" selected>Pilih Pertemuan</option>
                                     <option value="1" {{ $item->raw_pert_id == 1 ? 'selected' : '' }}>Pertemuan 1</option>
                                     <option value="2" {{ $item->raw_pert_id == 2 ? 'selected' : '' }}>Pertemuan 2</option>

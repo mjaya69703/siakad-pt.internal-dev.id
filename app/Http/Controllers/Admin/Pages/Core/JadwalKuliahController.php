@@ -24,6 +24,7 @@ use App\Models\JadwalKuliah;
 use App\Models\AbsensiMahasiswa;
 use App\Models\Ruang;
 use App\Models\Kelas;
+use App\Models\Mahasiswa;
 
 class JadwalKuliahController extends Controller
 {
@@ -85,25 +86,23 @@ class JadwalKuliahController extends Controller
     public function cetakAbsen(Request $request, $code)
     {
 
-        // Validasi input
-        // $request->validate([
-        //     'kode_kelas' => 'required|exists:jadwal_kuliahs,code',
-        // ]);
-
         // Dapatkan data absensi mahasiswa berdasarkan kode kelas yang dipilih 
-        $jadwal = JadwalKuliah::where('code', $code)->first();
+        // $data['jadwal'] = JadwalKuliah::where('code', $code)->first();
         $data['jadkul'] = JadwalKuliah::where('code', $code)->first();
         $data['absen'] = AbsensiMahasiswa::whereHas('jadkul', function ($query) use ($request) {
             $query->whereHas('kelas', function ($q) use ($request) {
                 $q->where('code', $request->kode_kelas);
             });
         })->where('jadkul_code', $code)->get();
-        // dd($absensiMahasiswa);
+    
+        $data['student'] = Mahasiswa::whereHas('kelas', function ($q) use ($request){
+            $q->where('code', $request->kode_kelas);
+        })->get();
 
         // return view('base.cetak.cetak-data-absensi', $data);
         $pdf = PDF::loadView('base.cetak.cetak-data-absensi', $data);
        
-        return $pdf->download('Daftar-Absen-'.$jadwal->matkul->name.'-'.$jadwal->pert_id.'-'.$request->kode_kelas.'.pdf');
+        return $pdf->download('Daftar-Absen-'.$data['jadkul']->matkul->name.'-'.$data['jadkul']->pert_id.'-'.$request->kode_kelas.'.pdf');
 
     }
 

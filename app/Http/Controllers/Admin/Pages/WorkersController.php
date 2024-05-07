@@ -668,12 +668,12 @@ class WorkersController extends Controller
     {
         $destinationPaths = storage_path('app/public/images');
 
-        $dosen = Dosen::where('dsn_code', $code)->first();
-        if ($dosen->image != 'default/default-profile.jpg') {
-            File::delete($destinationPaths.'/'.$dosen->image); // hapus gambar lama
+        $student = Mahasiswa::where('mhs_code', $code)->first();
+        if ($student->image != 'default/default-profile.jpg') {
+            File::delete($destinationPaths.'/'.$student->image); // hapus gambar lama
         }
 
-        $dosen->delete();
+        $student->delete();
         Alert::success('Success', 'Pengguna berhasil dihapus.');
         return back();
     }

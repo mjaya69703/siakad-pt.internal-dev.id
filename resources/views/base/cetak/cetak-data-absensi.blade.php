@@ -165,20 +165,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($absen as $key => $item)
-
-                    <tr>
-                        <td style="text-align: center">{{ ++$key }}</td>
-                        <td style="text-align: center">{{ $item->mahasiswa->mhs_nim }}</td>
-                        <td>{{ $item->mahasiswa->mhs_name }}</td>
-                        <td style="text-align: center">{{ $item->mahasiswa->kelas->name }}</td>
-                        <td style="text-align: center">{{ $item->absen_type }}</td>
-                        <td style="text-align: center">{{ \Carbon\Carbon::parse($item->absen_time)->format('H:i') }} WIB</td>
-                    </tr>
+                    @forelse ($student as $key => $std)
+                        <tr>
+                            <td style="text-align: center">{{ ++$key }}</td>
+                            <td style="text-align: center">{{ $std->mhs_nim }}</td>
+                            <td>{{ $std->mhs_name }}</td>
+                            <td style="text-align: center">{{ $std->kelas->name }}</td>
+                            <td style="text-align: center">
+                                @php
+                                    $absent = $absen->where('author_id', $std->id)->first();
+                                @endphp
+                                @if ($absent)
+                                    {{ $absent->absen_type }}
+                                @else
+                                    Tidak Hadir
+                                @endif
+                            </td>
+                            <td style="text-align: center">
+                                @if ($absent)
+                                    {{ \Carbon\Carbon::parse($absent->absen_time)->format('H:i') }} WIB
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
                     @empty
-                    <tr>
-                        <td colspan="7" class="empty">Tidak ada data mahasiswa yang absen pada kelas ini</td>
-                    </tr>
+                        <tr>
+                            <td colspan="6" class="empty">Tidak ada data mahasiswa dalam kelas ini</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
