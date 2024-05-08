@@ -14,12 +14,14 @@ use Alert;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
+use App\Models\Fakultas;
 
 class HomeController extends Controller
 {
 
     public function index()
     {
-        return view('base.base-root-index');
+        $data['fakultas'] = Fakultas::all();
+        return view('base.base-root-index', $data);
     }
 }
