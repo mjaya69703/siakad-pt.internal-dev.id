@@ -96,7 +96,7 @@ switch ($rawType) {
 
             </div>
             <div class="card-body">
-                <table class="table table-stripped" id="table1">
+                <table class="table table-striped" id="table1">
                     <thead>
                         <th class="text-center">#</th>
                         <th class="text-center">Nama Kurikulum</th>
@@ -106,11 +106,11 @@ switch ($rawType) {
                     </thead>
                     <tbody>
                         @foreach ($kurikulum as $key => $item)
-                            <tr class="text-center">
-                                <td>{{ ++$key }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->code }}</td>
-                                <td>{{ $item->year_start . ' - ' . $item->year_ended }}</td>
+                            <tr>
+                                <td data-label="Number">{{ ++$key }}</td>
+                                <td data-label="Nama Kurikulum">{{ $item->name }}</td>
+                                <td data-label="Kode Kurikulum">{{ $item->code }}</td>
+                                <td data-label="Periode Aktif">{{ $item->year_start . ' - ' . $item->year_ended }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateKurikulum{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                                     <a href="{{ route('web-admin.master.kurikulum-view', $item->id) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a>

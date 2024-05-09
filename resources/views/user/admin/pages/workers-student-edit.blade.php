@@ -247,7 +247,7 @@ switch ($rawType) {
                                 </div>
                                 <div class="form-group col-lg-12 col-12">
                                     <label for="mhs_addr_domisili">Alamat Lengkap Domisili / Tempat Tinggal</label>
-                                    <textarea cols="15" rows="4" class="form-control" name="mhs_addr_domisili" id="mhs_addr_domisili" placeholder="alamat lengkap domisili / tempat tinggal..." value="{{ $student->mhs_addr_domisili }}">{{ $student->mhs_addr_domisili == null ? 'inputkan alamat lengkap / domisili' : $student->mhs_addr_domisili }}</textarea>
+                                    <textarea cols="15" rows="4" class="form-control" name="mhs_addr_domisili" id="mhs_addr_domisili" placeholder="alamat lengkap domisili / tempat tinggal..." value="{{ $student->mhs_addr_domisili }}">{{ $student->mhs_addr_domisili == null ? '' : $student->mhs_addr_domisili }}</textarea>
                                     @error('mhs_addr_domisili')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror

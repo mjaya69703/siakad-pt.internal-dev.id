@@ -3,7 +3,7 @@
         <li class="sidebar-item has-sub {{ Route::is('web-admin.workers.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-user-tie"></i>
-                <span>Data Pengguna</span>
+                <span>Data Master Pengguna</span>
             </a>
             <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.workers.admin-*', request()->path()) ? 'active' : '' }}">

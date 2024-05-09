@@ -49,7 +49,7 @@ switch ($rawType) {
 
             </div>
             <div class="card-body">
-                <table class="table table-stripped" id="table1">
+                <table class="table table-striped" id="table1">
                     <thead>
                         <th class="text-center">#</th>
                         <th class="text-center">Nama Kelas</th>
@@ -61,12 +61,12 @@ switch ($rawType) {
                     <tbody>
                         @foreach ($kelas as $key => $item)
                             <tr class="text-center">
-                                <td>{{ ++$key }}</td>
-                                <td>{{ $item->proku->name . ' - ' . $item->name }}</td>
-                                <td>{{ $item->pstudi->name . ' - ' . $item->taka->semester}}</td>
+                                <td data-label="Number">{{ ++$key }}</td>
+                                <td data-label="Kelas">{{ $item->proku->name . ' - ' . $item->name }}</td>
+                                <td data-label="Program Studi">{{ $item->pstudi->name . ' - ' . $item->taka->semester}}</td>
                                 @php $mhs = \App\Models\Mahasiswa::where('class_id', $item->id)->count();                              @endphp
-                                <td>{{ $mhs . ' / ' . $item->capacity . ' Mahasiswa' }}</td>
-                                <td>{{ $item->dosen->dsn_name }}</td>
+                                <td data-label="Kapasitas">{{ $mhs . ' / ' . $item->capacity . ' Mahasiswa' }}</td>
+                                <td data-label="Wali Dosen">{{ $item->dosen->dsn_name }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateKelas{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                                     <a href="{{ route('web-admin.master.kelas-mahasiswa-view', $item->code) }}" style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-users"></i></a>

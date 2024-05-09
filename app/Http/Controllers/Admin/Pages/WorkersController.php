@@ -114,8 +114,8 @@ class WorkersController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8196',
             'name' => 'required|string|max:255',
             'user' => 'required|string|max:255|unique:users,user,' . $user->id,
-            'birth_place' => 'required|string|max:255', // New field
-            'birth_date' => 'required|date', // New field
+            // 'birth_place' => 'string|max:255', // New field
+            // 'birth_date' => 'date', // New field
             'phone' => 'required|numeric|unique:users,phone,' . $user->id,
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'gend' => 'nullable|string',
@@ -274,8 +274,8 @@ class WorkersController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8196',
             'name' => 'required|string|max:255',
             'user' => 'required|string|max:255|unique:users,user,' . $user->id,
-            'birth_place' => 'required|string|max:255', // New field
-            'birth_date' => 'required|date', // New field
+            // 'birth_place' => 'string|max:255', // New field
+            // 'birth_date' => 'date', // New field
             'phone' => 'required|numeric|unique:users,phone,' . $user->id,
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'gend' => 'nullable|string',
@@ -430,8 +430,8 @@ class WorkersController extends Controller
             'dsn_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8196',
             'dsn_name' => 'required|string|max:255',
             'dsn_user' => 'required|string|max:255|unique:users,user,' . $user->id,
-            'dsn_birthplace' => 'required|string|max:255', // New field
-            'dsn_birthdate' => 'required|date', // New field
+            // 'dsn_birthplace' => 'string|max:255', // New field
+            // 'dsn_birthdate' => 'date', // New field
             'dsn_phone' => 'required|numeric|unique:users,phone,' . $user->id,
             'dsn_mail' => 'required|email|max:255|unique:users,email,' . $user->id,
             'dsn_gend' => 'nullable|string',
@@ -526,8 +526,8 @@ class WorkersController extends Controller
             'mhs_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8196',
             'mhs_name' => 'required|string|max:255',
             'mhs_user' => 'required|string|max:255|unique:users,user,' . $user->id,
-            'mhs_birthplace' => 'string|max:255', // New field
-            'mhs_birthdate' => 'date', // New field
+            'mhs_birthplace' => 'nullable|string|max:255', // New field
+            'mhs_birthdate' => 'nullable|date', // New field
             'mhs_gend' => 'nullable|string',
             'mhs_phone' => 'required|numeric|unique:users,phone,' . $user->id,
             'mhs_mail' => 'required|email|max:255|unique:users,email,' . $user->id,
@@ -599,9 +599,9 @@ class WorkersController extends Controller
         $request->validate([
             'mhs_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8196',
             'mhs_name' => 'required|string|max:255',
-            'mhs_user' => 'required|string|max:255|unique:users,user,' . $user->id,
-            'mhs_birthplace' => 'string|max:255', // New field
-            'mhs_birthdate' => 'date', // New field
+            'mhs_user' => 'string|max:255|unique:users,user,' . $user->id,
+            'mhs_birthplace' => 'nullable|string|max:255', // New field
+            'mhs_birthdate' => 'nullable|date', // New field
             'mhs_gend' => 'nullable|string',
             'mhs_phone' => 'required|numeric|unique:users,phone,' . $user->id,
             'mhs_mail' => 'required|email|max:255|unique:users,email,' . $user->id,

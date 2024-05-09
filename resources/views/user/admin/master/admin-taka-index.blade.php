@@ -89,21 +89,23 @@ switch ($rawType) {
 
             </div>
             <div class="card-body">
-                <table class="table table-stripped" id="table1">
+                <table class="table table-striped" id="table1">
                     <thead>
                         <th class="text-center">#</th>
                         <th class="text-center">Nama Tahun Akademik</th>
                         <th class="text-center">Kode Tahun Akademik</th>
                         <th class="text-center">Semester Perkuliahan</th>
+                        <th class="text-center">Status</th>
                         <th class="text-center">Button</th>
                     </thead>
                     <tbody>
                         @foreach ($taka as $key => $item)
-                            <tr class="text-center">
-                                <td>{{ ++$key }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->code }}</td>
-                                <td>{{ $item->semester }}</td>
+                            <tr>
+                                <td data-label="Number">{{ ++$key }}</td>
+                                <td data-label="Tahun Akademik">{{ $item->name }}</td>
+                                <td data-label="Kode Tahun Akademik">{{ $item->code }}</td>
+                                <td data-label="Semester">{{ $item->semester }}</td>
+                                <td data-label="Status">@if($item->is_active === 0) Tidak Aktif @elseif($item->is_active === 1) Aktif @endif</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateTaka{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                                     {{-- <a href="{{ route('web-admin.staffmanager-dosen-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}

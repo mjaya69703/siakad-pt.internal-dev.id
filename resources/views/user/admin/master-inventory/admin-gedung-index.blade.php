@@ -75,7 +75,7 @@ switch ($rawType) {
 
             </div>
             <div class="card-body">
-                <table class="table table-stripped" id="table1">
+                <table class="table table-striped" id="table1">
                     <thead>
                         <th class="text-center">#</th>
                         <th class="text-center">Nama Gedung</th>
@@ -84,10 +84,10 @@ switch ($rawType) {
                     </thead>
                     <tbody>
                         @foreach ($gedung as $key => $item)
-                            <tr class="text-center">
-                                <td>{{ ++$key }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->code }}</td>
+                            <tr>
+                                <td data-label="Number">{{ ++$key }}</td>
+                                <td data-label="Nama Gedung">{{ $item->name }}</td>
+                                <td data-label="Kode Gedung">{{ $item->code }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateGedung{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                                     {{-- <a href="{{ route('web-admin.staffmanager-dosen-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}

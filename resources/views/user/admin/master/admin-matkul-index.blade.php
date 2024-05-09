@@ -64,15 +64,15 @@ switch ($rawType) {
                     @foreach ($matkul as $key => $item)
                         
                     <tr>
-                        <td class="text-center">{{ ++$key }}</td>
-                        <td class="text-center">{{ $item->pstudi->fakultas->name . ' - ' . $item->pstudi->name }}</td>
-                        <td class="text-center">{{ $item->kuri->name }}</td>
-                        <td class="text-center">{{ $item->name }}</td>
-                        <td class="text-center">{{ $item->kuri->code . ' - ' . $item->taka->code . ' - ' . $item->code }}</td>
-                        <td class="text-center">
+                        <td data-label="Number">{{ ++$key }}</td>
+                        <td data-label="Program Studi">{{ $item->pstudi->fakultas->name . ' - ' . $item->pstudi->name }}</td>
+                        <td data-label="Kurikulum">{{ $item->kuri->name }}</td>
+                        <td data-label="Nama Mata Kuliah">{{ $item->name }}</td>
+                        <td data-label="Kode Mata Kuliah">{{ $item->kuri->code . ' - ' . $item->taka->code . ' - ' . $item->code }}</td>
+                        <td data-label="Team Dosen">
                             {{ $item->dosen1->dsn_name }}<br>{{ $item->dosen_2 == null ? '-' : $item->dosen2->dsn_name }}<br>{{ $item->dosen_3 == null ? '-' : $item->dosen3->dsn_name }}
                         </td>
-                        <td class="text-center">{{ $item->requ_id == null ? '-' : $item->requ->name }}</td>
+                        <td data-label="Syarat Mata Kuliah">{{ $item->requ_id == null ? '-' : $item->requ->name }}</td>
                         <td class="d-flex justify-content-center align-items-center">
                             <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateMatkul{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                             {{-- <a href="{{ route('web-admin.master.matkul-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}

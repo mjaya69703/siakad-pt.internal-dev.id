@@ -120,7 +120,7 @@ switch ($rawType) {
 
             </div>
             <div class="card-body">
-                <table class="table table-stripped" id="table1">
+                <table class="table table-striped" id="table1">
                     <thead>
                         <th class="text-center">#</th>
                         <th class="text-center">Program Kuliah</th>
@@ -130,11 +130,11 @@ switch ($rawType) {
                     </thead>
                     <tbody>
                         @foreach ($proku as $key => $item)
-                            <tr class="text-center">
-                                <td>{{ ++$key }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->pstudi->name }}</td>
-                                <td>{{ \Carbon\Carbon::parse($item->wave_start)->locale('id')->isoFormat('LL') . ' - ' . \Carbon\Carbon::parse($item->wave_ended)->locale('id')->isoFormat('LL') }}</td>
+                            <tr>
+                                <td data-label="Number">{{ ++$key }}</td>
+                                <td data-label="Program Kuliah">{{ $item->name }}</td>
+                                <td data-label="Program Studi">{{ $item->pstudi->name }}</td>
+                                <td data-label="Periode Pendaftaran">{{ \Carbon\Carbon::parse($item->wave_start)->locale('id')->isoFormat('LL') . ' - ' . \Carbon\Carbon::parse($item->wave_ended)->locale('id')->isoFormat('LL') }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateProku{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                                     {{-- <a href="{{ route('web-admin.staffmanager-dosen-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}
