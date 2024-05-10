@@ -280,5 +280,20 @@ class DatabaseSeeder extends Seeder
             'code'       => 'C-103',
         ]);
 
+        // TAGIHAN KULIAH
+        \App\Models\TagihanKuliah::create([
+            'users_id'    => '1',
+            'name'    => 'UKT Semester 1',
+            'code'    => 'UKT-'.Str::random(8),
+            'price'    => '2400000',
+        ]);
+        // TAGIHAN KULIAH
+        \App\Models\TagihanKuliah::create([
+            'users_id'    => '1',
+            'name'    => 'UKT Semester 2',
+            'code'    => 'UKT-'.Str::random(8),
+            'price'    => '2200000',
+        ]);
+
     }
 }

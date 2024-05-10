@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // SECTION ADDONS SYSTEM
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use Hash;
 use Str;
@@ -20,12 +21,21 @@ use App\Models\Kurikulum;
 use App\Models\Dosen;
 use App\Models\TahunAkademik;
 use App\Models\JadwalKuliah;
+use App\Models\TagihanKuliah;
+use App\Models\HistoryTagihan;
 use App\Models\Ruang;
 use App\Models\Kelas;
 use App\Models\AbsensiMahasiswa;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        \Midtrans\Config::$serverKey    = config('services.midtrans.serverKey');
+        \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
+        \Midtrans\Config::$isSanitized  = config('services.midtrans.isSanitized');
+        \Midtrans\Config::$is3ds        = config('services.midtrans.is3ds');
+    }
     public function index(){
 
 
@@ -172,32 +182,6 @@ class HomeController extends Controller
             return redirect()->route('mahasiswa.home-profile');
         }
     }
-    // public function saveImageProfile(Request $request){
-    //     $request->validate([
-    //         'mhs_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
-
-    //     $user = Auth::guard('mahasiswa')->user();
-
-    //     if ($request->hasFile('mhs_image')) {
-    //         $image = $request->file('mhs_image');
-    //         $name = 'profile-'. $user->mhs_code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
-    //         $destinationPath = storage_path('app/public/images/profile');
-    //         $destinationPaths = storage_path('app/public/images');
-    //         $image->move($destinationPath, $name);
-    //         if ($user->mhs_image != 'default/default-profile.jpg') {
-    //             File::delete($destinationPaths.'/'.$user->mhs_image); // hapus gambar lama
-    //         }
-    //         $user->mhs_image = "profile/".$name;
-    //         $user->save();
-
-    //         // dd($user->image);
-
-    //         Alert::success('Success', 'Data berhasil diupdate');
-    //         return redirect()->route('mahasiswa.home-profile');
-    //     }
-
-    // }
 
     public function saveDataProfile(Request $request){
 
@@ -285,5 +269,75 @@ class HomeController extends Controller
 
         Alert::success('Success', 'Password berhasil diubah!');
         return back();
+    }
+
+    public function tagihanIndex()
+    {
+        // Mencari tagihan berdasarkan `users_id`
+        $data['tagihan'] = TagihanKuliah::where('users_id', Auth::guard('mahasiswa')->user()->id)->get();
+        $data['history'] = HistoryTagihan::where('users_id', Auth::guard('mahasiswa')->user()->id)->get();
+        
+        // Cek apakah tagihan ditemukan untuk `users_id` tertentu
+        if ($data['tagihan']->isEmpty()) {
+            // Jika tidak ditemukan, ambil tagihan berdasarkan `proku_id`
+            $data['tagihan'] = TagihanKuliah::where('proku_id', Auth::guard('mahasiswa')->user()->kelas->proku->id)->get();
+        }
+
+        // dd($data['tagihan']);
+        return view('mahasiswa.pages.mhs-tagihan-index', $data);
+    }
+    public function tagihanView($code)
+    {
+        // Mencari tagihan berdasarkan `users_id`
+        $data['tagihan'] = TagihanKuliah::where('code', $code)->first();
+        // dd($data['tagihan']);
+        return view('mahasiswa.pages.mhs-tagihan-view', $data);
+    }
+
+    public function tagihanPayment(Request $request, $code){
+        $tagihan = TagihanKuliah::where('code', $code)->first();
+
+        DB::transaction(function() use($request) { 
+            $donation = \App\Models\HistoryTagihan::create([
+                'users_id'   => Auth::guard('mahasiswa')->user()->id,
+                'tagihan_code'   => $code,
+                'stat'  => 1,
+                'desc' => 'Pembayaran tagihan kuliah #'.$code,
+                'code'  => 'PAYMENT-'.Str::random(6),
+            ]);
+
+            $payload = [
+                'transaction_details' => [
+                    'order_id'     => $code,
+                    'gross_amount' => 1,
+                ],
+                'customer_details' => [
+                    'first_name' => Auth::guard('mahasiswa')->user()->mhs_name,
+                    'email'      => Auth::guard('mahasiswa')->user()->mhs_mail,
+                ],
+                'item_details' => [
+                    [
+                        'id'            => $code,
+                        'price'         => $tagihan->price,
+                        'quantity'      => 1,
+                        'name'          => 'Pembayaran ' . $tagihan->name,
+                        'brand'         => 'Pembayaran',
+                        'category'      => 'Pembayaran',
+                        'merchant_name' => 'ESEC - ESchool Ecosystem Academy',
+                    ],
+                ],
+            ];
+
+            $snapToken = \Midtrans\Snap::getSnapToken($payload);
+            $donation->snap_token = $snapToken;
+            $donation->save();
+
+            $this->response['snap_token'] = $snapToken;
+        });
+
+        return response()->json([
+            'status'     => 'success',
+            'snap_token' => $this->response,
+        ]);
     }
 }

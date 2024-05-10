@@ -22,7 +22,7 @@ class MhsAccess
                 return $next($request);
             }
 
-            return redirect()->route('error.access');
+            // return redirect()->route('error.access');
         }
 
         // Jika belum login, arahkan ke rute 'auth-login'
