@@ -15,6 +15,7 @@
 @endsection
 @section('custom-css')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
 @endsection
 @section('content')
@@ -29,20 +30,35 @@
             </h5>
         </div>
         <div class="card-body ">
-            <form id="donation-form" method="POST">
-                <div class="row mb-3">
-                    <div class="col-lg-6 col-12">
-                        <label for="name">Nama Lengkap</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{ $tagihan->name }}">
-                    </div>
-                    <div class="col-lg-6 col-12">
-                        <label for="code">Nama Lengkap</label>
-                        <input type="text" name="code" id="code" class="form-control" value="{{ $tagihan->code }}">
-                    </div>
+            <form id="payment-form" action="{{ route('mahasiswa.home-tagihan-payment', $tagihan->code) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" value="{{ Auth::guard('mahasiswa')->user()->mhs_name }}" name="name">
                 </div>
-                <div class="col-12 text-center">
-                    <button class="btn btn-primary" id="pay-button"><i class="fa-solid fa-money-bill-transfer" style="margin-right: 10px"></i>Pay</button>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" value="{{ Auth::guard('mahasiswa')->user()->mhs_mail }}" name="email">
                 </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" class="form-control" id="amount" value="{{ $tagihan->price }}" name="amount">
+                </div>
+
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <textarea class="form-control" id="note" name="note">Pembayaran Tagihan Kuliah {{ $tagihan->code }}</textarea>
+                </div>
+
+                <button type="submit" id="pay-button" class="btn btn-primary">Pay Now</button>
+            </form>|
+            <form onsubmit="return false">
+                <label for="snapToken">Snap Token:</label>
+                <input type="text" id="snap-token">
+                <button id="pay-button">Pay!</button>
             </form>
 
         </div>
@@ -51,39 +67,77 @@
 </section>
 @endsection
 @section('custom-js')
+{{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> --}}
+
+{{-- <script src="https://app.stg.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script> --}}
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>    
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
+    var snapToken = ""; // Inisialisasi snapToken
+
+    // Fungsi untuk melakukan permintaan pembayaran
     $('#pay-button').click(function (event) {
+        event.preventDefault();
+
+        $.post("{{ route('mahasiswa.home-tagihan-payment', $tagihan->code) }}", {
+            _token: '{{ csrf_token() }}',
+            name: $('#name').val(),
+            email: $('#email').val(),
+            amount: $('#amount').val(),
+            note: $('#note').val()
+        },
+        function (data, status) {
+            
+            snapToken = data.snap_token; // Simpan snapToken dari respons server
+            console.log(data.snap_token); // Tambahkan ini untuk debugging
+            // Sekarang Anda memiliki snapToken yang bisa digunakan dalam embed snap
+            window.snap.embed(snapToken, {
+                embedId: 'snap-container'
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    var payButton = document.getElementById('pay-button');
+    // For example trigger on button clicked, or any time you need
+    payButton.addEventListener('click', function() {
+        var snapToken = document.getElementById('snap-token').value;
+        snap.pay(snapToken);
+    });
+</script>
+{{-- <script type="text/javascript">
+$('#pay-button').click(function (event) {
     event.preventDefault();
-    
-    $.post("{{ route('mahasiswa.home-tagihan-payment') }}", {
-        _method: 'POST',
+
+    // Perhatikan bahwa Anda menggunakan $.post untuk melakukan permintaan POST
+    $.post("{{ route('mahasiswa.home-tagihan-payment', $tagihan->code) }}", {
         _token: '{{ csrf_token() }}',
         name: $('#name').val(),
-        code: $('#code').val(),
+        email: $('#email').val(),
+        amount: $('#amount').val(),
+        note: $('#note').val()
     },
     function (data, status) {
         snap.pay(data.snap_token, {
             onSuccess: function (result) {
                 location.reload();
             },
-    
+
             onPending: function (result) {
-                location.reload();
+                location.reload(); 
             },
-    
+
             onError: function (result) {
                 location.reload();
             }
-            
         });
         return false;
     });
-    });
-</script>
+});
+
+</script> --}}
+
     
     
 

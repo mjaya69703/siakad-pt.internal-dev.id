@@ -29,17 +29,16 @@ use App\Models\AbsensiMahasiswa;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        \Midtrans\Config::$serverKey    = config('services.midtrans.serverKey');
-        \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
-        \Midtrans\Config::$isSanitized  = config('services.midtrans.isSanitized');
-        \Midtrans\Config::$is3ds        = config('services.midtrans.is3ds');
-    }
     public function index(){
 
 
         return view('mahasiswa.home-index');
+
+    }
+    public function indexDonate(){
+
+
+        return view('mahasiswa.pages.mhs-donate-index');
 
     }
     public function profile(){
@@ -283,50 +282,54 @@ class HomeController extends Controller
             $data['tagihan'] = TagihanKuliah::where('proku_id', Auth::guard('mahasiswa')->user()->kelas->proku->id)->get();
         }
 
-        // dd($data['tagihan']);
         return view('mahasiswa.pages.mhs-tagihan-index', $data);
     }
     public function tagihanView($code)
     {
         // Mencari tagihan berdasarkan `users_id`
         $data['tagihan'] = TagihanKuliah::where('code', $code)->first();
-        // dd($data['tagihan']);
+
         return view('mahasiswa.pages.mhs-tagihan-view', $data);
     }
 
     public function tagihanPayment(Request $request, $code){
         $tagihan = TagihanKuliah::where('code', $code)->first();
 
-        DB::transaction(function() use($request) { 
+        \Midtrans\Config::$serverKey    = config('services.midtrans.serverKey');
+        \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
+        \Midtrans\Config::$isSanitized  = config('services.midtrans.isSanitized');
+        \Midtrans\Config::$is3ds        = config('services.midtrans.is3ds');
+
+        DB::transaction(function() use($request) {
             $donation = \App\Models\HistoryTagihan::create([
-                'users_id'   => Auth::guard('mahasiswa')->user()->id,
-                'tagihan_code'   => $code,
-                'stat'  => 1,
-                'desc' => 'Pembayaran tagihan kuliah #'.$code,
-                'code'  => 'PAYMENT-'.Str::random(6),
+                'users_id'      => Auth::guard('mahasiswa')->user()->id,
+                'tagihan_code'  => $request->code,
+                'code'          => Str::random(9),
+                'desc'          => $request->note,
             ]);
 
             $payload = [
                 'transaction_details' => [
-                    'order_id'     => $code,
-                    'gross_amount' => 1,
+                    'order_id'     => $donation->code,
+                    'gross_amount' => $request->amount,
                 ],
                 'customer_details' => [
-                    'first_name' => Auth::guard('mahasiswa')->user()->mhs_name,
-                    'email'      => Auth::guard('mahasiswa')->user()->mhs_mail,
+                    'first_name' => $request->name,
+                    'email'      => $request->email,
                 ],
                 'item_details' => [
                     [
-                        'id'            => $code,
-                        'price'         => $tagihan->price,
+                        'id'            => $request->code,
+                        'price'         => $request->amount,
                         'quantity'      => 1,
-                        'name'          => 'Pembayaran ' . $tagihan->name,
-                        'brand'         => 'Pembayaran',
-                        'category'      => 'Pembayaran',
-                        'merchant_name' => 'ESEC - ESchool Ecosystem Academy',
+                        'name'          => $request->note,
+                        'brand'         => 'Tagihan Kuliah',
+                        'category'      => 'Tagihan Kuliah',
+                        'merchant_name' => config('app.name'),
                     ],
                 ],
             ];
+            // dd($payload);
 
             $snapToken = \Midtrans\Snap::getSnapToken($payload);
             $donation->snap_token = $snapToken;
