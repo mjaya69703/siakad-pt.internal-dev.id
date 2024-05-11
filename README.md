@@ -38,7 +38,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     - ( CRUD ) Data Admin 
     - ( CRUD ) Data Staff ( Web Administrator, Staff Akademik , Staff Administrasi & Keuangan, Staff SarPras ) 
     - ( CRUD ) Data Dosen
-    - ( CRUD ) Data Mahasiswa ( New - 6/5/2024 )
+    - ( CRUD ) Data Mahasiswa
 
 <b>Fitur Role Mahasiswa Aktif</b>
 - Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )

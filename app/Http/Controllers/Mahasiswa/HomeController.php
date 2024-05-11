@@ -274,7 +274,7 @@ class HomeController extends Controller
     {
         // Mencari tagihan berdasarkan `users_id`
         $data['tagihan'] = TagihanKuliah::where('users_id', Auth::guard('mahasiswa')->user()->id)->get();
-        $data['history'] = HistoryTagihan::where('users_id', Auth::guard('mahasiswa')->user()->id)->get();
+        $data['history'] = HistoryTagihan::where('users_id', Auth::guard('mahasiswa')->user()->id)->where('stat', 1)->get();
         
         // Cek apakah tagihan ditemukan untuk `users_id` tertentu
         if ($data['tagihan']->isEmpty()) {
@@ -335,12 +335,25 @@ class HomeController extends Controller
             $donation->snap_token = $snapToken;
             $donation->save();
 
+            $this->response['code_uniq'] = $donation->code;
             $this->response['snap_token'] = $snapToken;
         });
 
         return response()->json([
             'status'     => 'success',
-            'snap_token' => $this->response,
+            'snap_token' => $this->response['snap_token'],
+            'code_uniq' => $this->response['code_uniq'],
         ]);
+    }
+
+    public function tagihanSuccess(Request $request, $code){
+        $tagihan = HistoryTagihan::where('code', $code)->first();
+        $tagihan->stat = 1;
+        $tagihan->save();
+
+        Alert::success('Success', 'Tagihan telah dibayar');
+        return redirect()->route('mahasiswa.home-tagihan-index');
+
+
     }
 }

@@ -36,7 +36,6 @@
                         <th class="text-center">Kode Tagihan</th>
                         <th class="text-center">Nama Tagihan</th>
                         <th class="text-center">Nominal Tagihan</th>
-                        <th class="text-center">Status Tagihan</th>
                         <th class="text-center">Button</th>
                     </tr>
                 </thead>
@@ -47,13 +46,54 @@
                         <td data-label="Number">{{ ++$key }}</td>
                         <td data-label="Kode Tagihan"><span style="text-transform: uppercase">{{ $item->code }}</span></td>
                         <td data-label="Nama Tagihan">{{ $item->name }}</td>
-                        <td data-label="Nominal">{{ $item->price }}</td>
-                        <td data-label="Status"><span class="text-danger" style="text-transform: uppercase">un-paid</span></td>
+                        <td data-label="Nominal Bayar">Rp. {{ number_format($item->price, 0, ',', '.') }}</td>
                         <td class="d-flex justify-content-center align-items-center">
-                            <a href="{{ route('mahasiswa.home-tagihan-view', $item->code) }}" class="btn btn-outline-success"><i class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
+                            <a href="{{ route('mahasiswa.home-tagihan-view', $item->code) }}" class="btn btn-outline-success"><i style="margin-right: 5px" class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
 
 
                         </td>
+                    </tr>
+                    @endforeach
+ 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title d-flex justify-content-between align-items-center">
+                Riwayat Tagihan
+                <div class="">
+                    {{-- <a href="{{ route('web-admin.master.tagihan-index') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a> --}}
+                </div>
+            </h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped"  id="table1">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Kode Tagihan</th>
+                        <th class="text-center">Kode Bayar</th>
+                        <th class="text-center">Nominal Bayar</th>
+                        <th class="text-center">Status Tagihan</th>
+                        {{-- <th class="text-center">Button</th> --}}
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($history as $key => $item)
+                        
+                    <tr>
+                        <td data-label="Number">{{ ++$key }}</td>
+                        <td data-label="Kode Pembayaran"><span style="text-transform: uppercase">{{ $item->code }}</span></td>
+                        <td data-label="Kode Bayar"><span style="text-transform: uppercase">{{ $item->tagihan_code }}</span></td>
+                        <td data-label="Nominal Bayar">Rp. {{ number_format($item->tagihan->price, 0, ',', '.') }}</td>
+                        <td data-label="Status">{{$item->stat === 1 ? 'PAID' : 'UN-PAID'}}</td>
+                        {{-- <td class="d-flex justify-content-center align-items-center">
+                            <a href="{{ route('mahasiswa.home-tagihan-view', $item->code) }}" class="btn btn-outline-success"><i class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
+
+
+                        </td> --}}
                     </tr>
                     @endforeach
  
