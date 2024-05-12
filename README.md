@@ -40,6 +40,10 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     - ( CRUD ) Data Dosen
     - ( CRUD ) Data Mahasiswa
 
+- Fitur Kelola Tagihan
+    - ( CRUD ) Data Tagihan
+    - Pembayaran Biaya Kuliah via MidTrans ( New )
+
 <b>Fitur Role Mahasiswa Aktif</b>
 - Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
 - Fitur Lihat Jadwal Kuliah dan Absensi
@@ -69,7 +73,7 @@ DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-- Sesuaikan Konfigurasi Email
+- Sesuaikan Konfigurasi Email ( .env )
 ```
 # BILA MENGGUNAKAN BREVO
 MAIL_DRIVER=smtp
@@ -80,6 +84,14 @@ MAIL_PASSWORD="yourpassword"
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="${MAIL_USERNAME}"
 MAIL_FROM_NAME="${APP_NAME}"
+```
+- Sesuaikan Konfigurasi MidTrans ( .env )
+```
+MIDTRANS_CLIENT_KEY=SB-Mid-client-xxxx   //   => Input your MidTrans clientKey
+MIDTRANS_SERVER_KEY=SB-Mid-server-xxxx   //   => Input your MidTrans serverKey
+MIDTRANS_IS_PRODUCTION=false // or true       => Choose your condition
+MIDTRANS_IS_SANITIZED=true
+MIDTRANS_IS_3DS=true
 ```
 4. Installasi Project 
 ```

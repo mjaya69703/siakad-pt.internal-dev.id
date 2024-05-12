@@ -289,7 +289,7 @@ class DatabaseSeeder extends Seeder
         ]);
         // TAGIHAN KULIAH
         \App\Models\TagihanKuliah::create([
-            'users_id'    => '1',
+            'proku_id'    => '1',
             'name'    => 'UKT Semester 2',
             'code'    => 'UKT-'.Str::random(8),
             'price'    => '2200000',

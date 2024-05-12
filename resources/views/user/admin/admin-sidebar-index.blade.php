@@ -1,3 +1,18 @@
+        {{-- MENU KHUSUS UNTUK FINANCE DEPARTEMENT --}}
+        <li class="sidebar-title">Finance Departement</li>
+        <li class="sidebar-item has-sub {{ Route::is('web-admin.finance.*', request()->path()) ? 'active' : '' }}">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Data Keuangan</span>
+            </a>
+            <ul class="submenu">
+                <li class="submenu-item {{ Route::is('web-admin.finance.tagihan-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.finance.tagihan-index') }}" class="submenu-link">Data Tagihan</a>
+                </li>
+            </ul>
+        </li>
+
+        
         {{-- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
         <li class="sidebar-title">Data Master</li>
         <li class="sidebar-item has-sub {{ Route::is('web-admin.workers.*', request()->path()) ? 'active' : '' }}">

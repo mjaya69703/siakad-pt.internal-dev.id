@@ -9,17 +9,14 @@ class TagihanKuliah extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-    public function proku()
+    // protected $guarded = [];
+
+    public function prokuu()
     {
         return $this->belongsTo(ProgramKuliah::class, 'proku_id');
     }
-    public function users()
+    public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'users_id');
-    }
-    public function history()
-    {
-        return $this->belongsTo(HistoryTagihan::class, 'code');
     }
 }
