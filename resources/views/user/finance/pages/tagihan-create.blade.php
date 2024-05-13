@@ -103,7 +103,7 @@ switch ($rawType) {
                             <div class="form-group col-lg-4 col-12">
                                 <label for="users_id">Tagihan Mahasiswa</label>
                                 <select name="users_id" id="users_id" class="choices form-select">
-                                    <option value="" selected>Pilih Mahasiswa</option>
+                                    <option value="0" selected>Pilih Mahasiswa</option>
                                     @foreach ($mahasiswa as $item)
                                         
                                     <option value="{{ $item->id }}">{{ $item->mhs_name }}</option>
@@ -116,7 +116,7 @@ switch ($rawType) {
                             <div class="form-group col-lg-4 col-12">
                                 <label for="prodi_id">Tagihan Program Studi</label>
                                 <select name="prodi_id" id="prodi_id" class="choices form-select">
-                                    <option value="" selected>Pilih Program Studi</option>
+                                    <option value="0" selected>Pilih Program Studi</option>
                                     @foreach ($prodi as $item)
                                         
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -129,7 +129,7 @@ switch ($rawType) {
                             <div class="form-group col-lg-4 col-12">
                                 <label for="proku_id">Tagihan Program Kuliah</label>
                                 <select name="proku_id" id="proku_id" class="choices form-select">
-                                    <option value="" selected>Pilih Program Kuliah</option>
+                                    <option value="0" selected>Pilih Program Kuliah</option>
                                     @foreach ($proku as $item)
                                         
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>

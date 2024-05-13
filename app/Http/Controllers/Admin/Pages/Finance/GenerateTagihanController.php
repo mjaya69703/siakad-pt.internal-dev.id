@@ -54,4 +54,32 @@ class GenerateTagihanController extends Controller
 
         return view('user.finance.pages.tagihan-create', $data);
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'string|max:255',
+            'price' => 'string|max:255',
+            'prodi_id' => 'required_without_all:users_id,proku_id',
+            'proku_id' => 'required_without_all:users_id,prodi_id',
+            'users_id' => 'required_without_all:proku_id,prodi_id',
+        ]);
+
+        $tagihan = new TagihanKuliah;
+        $tagihan->name = $request->name;
+        $tagihan->price = $request->price;
+        $tagihan->prodi_id = $request->prodi_id;
+        $tagihan->proku_id = $request->proku_id;
+        $tagihan->users_id = $request->users_id;
+        $tagihan->code = 'UKT-'.Str::random(8);
+
+        $tagihan->save();
+
+        Alert::success('success', 'Data berhasil ditambahkan');
+        return back();
+
+        dd($tagihan);
+
+        // dd($request->all());
+    }
 }

@@ -1,63 +1,61 @@
-@extends('base.base-dash-index')
-@section('title')
+<?php $__env->startSection('title'); ?>
     Data Tagihan Perkuliahan - Siakad By Internal Developer
-@endsection
-@section('menu')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('menu'); ?>
     Data Tagihan Perkuliahan
-@endsection
-@section('submenu')
-    Lihat Tagihan {{ $tagihan->code }}
-@endsection
-@section('urlmenu')
-@endsection
-@section('subdesc')
-    Halaman untuk melihat Tagihan {{ $tagihan->code }}
-@endsection
-@section('custom-css')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('submenu'); ?>
+    Lihat Tagihan <?php echo e($tagihan->code); ?>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('urlmenu'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('subdesc'); ?>
+    Halaman untuk melihat Tagihan <?php echo e($tagihan->code); ?>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('custom-css'); ?>
+<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <section class="section">
     <div class="card">
         <div class="card-header">
             <h5 class="card-title d-flex justify-content-between align-items-center">
-                @yield('menu')
+                <?php echo $__env->yieldContent('menu'); ?>
                 <div class="">
-                    <a href="{{ route('mahasiswa.home-tagihan-index') }}" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
+                    <a href="<?php echo e(route('mahasiswa.home-tagihan-index')); ?>" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
                 </div>
             </h5>
         </div>
         <div class="card-body ">
-            <form id="payment-form" action="{{ route('mahasiswa.home-tagihan-payment', $tagihan->code) }}" method="POST" enctype="multipart/form-data">
-                @csrf
+            <form id="payment-form" action="<?php echo e(route('mahasiswa.home-tagihan-payment', $tagihan->code)); ?>" method="POST" enctype="multipart/form-data">
+                <?php echo csrf_field(); ?>
 
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" readonly value="{{ Auth::guard('mahasiswa')->user()->mhs_name }}" name="name">
+                    <input type="text" class="form-control" id="name" readonly value="<?php echo e(Auth::guard('mahasiswa')->user()->mhs_name); ?>" name="name">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" readonly value="{{ Auth::guard('mahasiswa')->user()->mhs_mail }}" name="email">
+                    <input type="email" class="form-control" id="email" readonly value="<?php echo e(Auth::guard('mahasiswa')->user()->mhs_mail); ?>" name="email">
                 </div>
 
                 <div class="form-group">
                     <label for="amount">Amount</label>
-                    <input type="number" class="form-control" id="amount" readonly value="{{ $tagihan->price }}" name="amount">
+                    <input type="number" class="form-control" id="amount" readonly value="<?php echo e($tagihan->price); ?>" name="amount">
                 </div>
 
                 <div class="form-group">
                     <label for="note">Note</label>
-                    <textarea class="form-control" id="note" name="note" >Pembayaran Tagihan Kuliah {{ $tagihan->code }}</textarea>
+                    <textarea class="form-control" id="note" name="note" >Pembayaran Tagihan Kuliah <?php echo e($tagihan->code); ?></textarea>
                 </div>
-                {{-- <div class="form-group">
-                    <label for="SnapToken">SnapToken</label>
-                    <input class="form-control" id="snap-token" name="snapToken">
-                </div> --}}
+                
 
                 <button type="submit" id="pay-button" class="btn btn-primary">Pay Now</button>
             </form>
@@ -66,9 +64,9 @@
     </div>
 
 </section>
-@endsection
-@section('custom-js')
-<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('custom-js'); ?>
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?php echo e(config('services.midtrans.clientKey')); ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>    
 
 <script type="text/javascript">
@@ -78,8 +76,8 @@
     $('#pay-button').click(function (event) {
         event.preventDefault();
 
-        $.post("{{ route('mahasiswa.home-tagihan-payment', $tagihan->code) }}", {
-            _token: '{{ csrf_token() }}',
+        $.post("<?php echo e(route('mahasiswa.home-tagihan-payment', $tagihan->code)); ?>", {
+            _token: '<?php echo e(csrf_token()); ?>',
             name: $('#name').val(),
             email: $('#email').val(),
             amount: $('#amount').val(),
@@ -96,7 +94,7 @@
             snap.pay(snapToken, {
                 onSuccess: function (result) {
                     // location.reload();
-                    window.location.href = "{{ route('mahasiswa.home-tagihan-payment-success', ':uniqCode') }}".replace(':uniqCode', uniqCode);
+                    window.location.href = "<?php echo e(route('mahasiswa.home-tagihan-payment-success', ':uniqCode')); ?>".replace(':uniqCode', uniqCode);
 
                 },
 
@@ -115,4 +113,5 @@
     
     
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('base.base-dash-index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/siakadpt/htdocs/siakad-pt.internal-dev.id/resources/views/mahasiswa/pages/mhs-tagihan-view.blade.php ENDPATH**/ ?>

@@ -270,11 +270,22 @@ class HomeController extends Controller
         return back();
     }
 
+    public function tagihanIndexAjax()
+    {
+        $user = Auth::guard('mahasiswa')->user();
+
+        $data['tagihan'] = TagihanKuliah::where('users_id', $user->id)->orwhere('proku_id', $user->kelas->proku->id)->orwhere('prodi_id', $user->kelas->pstudi->id)->latest()->get();
+        $data['history'] = HistoryTagihan::where('users_id', Auth::guard('mahasiswa')->user()->id)->where('stat', 1)->latest()->get();
+
+        return response()->json($data);
+
+    }
+
     public function tagihanIndex()
     {
         $user = Auth::guard('mahasiswa')->user();
         // Mencari tagihan berdasarkan `users_id`
-        $data['tagihan'] = TagihanKuliah::where('users_id', $user->id)->orWhere('proku_id', $user->kelas->proku->id)->latest()->get();
+        $data['tagihan'] = TagihanKuliah::where('users_id', $user->id)->orwhere('proku_id', $user->kelas->proku->id)->orwhere('prodi_id', $user->kelas->pstudi->id)->latest()->get();
         $data['history'] = HistoryTagihan::where('users_id', Auth::guard('mahasiswa')->user()->id)->where('stat', 1)->latest()->get();
         
 
@@ -286,11 +297,12 @@ class HomeController extends Controller
         // Mencari tagihan berdasarkan `users_id`
         $user = Auth::guard('mahasiswa')->user();
 
-        $checkData = HistoryTagihan::where('tagihan_code', $code)->where('users_id', $user->id)->count();
+        $checkData = HistoryTagihan::where('tagihan_code', $code)->count();
         if($checkData === 0){
-
-            $data['tagihan'] = TagihanKuliah::where('code', $code)->where('users_id', $user->id)->orWhere('proku_id', $user->kelas->proku->id)->first();
-    
+            
+            
+            $data['tagihan'] = TagihanKuliah::where('code', $code)->first();
+            
             return view('mahasiswa.pages.mhs-tagihan-view', $data);
         } else {
             Alert::error('error', 'Kamu sudah membayar tagihan ini');

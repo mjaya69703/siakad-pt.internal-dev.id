@@ -294,11 +294,13 @@ Route::group(['prefix' => 'mahasiswa', 'middleware' => ['mhs-access:Mahasiswa Ak
     Route::get('/tagihan/view/{code}/payment/success',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanSuccess'])->name('home-tagihan-payment-success');
     Route::get('/jadwal-kuliah/{code}/absen',[App\Http\Controllers\Mahasiswa\HomeController::class, 'jadkulAbsen'])->name('home-jadkul-absen');
     Route::post('/jadwal-kuliah/absen/store',[App\Http\Controllers\Mahasiswa\HomeController::class, 'jadkulAbsenStore'])->name('home-jadkul-absen-store');
-
+    
     // PRIVATE FUNCTION => PROFILE
     Route::patch('/profile/update-image',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveImageProfile'])->name('home-profile-save-image');
     Route::patch('/profile/update-data',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveDataProfile'])->name('home-profile-save-data');
     Route::patch('/profile/update-kontak',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
     Route::patch('/profile/update-password',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
 
+    // AJAX ASYNC
+    Route::get('/ajax/getTagihan',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanIndexAjax'])->name('ajax-tagihan-index');
 });

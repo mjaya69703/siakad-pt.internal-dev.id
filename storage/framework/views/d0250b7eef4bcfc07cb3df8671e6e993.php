@@ -1,30 +1,29 @@
-@extends('base.base-dash-index')
-@section('title')
+<?php $__env->startSection('title'); ?>
     Data Tagihan Perkuliahan - Siakad By Internal Developer
-@endsection
-@section('menu')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('menu'); ?>
     Data Tagihan Perkuliahan
-@endsection
-@section('submenu')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('submenu'); ?>
     Daftar Tagihan
-@endsection
-@section('urlmenu')
-@endsection
-@section('subdesc')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('urlmenu'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('subdesc'); ?>
     Halaman untuk melihat Tagihan Perkuliahan
-@endsection
-@section('custom-css')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('custom-css'); ?>
+<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <section class="section">
     <div class="card">
         <div class="card-header">
             <h5 class="card-title d-flex justify-content-between align-items-center">
-                @yield('menu')
+                <?php echo $__env->yieldContent('menu'); ?>
                 <div class="">
-                    {{-- <a href="{{ route('web-admin.master.tagihan-index') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a> --}}
+                    
                 </div>
             </h5>
         </div>
@@ -40,20 +39,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tagihan as $key => $item)
+                    <?php $__currentLoopData = $tagihan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         
                     <tr>
-                        <td data-label="Number">{{ ++$key }}</td>
-                        <td data-label="Kode Tagihan"><span style="text-transform: uppercase">{{ $item->code }}</span></td>
-                        <td data-label="Nama Tagihan">{{ $item->name }}</td>
-                        <td data-label="Nominal Bayar">Rp. {{ number_format($item->price, 0, ',', '.') }}</td>
+                        <td data-label="Number"><?php echo e(++$key); ?></td>
+                        <td data-label="Kode Tagihan"><span style="text-transform: uppercase"><?php echo e($item->code); ?></span></td>
+                        <td data-label="Nama Tagihan"><?php echo e($item->name); ?></td>
+                        <td data-label="Nominal Bayar">Rp. <?php echo e(number_format($item->price, 0, ',', '.')); ?></td>
                         <td class="d-flex justify-content-center align-items-center">
-                            <a href="{{ route('mahasiswa.home-tagihan-view', $item->code) }}" class="btn btn-outline-success"><i style="margin-right: 5px" class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
+                            <a href="<?php echo e(route('mahasiswa.home-tagihan-view', $item->code)); ?>" class="btn btn-outline-success"><i style="margin-right: 5px" class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
 
 
                         </td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
  
                 </tbody>
             </table>
@@ -64,7 +63,7 @@
             <h5 class="card-title d-flex justify-content-between align-items-center">
                 Riwayat Tagihan
                 <div class="">
-                    {{-- <a href="{{ route('web-admin.master.tagihan-index') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a> --}}
+                    
                 </div>
             </h5>
         </div>
@@ -77,25 +76,21 @@
                         <th class="text-center">Kode Bayar</th>
                         <th class="text-center">Nominal Bayar</th>
                         <th class="text-center">Status Tagihan</th>
-                        {{-- <th class="text-center">Button</th> --}}
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($history as $key => $item)
+                    <?php $__currentLoopData = $history; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         
                     <tr>
-                        <td data-label="Number">{{ ++$key }}</td>
-                        <td data-label="Kode Pembayaran"><span style="text-transform: uppercase">{{ $item->code }}</span></td>
-                        <td data-label="Kode Bayar"><span style="text-transform: uppercase">{{ $item->tagihan_code }}</span></td>
-                        <td data-label="Nominal Bayar">Rp. {{ number_format($item->tagihan->price, 0, ',', '.') }}</td>
-                        <td data-label="Status">{{$item->stat === 1 ? 'PAID' : 'UN-PAID'}}</td>
-                        {{-- <td class="d-flex justify-content-center align-items-center">
-                            <a href="{{ route('mahasiswa.home-tagihan-view', $item->code) }}" class="btn btn-outline-success"><i class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
-
-
-                        </td> --}}
+                        <td data-label="Number"><?php echo e(++$key); ?></td>
+                        <td data-label="Kode Pembayaran"><span style="text-transform: uppercase"><?php echo e($item->code); ?></span></td>
+                        <td data-label="Kode Bayar"><span style="text-transform: uppercase"><?php echo e($item->tagihan_code); ?></span></td>
+                        <td data-label="Nominal Bayar">Rp. <?php echo e(number_format($item->tagihan->price, 0, ',', '.')); ?></td>
+                        <td data-label="Status"><?php echo e($item->stat === 1 ? 'PAID' : 'UN-PAID'); ?></td>
+                        
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
  
                 </tbody>
             </table>
@@ -103,9 +98,9 @@
     </div>
 
 </section>
-@endsection
-@section('custom-js')
-<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('custom-js'); ?>
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?php echo e(config('services.midtrans.clientKey')); ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>    
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
@@ -116,8 +111,8 @@
             
             var code = $(this).data('code'); // Ambil kode tagihan dari atribut data
             
-            $.post("{{ route('mahasiswa.home-tagihan-payment', ':code') }}".replace(':code', code), { // Ganti placeholder :code dengan nilai kode tagihan
-                _token: '{{ csrf_token() }}',
+            $.post("<?php echo e(route('mahasiswa.home-tagihan-payment', ':code')); ?>".replace(':code', code), { // Ganti placeholder :code dengan nilai kode tagihan
+                _token: '<?php echo e(csrf_token()); ?>',
             },
             function (data, status) {
                 snap.pay(data.snap_token, {
@@ -184,4 +179,5 @@ setInterval(updateTable, 5000); // 5000 milidetik = 5 detik
 
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('base.base-dash-index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/siakadpt/htdocs/siakad-pt.internal-dev.id/resources/views/mahasiswa/pages/mhs-tagihan-index.blade.php ENDPATH**/ ?>
