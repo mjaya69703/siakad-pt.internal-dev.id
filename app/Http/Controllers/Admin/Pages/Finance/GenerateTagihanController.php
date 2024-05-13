@@ -17,6 +17,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\User;
 use App\Models\Dosen;
 use App\Models\Kelas;
+use App\Models\ProgramStudi;
 use App\Models\ProgramKuliah;
 use App\Models\Mahasiswa;
 use App\Models\TagihanKuliah;
@@ -37,5 +38,20 @@ class GenerateTagihanController extends Controller
         // dd($data);
 
         return view('user.finance.pages.tagihan-index', $data);
+    }
+    public function create(Request $request)
+    {
+        $data['income'] = HistoryTagihan::where('stat', 1)->whereHas('tagihan', function ($query) use ($request){
+            $query->select('price');
+        })->with('tagihan')->get()->sum(function ($history) {
+            return $history->tagihan->price;
+        });
+        $data['tagihan'] = TagihanKuliah::latest()->paginate(3);
+        $data['history'] = HistoryTagihan::all();
+        $data['mahasiswa'] = Mahasiswa::all();
+        $data['prodi'] = ProgramStudi::all();
+        $data['proku'] = ProgramKuliah::all();
+
+        return view('user.finance.pages.tagihan-create', $data);
     }
 }

@@ -6,7 +6,7 @@
     Data Tagihan
 @endsection
 @section('submenu')
-    Lihat
+    Tambah
 @endsection
 @section('urlmenu')
 @php
@@ -30,7 +30,7 @@ switch ($rawType) {
         break;
 }
 @endphp
-    #
+    {{ route($prefix.'finance.tagihan-index') }}
 @endsection
 @section('subdesc')
     Halaman untuk melihat data tagihan
@@ -41,7 +41,7 @@ switch ($rawType) {
             <div class="col-lg-12 col-12">
                 <div class="row">
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route('web-admin.workers.student-index') }}">
+                        <a href="#">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice" style="font-size: 42px"></i></span>
@@ -51,7 +51,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route('web-admin.workers.student-index') }}">
+                        <a href="#">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
@@ -61,7 +61,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route('web-admin.workers.student-index') }}">
+                        <a href="#">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-dollar" style="font-size: 42px"></i></span>
@@ -72,12 +72,85 @@ switch ($rawType) {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-12">
+            <div class="col-lg-12 col-12 mb-2">
+                <form action="{{ route($prefix . 'finance.tagihan-store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="card-title">@yield('submenu')@yield('menu')</h5>
+                            <div class="">
+                                <a href="{{ route($prefix.'finance.tagihan-index') }}" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
+                                <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-paper-plane"></i></button>
+                            </div>
+            
+                        </div>
+                        <div class="card-body row">
+                            <div class="form-group col-lg-6 col-12">
+                                <label for="name">Nama Tagihan</label>
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Nama tagihan...">
+                                @error('name')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-6 col-12">
+                                <label for="price">Nominal Tagihan</label>
+                                <input type="text" name="price" id="price" class="form-control" placeholder="Nominal tagihan...">
+                                @error('price')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-4 col-12">
+                                <label for="users_id">Tagihan Mahasiswa</label>
+                                <select name="users_id" id="users_id" class="choices form-select">
+                                    <option value="" selected>Pilih Mahasiswa</option>
+                                    @foreach ($mahasiswa as $item)
+                                        
+                                    <option value="{{ $item->id }}">{{ $item->mhs_name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('users_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-4 col-12">
+                                <label for="prodi_id">Tagihan Program Studi</label>
+                                <select name="prodi_id" id="prodi_id" class="choices form-select">
+                                    <option value="" selected>Pilih Program Studi</option>
+                                    @foreach ($prodi as $item)
+                                        
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('prodi_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-4 col-12">
+                                <label for="proku_id">Tagihan Program Kuliah</label>
+                                <select name="proku_id" id="proku_id" class="choices form-select">
+                                    <option value="" selected>Pilih Program Kuliah</option>
+                                    @foreach ($proku as $item)
+                                        
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('proku_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+    
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-12 col-12 mb-2">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title">@yield('menu')</h5>
+                        <h5 class="card-title">Data Tagihan Terbaru</h5>
                         <div class="">
-                            <a href="{{ route($prefix.'finance.tagihan-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
+                            <a href="{{ route($prefix.'finance.tagihan-index') }}" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
+                            {{-- <a href="#" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a> --}}
                         </div>
         
                     </div>
@@ -152,4 +225,12 @@ switch ($rawType) {
             </div>
         </div>
     </section>
+@endsection
+@section('custom-js')
+<script src="{{ asset('dist') }}/assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
+<script src="{{ asset('dist') }}/assets/static/js/pages/form-element-select.js"></script>
+@endsection
+@section('custom-css')
+<link rel="stylesheet" href="{{ asset('dist') }}/assets/extensions/choices.js/public/assets/styles/choices.css">
+
 @endsection
