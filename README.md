@@ -8,74 +8,89 @@
 </p>
 
 ## About Project SiakadPT By Internal-Dev
+
 <img src="https://siakad-pt.internal-dev.id/storage/images/web/Picture1.png" style="width: 100%;" align="center">
 
 Web Siakad Perguruan Tinggi yang dibuat oleh Muhamad Jaya Kusuma menggunakan Base Framework Laravel 10 yang kini telah diupdate ke Laravel 11. Siakad ini dibangun untuk mempermudah para mahasiswa, dosen dan para staff dalam melakukan akvitas pekerjaannya dilingkungan kampus.
-
 
 ## Feature Project Siakad PT ( In Development )
 
 Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authentikasi yaitu User, Mahasiswa dan Dosen. Berikut deretan fitur yang sudah dibangun pada SiakadPT ini:
 
 <b>Fitur Role Web Admininstrator</b>
-- Authentikasi User / Staff / Admin, Mahasiswa dan Dosen
-- Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
-- Fitur Kelola Data Akademik
-    - ( CRUD ) Data Fakultas 
-    - ( CRUD ) Data Program Studi 
-    - ( CRUD ) Data Tahun Akademik 
-    - ( CRUD ) Data Program Kuliah
-    - ( CRUD ) Data Kelas
-    - ( CRUD ) Data Kurikulum
-    - ( CRUD ) Data MataKuliah
-    - ( CRUD ) Data JadwalKuliah
 
-- Fitur Kelola Data Inventaris
-    - ( CRUD ) Data Gedung 
-    - ( CRUD ) Data Ruang
+-   Authentikasi User / Staff / Admin, Mahasiswa dan Dosen
+-   Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
+-   Fitur Kelola Data Akademik
 
-- Fitur Kelola Data Pengguna
-    - ( CRUD ) Data Admin 
-    - ( CRUD ) Data Staff ( Web Administrator, Staff Akademik , Staff Administrasi & Keuangan, Staff SarPras ) 
-    - ( CRUD ) Data Dosen
-    - ( CRUD ) Data Mahasiswa
+    -   ( CRUD ) Data Fakultas
+    -   ( CRUD ) Data Program Studi
+    -   ( CRUD ) Data Tahun Akademik
+    -   ( CRUD ) Data Program Kuliah
+    -   ( CRUD ) Data Kelas
+    -   ( CRUD ) Data Kurikulum
+    -   ( CRUD ) Data MataKuliah
+    -   ( CRUD ) Data JadwalKuliah
 
-- Fitur Kelola Tagihan
-    - ( CRUD ) Data Tagihan ( Progress )
-    - ( CRUD ) Data Pembayaran ( After Progress )
-    - ( CRUD ) Data Keuangan ( After Progress )
-    - Pembayaran Biaya Kuliah via MidTrans
+-   Fitur Kelola Data Inventaris
+
+    -   ( CRUD ) Data Gedung
+    -   ( CRUD ) Data Ruang
+
+-   Fitur Kelola Data Pengguna
+
+    -   ( CRUD ) Data Admin
+    -   ( CRUD ) Data Staff ( Web Administrator, Staff Akademik , Staff Administrasi & Keuangan, Staff SarPras )
+    -   ( CRUD ) Data Dosen
+    -   ( CRUD ) Data Mahasiswa
+
+-   Fitur Kelola Tagihan
+    -   ( CRUD ) Data Tagihan ( Progress )
+    -   ( CRUD ) Data Pembayaran ( After Progress )
+    -   ( CRUD ) Data Keuangan ( After Progress )
+    -   Pembayaran Biaya Kuliah via MidTrans
 
 <b>Fitur Role Mahasiswa Aktif</b>
-- Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
-- Fitur Lihat Jadwal Kuliah dan Absensi
+
+-   Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
+-   Fitur Lihat Jadwal Kuliah dan Absensi
 
 ## How to Install
+
 1. Persyaratan Install
+
     - Sudah Menginstall Composer
     - Sudah Menginstall PHP 8.2 atau diatasnya
     - Sudah Menginstall MySQL atau MariaDB
     - Sudah Menginstall Git / GitBash
 
 2. Clone Repository
+
 ```
 git clone https://github.com/mjaya69703/siakad-pt.internal-dev.id.git
 cd siakad-pt.internal-dev.id
-composer install
-composer update
-npm install
-cp .env.example .env
+
+// Apabila Menggunakan Windows
+setup.bash
+
+// Apabila Menggunakan Linux
+chmod +x setup.sh
+./setup.sh
 ```
 
 3. Edit File Environment ( .env )
-- Sesuaikan Database Kamu
+
+-   Sesuaikan Database Kamu
+
 ```
 DB_PORT=3306
 DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-- Sesuaikan Konfigurasi Email ( .env )
+
+-   Sesuaikan Konfigurasi Email ( .env )
+
 ```
 # BILA MENGGUNAKAN BREVO
 MAIL_DRIVER=smtp
@@ -87,26 +102,25 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="${MAIL_USERNAME}"
 MAIL_FROM_NAME="${APP_NAME}"
 ```
-- Sesuaikan Konfigurasi MidTrans ( .env )
+
+-   Sesuaikan Konfigurasi MidTrans ( .env )
+
 ```
-MIDTRANS_CLIENT_KEY=SB-Mid-client-xxxx   //   => Input your MidTrans clientKey
-MIDTRANS_SERVER_KEY=SB-Mid-server-xxxx   //   => Input your MidTrans serverKey
-MIDTRANS_IS_PRODUCTION=false // or true       => Choose your condition
+MIDTRANS_CLIENT_KEY=SB-Mid-client-xxxx   ##   => Input your MidTrans clientKey
+MIDTRANS_SERVER_KEY=SB-Mid-server-xxxx   ##   => Input your MidTrans serverKey
+MIDTRANS_IS_PRODUCTION=false             ##   => false or true => Choose your condition
 MIDTRANS_IS_SANITIZED=true
 MIDTRANS_IS_3DS=true
 ```
-4. Installasi Project 
-```
-php artisan key:generate
-php artisan migrate --seed
-```
-5. Menjalankan Project
+
+4. Menjalankan Project
+
 ```
 php artisan serve
 ```
 
-
 ## CREDITS
-- Framework PHP <a href="https://laravel.com">Laravel 11</a>
-- Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
-- Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
+
+-   Framework PHP <a href="https://laravel.com">Laravel 11</a>
+-   Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
+-   Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
