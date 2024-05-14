@@ -6,7 +6,7 @@
 /storage/*.key
 /storage/framework/*
 /vendor
-/storage/frameworks/views
+/storage/framework/views
 .env
 .env.backup
 .env.production
