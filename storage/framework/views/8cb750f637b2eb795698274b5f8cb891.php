@@ -232,6 +232,28 @@ switch ($rawType) {
                         </a>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-3 col-6 mb-2">
+                        <a href="<?php echo e(route($prefix.'finance.tagihan-index')); ?>">
+                            <div class="card btn btn-outline-success">
+                                <div class="card-body d-flex justify-content-around align-items-center">
+                                    <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice" style="font-size: 42px"></i></span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;"><?php echo e(\App\Models\TagihanKuliah::all()->count()); ?><br> Tagihan</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-6 mb-2">
+                        <a href="<?php echo e(route($prefix.'finance.pembayaran-index')); ?>">
+                            <div class="card btn btn-outline-success">
+                                <div class="card-body d-flex justify-content-around align-items-center">
+                                    <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;"><?php echo e(\App\Models\HistoryTagihan::where('stat', 1)->count()); ?><br> Pembayaran</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-3 col-12">
                 <div class="card">
