@@ -44,16 +44,17 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   ( CRUD ) Data Dosen
     -   ( CRUD ) Data Mahasiswa
 
--   Fitur Kelola Tagihan
-    -   ( CRUD ) Data Tagihan ( Progress )
-    -   ( CRUD ) Data Pembayaran ( After Progress )
-    -   ( CRUD ) Data Keuangan ( After Progress )
+-   Fitur Kelola Data Keuangan
+    -   ( CRUD ) Data Tagihan ( New )
+    -   ( CRUD ) Data Pembayaran ( New )
+    -   ( CRUD ) Data Keuangan ( New )
     -   Pembayaran Biaya Kuliah via MidTrans
 
 <b>Fitur Role Mahasiswa Aktif</b>
 
 -   Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
 -   Fitur Lihat Jadwal Kuliah dan Absensi
+-   Fitur Lihat Tagihan dan Lihat Riwayat Pembayaran
 
 ## How to Install
 

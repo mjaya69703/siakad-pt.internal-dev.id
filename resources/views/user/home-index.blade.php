@@ -69,7 +69,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-graduate" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Mahasiswa <br>{{ \App\Models\Mahasiswa::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\Mahasiswa::all()->count() }} <br> Mahasiswa</span>
                                 </div>
                             </div>
                         </a>
@@ -79,7 +79,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-tie" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Dosen <br>{{ \App\Models\Dosen::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\Dosen::all()->count() }} <br> Dosen</span>
                                 </div>
                             </div>
                         </a>
@@ -89,7 +89,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-tag" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Karyawan <br>{{ \App\Models\User::where('type', ['1','2','3','4'])->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\User::where('type', ['1','2','3','4'])->count() }}<br> Karyawan</span>
                                 </div>
                             </div>
                         </a>
@@ -99,7 +99,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-book-open-reader" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Perkuliahan <br>{{ \App\Models\JadwalKuliah::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\JadwalKuliah::all()->count() }}<br>Jadwal Kuliah</span>
                                 </div>
                             </div>
                         </a>
@@ -112,7 +112,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-building-columns" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Fakultas <br>{{ \App\Models\Fakultas::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\Fakultas::all()->count() }} <br> Fakultas</span>
                                 </div>
                             </div>
                         </a>
@@ -122,7 +122,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-graduation-cap" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Prodi <br>{{ \App\Models\ProgramStudi::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\ProgramStudi::all()->count() }}<br>Prodi</span>
                                 </div>
                             </div>
                         </a>
@@ -132,7 +132,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-building-user" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Kelas <br>{{ \App\Models\Kelas::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\Kelas::all()->count() }}<br> Kelas</span>
                                 </div>
                             </div>
                         </a>
@@ -142,7 +142,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-book-open" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Mata Kuliah <br>{{ \App\Models\MataKuliah::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\MataKuliah::all()->count() }} <br> Mata Kuliah</span>
                                 </div>
                             </div>
                         </a>
@@ -155,7 +155,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-calendar" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Tahun Akademik <br>{{ \App\Models\Kurikulum::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\Kurikulum::all()->count() }}<br>Tahun Akademik</span>
                                 </div>
                             </div>
                         </a>
@@ -165,7 +165,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-book" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Kurikulum <br>{{ \App\Models\Kurikulum::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\Kurikulum::all()->count() }}<br>Kurikulum</span>
                                 </div>
                             </div>
                         </a>
@@ -175,7 +175,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-list-ol" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Program Kuliah <br>{{ \App\Models\ProgramKuliah::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\ProgramKuliah::all()->count() }}<br> Program Kuliah</span>
                                 </div>
                             </div>
                         </a>
@@ -185,7 +185,49 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-house-flag" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">Ruangan <br>{{ \App\Models\Ruang::all()->count() }}</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\Ruang::all()->count() }}<br>Ruangan</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-6 mb-2">
+                        <a href="{{ route($prefix.'finance.keuangan-index') }}">
+                            <div class="card btn btn-outline-success">
+                                <div class="card-body d-flex justify-content-around align-items-center">
+                                    <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-wallet" style="font-size: 42px"></i></span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ number_format($balSekarang, 0, ',', '.') }}<br> Sisa Saldo ( IDR )</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-6 mb-2">
+                        <a href="{{ route($prefix.'finance.keuangan-index') }}">
+                            <div class="card btn btn-outline-success">
+                                <div class="card-body d-flex justify-content-around align-items-center">
+                                    <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ number_format($balPending, 0, ',', '.') }}<br> Pending ( IDR )</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-6 mb-2">
+                        <a href="{{ route($prefix.'finance.keuangan-index') }}">
+                            <div class="card btn btn-outline-success">
+                                <div class="card-body d-flex justify-content-around align-items-center">
+                                    <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-dollar" style="font-size: 42px"></i></span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ number_format($balIncome, 0, ',', '.') }}<br> Income ( IDR )</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-6 mb-2">
+                        <a href="{{ route($prefix.'finance.keuangan-index') }}">
+                            <div class="card btn btn-outline-success">
+                                <div class="card-body d-flex justify-content-around align-items-center">
+                                    <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-dollar" style="font-size: 42px"></i></span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ number_format($balExpense, 0, ',', '.') }}<br> Expenses ( IDR )</span>
                                 </div>
                             </div>
                         </a>

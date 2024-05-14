@@ -17,13 +17,20 @@ use Carbon\Carbon;
 use App\Models\Mahasiswa;
 use App\Models\Dosen;
 use App\Models\User;
+use App\Models\Balance;
 
 class HomeController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
 
-        return view('user.home-index',);
+        $data['balIncome'] = Balance::where('type', 1)->sum('value');
+        $data['balExpense'] = Balance::where('type', 2)->sum('value');
+        $data['balPending'] = Balance::where('type', 0)->sum('value');
+        $data['balSekarang'] = $data['balIncome'] - $data['balExpense'];
+
+        return view('user.home-index', $data);
     }
 
     // KHUSUS PROFILE AREA

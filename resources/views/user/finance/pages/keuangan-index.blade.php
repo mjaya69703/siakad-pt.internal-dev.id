@@ -43,7 +43,7 @@ switch ($rawType) {
                 <a href="#">
                     <div class="card btn btn-outline-success">
                         <div class="card-body d-flex justify-content-around align-items-center">
-                            <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice" style="font-size: 42px"></i></span>
+                            <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-wallet" style="font-size: 42px"></i></span>
                             <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ number_format($balSekarang, 0, ',', '.') }}<br> Sisa Saldo ( IDR )</span>
                         </div>
                     </div>
