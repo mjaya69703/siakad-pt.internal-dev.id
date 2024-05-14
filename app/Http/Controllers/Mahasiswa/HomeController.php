@@ -25,6 +25,7 @@ use App\Models\TagihanKuliah;
 use App\Models\HistoryTagihan;
 use App\Models\Ruang;
 use App\Models\Kelas;
+use App\Models\Balance;
 use App\Models\AbsensiMahasiswa;
 
 class HomeController extends Controller
@@ -297,7 +298,7 @@ class HomeController extends Controller
         // Mencari tagihan berdasarkan `users_id`
         $user = Auth::guard('mahasiswa')->user();
 
-        $checkData = HistoryTagihan::where('tagihan_code', $code)->count();
+        $checkData = HistoryTagihan::where('tagihan_code', $code)->where('users_id', $user->id)->count();
         if($checkData === 0){
             
             
@@ -368,6 +369,15 @@ class HomeController extends Controller
         $tagihan = HistoryTagihan::where('code', $code)->first();
         $tagihan->stat = 1;
         $tagihan->save();
+
+        $balance = new Balance;
+        $balance->value = $tagihan->tagihan->price;
+        $balance->type = 1;
+        $balance->desc = 'Reff pembayaran mahasiswa #' . $code;
+        $balance->code = uniqid();
+        // $balance->author_id = Auth::user()->id;
+
+        $balance->save();
 
         Alert::success('Success', 'Tagihan telah dibayar');
         return redirect()->route('mahasiswa.home-tagihan-index');

@@ -9,6 +9,12 @@
                 <li class="submenu-item <?php echo e(Route::is('web-admin.finance.tagihan-*', request()->path()) ? 'active' : ''); ?>">
                     <a href="<?php echo e(route('web-admin.finance.tagihan-index')); ?>" class="submenu-link">Data Tagihan</a>
                 </li>
+                <li class="submenu-item <?php echo e(Route::is('web-admin.finance.pembayaran-*', request()->path()) ? 'active' : ''); ?>">
+                    <a href="<?php echo e(route('web-admin.finance.pembayaran-index')); ?>" class="submenu-link">Data Pembayaran</a>
+                </li>
+                <li class="submenu-item <?php echo e(Route::is('web-admin.finance.keuangan-*', request()->path()) ? 'active' : ''); ?>">
+                    <a href="<?php echo e(route('web-admin.finance.keuangan-index')); ?>" class="submenu-link">Data Keuangan</a>
+                </li>
             </ul>
         </li>
 

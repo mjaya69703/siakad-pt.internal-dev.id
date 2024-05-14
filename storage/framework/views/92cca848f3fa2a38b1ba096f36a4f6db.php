@@ -5,7 +5,7 @@
     Data Tagihan
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('submenu'); ?>
-    Tambah
+    Lihat
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('urlmenu'); ?>
 <?php
@@ -29,8 +29,7 @@ switch ($rawType) {
         break;
 }
 ?>
-    <?php echo e(route($prefix.'finance.tagihan-index')); ?>
-
+    #
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('subdesc'); ?>
     Halaman untuk melihat data tagihan
@@ -61,7 +60,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="#">
+                        <a href="<?php echo e(route('web-admin.workers.student-index')); ?>">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-dollar" style="font-size: 42px"></i></span>
@@ -72,120 +71,12 @@ switch ($rawType) {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-12 mb-2">
-                <form action="<?php echo e(route($prefix . 'finance.tagihan-store')); ?>" method="POST" enctype="multipart/form-data">
-                    <?php echo csrf_field(); ?>
-
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center justify-content-between">
-                            <h5 class="card-title"><?php echo $__env->yieldContent('submenu'); ?><?php echo $__env->yieldContent('menu'); ?></h5>
-                            <div class="">
-                                <a href="<?php echo e(route($prefix.'finance.tagihan-index')); ?>" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
-                                <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-paper-plane"></i></button>
-                            </div>
-            
-                        </div>
-                        <div class="card-body row">
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="name">Nama Tagihan</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Nama tagihan...">
-                                <?php $__errorArgs = ['name'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <small class="text-danger"><?php echo e($message); ?></small>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="price">Nominal Tagihan</label>
-                                <input type="text" name="price" id="price" class="form-control" placeholder="Nominal tagihan...">
-                                <?php $__errorArgs = ['price'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <small class="text-danger"><?php echo e($message); ?></small>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="users_id">Tagihan Mahasiswa</label>
-                                <select name="users_id" id="users_id" class="choices form-select">
-                                    <option value="0" selected>Pilih Mahasiswa</option>
-                                    <?php $__currentLoopData = $mahasiswa; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        
-                                    <option value="<?php echo e($item->id); ?>"><?php echo e($item->mhs_name); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
-                                <?php $__errorArgs = ['users_id'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <small class="text-danger"><?php echo e($message); ?></small>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="prodi_id">Tagihan Program Studi</label>
-                                <select name="prodi_id" id="prodi_id" class="choices form-select">
-                                    <option value="0" selected>Pilih Program Studi</option>
-                                    <?php $__currentLoopData = $prodi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        
-                                    <option value="<?php echo e($item->id); ?>"><?php echo e($item->name); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
-                                <?php $__errorArgs = ['prodi_id'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <small class="text-danger"><?php echo e($message); ?></small>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="proku_id">Tagihan Program Kuliah</label>
-                                <select name="proku_id" id="proku_id" class="choices form-select">
-                                    <option value="0" selected>Pilih Program Kuliah</option>
-                                    <?php $__currentLoopData = $proku; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        
-                                    <option value="<?php echo e($item->id); ?>"><?php echo e($item->name); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
-                                <?php $__errorArgs = ['proku_id'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <small class="text-danger"><?php echo e($message); ?></small>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-    
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-12 col-12 mb-2">
+            <div class="col-lg-12 col-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title">Data Tagihan Terbaru</h5>
+                        <h5 class="card-title"><?php echo $__env->yieldContent('menu'); ?></h5>
                         <div class="">
-                            <a href="<?php echo e(route($prefix.'finance.tagihan-index')); ?>" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
-                            
+                            <a href="<?php echo e(route($prefix.'finance.tagihan-create')); ?>" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
                         </div>
         
                     </div>
@@ -384,12 +275,4 @@ unset($__errorArgs, $__bag); ?>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 <?php $__env->stopSection(); ?>
-<?php $__env->startSection('custom-js'); ?>
-<script src="<?php echo e(asset('dist')); ?>/assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
-<script src="<?php echo e(asset('dist')); ?>/assets/static/js/pages/form-element-select.js"></script>
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('custom-css'); ?>
-<link rel="stylesheet" href="<?php echo e(asset('dist')); ?>/assets/extensions/choices.js/public/assets/styles/choices.css">
-
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('base.base-dash-index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/siakadpt/htdocs/siakad-pt.internal-dev.id/resources/views/user/finance/pages/tagihan-create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('base.base-dash-index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/siakadpt/htdocs/siakad-pt.internal-dev.id/resources/views/user/finance/pages/tagihan-index.blade.php ENDPATH**/ ?>

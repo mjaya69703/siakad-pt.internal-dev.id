@@ -105,6 +105,8 @@
                 },
 
                 onError: function (result) {
+                    // window.location.href = "{{ route('mahasiswa.home-tagihan-payment-success', ':uniqCode') }}".replace(':uniqCode', uniqCode);
+
                     location.reload();
                 }
             });

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tagihan_kuliahs', function (Blueprint $table) {
             $table->id();
+            $table->string('author_id')->default(0);     // CREATOR TAGIHAN
             $table->string('proku_id')->default(0);     // TAGIHAN KEPADA PROGRAM KULIAH TERTENTU
             $table->string('prodi_id')->default(0);     // TAGIHAN KEPADA PROGRAM STUDI TERTENTU
             $table->string('users_id')->default(0);     // TAGIHAN KEPADA MAHASISWA TERTENTU

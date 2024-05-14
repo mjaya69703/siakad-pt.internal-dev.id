@@ -66,4 +66,3 @@ $(document).ready( function () {
     $('#myTable').DataTable();
 } );
 </script>
-@yield('custom-js')

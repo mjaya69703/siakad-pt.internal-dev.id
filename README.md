@@ -118,9 +118,17 @@ MIDTRANS_IS_3DS=true
 ```
 php artisan serve
 ```
-
 ## CREDITS
-
 -   Framework PHP <a href="https://laravel.com">Laravel 11</a>
 -   Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
 -   Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
+
+## CHANGE-LOGS
+<b>14/05/2024 - Update 1</b>
+- Tambah Menu Data Tagihan ( CRUD )
+- Tambah Menu Data Pembayaran ( VIEW ONLY )
+- Tambah Menu Data Keuangan ( CRUD )
+- Fix Lihat Tagihan Pada Sisi Mahasiswa
+- Fix Duplikat script js
+- Rename Kode Bayar Pada Menu Data Tagihan
+- Integrasi Data pembayaran mahasiswa ke Data Keuangan

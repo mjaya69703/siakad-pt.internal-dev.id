@@ -66,5 +66,4 @@ $(document).ready( function () {
     $('#myTable').DataTable();
 } );
 </script>
-<?php echo $__env->yieldContent('custom-js'); ?>
 <?php /**PATH /home/siakadpt/htdocs/siakad-pt.internal-dev.id/resources/views/base/panel/base-panel-footer-script.blade.php ENDPATH**/ ?>

@@ -41,7 +41,7 @@ switch ($rawType) {
             <div class="col-lg-12 col-12">
                 <div class="row">
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="#">
+                        <a href="{{ route($prefix.'finance.tagihan-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice" style="font-size: 42px"></i></span>
@@ -51,7 +51,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="#">
+                        <a href="{{ route($prefix.'finance.pembayaran-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
@@ -200,16 +200,15 @@ switch ($rawType) {
                                         <td data-label="Nominal">Rp. {{ number_format($item->price, 0, ',', '.') }}</td>
                                         {{-- <td data-label="Tagihan Kepada">{{ $item->users_id === 0 ? $item->proku->name : $item->users->mhs_name }}</td> --}}
                                         <td class="d-flex justify-content-center align-items-center">
-                                            <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateFakultas{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
-                                            {{-- <a href="{{ route('web-admin.staffmanager-dosen-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}
+                                            <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateTagihan{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                                             <form id="delete-form-{{ $item->code }}"
-                                                action="{{ route('web-admin.master.fakultas-destroy', $item->code) }}" method="POST">
+                                                action="{{ route($prefix.'finance.tagihan-destroy', $item->code) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger"
                                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                                     data-original-title="Delete"
-                                                    data-url="{{ route('web-admin.master.fakultas-destroy', $item->code) }}"
+                                                    data-url="{{ route($prefix.'finance.tagihan-destroy', $item->code) }}"
                                                     data-name="{{ $item->name }}"
                                                     onclick="deleteData('{{ $item->code }}')">
                                                     <i class="fas fa-trash"></i>
@@ -225,6 +224,92 @@ switch ($rawType) {
             </div>
         </div>
     </section>
+    <div class="me-1 mb-1 d-inline-block">
+
+        <!--Extra Large Modal -->
+        @foreach ($tagihan as $item)
+        <form action="{{ route($prefix.'finance.tagihan-update', $item->code) }}" method="POST" enctype="multipart/form-data">
+            @method('patch')
+            @csrf
+            <div class="modal fade text-left w-100" id="updateTagihan{{$item->code}}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel16" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl"
+                    role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel16">Edit Tagihan - {{ $item->name }}</h4>
+                            <div class="">
+        
+                                <button type="submit" class="mt-1 btn btn-outline-primary" >
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                                <button type="button" class="mt-1 btn btn-outline-danger" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="modal-body row">
+                            <div class="form-group col-lg-6 col-12">
+                                <label for="name">Nama Tagihan</label>
+                                <input type="text" name="name" id="name" class="form-control" value="{{ $item->name }}" placeholder="Nama tagihan...">
+                                @error('name')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-6 col-12">
+                                <label for="price">Nominal Tagihan</label>
+                                <input type="text" name="price" id="price" class="form-control" value="{{ $item->price }}" placeholder="Nominal tagihan...">
+                                @error('price')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-4 col-12">
+                                <label for="users_id">Tagihan Mahasiswa</label>
+                                <select name="users_id" id="users_id" class="choices form-select">
+                                    <option value="0" selected>Pilih Mahasiswa</option>
+                                    @foreach ($mahasiswa as $mhs)
+                                        
+                                    <option value="{{ $mhs->id }}" {{ $item->users_id == $mhs->id ? 'selected' : '' }}>{{ $mhs->mhs_name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('users_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-4 col-12">
+                                <label for="prodi_id">Tagihan Program Studi</label>
+                                <select name="prodi_id" id="prodi_id" class="choices form-select">
+                                    <option value="0" selected>Pilih Program Studi</option>
+                                    @foreach ($prodi as $prd)
+                                        
+                                    <option value="{{ $prd->id }}" {{ $item->prodi_id == $prd->id ? 'selected' : '' }}>{{ $prd->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('prodi_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-4 col-12">
+                                <label for="proku_id">Tagihan Program Kuliah</label>
+                                <select name="proku_id" id="proku_id" class="choices form-select">
+                                    <option value="0" selected>Pilih Program Kuliah</option>
+                                    @foreach ($proku as $prk)
+                                        
+                                    <option value="{{ $prk->id }}" {{ $item->proku_id == $prk->id ? 'selected' : '' }}>{{ $prk->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('proku_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        @endforeach
+    </div>
 @endsection
 @section('custom-js')
 <script src="{{ asset('dist') }}/assets/extensions/choices.js/public/assets/scripts/choices.js"></script>

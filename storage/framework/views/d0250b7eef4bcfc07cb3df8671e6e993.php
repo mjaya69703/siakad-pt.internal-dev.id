@@ -72,8 +72,8 @@
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
+                        <th class="text-center">Kode Pembayaran</th>
                         <th class="text-center">Kode Tagihan</th>
-                        <th class="text-center">Kode Bayar</th>
                         <th class="text-center">Nominal Bayar</th>
                         <th class="text-center">Status Tagihan</th>
                         
@@ -85,7 +85,7 @@
                     <tr>
                         <td data-label="Number"><?php echo e(++$key); ?></td>
                         <td data-label="Kode Pembayaran"><span style="text-transform: uppercase"><?php echo e($item->code); ?></span></td>
-                        <td data-label="Kode Bayar"><span style="text-transform: uppercase"><?php echo e($item->tagihan_code); ?></span></td>
+                        <td data-label="Kode Tagihan"><span style="text-transform: uppercase"><?php echo e($item->tagihan_code); ?></span></td>
                         <td data-label="Nominal Bayar">Rp. <?php echo e(number_format($item->tagihan->price, 0, ',', '.')); ?></td>
                         <td data-label="Status"><?php echo e($item->stat === 1 ? 'PAID' : 'UN-PAID'); ?></td>
                         
@@ -158,7 +158,7 @@ function updateTable() {
                         <td data-label="Nama Tagihan">${item.name}</td>
                         <td data-label="Nominal Bayar">${formattedPrice}</td>
                         <td class="d-flex justify-content-center align-items-center">
-                            <a href="/mahasiswa/home-tagihan-view/${item.code}" class="btn btn-outline-success"><i style="margin-right: 5px" class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
+                            <a href="/mahasiswa/tagihan/view/${item.code}" class="btn btn-outline-success"><i style="margin-right: 5px" class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
                         </td>
                     </tr>
                 `;
