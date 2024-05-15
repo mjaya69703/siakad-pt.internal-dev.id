@@ -125,6 +125,9 @@ php artisan serve
 -   Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
 
 ## CHANGE-LOGS
+<b>16/05/2024 - Update 1</b>
+- Update Dashboard Mahasiswa
+
 <b>14/05/2024 - Update 1</b>
 - Tambah Menu Data Tagihan ( CRUD )
 - Tambah Menu Data Pembayaran ( VIEW ONLY )

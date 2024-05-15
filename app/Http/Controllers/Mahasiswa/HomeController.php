@@ -30,10 +30,23 @@ use App\Models\AbsensiMahasiswa;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(Request $request)
+    {
+        $user = Auth::guard('mahasiswa')->user();
+        $data['tagihan'] = TagihanKuliah::where('users_id', $user->id)->orwhere('proku_id', $user->kelas->proku->id)->orwhere('prodi_id', $user->kelas->pstudi->id)->sum('price');
+        $data['history'] = HistoryTagihan::where('users_id', $user->id)->where('stat', 1)->whereHas('tagihan', function ($query) use ($request){
+            $query->select('price');
+        })->with('tagihan')->get()->sum(function ($history) {
+            return $history->tagihan->price;
+        });
+        $data['sisatagihan'] = $data['tagihan'] - $data['history'];
+        $data['jadkul'] = JadwalKuliah::where('kelas_id', $user->class_id)->count();
+        $data['habsen'] = AbsensiMahasiswa::where('author_id', $user->id)->where('absen_type', 'H')->count();
+
+        // dd($data['history']);
 
 
-        return view('mahasiswa.home-index');
+        return view('mahasiswa.home-index', $data);
 
     }
     public function indexDonate(){

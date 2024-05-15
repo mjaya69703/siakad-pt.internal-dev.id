@@ -19,6 +19,6 @@
 <li class="sidebar-item  <?php echo e(Route::is('mahasiswa.home-tagihan-*', request()->path()) ? 'active' : ''); ?>">
     <a href="<?php echo e(route('mahasiswa.home-tagihan-index')); ?>" class='sidebar-link'>
         <i class="fa-solid fa-file-invoice"></i>
-        <span>Tagihan</span>
+        <span>Data Tagihan</span>
     </a>
 </li><?php /**PATH /home/siakadpt/htdocs/siakad-pt.internal-dev.id/resources/views/mahasiswa/sidebar-index.blade.php ENDPATH**/ ?>

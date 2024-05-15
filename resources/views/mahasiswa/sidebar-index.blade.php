@@ -19,6 +19,6 @@
 <li class="sidebar-item  {{ Route::is('mahasiswa.home-tagihan-*', request()->path()) ? 'active' : '' }}">
     <a href="{{ route('mahasiswa.home-tagihan-index') }}" class='sidebar-link'>
         <i class="fa-solid fa-file-invoice"></i>
-        <span>Tagihan</span>
+        <span>Data Tagihan</span>
     </a>
 </li>

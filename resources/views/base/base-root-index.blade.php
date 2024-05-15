@@ -158,14 +158,10 @@
                                     <span><i class="fa-solid fa-home"></i> Home</span>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="#" class='menu-link'>
-                                    <span><i class="fa-solid fa-circle-info"></i> Pelayanan</span>
-                                </a>
-                            </li>
+
                             <li class="menu-item  has-sub">
                                 <a href="#" class='menu-link'>
-                                    <span><i class="fa-solid fa-graduation-cap"></i> Fakultas</span>
+                                    <span><i class="fa-solid fa-graduation-cap"></i> Admission</span>
                                 </a>
                                 <div class="submenu">
                                     <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
@@ -197,9 +193,7 @@
                                                     
                                                 </li>
                                             @endforeach
-                                            
-                
-                                            
+                            
                                         </ul>
                                         
                                         
@@ -207,32 +201,25 @@
                                 </div>
                             </li>
 
-                            <li class="menu-item active has-sub">
+                            <li class="menu-item">
                                 <a href="#" class='menu-link'>
                                     <span><i class="fa-solid fa-book"></i> Tentang Kami</span>
                                 </a>
-                                <div class="submenu ">
-                                    <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-                                    <div class="submenu-group-wrapper">
-                                        
-                                        
-                                        <ul class="submenu-group">
-                                            
-                                            <li class="submenu-item">
-                                                <a href="#" class='submenu-link'>Default Layout</a>
-
-                                            </li>
-                                            
-                                        
-
-                                            
-                                        </ul>
-                                        
-                                        
-                                    </div>
-                                </div>
                             </li>
- 
+                            <li class="menu-item">
+                                <a href="#" class='menu-link'>
+                                    <span><i class="fa-solid fa-phone"></i> Kontak Kami</span>
+                                </a>
+                            </li>
+                            
+
+                            <li class="menu-item">
+                                <a href="#" class='menu-link'>
+                                    <span><i class="fa-solid fa-circle-info"></i> Pelayanan</span>
+                                </a>
+                            </li>
+
+
                             
                             
                         </ul>
@@ -242,36 +229,46 @@
             </header>
 
             <div class="content-wrapper container">
+                @include('sweetalert::alert')
 
                 <div class="page-content row">
 
                     <div class="col-lg-8 col-12">
-                        <h4 class="card-title">Pengumuman</h4>
+                        <h4 class="card-title">Gallery Terbaru</h4>
                         <hr>
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="{{ asset('dist') }}/assets/compiled/png/1.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h5>First slide label</h5>
-                                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                            </div>
+                                            <a href="/back">
+
+                                                <img src="{{ asset('dist') }}/assets/compiled/png/1.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h5>First slide label</h5>
+                                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                                </div>
+                                            </a>
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="{{ asset('dist') }}/assets/compiled/png/2.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h5>Second slide label</h5>
-                                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                            </div>
+                                            <a href="/unzuo">
+
+                                                <img src="{{ asset('dist') }}/assets/compiled/png/2.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h5>Second slide label</h5>
+                                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                                </div>
+                                            </a>
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="{{ asset('dist') }}/assets/compiled/png/3.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h5>Third slide label</h5>
-                                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                            </div>
+                                            <a href="/ushio">
+
+                                                <img src="{{ asset('dist') }}/assets/compiled/png/3.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h5>Third slide label</h5>
+                                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
                                     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
@@ -285,7 +282,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h4 class="card-title">Berita popular</h4>
+                        <h4 class="card-title">Berita Terbaru</h4>
                         <hr>
                         <div class="card mb-3">
                             <div class="card-body">
@@ -295,7 +292,7 @@
                                         <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
                                     </div>
                                     <div class="col-lg-10">
-                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
                                         <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
                                         <div class="d-flex justify-content-between align-items-center">
 
@@ -310,7 +307,7 @@
                                         <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
                                     </div>
                                     <div class="col-lg-10">
-                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
                                         <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
                                         <div class="d-flex justify-content-between align-items-center">
 
@@ -325,7 +322,7 @@
                                         <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
                                     </div>
                                     <div class="col-lg-10">
-                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
                                         <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
                                         <div class="d-flex justify-content-between align-items-center">
 
@@ -340,7 +337,7 @@
                                         <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
                                     </div>
                                     <div class="col-lg-10">
-                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
                                         <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
                                         <div class="d-flex justify-content-between align-items-center">
 
@@ -355,7 +352,7 @@
                                         <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
                                     </div>
                                     <div class="col-lg-10">
-                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 400;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
+                                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
                                         <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
                                         <div class="d-flex justify-content-between align-items-center">
 
@@ -366,6 +363,21 @@
                                 </div>
                                 <hr>
                             </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination pagination-primary  justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
 
     
