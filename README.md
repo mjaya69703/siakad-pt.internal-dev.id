@@ -50,6 +50,16 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   ( CRUD ) Data Keuangan ( New )
     -   Pembayaran Biaya Kuliah via MidTrans
 
+<b>Fitur Role Finance Departement ( New )</b>
+
+-   Fitur Dasar
+    -   Halaman Profile , Edit Profile dan Ubah Password
+    -   Halaman Jurnal Presensi ( Absensi )
+-   Fitur Kelola Data Keuangan
+    -   Menerbitkan Tagihan ( Personal / Group By Program Studi or Program Kuliah )
+    -   Lihat Data Pembayaran Mahasiswa
+    -   ( CRUD ) Data Keuangan Income, Expense, Pending, Sisa Saldo
+
 <b>Fitur Role Mahasiswa Aktif</b>
 
 -   Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
@@ -119,20 +129,50 @@ MIDTRANS_IS_3DS=true
 ```
 php artisan serve
 ```
+
+## SHORTCUT
+
+```
+For Windows ( Execute In Terminal )
+- Run Migrate Refresh Seed
+seed.bat
+- Run Clear Cache
+clear.bat
+- Run Installer Windows
+setup.bat
+
+For Linux ( Execute In Terminal )
+- Run Migrate Refresh Seed
+seed.bat
+- Run Clear Cache
+clear.bat
+- Run Installer Linux
+setup.bat
+```
+
 ## CREDITS
+
 -   Framework PHP <a href="https://laravel.com">Laravel 11</a>
 -   Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
 -   Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
 
 ## CHANGE-LOGS
+
 <b>16/05/2024 - Update 1</b>
-- Update Dashboard Mahasiswa
+
+-   Update Dashboard Mahasiswa
+-   Restructure Type User
+-   Initialisasi Role Finance
+-   Restructure Dashboard Finance
+-   Fix Installer Windows ( setup.bat )
+-   Create Shortcut Command For Windows and Linux
 
 <b>14/05/2024 - Update 1</b>
-- Tambah Menu Data Tagihan ( CRUD )
-- Tambah Menu Data Pembayaran ( VIEW ONLY )
-- Tambah Menu Data Keuangan ( CRUD )
-- Fix Lihat Tagihan Pada Sisi Mahasiswa
-- Fix Duplikat script js
-- Rename Kode Bayar Pada Menu Data Tagihan
-- Integrasi Data pembayaran mahasiswa ke Data Keuangan
+
+-   Tambah Menu Data Tagihan ( CRUD )
+-   Tambah Menu Data Pembayaran ( VIEW ONLY )
+-   Tambah Menu Data Keuangan ( CRUD )
+-   Fix Lihat Tagihan Pada Sisi Mahasiswa
+-   Fix Duplikat script js
+-   Rename Kode Bayar Pada Menu Data Tagihan
+-   Integrasi Data pembayaran mahasiswa ke Data Keuangan

@@ -216,23 +216,23 @@ Route::group(['prefix' => 'finance', 'middleware' => ['user-access:Departement F
     Route::get('/signout',[App\Http\Controllers\Admin\AuthController::class, 'AuthSignOutPost'])->name('auth-signout-post');
 
     // GLOBAL MENU
-    Route::get('/home',[App\Http\Controllers\Admin\Finance\HomeController::class, 'index'])->name('home-index');
-    Route::get('/profile',[App\Http\Controllers\Admin\Finance\HomeController::class, 'profile'])->name('home-profile');
-    Route::get('/presensi',[App\Http\Controllers\Admin\Finance\PresensiController::class, 'index'])->name('home-presensi');
-    Route::get('/presensi/view',[App\Http\Controllers\Admin\Finance\PresensiController::class, 'presensiList'])->name('home-presensi-list');
-    Route::get('/presensi/view/{date}',[App\Http\Controllers\Admin\Finance\PresensiController::class, 'presensiView'])->name('home-presensi-view');
+    Route::get('/home',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home-index');
+    Route::get('/profile',[App\Http\Controllers\Admin\HomeController::class, 'profile'])->name('home-profile');
+    Route::get('/presensi',[App\Http\Controllers\Admin\PresensiController::class, 'index'])->name('home-presensi');
+    Route::get('/presensi/view',[App\Http\Controllers\Admin\PresensiController::class, 'presensiList'])->name('home-presensi-list');
+    Route::get('/presensi/view/{date}',[App\Http\Controllers\Admin\PresensiController::class, 'presensiView'])->name('home-presensi-view');
 
     // PRIVATE FUNCTION => PROFILE
-    Route::patch('/profile/update-image',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveImageProfile'])->name('home-profile-save-image');
-    Route::patch('/profile/update-data',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveDataProfile'])->name('home-profile-save-data');
-    Route::patch('/profile/update-kontak',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
-    Route::patch('/profile/update-password',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
+    Route::patch('/profile/update-image',[App\Http\Controllers\Admin\HomeController::class, 'saveImageProfile'])->name('home-profile-save-image');
+    Route::patch('/profile/update-data',[App\Http\Controllers\Admin\HomeController::class, 'saveDataProfile'])->name('home-profile-save-data');
+    Route::patch('/profile/update-kontak',[App\Http\Controllers\Admin\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
+    Route::patch('/profile/update-password',[App\Http\Controllers\Admin\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
 
     // PRIVATE FUNCTION => PRESENSI
-    Route::post('/presensi/save-absen',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveAbsen'])->name('home-presensi-input-absen');
-    Route::post('/presensi/save-sakit',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveSakit'])->name('home-presensi-input-sakit');
-    Route::post('/presensi/save-izin',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveIzin'])->name('home-presensi-input-izin');
-    Route::patch('/presensi/update-absen',[App\Http\Controllers\Admin\Finance\PresensiController::class, 'absenPulang'])->name('home-presensi-update-absen');
+    Route::post('/presensi/save-absen',[App\Http\Controllers\Admin\HomeController::class, 'saveAbsen'])->name('home-presensi-input-absen');
+    Route::post('/presensi/save-sakit',[App\Http\Controllers\Admin\HomeController::class, 'saveSakit'])->name('home-presensi-input-sakit');
+    Route::post('/presensi/save-izin',[App\Http\Controllers\Admin\HomeController::class, 'saveIzin'])->name('home-presensi-input-izin');
+    Route::patch('/presensi/update-absen',[App\Http\Controllers\Admin\PresensiController::class, 'absenPulang'])->name('home-presensi-update-absen');
         // STATUS ACTIVE BOLEH AKSES INI
     Route::middleware(['is-active:1'])->group(function () {
 

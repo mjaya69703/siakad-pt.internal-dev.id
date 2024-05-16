@@ -9,15 +9,12 @@
     Lihat
 @endsection
 @section('urlmenu')
-    @include('base.base-dash-prefix')
     #
 @endsection
 @section('subdesc')
     Halaman untuk melihat data riwayat pembayaran
 @endsection
 @section('content')
-    @include('base.base-dash-prefix')
-
     <section class="section">
         <div class="row">
             <div class="col-lg-12 col-12">

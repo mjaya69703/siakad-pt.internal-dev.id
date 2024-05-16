@@ -9,15 +9,12 @@
     Tambah
 @endsection
 @section('urlmenu')
-    @include('base.base-dash-prefix')
     {{ route($prefix . 'finance.tagihan-index') }}
 @endsection
 @section('subdesc')
     Halaman untuk melihat data tagihan
 @endsection
 @section('content')
-    @include('base.base-dash-prefix')
-
     <section class="section">
         <div class="row">
             <div class="col-lg-12 col-12">
