@@ -1,6 +1,8 @@
 @echo off
 echo Menjalankan Composer Update...
-composer update & echo Proses Installasi SiakadPT telah Selesai.... & pause
+start cmd /c setup-composer.bat
+Proses Installasi SiakadPT telah Selesai....
+pause
 
 echo Setup Environment...
 cp .env.example .env
