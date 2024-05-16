@@ -9,27 +9,7 @@
     Dashboard Admin
 @endsection
 @section('urlmenu')
-@php
-$prefix = '';
-$rawType = Auth::user()->raw_type;
-switch ($rawType) {
-    case 1:
-        $prefix = 'faculty.';
-        break;
-    case 2:
-        $prefix = 'administrative.';
-        break;
-    case 3:
-        $prefix = 'academic.';
-        break;
-    case 4:
-        $prefix = 'facility.';
-        break;
-    default:
-        $prefix = 'web-admin.';
-        break;
-}
-@endphp
+    @include('user.pre')
     #
 @endsection
 @section('subdesc')
@@ -89,7 +69,7 @@ switch ($rawType) {
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-tag" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\User::where('type', ['1','2','3','4'])->count() }}<br> Karyawan</span>
+                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\User::where('type', ['1', '2', '3', '4'])->count() }}<br> Karyawan</span>
                                 </div>
                             </div>
                         </a>
@@ -193,7 +173,7 @@ switch ($rawType) {
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix.'finance.keuangan-index') }}">
+                        <a href="{{ route($prefix . 'finance.keuangan-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-wallet" style="font-size: 42px"></i></span>
@@ -203,7 +183,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix.'finance.keuangan-index') }}">
+                        <a href="{{ route($prefix . 'finance.keuangan-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
@@ -213,7 +193,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix.'finance.keuangan-index') }}">
+                        <a href="{{ route($prefix . 'finance.keuangan-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-dollar" style="font-size: 42px"></i></span>
@@ -223,7 +203,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix.'finance.keuangan-index') }}">
+                        <a href="{{ route($prefix . 'finance.keuangan-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-dollar" style="font-size: 42px"></i></span>
@@ -235,7 +215,7 @@ switch ($rawType) {
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix.'finance.tagihan-index') }}">
+                        <a href="{{ route($prefix . 'finance.tagihan-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice" style="font-size: 42px"></i></span>
@@ -245,7 +225,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix.'finance.pembayaran-index') }}">
+                        <a href="{{ route($prefix . 'finance.pembayaran-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
@@ -289,76 +269,76 @@ switch ($rawType) {
     </section>
 @endsection
 @section('custom-js')
-<script src="{{ asset('dist') }}/assets/extensions/apexcharts/apexcharts.min.js"></script>
-<script src="{{ asset('dist') }}/assets/static/js/pages/dashboard.js"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
-<script>
-var ajaxRunning = false;
+    <script src="{{ asset('dist') }}/assets/extensions/apexcharts/apexcharts.min.js"></script>
+    <script src="{{ asset('dist') }}/assets/static/js/pages/dashboard.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
+    <script>
+        var ajaxRunning = false;
 
-$(document).ready(function() {
-    // Fungsi untuk melakukan permintaan AJAX
-    function fetchData() {
-        // Jika sedang berjalan, hentikan fungsi
-        if (ajaxRunning) {
-            return;
-        }
+        $(document).ready(function() {
+            // Fungsi untuk melakukan permintaan AJAX
+            function fetchData() {
+                // Jika sedang berjalan, hentikan fungsi
+                if (ajaxRunning) {
+                    return;
+                }
 
-        ajaxRunning = true;
+                ajaxRunning = true;
 
-        $.ajax({
-            url: '{{ route('web-admin.home.ajax-mhs-gender') }}',
-            method: 'GET',
-            success: function(response) {
-                var maleCount = response.male;
-                var femaleCount = response.female;
-                var dmaleCount = response.dmale;
-                var dfemaleCount = response.dfemale;
-                var umaleCount = response.umale;
-                var ufemaleCount = response.ufemale;
+                $.ajax({
+                    url: '{{ route('web-admin.home.ajax-mhs-gender') }}',
+                    method: 'GET',
+                    success: function(response) {
+                        var maleCount = response.male;
+                        var femaleCount = response.female;
+                        var dmaleCount = response.dmale;
+                        var dfemaleCount = response.dfemale;
+                        var umaleCount = response.umale;
+                        var ufemaleCount = response.ufemale;
 
-                var options = {
-                    chart: {
-                        type: 'pie',
+                        var options = {
+                            chart: {
+                                type: 'pie',
+                            },
+                            series: [maleCount, femaleCount],
+                            labels: ['Laki-laki', 'Perempuan'],
+                        };
+
+                        var chart = new ApexCharts(document.querySelector('#genderMhsChart'), options);
+                        chart.render();
+
+                        var options = {
+                            chart: {
+                                type: 'pie',
+                            },
+                            series: [dmaleCount, dfemaleCount],
+                            labels: ['Laki-laki', 'Perempuan'],
+                        };
+
+                        var chart = new ApexCharts(document.querySelector('#genderDsnChart'), options);
+                        chart.render();
+                        var options = {
+                            chart: {
+                                type: 'pie',
+                            },
+                            series: [umaleCount, ufemaleCount],
+                            labels: ['Laki-laki', 'Perempuan'],
+                        };
+
+                        var chart = new ApexCharts(document.querySelector('#genderUsrChart'), options);
+                        chart.render();
                     },
-                    series: [maleCount, femaleCount],
-                    labels: ['Laki-laki', 'Perempuan'],
-                };
-
-                var chart = new ApexCharts(document.querySelector('#genderMhsChart'), options);
-                chart.render();
-
-                var options = {
-                    chart: {
-                        type: 'pie',
+                    error: function(xhr, status, error) {
+                        console.error(error);
                     },
-                    series: [dmaleCount, dfemaleCount],
-                    labels: ['Laki-laki', 'Perempuan'],
-                };
-
-                var chart = new ApexCharts(document.querySelector('#genderDsnChart'), options);
-                chart.render();
-                var options = {
-                    chart: {
-                        type: 'pie',
-                    },
-                    series: [umaleCount, ufemaleCount],
-                    labels: ['Laki-laki', 'Perempuan'],
-                };
-
-                var chart = new ApexCharts(document.querySelector('#genderUsrChart'), options);
-                chart.render();
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-            },
-            complete: function() {
-                ajaxRunning = false; // Setelah permintaan selesai, set status menjadi false
+                    complete: function() {
+                        ajaxRunning = false; // Setelah permintaan selesai, set status menjadi false
+                    }
+                });
             }
-        });
-    }
 
-    // Panggil fungsi untuk pertama kalinya
-    fetchData();
-});
-</script>
+            // Panggil fungsi untuk pertama kalinya
+            fetchData();
+        });
+    </script>
 @endsection

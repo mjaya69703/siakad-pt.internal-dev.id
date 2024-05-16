@@ -9,28 +9,7 @@
     Edit Profile
 @endsection
 @section('urlmenu')
-@php
-$prefix = '';
-$rawType = Auth::user()->raw_type;
-switch ($rawType) {
-    case 1:
-        $prefix = 'faculty.';
-        break;
-    case 2:
-        $prefix = 'administrative.';
-        break;
-    case 3:
-        $prefix = 'academic.';
-        break;
-    case 4:
-        $prefix = 'facility.';
-        break;
-    default:
-        $prefix = 'web-admin.';
-        break;
-}
-@endphp
-{{ route($prefix . 'home-index') }}
+    {{ route($prefix . 'home-index') }}
 @endsection
 @section('subdesc')
     Halaman untuk mengubah profile pengguna
@@ -44,7 +23,7 @@ switch ($rawType) {
                     <h4 class="card-title">Ubah Foto Profile</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route($prefix.'home-profile-save-image') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route($prefix . 'home-profile-save-image') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
 
@@ -85,7 +64,7 @@ switch ($rawType) {
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                             <hr>
-                            <form action="{{ route($prefix.'home-profile-save-data') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route($prefix . 'home-profile-save-data') }}" method="POST" enctype="multipart/form-data">
                                 @method('PATCH')
                                 @csrf
 
@@ -106,10 +85,10 @@ switch ($rawType) {
                                     </div>
                                     <div class="form-group col-lg-6 col-12">
                                         <label for="gend">Jenis Kelamin</label>
-                                        <select name="gend" id="gend" class="form-select" >
+                                        <select name="gend" id="gend" class="form-select">
                                             <option value="" selected>Pilih Jenis Kelamin</option>
-                                            <option value="L" {{ Auth::user()->gend === 'L' ? 'selected' : ''}}>Laki Laki</option>
-                                            <option value="P" {{ Auth::user()->gend === 'P' ? 'selected' : ''}}>Perempuan</option>
+                                            <option value="L" {{ Auth::user()->gend === 'L' ? 'selected' : '' }}>Laki Laki</option>
+                                            <option value="P" {{ Auth::user()->gend === 'P' ? 'selected' : '' }}>Perempuan</option>
                                         </select>
                                         @error('gend')
                                             <small class="text-danger">{{ $message }}</small>
@@ -139,7 +118,7 @@ switch ($rawType) {
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <hr>
-                            <form action="{{ route($prefix.'home-profile-save-kontak') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route($prefix . 'home-profile-save-kontak') }}" method="POST" enctype="multipart/form-data">
                                 @method('PATCH')
                                 @csrf
 
@@ -159,14 +138,14 @@ switch ($rawType) {
                                         @enderror
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center">
-                                        <button type="submit" class="btn btn-outline-primary"><i style="margin-right: 5px"  class="fa-solid fa-paper-plane"></i> Save</button>
+                                        <button type="submit" class="btn btn-outline-primary"><i style="margin-right: 5px" class="fa-solid fa-paper-plane"></i> Save</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <hr>
-                            <form action="{{ route($prefix.'home-profile-save-password') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route($prefix . 'home-profile-save-password') }}" method="POST" enctype="multipart/form-data">
                                 @method('PATCH')
                                 @csrf
 
@@ -216,7 +195,7 @@ switch ($rawType) {
                                         @enderror
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center">
-                                        <button type="submit" class="btn btn-outline-primary"><i style="margin-right: 5px"  class="fa-solid fa-paper-plane"></i> Save</button>
+                                        <button type="submit" class="btn btn-outline-primary"><i style="margin-right: 5px" class="fa-solid fa-paper-plane"></i> Save</button>
                                     </div>
                                 </div>
                             </form>
@@ -252,6 +231,4 @@ switch ($rawType) {
             });
         });
     </script>
-
-    
 @endsection

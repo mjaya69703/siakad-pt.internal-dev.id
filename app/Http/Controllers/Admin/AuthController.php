@@ -140,7 +140,7 @@ class AuthController extends Controller
                 // echo "Anda login sebagai admin.";
             }elseif($user->rawtype == 1){
                 Alert::success('Success', 'Anda berhasil login sebagai '. $user->type);
-                return redirect()->route('faculty.home-index');
+                return redirect()->route('finance.home-index');
                 // return back();
 
             }elseif($user->rawtype == 2){

@@ -63,7 +63,7 @@ Route::middleware(['guest'])->group(function () {
 Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Administrator'], 'as' => 'web-admin.'],function(){
     // GLOBAL MENU AUTHENTIKASI
     Route::get('/signout',[App\Http\Controllers\Admin\AuthController::class, 'AuthSignOutPost'])->name('auth-signout-post');
-    
+
     // GLOBAL MENU
     Route::get('/home',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home-index');
     Route::get('/home/ajax/GetMhsGender',[App\Http\Controllers\Admin\HomeController::class, 'getMhsGender'])->name('home.ajax-mhs-gender');
@@ -82,7 +82,7 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
     Route::patch('/profile/update-data',[App\Http\Controllers\Admin\HomeController::class, 'saveDataProfile'])->name('home-profile-save-data');
     Route::patch('/profile/update-kontak',[App\Http\Controllers\Admin\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
     Route::patch('/profile/update-password',[App\Http\Controllers\Admin\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
-    
+
     // PRIVATE FUNCTION => PRESENSI
     Route::post('/presensi/save-absen',[App\Http\Controllers\Admin\HomeController::class, 'saveAbsen'])->name('home-presensi-input-absen');
     Route::post('/presensi/save-sakit',[App\Http\Controllers\Admin\HomeController::class, 'saveSakit'])->name('home-presensi-input-sakit');
@@ -91,9 +91,9 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
 
     // STATUS ACTIVE BOLEH AKSES INI
     Route::middleware(['is-active:1'])->group(function () {
-        
+
         // ADMIN AUTHORITY
-        
+
         // MENU KHUSUS DATA PENGGUNA => DATA ADMIN
         Route::get('/workers/data-admin',[App\Http\Controllers\Admin\Pages\WorkersController::class, 'indexAdmin'])->name('workers.admin-index');
         Route::get('/workers/data-admin/create',[App\Http\Controllers\Admin\Pages\WorkersController::class, 'createAdmin'])->name('workers.admin-create');
@@ -203,7 +203,7 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
         Route::post('/finance/data-keuangan/store',[App\Http\Controllers\Admin\Pages\Finance\BalanceController::class, 'store'])->name('finance.keuangan-store');
         Route::patch('/finance/data-keuangan/{code}/update',[App\Http\Controllers\Admin\Pages\Finance\BalanceController::class, 'update'])->name('finance.keuangan-update');
         Route::delete('/finance/data-keuangan/{code}/destroy',[App\Http\Controllers\Admin\Pages\Finance\BalanceController::class, 'destroy'])->name('finance.keuangan-destroy');
-        
+
 
 
     });
@@ -211,66 +211,58 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
 });
 
 // HAK AKSES STAFF ADMINISTRASI
-Route::group(['prefix' => 'administrative', 'middleware' => ['user-access:Administrative Staff'], 'as' => 'administrative.'],function(){
+Route::group(['prefix' => 'finance', 'middleware' => ['user-access:Departement Finance'], 'as' => 'finance.'],function(){
     // GLOBAL MENU AUTHENTIKASI
     Route::get('/signout',[App\Http\Controllers\Admin\AuthController::class, 'AuthSignOutPost'])->name('auth-signout-post');
 
     // GLOBAL MENU
-    Route::get('/home',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home-index');
-    Route::get('/profile',[App\Http\Controllers\Admin\HomeController::class, 'profile'])->name('home-profile');
-    Route::get('/presensi',[App\Http\Controllers\Admin\PresensiController::class, 'index'])->name('home-presensi');
-    Route::get('/presensi/view',[App\Http\Controllers\Admin\PresensiController::class, 'presensiList'])->name('home-presensi-list');
-    Route::get('/presensi/view/{date}',[App\Http\Controllers\Admin\PresensiController::class, 'presensiView'])->name('home-presensi-view');
-    // Route::get('/presensi',[App\Http\Controllers\Admin\PresensiController::class, 'index'])->name('home-presensi');
-    // Route::get('/presensi/get-data',[App\Http\Controllers\Admin\HomeController::class, 'presensiGet'])->name('home-presensi-get-data');
-    // Route::get('/presensi/view/hadir',[App\Http\Controllers\Admin\HomeController::class, 'presensiHadir'])->name('home-presensi-view-hadir');
-    // Route::get('/presensi/view/izin',[App\Http\Controllers\Admin\HomeController::class, 'presensiIzin'])->name('home-presensi-view-izin');
-    // Route::get('/presensi/view/{date}',[App\Http\Controllers\Admin\PresensiController::class, 'presensiView'])->name('home-presensi-view');
+    Route::get('/home',[App\Http\Controllers\Admin\Finance\HomeController::class, 'index'])->name('home-index');
+    Route::get('/profile',[App\Http\Controllers\Admin\Finance\HomeController::class, 'profile'])->name('home-profile');
+    Route::get('/presensi',[App\Http\Controllers\Admin\Finance\PresensiController::class, 'index'])->name('home-presensi');
+    Route::get('/presensi/view',[App\Http\Controllers\Admin\Finance\PresensiController::class, 'presensiList'])->name('home-presensi-list');
+    Route::get('/presensi/view/{date}',[App\Http\Controllers\Admin\Finance\PresensiController::class, 'presensiView'])->name('home-presensi-view');
 
     // PRIVATE FUNCTION => PROFILE
-    Route::patch('/profile/update-image',[App\Http\Controllers\Admin\HomeController::class, 'saveImageProfile'])->name('home-profile-save-image');
-    Route::patch('/profile/update-data',[App\Http\Controllers\Admin\HomeController::class, 'saveDataProfile'])->name('home-profile-save-data');
-    Route::patch('/profile/update-kontak',[App\Http\Controllers\Admin\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
-    Route::patch('/profile/update-password',[App\Http\Controllers\Admin\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
-    
+    Route::patch('/profile/update-image',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveImageProfile'])->name('home-profile-save-image');
+    Route::patch('/profile/update-data',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveDataProfile'])->name('home-profile-save-data');
+    Route::patch('/profile/update-kontak',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
+    Route::patch('/profile/update-password',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
+
     // PRIVATE FUNCTION => PRESENSI
-    Route::post('/presensi/save-absen',[App\Http\Controllers\Admin\HomeController::class, 'saveAbsen'])->name('home-presensi-input-absen');
-    Route::post('/presensi/save-sakit',[App\Http\Controllers\Admin\HomeController::class, 'saveSakit'])->name('home-presensi-input-sakit');
-    Route::post('/presensi/save-izin',[App\Http\Controllers\Admin\HomeController::class, 'saveIzin'])->name('home-presensi-input-izin');
-    Route::patch('/presensi/update-absen',[App\Http\Controllers\Admin\PresensiController::class, 'absenPulang'])->name('home-presensi-update-absen');
+    Route::post('/presensi/save-absen',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveAbsen'])->name('home-presensi-input-absen');
+    Route::post('/presensi/save-sakit',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveSakit'])->name('home-presensi-input-sakit');
+    Route::post('/presensi/save-izin',[App\Http\Controllers\Admin\Finance\HomeController::class, 'saveIzin'])->name('home-presensi-input-izin');
+    Route::patch('/presensi/update-absen',[App\Http\Controllers\Admin\Finance\PresensiController::class, 'absenPulang'])->name('home-presensi-update-absen');
+        // STATUS ACTIVE BOLEH AKSES INI
+    Route::middleware(['is-active:1'])->group(function () {
+
+
+
+        // MENU KHUSUS FINANCE DEPARTEMENT => DATA TAGIHAN
+        Route::get('/finance/data-tagihan',[App\Http\Controllers\Admin\Pages\Finance\GenerateTagihanController::class, 'index'])->name('finance.tagihan-index');
+        Route::get('/finance/data-tagihan/create',[App\Http\Controllers\Admin\Pages\Finance\GenerateTagihanController::class, 'create'])->name('finance.tagihan-create');
+        Route::post('/finance/data-tagihan/store',[App\Http\Controllers\Admin\Pages\Finance\GenerateTagihanController::class, 'store'])->name('finance.tagihan-store');
+        Route::patch('/finance/data-tagihan/{code}/update',[App\Http\Controllers\Admin\Pages\Finance\GenerateTagihanController::class, 'update'])->name('finance.tagihan-update');
+        Route::delete('/finance/data-tagihan/{code}/destroy',[App\Http\Controllers\Admin\Pages\Finance\GenerateTagihanController::class, 'destroy'])->name('finance.tagihan-destroy');
+        // MENU KHUSUS FINANCE DEPARTEMENT => DATA PEMBAYARAN
+        Route::get('/finance/data-pembayaran',[App\Http\Controllers\Admin\Pages\Finance\PembayaranController::class, 'index'])->name('finance.pembayaran-index');
+        Route::get('/finance/data-pembayaran/create',[App\Http\Controllers\Admin\Pages\Finance\PembayaranController::class, 'create'])->name('finance.pembayaran-create');
+        Route::post('/finance/data-pembayaran/store',[App\Http\Controllers\Admin\Pages\Finance\PembayaranController::class, 'store'])->name('finance.pembayaran-store');
+        Route::patch('/finance/data-pembayaran/{code}/update',[App\Http\Controllers\Admin\Pages\Finance\PembayaranController::class, 'update'])->name('finance.pembayaran-update');
+        Route::delete('/finance/data-pembayaran/{code}/destroy',[App\Http\Controllers\Admin\Pages\Finance\PembayaranController::class, 'destroy'])->name('finance.pembayaran-destroy');
+        // MENU KHUSUS FINANCE DEPARTEMENT => DATA KEUANGAN
+        Route::get('/finance/data-keuangan',[App\Http\Controllers\Admin\Pages\Finance\BalanceController::class, 'index'])->name('finance.keuangan-index');
+        Route::post('/finance/data-keuangan/store',[App\Http\Controllers\Admin\Pages\Finance\BalanceController::class, 'store'])->name('finance.keuangan-store');
+        Route::patch('/finance/data-keuangan/{code}/update',[App\Http\Controllers\Admin\Pages\Finance\BalanceController::class, 'update'])->name('finance.keuangan-update');
+        Route::delete('/finance/data-keuangan/{code}/destroy',[App\Http\Controllers\Admin\Pages\Finance\BalanceController::class, 'destroy'])->name('finance.keuangan-destroy');
+
+
+
+    });
 
 });
 
-// HAK AKSES KOORDINATOR PROGRAM STUDI
-Route::group(['prefix' => 'faculty', 'middleware' => ['user-access:Faculty Coordinator'], 'as' => 'faculty.'],function(){
-    // GLOBAL MENU AUTHENTIKASI
-    Route::get('/signout',[App\Http\Controllers\Admin\AuthController::class, 'AuthSignOutPost'])->name('auth-signout-post');
 
-    // GLOBAL MENU
-    Route::get('/home',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home-index');
-    Route::get('/profile',[App\Http\Controllers\Admin\HomeController::class, 'profile'])->name('home-profile');
-    Route::get('/presensi',[App\Http\Controllers\Admin\PresensiController::class, 'index'])->name('home-presensi');
-    Route::get('/presensi/view',[App\Http\Controllers\Admin\PresensiController::class, 'presensiList'])->name('home-presensi-list');
-    Route::get('/presensi/view/{date}',[App\Http\Controllers\Admin\PresensiController::class, 'presensiView'])->name('home-presensi-view');
-    // Route::get('/presensi',[App\Http\Controllers\Admin\PresensiController::class, 'index'])->name('home-presensi');
-    // Route::get('/presensi/get-data',[App\Http\Controllers\Admin\HomeController::class, 'presensiGet'])->name('home-presensi-get-data');
-    // Route::get('/presensi/view/hadir',[App\Http\Controllers\Admin\HomeController::class, 'presensiHadir'])->name('home-presensi-view-hadir');
-    // Route::get('/presensi/view/izin',[App\Http\Controllers\Admin\HomeController::class, 'presensiIzin'])->name('home-presensi-view-izin');
-
-    // PRIVATE FUNCTION => PROFILE
-    Route::patch('/profile/update-image',[App\Http\Controllers\Admin\HomeController::class, 'saveImageProfile'])->name('home-profile-save-image');
-    Route::patch('/profile/update-data',[App\Http\Controllers\Admin\HomeController::class, 'saveDataProfile'])->name('home-profile-save-data');
-    Route::patch('/profile/update-kontak',[App\Http\Controllers\Admin\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
-    Route::patch('/profile/update-password',[App\Http\Controllers\Admin\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
-    
-    // PRIVATE FUNCTION => PRESENSI
-    Route::post('/presensi/save-absen',[App\Http\Controllers\Admin\HomeController::class, 'saveAbsen'])->name('home-presensi-input-absen');
-    Route::post('/presensi/save-sakit',[App\Http\Controllers\Admin\HomeController::class, 'saveSakit'])->name('home-presensi-input-sakit');
-    Route::post('/presensi/save-izin',[App\Http\Controllers\Admin\HomeController::class, 'saveIzin'])->name('home-presensi-input-izin');
-    Route::patch('/presensi/update-absen',[App\Http\Controllers\Admin\PresensiController::class, 'absenPulang'])->name('home-presensi-update-absen');
-
-
-});
 
 // HAK AKSES DOSEN
 Route::group(['prefix' => 'dosen', 'middleware' => ['dsn-access:Dosen Aktif'], 'as' => 'dosen.'],function(){
@@ -305,7 +297,7 @@ Route::group(['prefix' => 'mahasiswa', 'middleware' => ['mhs-access:Mahasiswa Ak
     Route::get('/tagihan/view/{code}/payment/success',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanSuccess'])->name('home-tagihan-payment-success');
     Route::get('/jadwal-kuliah/{code}/absen',[App\Http\Controllers\Mahasiswa\HomeController::class, 'jadkulAbsen'])->name('home-jadkul-absen');
     Route::post('/jadwal-kuliah/absen/store',[App\Http\Controllers\Mahasiswa\HomeController::class, 'jadkulAbsenStore'])->name('home-jadkul-absen-store');
-    
+
     // PRIVATE FUNCTION => PROFILE
     Route::patch('/profile/update-image',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveImageProfile'])->name('home-profile-save-image');
     Route::patch('/profile/update-data',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveDataProfile'])->name('home-profile-save-data');

@@ -9,39 +9,21 @@
     Lihat
 @endsection
 @section('urlmenu')
-@php
-$prefix = '';
-$rawType = Auth::user()->raw_type;
-switch ($rawType) {
-    case 1:
-        $prefix = 'faculty.';
-        break;
-    case 2:
-        $prefix = 'administrative.';
-        break;
-    case 3:
-        $prefix = 'academic.';
-        break;
-    case 4:
-        $prefix = 'facility.';
-        break;
-    default:
-        $prefix = 'web-admin.';
-        break;
-}
-@endphp
+    @include('base.base-dash-prefix')
     #
 @endsection
 @section('subdesc')
     Halaman untuk melihat data riwayat pembayaran
 @endsection
 @section('content')
+    @include('base.base-dash-prefix')
+
     <section class="section">
         <div class="row">
             <div class="col-lg-12 col-12">
                 <div class="row">
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix.'finance.tagihan-index') }}">
+                        <a href="{{ route($prefix . 'finance.tagihan-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice" style="font-size: 42px"></i></span>
@@ -51,7 +33,7 @@ switch ($rawType) {
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix.'finance.pembayaran-index') }}">
+                        <a href="{{ route($prefix . 'finance.pembayaran-index') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
@@ -79,10 +61,10 @@ switch ($rawType) {
                         <div class="">
                             {{-- <a href="{{ route($prefix.'finance.tagihan-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a> --}}
                         </div>
-        
+
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped"  id="table1">
+                        <table class="table table-striped" id="table1">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
@@ -96,22 +78,21 @@ switch ($rawType) {
                             </thead>
                             <tbody>
                                 @foreach ($history as $key => $item)
-                                    
-                                <tr>
-                                    <td data-label="Number">{{ ++$key }}</td>
-                                    <td data-label="Nama Mahasiswa">{{ $item->users->mhs_name }}</td>
-                                    <td data-label="Kode Pembayaran"><span style="text-transform: uppercase">{{ $item->code }}</span></td>
-                                    <td data-label="Kode Tagihan"><span style="text-transform: uppercase">{{ $item->tagihan_code }}</span></td>
-                                    <td data-label="Nominal Bayar">Rp. {{ number_format($item->tagihan->price, 0, ',', '.') }}</td>
-                                    <td data-label="Status">{{$item->stat === 1 ? 'PAID' : 'UN-PAID'}}</td>
-                                    {{-- <td class="d-flex justify-content-center align-items-center">
+                                    <tr>
+                                        <td data-label="Number">{{ ++$key }}</td>
+                                        <td data-label="Nama Mahasiswa">{{ $item->users->mhs_name }}</td>
+                                        <td data-label="Kode Pembayaran"><span style="text-transform: uppercase">{{ $item->code }}</span></td>
+                                        <td data-label="Kode Tagihan"><span style="text-transform: uppercase">{{ $item->tagihan_code }}</span></td>
+                                        <td data-label="Nominal Bayar">Rp. {{ number_format($item->tagihan->price, 0, ',', '.') }}</td>
+                                        <td data-label="Status">{{ $item->stat === 1 ? 'PAID' : 'UN-PAID' }}</td>
+                                        {{-- <td class="d-flex justify-content-center align-items-center">
                                         <a href="{{ route('mahasiswa.home-tagihan-view', $item->code) }}" class="btn btn-outline-success"><i class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
-            
-            
+
+
                                     </td> --}}
-                                </tr>
+                                    </tr>
                                 @endforeach
-             
+
                             </tbody>
                         </table>
                     </div>

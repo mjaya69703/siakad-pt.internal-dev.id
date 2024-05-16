@@ -18,8 +18,29 @@ use App\Models\Balance;
 
 class BalanceController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
+
     public function index()
     {
+
+        $data['prefix'] = $this->setPrefix();
         $data['balance'] = Balance::all();
         $data['balIncome'] = Balance::where('type', 1)->sum('value');
         $data['balExpense'] = Balance::where('type', 2)->sum('value');
@@ -75,7 +96,7 @@ class BalanceController extends Controller
     {
         $balance = Balance::where('code', $code)->first();
         $balance->delete();
-        
+
         Alert::success('success', 'Data berhasil dihapus');
         return back();
     }

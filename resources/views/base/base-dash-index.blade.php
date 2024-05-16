@@ -10,16 +10,15 @@
         @include('base.panel.base-panel-header-script')
 
         <style>
-
             @media screen and (max-width: 767px) {
                 .footer {
                     display: flex;
                     flex-direction: column;
-                    align-items: center; /* Tulisan menjadi rata tengah secara horizontal */
+                    align-items: center;
+                    /* Tulisan menjadi rata tengah secara horizontal */
                 }
 
             }
-
         </style>
     </head>
 

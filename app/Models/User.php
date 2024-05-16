@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $guarded=[];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,11 +42,12 @@ class User extends Authenticatable
     public function getTypeAttribute($value)
     {
         $types = [
-            0 => 'Web Administrator', // => Prefix web-admin
-            1 => 'Faculty Coordinator', // => Prefix faculty
-            2 => 'Administrative Staff', // => Prefix administrative
-            3 => 'Academic Staff', // => Prefix academic
-            4 => 'Facility Staff', // => Prefix facility
+            0 => 'Web Administrator',       // => Prefix web-admin  => For Monitoring Antar Departement
+            1 => 'Departement Finance',     // => Prefix finance    => For Pelayanan Administrasi Umum dan Keuangan ( BAU )
+            2 => 'Departement Officer',     // => Prefix officer    => For Penerimaan Mahasiswa, Etc. ( Officer Staff )
+            3 => 'Departement Academic',    // => Prefix academic   => For Pelayanan Akademik ( BAAK Staff )
+            4 => 'Departement Admin',       // => Prefix admin      => For Penghubung antar departement dan dosen
+            5 => 'Departement Support',     // => Prefix support    => For IT Technical, Lab Technician, Helper
         ];
 
         return isset($types[$value]) ? $types[$value] : 'Unknown';
