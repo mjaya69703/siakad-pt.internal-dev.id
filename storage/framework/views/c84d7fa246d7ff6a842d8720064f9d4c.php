@@ -41,7 +41,7 @@
 
             <div class="col-lg-9 col-12 row">
                 <div class="col-lg-3 col-6 mb-2">
-                    <a href="http://newprojectfoto.test/admin/manage-balance/pending">
+                    <a href="<?php echo e(route('mahasiswa.home-tagihan-index')); ?>">
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
@@ -51,7 +51,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-6 mb-2">
-                    <a href="http://newprojectfoto.test/admin/manage-balance/pending">
+                    <a href="<?php echo e(route('mahasiswa.home-tagihan-index')); ?>">
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-money-bill-transfer" style="font-size: 42px"></i></span>
@@ -61,7 +61,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-6 mb-2">
-                    <a href="http://newprojectfoto.test/admin/manage-balance/pending">
+                    <a href="<?php echo e(route('mahasiswa.home-jadkul-index')); ?>">
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-check" style="font-size: 42px"></i></span>
@@ -71,7 +71,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-6 mb-2">
-                    <a href="http://newprojectfoto.test/admin/manage-balance/pending">
+                    <a href="<?php echo e(route('mahasiswa.home-jadkul-index')); ?>">
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-book-open-reader" style="font-size: 42px"></i></span>
