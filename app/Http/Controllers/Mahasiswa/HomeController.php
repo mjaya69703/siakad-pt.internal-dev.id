@@ -81,7 +81,7 @@ class HomeController extends Controller
         $date = \Carbon\Carbon::now()->format('Y-m-d');
         $checkAbsen = AbsensiMahasiswa::where('jadkul_code', $code)->where('author_id', Auth::guard('mahasiswa')->user()->id)->count();
         $checkDate = JadwalKuliah::where('code', $code)->where('date', $date)->count();
-        
+
         // dd($timeStart);
         if($checkAbsen === 0){
             if($checkDate !== 0){
@@ -94,9 +94,9 @@ class HomeController extends Controller
                 $data['jadkul'] = JadwalKuliah::where('code', $code)->first();
                 $data['ruang'] = Ruang::all();
                 $data['kelas'] = Kelas::all();
-    
+
                 // dd($data['jadkul']);
-    
+
                 return view('mahasiswa.pages.mhs-jadkul-absen', $data);
             } else {
 
@@ -115,26 +115,26 @@ class HomeController extends Controller
             'absen_proof' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8192',
             'absen_type' => 'required|string',
         ]);
-    
+
         $timeStart = \Carbon\Carbon::now()->format('H:i:s');
         $checkStart = JadwalKuliah::where('code', $request->jadkul_code)->first();
 
 
         $absen = new AbsensiMahasiswa;
-    
+
         if ($request->hasFile('absen_proof')) {
             $image = $request->file('absen_proof');
             $name = 'profile-'. $request->jadkul_code. '-' . $request->absen_date . '-' . $request->author_id .'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile/absen/');
             $destinationPaths = storage_path('app/public/images');
-    
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());
             // $image->resize(width: 250);
             $image->scaleDown(height: 300);
             $image->toPng()->save($destinationPath.'/'.$name);
-    
+
             if ($absen->absen_proof != 'default/default-profile.jpg') {
                 File::delete($destinationPaths.'/'.$absen->absen_proof); // hapus gambar lama
             }
@@ -157,7 +157,7 @@ class HomeController extends Controller
                 Alert::error('Error', 'Waktu absen belum dimulai. Silahkan coba kembali nanti.');
                 return back();
             }
-    
+
             Alert::success('Success', 'Kamu telah berhasil absen pada matakuliah ini');
             return redirect()->route('mahasiswa.home-jadkul-index');
         }
@@ -169,28 +169,28 @@ class HomeController extends Controller
         $request->validate([
             'mhs_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8192',
         ]);
-    
+
         $user = Auth::guard('mahasiswa')->user();
-    
+
         if ($request->hasFile('mhs_image')) {
             $image = $request->file('mhs_image');
             $name = 'profile-'. $user->mhs_code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile');
             $destinationPaths = storage_path('app/public/images');
-    
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());
             // $image->resize(width: 250);
             $image->scaleDown(height: 300);
             $image->toPng()->save($destinationPath.'/'.$name);
-    
+
             if ($user->mhs_image != 'default/default-profile.jpg') {
                 File::delete($destinationPaths.'/'.$user->mhs_image); // hapus gambar lama
             }
             $user->mhs_image = "profile/".$name;
             $user->save();
-    
+
             Alert::success('Success', 'Data berhasil diupdate');
             return redirect()->route('mahasiswa.home-profile');
         }
@@ -301,7 +301,7 @@ class HomeController extends Controller
         // Mencari tagihan berdasarkan `users_id`
         $data['tagihan'] = TagihanKuliah::where('users_id', $user->id)->orwhere('proku_id', $user->kelas->proku->id)->orwhere('prodi_id', $user->kelas->pstudi->id)->latest()->get();
         $data['history'] = HistoryTagihan::where('users_id', Auth::guard('mahasiswa')->user()->id)->where('stat', 1)->latest()->get();
-        
+
 
         return view('mahasiswa.pages.mhs-tagihan-index', $data);
 
@@ -313,10 +313,10 @@ class HomeController extends Controller
 
         $checkData = HistoryTagihan::where('tagihan_code', $code)->where('users_id', $user->id)->count();
         if($checkData === 0){
-            
-            
+
+
             $data['tagihan'] = TagihanKuliah::where('code', $code)->first();
-            
+
             return view('mahasiswa.pages.mhs-tagihan-view', $data);
         } else {
             Alert::error('error', 'Kamu sudah membayar tagihan ini');
@@ -396,5 +396,11 @@ class HomeController extends Controller
         return redirect()->route('mahasiswa.home-tagihan-index');
 
 
+    }
+
+    public function tagihanInvoice(Request $request, $code){
+        $data['history'] = HistoryTagihan::where('code', $code)->first();
+
+        return view('mahasiswa.pages.mhs-tagihan-invoice', $data);
     }
 }

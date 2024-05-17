@@ -291,6 +291,7 @@ Route::group(['prefix' => 'mahasiswa', 'middleware' => ['mhs-access:Mahasiswa Ak
     Route::get('/home',[App\Http\Controllers\Mahasiswa\HomeController::class, 'index'])->name('home-index');
     Route::get('/profile',[App\Http\Controllers\Mahasiswa\HomeController::class, 'profile'])->name('home-profile');
     Route::get('/tagihan',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanIndex'])->name('home-tagihan-index');
+    Route::get('/tagihan/{code}/invoice',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanInvoice'])->name('home-tagihan-invoice');
     Route::get('/jadwal-kuliah',[App\Http\Controllers\Mahasiswa\HomeController::class, 'jadkulIndex'])->name('home-jadkul-index');
     Route::get('/tagihan/view/{code}',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanView'])->name('home-tagihan-view');
     Route::post('/tagihan/view/{code}/payment',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanPayment'])->name('home-tagihan-payment');

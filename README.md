@@ -158,7 +158,11 @@ setup.bat
 
 ## CHANGE-LOGS
 
-<b>16/05/2024 - Update 1</b>
+<b>17/05/2024 - Update v.0.0003a - alpha</b>
+
+-   Initialisasi Invoice Pembayaran Mahasiswa
+
+<b>16/05/2024 - Update v.0.0002 - alpha</b>
 
 -   Update Dashboard Mahasiswa
 -   Restructure Type User
@@ -167,7 +171,7 @@ setup.bat
 -   Fix Installer Windows ( setup.bat )
 -   Create Shortcut Command For Windows and Linux
 
-<b>14/05/2024 - Update 1</b>
+<b>14/05/2024 - Update v.0.0001 - alpha</b>
 
 -   Tambah Menu Data Tagihan ( CRUD )
 -   Tambah Menu Data Pembayaran ( VIEW ONLY )

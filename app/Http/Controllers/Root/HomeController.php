@@ -20,20 +20,23 @@ class HomeController extends Controller
 {
     private function setPrefix()
     {
-        $rawType = Auth::user()->raw_type;
-        switch ($rawType) {
-            case 1:
-                return 'finance.';
-            case 2:
-                return 'officer.';
-            case 3:
-                return 'academic.';
-            case 4:
-                return 'admin.';
-            case 5:
-                return 'support.';
-            default:
-                return 'web-admin.';
+        if(Auth::user()){
+
+            $rawType = Auth::user()->raw_type;
+            switch ($rawType) {
+                case 1:
+                    return 'finance.';
+                case 2:
+                    return 'officer.';
+                case 3:
+                    return 'academic.';
+                case 4:
+                    return 'admin.';
+                case 5:
+                    return 'support.';
+                default:
+                    return 'web-admin.';
+            }
         }
     }
 
