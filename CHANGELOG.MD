@@ -1,5 +1,11 @@
 ## CHANGE-LOGS
 
+<b>18/05/2024 - Update v.0.0003b - alpha</b>
+
+```
+-   Relayouting Menu Absensi Pegawai
+```
+
 <b>17/05/2024 - Update v.0.0003a - alpha</b>
 
 ```

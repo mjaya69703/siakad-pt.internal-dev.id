@@ -36,9 +36,8 @@ class PresensiController extends Controller
         }
     }
 
-    public function index()
+    public function absenHarian()
     {
-
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
         $data['hadir'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
@@ -49,24 +48,62 @@ class PresensiController extends Controller
         ->whereIn('absen_type', [0,1,5])
         ->whereTime('absen_time_in', '>', '08:00:00')
         ->get();
-        // Check Data Absen Hari Ini
-        $data['absen'] = UAttendance::where('absen_user_id', $data['userid'])
-        ->where('absen_date', $data['today'])
-        ->first();
+        $data['absen'] = uAttendance::where('absen_user_id', $data['userid'])->latest()->get();
         $data['prefix'] = $this->setPrefix();
 
+        return view('user.pages.presensi-index', $data);
 
-        // dd($data['absen']);
+    }
+    public function absenIzinCuti()
+    {
+        $data['userid'] = Auth::user()->id;
+        $data['today'] = date('Y-m-d');
+        $data['hadir'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
+        $data['izin'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [2,3,6,7])->get();
+        $data['sakit'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [2])->get();
+        // Filter data untuk terlambat (waktu masuk lebih dari jam 8 pagi)
+        $data['terlambat'] = uAttendance::where('absen_user_id', $data['userid'])
+        ->whereIn('absen_type', [0,1,5])
+        ->whereTime('absen_time_in', '>', '08:00:00')
+        ->get();
+        $data['absen'] = uAttendance::where('absen_user_id', $data['userid'])->latest()->get();
+        $data['prefix'] = $this->setPrefix();
+
+        return view('user.pages.presensi-izin', $data);
+
+    }
+
+        public function absenView($code)
+    {
+
+        $data['userid'] = Auth::user()->id;
+        $data['today'] = date('Y-m-d');
+        $data['prefix'] = $this->setPrefix();
+        $data['hadir'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
+        $data['izin'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [2,3,6,7])->get();
+        $data['sakit'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [2])->get();
+        // Filter data untuk terlambat (waktu masuk lebih dari jam 8 pagi)
+        $data['terlambat'] = uAttendance::where('absen_user_id', $data['userid'])
+        ->whereIn('absen_type', [0,1,5])
+        ->whereTime('absen_time_in', '>', '08:00:00')
+        ->get();
+        // Check Data Absen Hari Ini
+        $data['absen'] = UAttendance::where('absen_user_id', $data['userid'])
+        ->where('absen_code', $code)
+        ->first();
 
         if($data['absen']){
 
-            return view('user.home-presensi-update', $data);
+            return view('user.pages.presensi-view', $data);
         } else {
-            return view('user.home-presensi-index', $data);
+
+            Alert::error('Kamu belum absen pada tanggal ini !');
+            return back();
 
         }
 
     }
+
     public function presensiList()
     {
 
@@ -94,6 +131,7 @@ class PresensiController extends Controller
 
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
+        $data['prefix'] = $this->setPrefix();
         $data['hadir'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
         $data['izin'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [2,3,6,7])->get();
         $data['sakit'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [2])->get();

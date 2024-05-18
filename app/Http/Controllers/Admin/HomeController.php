@@ -12,6 +12,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Alert;
 use Auth;
 use Hash;
+use Str;
 use App\Models\uAttendance;
 use Carbon\Carbon;
 use App\Models\Mahasiswa;
@@ -229,6 +230,7 @@ class HomeController extends Controller
                                         ->whereTime('absen_time_in', '>', '08:00:00')
                                         ->get();
 
+        dd($data['prefix']);
 
         return view('user.home-presensi-view', $data);
     }
@@ -249,7 +251,7 @@ class HomeController extends Controller
         // Periksa apakah sudah ada presensi untuk tanggal yang sama
         $existingAbsen = uAttendance::where('absen_user_id', $user->id)
             ->whereDate('absen_date', $absenDate)
-            ->whereIn('absen_type', [0,2,4,6,7])
+            ->where('absen_type', $request->absen_type)
             ->first();
 
         if ($existingAbsen) {
@@ -261,6 +263,7 @@ class HomeController extends Controller
         $absen->absen_user_id = $user->id;
         $absen->absen_type = $request->absen_type;
         $absen->absen_date = $request->absen_date;
+        $absen->absen_code = Str::random(7);
         $absen->absen_time_in = $request->absen_time_in;
         $absen->absen_time_out = $request->absen_time_out;
 
@@ -290,13 +293,12 @@ class HomeController extends Controller
         return back();
     }
 
-    public function saveSakit(Request $request)
+    public function saveIzinCuti(Request $request)
     {
         $request->validate([
             'absen_type' => 'required|integer',
             'absen_date' => 'required|date',
-            // 'absen_time_in' => 'required',
-            // 'absen_time_out' => 'nullable',
+            'absen_time_out' => 'nullable',
             'absen_proof' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:8196',
         ]);
 
@@ -306,7 +308,7 @@ class HomeController extends Controller
         // Periksa apakah sudah ada presensi untuk tanggal yang sama
         $existingAbsen = uAttendance::where('absen_user_id', $user->id)
             ->whereDate('absen_date', $absenDate)
-            ->whereIn('absen_type', [0,2,4,6,7])
+            ->where('absen_type', $request->absen_type)
             ->first();
 
         if ($existingAbsen) {
@@ -318,70 +320,13 @@ class HomeController extends Controller
         $absen->absen_user_id = $user->id;
         $absen->absen_type = $request->absen_type;
         $absen->absen_date = $request->absen_date;
+        $absen->absen_code = Str::random(7);
         $absen->absen_time_in = Carbon::now()->format('H:i');
-        // $absen->absen_time_out = $request->absen_time_out;
-
-        if ($request->hasFile('absen_proof')) {
-            $image = $request->file('absen_proof');
-            $name = 'presensi-sakit-' . $user->code . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            $destinationPath = storage_path('app/public/images/presensi');
-
-            // Membuat direktori jika belum ada
-            if (!File::exists($destinationPath)) {
-                File::makeDirectory($destinationPath, 0755, true, true);
-            }
-
-            // Mengompres gambar dan menyimpannya
-            $manager = new ImageManager(new Driver());
-            $image = $manager->read($image->getRealPath());
-
-            $image->scaleDown(height: 300)->save($destinationPath . '/' . $name);
-
-            // Menyimpan nama file gambar ke database
-            $absen->absen_proof = "presensi/" . $name;
-        }
-
-        $absen->save();
-
-        Alert::success('Success', 'Data berhasil disimpan');
-        return back();
-    }
-    public function saveIzin(Request $request)
-    {
-        $request->validate([
-            'absen_type' => 'required|integer',
-            'absen_date' => 'required|date',
-            // 'absen_time_in' => 'required',
-            // 'absen_time_out' => 'nullable',
-            'absen_proof' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:8196',
-        ]);
-
-        $user = Auth::user();
-        $absenDate = Carbon::parse($request->absen_date)->toDateString();
-
-        // Periksa apakah sudah ada presensi untuk tanggal yang sama
-        $existingAbsen = uAttendance::where('absen_user_id', $user->id)
-            ->whereDate('absen_date', $absenDate)
-            ->whereIn('absen_type', [0,2,4,6,7])
-            ->first();
-
-        if ($existingAbsen) {
-            Alert::error('Error', 'Kamu sudah absen pada tanggal ini.');
-            return back();
-        }
-
-        $absen = new uAttendance;
-        $absen->absen_user_id = $user->id;
-        $absen->absen_type = $request->absen_type;
         $absen->absen_approve = 1;
 
-        $absen->absen_date = $request->absen_date;
-        $absen->absen_time_in = Carbon::now()->format('H:i');
-        // $absen->absen_time_out = $request->absen_time_out;
-
         if ($request->hasFile('absen_proof')) {
             $image = $request->file('absen_proof');
-            $name = 'presensi-izin-' . $user->code . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $name = 'presensi-' . $user->code . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/presensi');
 
             // Membuat direktori jika belum ada

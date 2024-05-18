@@ -5,22 +5,28 @@
         <!-- Bagian menu untuk pengguna yang telah login -->
         {{-- HAK AKSES WEB ADMINISTRATOR --}}
         <li class="sidebar-title">Menu</li>
-        <li class="sidebar-item">
+        <li class="sidebar-item {{ Route::is($prefix . 'home-index', request()->path()) ? 'active' : '' }}">
             <a href="{{ route($prefix . 'home-index') }}" class='sidebar-link'>
                 <i class="fa-solid fa-home"></i>
                 <span>Home</span>
             </a>
         </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item {{ Route::is($prefix . 'home-profile', request()->path()) ? 'active' : '' }}">
             <a href="{{ route($prefix . 'home-profile') }}" class='sidebar-link'>
                 <i class="fa-solid fa-user-edit"></i>
                 <span>Profile User</span>
             </a>
         </li>
-        <li class="sidebar-item">
-            <a href="{{ route($prefix . 'home-presensi') }}" class='sidebar-link'>
+        <li class="sidebar-item  {{ Route::is($prefix . 'presensi.absen-harian', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route($prefix . 'presensi.absen-harian') }}" class='sidebar-link'>
                 <i class="fa-solid fa-calendar-check"></i>
-                <span>Jurnal Presensi</span>
+                <span>Absen Harian</span>
+            </a>
+        </li>
+        <li class="sidebar-item  {{ Route::is($prefix . 'presensi.absen-izin-cuti', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route($prefix . 'presensi.absen-izin-cuti') }}" class='sidebar-link'>
+                <i class="fa-solid fa-calendar-xmark"></i>
+                <span>Absen Izin & Cuti</span>
             </a>
         </li>
         @if (Auth::user()->raw_type === 0)
