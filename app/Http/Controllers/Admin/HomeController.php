@@ -54,9 +54,10 @@ class HomeController extends Controller
 
     // KHUSUS PROFILE AREA
     public function profile(){
+
         $data['prefix'] = $this->setPrefix();
 
-        return view('user.home-profile');
+        return view('user.home-profile', $data);
     }
 
     public function getMhsGender(){
@@ -184,6 +185,8 @@ class HomeController extends Controller
     public function presensi(Request $request){
 
         $user = Auth::user();
+        $data['prefix'] = $this->setPrefix();
+
         $data['hadir'] = uAttendance::where('absen_user_id', $user->id)->whereIn('absen_type', [0,1,4,5])->get();
         $data['izin'] = uAttendance::where('absen_user_id', $user->id)->whereIn('absen_type', [2,3,6,7])->get();
         $data['sakit'] = uAttendance::where('absen_user_id', $user->id)->whereIn('absen_type', [2])->get();
@@ -192,8 +195,8 @@ class HomeController extends Controller
         ->whereIn('absen_type', [0,1,5])
         ->whereTime('absen_time_in', '>', '08:00:00')
         ->get();
-        $data['prefix'] = $this->setPrefix();
 
+        dd($data['prefix']);
         return view('user.home-presensi', $data);
     }
     public function presensiGet(Request $request){
@@ -214,7 +217,7 @@ class HomeController extends Controller
     public function presensiHadir(Request $request){
 
         $user = Auth::user();
-                $data['prefix'] = $this->setPrefix();
+        $data['prefix'] = $this->setPrefix();
 
         $data['absen'] = uAttendance::where('absen_user_id', $user->id)->whereIn('absen_type', [0,1,4,5])->get();
         $data['hadir'] = uAttendance::where('absen_user_id', $user->id)->whereIn('absen_type', [0,1,4,5])->get();

@@ -11,6 +11,12 @@ rm public/storage
 php artisan storage:link
 pause
 
+echo Tolong setting .env sebelum melanjutkan tahap installasi
+code .
+pause
+echo Sudah Selesai Setting .env ?
+pause
+
 echo Menjalankan Migrasi Database...
 php artisan migrate
 pause
@@ -18,5 +24,8 @@ pause
 echo Menjalankan Refresh Migrasi dengan Seeder...
 php artisan migrate:refresh --seed
 pause
+
+echo Proses Installasi Telah Selesai, Have Fun Sir :)
+php artisan serve
 
 

@@ -25,6 +25,24 @@ use App\Models\HistoryTagihan;
 
 class GenerateTagihanController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
     public function index(Request $request)
     {
         $data['income'] = HistoryTagihan::where('stat', 1)->whereHas('tagihan', function ($query) use ($request){
@@ -37,6 +55,7 @@ class GenerateTagihanController extends Controller
         $data['mahasiswa'] = Mahasiswa::all();
         $data['prodi'] = ProgramStudi::all();
         $data['proku'] = ProgramKuliah::all();
+        $data['prefix'] = $this->setPrefix();
 
         // dd($data);
 
@@ -54,6 +73,8 @@ class GenerateTagihanController extends Controller
         $data['mahasiswa'] = Mahasiswa::all();
         $data['prodi'] = ProgramStudi::all();
         $data['proku'] = ProgramKuliah::all();
+        $data['prefix'] = $this->setPrefix();
+
 
         return view('user.finance.pages.tagihan-create', $data);
     }
@@ -67,18 +88,18 @@ class GenerateTagihanController extends Controller
             'proku_id' => 'required_without_all:users_id,prodi_id|nullable|integer|min:0',
             'users_id' => 'required_without_all:proku_id,prodi_id|nullable|integer|min:0',
         ]);
-    
+
         // Menghitung jumlah nilai yang valid
         $count = count(array_filter([$request->prodi_id, $request->proku_id, $request->users_id], function ($value) {
             return $value > 0;
         }));
-    
+
         // Validasi jika hanya satu nilai yang valid
         if ($count != 1) {
             Alert::error('error', 'Hanya boleh memilih salah satu.');
             return back()->withInput();
         }
-    
+
         $tagihan = new TagihanKuliah;
         $tagihan->name = $request->name;
         $tagihan->price = $request->price;
@@ -87,9 +108,9 @@ class GenerateTagihanController extends Controller
         $tagihan->users_id = $request->users_id;
         $tagihan->author_id = Auth::user()->id;
         $tagihan->code = 'UKT-'.Str::random(8);
-    
+
         $tagihan->save();
-    
+
         Alert::success('success', 'Data berhasil ditambahkan');
         return back();
     }
@@ -103,18 +124,18 @@ class GenerateTagihanController extends Controller
             'proku_id' => 'required_without_all:users_id,prodi_id|nullable|integer|min:0',
             'users_id' => 'required_without_all:proku_id,prodi_id|nullable|integer|min:0',
         ]);
-    
+
         // Menghitung jumlah nilai yang valid
         $count = count(array_filter([$request->prodi_id, $request->proku_id, $request->users_id], function ($value) {
             return $value > 0;
         }));
-    
+
         // Validasi jika hanya satu nilai yang valid
         if ($count != 1) {
             Alert::error('error', 'Hanya boleh memilih salah satu.');
             return back()->withInput();
         }
-    
+
         $tagihan = TagihanKuliah::where('code', $code)->first();
         $tagihan->name = $request->name;
         $tagihan->price = $request->price;
@@ -123,9 +144,9 @@ class GenerateTagihanController extends Controller
         $tagihan->users_id = $request->users_id;
         $tagihan->author_id = Auth::user()->id;
         // $tagihan->code = 'UKT-'.Str::random(8);
-    
+
         $tagihan->save();
-    
+
         Alert::success('success', 'Data berhasil diupdate');
         return back();
     }

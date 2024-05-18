@@ -25,6 +25,24 @@ use App\Models\HistoryTagihan;
 
 class PembayaranController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
     public function index(Request $request)
     {
         $data['income'] = HistoryTagihan::where('stat', 1)->whereHas('tagihan', function ($query) use ($request){
@@ -34,6 +52,8 @@ class PembayaranController extends Controller
         });
         $data['tagihan'] = TagihanKuliah::all();
         $data['history'] = HistoryTagihan::latest()->get();
+        $data['prefix'] = $this->setPrefix();
+
 
 
         return view('user.finance.pages.pembayaran-index', $data);

@@ -17,9 +17,28 @@ use Carbon\Carbon;
 
 class PresensiController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
+
     public function index()
     {
-        
+
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
         $data['hadir'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
@@ -34,7 +53,8 @@ class PresensiController extends Controller
         $data['absen'] = UAttendance::where('absen_user_id', $data['userid'])
         ->where('absen_date', $data['today'])
         ->first();
-        
+        $data['prefix'] = $this->setPrefix();
+
 
         // dd($data['absen']);
 
@@ -43,16 +63,17 @@ class PresensiController extends Controller
             return view('user.home-presensi-update', $data);
         } else {
             return view('user.home-presensi-index', $data);
-            
+
         }
 
     }
     public function presensiList()
     {
-        
+
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
         $data['absen'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
+        $data['prefix'] = $this->setPrefix();
 
         $data['hadir'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
         $data['izin'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [2,3,6,7])->get();
@@ -70,7 +91,7 @@ class PresensiController extends Controller
     }
     public function presensiView($date)
     {
-        
+
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
         $data['hadir'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
@@ -85,7 +106,7 @@ class PresensiController extends Controller
         $data['absen'] = UAttendance::where('absen_user_id', $data['userid'])
         ->where('absen_date', $date)
         ->first();
-        
+
 
         // dd($data['absen']);
 
@@ -97,7 +118,7 @@ class PresensiController extends Controller
             Alert::error('Kamu belum absen pada tanggal ini !');
             return back();
             // return view('user.home-presensi-index', $data);
-            
+
         }
 
 
