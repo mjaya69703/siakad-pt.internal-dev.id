@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use Hash;
 use Str;
+use PDF;
 // SECTION ADDONS EXTERNAL
 use Alert;
 use Intervention\Image\ImageManager;
@@ -47,12 +48,6 @@ class HomeController extends Controller
 
 
         return view('mahasiswa.home-index', $data);
-
-    }
-    public function indexDonate(){
-
-
-        return view('mahasiswa.pages.mhs-donate-index');
 
     }
     public function profile(){
@@ -401,6 +396,21 @@ class HomeController extends Controller
     public function tagihanInvoice(Request $request, $code){
         $data['history'] = HistoryTagihan::where('code', $code)->first();
 
-        return view('mahasiswa.pages.mhs-tagihan-invoice', $data);
+        // Load view into a variable
+
+        // return view('mahasiswa.pages.mhs-tagihan-invoice', $data);
+        $view = view('mahasiswa.pages.mhs-tagihan-invoice', $data);
+
+        // Load the HTML content of the view
+        $html = $view->render();
+
+        // Load HTML content into DOMPDF
+        $pdf = PDF::loadHtml($html)->setPaper('a4');
+
+        // Save the PDF file to storage
+        $pdf->save(storage_path('app/public/invoices/Invoice-Pembayaran-'.$data['history']->tagihan->name.'-'.$data['history']->tagihan_code.'.pdf'));
+
+        // Or you can return the PDF to be downloaded
+        return $pdf->download('Invoice-Pembayaran-'.$data['history']->tagihan->name.'-'.$data['history']->tagihan_code.'.pdf');
     }
 }

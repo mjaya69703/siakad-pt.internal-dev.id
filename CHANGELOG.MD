@@ -1,5 +1,10 @@
 ## CHANGE-LOGS
 
+<b>19/05/2024 - Update v.0.0003c - alpha</b>
+
+```
+-   Tambah fitur E-Invoice pada riwayat pembayaran mahasiswa
+```
 <b>18/05/2024 - Update v.0.0003b - alpha</b>
 
 ```

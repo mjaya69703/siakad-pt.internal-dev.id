@@ -152,7 +152,7 @@ class AuthController extends Controller
 
     public function AuthSignOutPost(Request $request){
         Auth::guard('mahasiswa')->logout();
-        
+
         Alert::success('Success', 'Anda berhasil logout');
         return redirect()->route('mahasiswa.auth-signin-page');
     }

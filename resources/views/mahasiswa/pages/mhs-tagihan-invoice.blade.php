@@ -1,221 +1,226 @@
 <!DOCTYPE html>
-<html>
+<html lang='en' class=''>
 
-    <head>
-        <title>Daftar Hadir Perkuliahan</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-            }
+<head>
 
-            .container {
-                width: 700px;
-                margin: 0 auto;
-                padding: 1px;
-                /* border: 1px solid #ddd; */
-            }
+  <meta charset='UTF-8'>
+  <title>CodePen Demo</title>
 
-            .header {
-                text-align: center;
-                margin-bottom: 20px;
-            }
+  <meta name="robots" content="noindex">
 
-            .logo {
-                width: 125px;
-                height: auto;
-            }
+  <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+  <link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+  <link rel="canonical" href="https://codepen.io/zarbyasir/pen/ZEYGNVw">
 
-            .title {
-                font-size: 24px;
-                margin-top: 10px;
-            }
 
-            .content {
-                margin-top: 20px;
-            }
 
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 10px;
-            }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
 
-            th,
-            td {
-                border: 1px solid #ddd;
-                padding: 5px;
+  <style id="INLINE_PEN_STYLESHEET_ID">
+    /*
+    Colors
+    rgb(249, 99, 50); orange flame
+    rgb(255, 77, 77); red
+    rgb(198, 89, 99); red'ish
+    */
 
-            }
+    @page {
+    bleed: 1cm;
+    size: A4 portrait;
+        size:  auto;   /* auto is the initial value */
+        margin-left: 0mm;  /* this affects the margin in the printer settings */
+        margin-bottom: 0mm;
+        margin-top: 0mm;
 
-            .empty {
-                text-align: center;
-            }
+    html
+    {
+        background-color: #FFFFFF;
+        margin: 0px;  /* this affects the margin on the html before sending to printer */
+    }
 
-            .signature {
-                margin-top: 10px;
-                /* margin-bottom: 10px; */
-                text-align: right;
-            }
+    body
+    {
+        border: solid 1px blue ;
+        margin: 10mm 15mm 10mm 15mm; /* margin you want for the content */
+    }
+    }
 
-            .signature p {
-                font-size: 16px;
-                /* margin-top: 80px; */
-            }
+    @media print {
+    .page {
+        margin: 0;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        min-height: initial;
+        box-shadow: initial;
+        background: initial;
+        page-break-after: always;
+    }
+    }
 
-            .info {
-                margin-bottom: 20px;
-            }
+    body {
+    background: #eee;
+    font-familly: roboto;
+    -webkit-print-color-adjust: exact !important;
+    }
 
-            .info-row {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 10px;
-            }
+    div.container {
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    }
 
-            .info-col {
-                flex: 0 0 70%;
-            }
-        </style>
-    </head>
+    div.invoice-letter{
+    min-height: 150px;
+    background-color: #04617B;
+    box-shadow: 0 4px 3px rgba(0,0,0,0.4);
+    }
 
-    <body>
-        <div class="container">
-            <div class="header" style="text-align: center; margin-bottom: 20px;">
-                <table style="width: 100%;">
-                    <tr>
-                        <!-- Logo -->
-                        <td style="width: 30%; text-align: center; border: none;">
-                            <img src="{{ asset('storage') }}/images/website/site-logo.png" alt="Logo" class="logo" style="max-height: 125px; height: auto;">
-                        </td>
-                        <!-- Kop surat -->
-                        <td style="width: 70%; text-align: center; border: none;">
-                            <div>
-                                <h2 class="title" style="margin: 0;">Universitas Contoh</h2>
-                                <p style="margin: 5px 0; font-size: 16px;">Jl. Contoh No. 123, Kota Contoh</p>
-                                <p style="margin: 5px 0; font-size: 16px;">Telp: (0123) 456789 | Fax: (0123) 456789</p>
-                                <p style="margin: 5px 0; font-size: 16px;">Website: www.contoh.ac.id | Email: info@contoh.ac.id</p>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <hr style="margin-top: 20px; border: 1px solid #ddd;">
-                <div class="header" style="text-align: center; margin-bottom: 20px;">
-                    {{-- <h2 class="title" style="margin-top: 20px; font-size: 20px;">
-                        Daftar Hadir Perkuliahan <br>
-                        {{ $jadkul->kelas->pstudi->fakultas->name }} <br>
-                        Program Studi {{ $jadkul->kelas->pstudi->name }} <br>
-                        {{ $jadkul->kelas->taka->name . ' - ' . $jadkul->kelas->taka->semester }}
-                    </h2> --}}
-                </div>
+
+
+    table.invoice thead th{
+    background-color: rgba(4, 97, 123, 0.2);
+    border-top: none;
+    }
+
+    table.invoice thead tr:first-child th:first-child{
+        border-top-left-radius: 10px;
+    }
+
+    table.invoice thead tr:first-child th:last-child{
+    border-top-right-radius: 10px;
+    }
+
+    tr.last-row{
+    background-color: rgba(4, 97, 123, 0.2);
+    font-size: 16px;
+
+    }
+
+    tr.last-row th{
+    border-bottom-left-radius: 10px;
+    width: 30px;
+    font-size: 16px;
+
+    }
+
+    tr.last-row td{
+    border-bottom-right-radius: 10px;
+    font-size: 16px;
+    }
+
+    div.row div.to{
+    height: 260px;
+    /* padding-right: 25px; */
+    border-right: 2px solid rgba(4, 97, 123, 0.2);
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <div class="container my-5 px-5 py-5">
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 33%;">
+                <h5>Esec Academy</h5>
+                <h6><em>Jakarta, Indonesia</em></h6>
+                <p>Jl. Ciremai Raya No 240 Kota Jakarta Selatan</p>
+            </td>
+            <td style="width: 32%; text-align: center;">
+                <img width="125px" height="125px" src="{{ asset('storage/images/web/site-logo.png') }}" alt="Logo">
+            </td>
+            <td style="width: 35%; text-align: left;">
+                <h6>Invoice #<span style="text-transform: uppercase">{{ $history->tagihan_code }}</span></h6>
+                <h6>Issued at: {{ \Carbon\Carbon::parse($history->created_at)->format('d M Y') }}</h6>
+                <h3 style="color: #15ff00;">PAID</h3>
+            </td>
+        </tr>
+    </table>
+
+
+    <div class="container-fluid invoice-letter mt-3" style="padding: 0px; border-radius: 10px;">
+        <table style="width: 100%;" class="invoice-letter mt-3">
+            <tr>
+                <td style="width: 30%; background-color: #04617B; color: white; border-radius: 10px; padding: 5px;">
+                    <p>Summary and Notes</p>
+                </td>
+                <td style="width: 70%; background-color: #04617B; color: white; border-radius: 10px; padding: 5px;">
+                    <p>{{ $history->tagihan->name }} <br> {{ $history->tagihan->desc }}</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+   <div class=" table mt-5">
+      <table class="invoice table table-hover">
+         <thead class="thead">
+            <tr>
+               <th scope="col">No.</th>
+               <th scope="col">Item</th>
+               <th scope="col">Qty.</th>
+               <th scope="col">Amount</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <th scope="row">1</th>
+               <td class="item">Pembayaran {{ $history->tagihan->name }}</td>
+               <td>1</td>
+               <td>Rp. {{ number_format($history->tagihan->price, 0, ',', '.') }}</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+
+   <table style="width: 100%;">
+    <tr>
+        <!-- invoiced to details -->
+        <td style="width: 50%;">
+            <div class="to text-left">
+                <span style="font-weight: 500; font-size: 16px">
+                    Invoiced to: <br>
+                    <b style="font-size: 18px">{{ $history->users->mhs_name }}</b> <br>
+
+                </span>
+                <span style="font-weight: 500; font-size: 16px">
+                    {{ $history->users->mhs_addr_kota == null ? 'Nama Kota' : $history->users->mhs_addr_kota }}, {{ $history->users->mhs_addr_provinsi == null ? 'Nama Provinsi' : $history->users->mhs_addr_provinsi }} <br>
+                </span>
+                <span style="font-weight: 500; font-size: 14px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio, fuga.</span>
             </div>
-
-
-
-
-            {{-- <table style="border-collapse: collapse;">
+        </td>
+        <!-- Invoice assets and total -->
+        <td style="width: 50%;">
+            <table class="table table-borderless text-left">
                 <tbody>
                     <tr>
-                        <td style="text-align: left; border: none;">Mata Kuliah</td>
-                        <td style="border: none;">:</td>
-                        <td style="text-align: left; border: none;">{{ $jadkul->matkul->name }}</td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="text-align: left; border: none;">Hari</td>
-                        <td style="border: none;">:</td>
-                        <td style="text-align: left; border: none;">{{ $jadkul->days_id }}</td>
+                        <th scope="row">Subtotal</th>
+                        <td>Rp. {{ number_format($history->tagihan->price, 0, ',', '.') }}</td>
                     </tr>
-                    <tr>
-                        <td style="text-align: left; border: none;">Pertemuan</td>
-                        <td style="border: none;">:</td>
-                        <td style="text-align: left; border: none;">{{ $jadkul->pert_id }}</td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="text-align: left; border: none;">Tanggal</td>
-                        <td style="border: none;">:</td>
-                        <td style="text-align: left; border: none;">{{ \Carbon\Carbon::parse($jadkul->date)->format('d M Y') }}</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left; border: none;">Kelas</td>
-                        <td style="border: none;">:</td>
-                        <td style="text-align: left; border: none;">{{ $jadkul->kelas->name }}</td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="text-align: left; border: none;">Waktu</td>
-                        <td style="border: none;">:</td>
-                        <td style="text-align: left; border: none;">{{ \Carbon\Carbon::parse($jadkul->start)->format('H:i') . ' - ' . \Carbon\Carbon::parse($jadkul->ended)->format('H:i') }} WIB</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left; border: none;">Dosen Pengajar</td>
-                        <td style="border: none;">:</td>
-                        <td style="text-align: left; border: none;">{{ $jadkul->dosen->dsn_name }}</td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="border: none;"></td>
-                        <td style="text-align: left; border: none;">Ruangan</td>
-                        <td style="border: none;">:</td>
-                        <td style="text-align: left; border: none;">{{ $jadkul->ruang->name }}</td>
+                    <tr class="last-row">
+                        <th scope="row">
+                            Total
+                        </th>
+                        <td>
+                            Rp. {{ number_format($history->tagihan->price, 0, ',', '.') }}
+                        </td>
                     </tr>
                 </tbody>
-            </table> --}}
+            </table>
+            <span style="color: red;font-size: 14px;">Due date: {{ \Carbon\Carbon::parse($history->created_at)->addDays(3)->format('d M Y H:i:s') }}</span>
+
+        </td>
+    </tr>
+   </table>
+
+   <p class="text-center mt-3">ESEC Academy - SiakadPT By Internal Developer</p>
+</div>
 
 
-
-
-            <div class="content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>Tanggal</th>
-                            <th>Waktu</th>
-                            <th>Kode Bayar</th>
-                            <th>Kode Tagihan</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="text-align: center">
-                            <td>1</td>
-                            <td>{{ \Carbon\Carbon::parse($history->created_at)->format('d M Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($history->created_at)->format('H:i:s') }}</td>
-                            <td><span style="text-transform: uppercase">#{{ $history->code }}</span></td>
-                            <td><span style="text-transform: uppercase">#{{ $history->tagihan_code }}</span></td>
-                            <td><span style="text-transform: uppercase; color:chartreuse"><b>{{ $history->stat == 1 ? 'PAID' : 'UN-PAID' }}</b></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            {{-- <div class="signature">
-                <table style="width: 100%">
-                    <tr>
-                        <td style="width: 33%; text-align: left; border: none;">
-
-                            <p style="margin-top: 50px;">Cirebon, {{ \Carbon\Carbon::now()->format('d M Y') }}</p>
-                            <p style="margin-top: 75px;"><b>{{ Auth::user()->name }}</b> <br>{{ Auth::user()->type }}</p>
-                        </td>
-                        <td style="width: 33%; text-align: left; border: none;">
-
-                            <p style="margin-top: 50px;">Mengetahui,</p>
-                            <p style="margin-top: 75px;"><b>{{ $jadkul->dosen->dsn_name }}</b> <br>Dosen Pengajar</p>
-                        </td>
-                        <td style="width: 33%; text-align: left; border: none;">
-
-                            <p style="margin-top: 50px;">Mengesahkan,</p>
-                            <p style="margin-top: 75px;"><b>{{ $jadkul->matkul->pstudi->head->dsn_name }}</b> <br>Kepala Program Studi</p>
-                        </td>
-                    </tr>
-
-                </table>
-            </div> --}}
-        </div>
-    </body>
+</body>
 
 </html>
