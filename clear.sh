@@ -1,4 +1,5 @@
+php artisan route:cache
 php artisan view:cache
 php artisan view:clear
 php artisan cache:clear
-php artisan route:cache
+rm bootstrap/cache/routes-v7.php

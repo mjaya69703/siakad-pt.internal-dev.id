@@ -20,7 +20,7 @@
             <div class="col-lg-12 col-12">
                 <div class="row">
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix . 'home-presensi-list') }}">
+                        <a href="{{ route($prefix . 'presensi.absen-harian') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-clock" style="font-size: 42px"></i></span>
@@ -30,7 +30,7 @@
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix . 'home-presensi-list') }}">
+                        <a href="{{ route($prefix . 'presensi.absen-harian') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-clock" style="font-size: 42px"></i></span>
@@ -40,7 +40,7 @@
                         </a>
                     </div>
                     <div class="col-lg-3 col-6 mb-2">
-                        <a href="{{ route($prefix . 'home-presensi-list') }}">
+                        <a href="{{ route($prefix . 'presensi.absen-harian') }}">
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-clock" style="font-size: 42px"></i></span>
