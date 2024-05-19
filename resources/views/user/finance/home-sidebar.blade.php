@@ -1,21 +1,18 @@
 <li class="sidebar-title">Finance Departement</li>
-<li class="sidebar-item has-sub {{ Route::is($prefix . 'finance.*', request()->path()) ? 'active' : '' }}">
+<li class="sidebar-item has-sub {{ Route::is('web-admin.approval.*', request()->path()) ? 'active' : '' }}">
     <a href="#" class='sidebar-link'>
-        <i class="fa-solid fa-user-check"></i>
-        <span>Data Absen</span>
+        <i class="fa-solid fa-file-signature"></i>
+        <span>Data Approval</span>
     </a>
     <ul class="submenu">
-        <li class="submenu-item {{ Route::is($prefix . 'finance.tagihan-*', request()->path()) ? 'active' : '' }}">
-            <a href="{{ route($prefix . 'finance.tagihan-index') }}" class="submenu-link">Absensi Harian</a>
-        </li>
-        <li class="submenu-item {{ Route::is($prefix . 'finance.pembayaran-*', request()->path()) ? 'active' : '' }}">
-            <a href="{{ route($prefix . 'finance.pembayaran-index') }}" class="submenu-link">Absensi Izin & Cuti</a>
+        <li class="submenu-item {{ Route::is($prefix . 'approval.absen-*', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route($prefix . 'approval.absen-index') }}" class="submenu-link">Approval Absensi</a>
         </li>
     </ul>
 </li>
 <li class="sidebar-item has-sub {{ Route::is($prefix . 'finance.*', request()->path()) ? 'active' : '' }}">
     <a href="#" class='sidebar-link'>
-        <i class="fa-solid fa-user-tie"></i>
+        <i class="fa-solid fa-vault"></i>
         <span>Data Keuangan</span>
     </a>
     <ul class="submenu">

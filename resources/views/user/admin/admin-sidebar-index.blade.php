@@ -2,7 +2,7 @@
         <li class="sidebar-title">Finance Departement</li>
         <li class="sidebar-item has-sub {{ Route::is('web-admin.finance.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
-                <i class="fa-solid fa-user-tie"></i>
+                <i class="fa-solid fa-vault"></i>
                 <span>Data Keuangan</span>
             </a>
             <ul class="submenu">
@@ -17,8 +17,19 @@
                 </li>
             </ul>
         </li>
+        <li class="sidebar-item has-sub {{ Route::is('web-admin.approval.*', request()->path()) ? 'active' : '' }}">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-file-signature"></i>
+                <span>Data Approval</span>
+            </a>
+            <ul class="submenu">
+                <li class="submenu-item {{ Route::is($prefix . 'approval.absen-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route($prefix . 'approval.absen-index') }}" class="submenu-link">Approval Absensi</a>
+                </li>
+            </ul>
+        </li>
 
-        
+
         {{-- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
         <li class="sidebar-title">Data Master</li>
         <li class="sidebar-item has-sub {{ Route::is('web-admin.workers.*', request()->path()) ? 'active' : '' }}">

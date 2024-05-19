@@ -153,16 +153,18 @@
                                         <td data-label="Keluar">{{ $item->absen_time_out == null ? '-' : $item->absen_time_out }}</td>
                                         <td data-label="Status">{{ $item->absen_type }}</td>
                                         <td class="d-flex justify-content-center align-items-center">
-                                            @if ($item->raw_absen_approve == 1)
-                                                <span class="btn btn-warning">Pending</span>
-                                            @elseif ($item->raw_absen_approve == 2)
-                                                <span class="btn btn-success">Approve</span>
-                                            @else
+                                            @if ($item->raw_absen_approve == 0)
                                                 @if ($item->absen_time_out == null)
                                                     <a href="{{ route($prefix . 'presensi.absen-harian-view', $item->absen_code) }}" class="btn btn-danger">Absen Keluar</a>
                                                 @elseif ($item->absen_time_out)
                                                     <a href="{{ route($prefix . 'presensi.absen-harian-view', $item->absen_code) }}" class="btn btn-success">Lihat Absen</a>
                                                 @endif
+                                            @elseif ($item->raw_absen_approve == 1)
+                                                <span class="btn btn-warning">Pending</span>
+                                            @elseif ($item->raw_absen_approve == 2)
+                                                <span class="btn btn-success">Approved</span>
+                                            @elseif ($item->raw_absen_approve == 3)
+                                                <span class="btn btn-danger">Rejected</span>
                                             @endif
                                         </td>
                                     </tr>

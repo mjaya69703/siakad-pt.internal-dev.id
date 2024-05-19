@@ -159,7 +159,9 @@
                                             @elseif ($item->raw_absen_approve == 1)
                                                 <span class="btn btn-warning">Pending</span>
                                             @elseif ($item->raw_absen_approve == 2)
-                                                <span class="btn btn-success">Approve</span>
+                                                <span class="btn btn-success">Approved</span>
+                                            @elseif ($item->raw_absen_approve == 3)
+                                                <span class="btn btn-danger">Rejected</span>
                                             @endif
                                         </td>
                                     </tr>

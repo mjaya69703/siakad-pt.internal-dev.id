@@ -299,6 +299,7 @@ class HomeController extends Controller
             'absen_type' => 'required|integer',
             'absen_date' => 'required|date',
             'absen_time_out' => 'nullable',
+            'absen_desc' => 'required',
             'absen_proof' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:8196',
         ]);
 
@@ -323,6 +324,7 @@ class HomeController extends Controller
         $absen->absen_code = Str::random(7);
         $absen->absen_time_in = Carbon::now()->format('H:i');
         $absen->absen_approve = 1;
+        $absen->absen_desc = $request->absen_desc;
 
         if ($request->hasFile('absen_proof')) {
             $image = $request->file('absen_proof');
