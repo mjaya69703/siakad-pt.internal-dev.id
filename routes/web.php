@@ -292,6 +292,12 @@ Route::group(['prefix' => 'dosen', 'middleware' => ['dsn-access:Dosen Aktif'], '
     Route::patch('/profile/update-kontak',[App\Http\Controllers\Dosen\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
     Route::patch('/profile/update-password',[App\Http\Controllers\Dosen\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
 
+    // PRIVATE FUNCTION => DATA AKADEMIK - JADWAL MENGAJAR
+    Route::get('/data-akademik/jadwal',[App\Http\Controllers\Dosen\Akademik\JadwalAjarController::class, 'index'])->name('akademik.jadwal-index');
+    Route::get('/data-akademik/jadwal/{code}/absen',[App\Http\Controllers\Dosen\Akademik\JadwalAjarController::class, 'indexAbsen'])->name('akademik.jadwal-absen');
+    Route::patch('/data-akademik/jadwal/absen/{code}/update',[App\Http\Controllers\Dosen\Akademik\JadwalAjarController::class, 'updateAbsen'])->name('akademik.jadwal-absen-update');
+
+
 });
 
 

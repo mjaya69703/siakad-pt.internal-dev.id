@@ -1,5 +1,15 @@
 ## CHANGE-LOGS
 
+<b>20/05/2024 - Update v.0.0003d - alpha</b>
+
+```
+-   ( Dosen ) Tambah Menu Jadwal Mengajar + Verifikasi Absen Mahasiswa
+-   ( Dosen ) Initialisasi Absensi Dosen
+-   ( Mahasiswa ) Tambah Status Pembayaran pada Tabel Daftar Tagihan
+-   ( Seeder ) Update Seeder Sample Jadwal Kuliah
+
+```
+
 <b>19/05/2024 - Update v.0.0003c - alpha</b>
 
 ```

@@ -35,6 +35,7 @@
                             <th class="text-center">Kode Tagihan</th>
                             <th class="text-center">Nama Tagihan</th>
                             <th class="text-center">Nominal Tagihan</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Button</th>
                         </tr>
                     </thead>
@@ -45,6 +46,20 @@
                                 <td data-label="Kode Tagihan"><span style="text-transform: uppercase">{{ $item->code }}</span></td>
                                 <td data-label="Nama Tagihan">{{ $item->name }}</td>
                                 <td data-label="Nominal Bayar">Rp. {{ number_format($item->price, 0, ',', '.') }}</td>
+                                <td data-label="Status">
+                                    @php
+                                        $status = $history
+                                            ->where('tagihan_code', $item->code)
+                                            ->where('users_id', Auth::guard('mahasiswa')->user()->id)
+                                            ->where('stat', 1)
+                                            ->first();
+                                    @endphp
+                                    @if ($status)
+                                        <span class="text-success"><b>PAID</b></span>
+                                    @else
+                                        <span class="text-danger"><b>UN-PAID</b></span>
+                                    @endif
+                                </td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="{{ route('mahasiswa.home-tagihan-view', $item->code) }}" class="btn btn-outline-success"><i style="margin-right: 5px" class="fa-solid fa-money-bill-transfer"></i> Bayar Sekarang</a>
 
@@ -104,37 +119,6 @@
     </section>
 @endsection
 @section('custom-js')
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.pay-button').click(function(event) {
-                event.preventDefault();
-
-                var code = $(this).data('code'); // Ambil kode tagihan dari atribut data
-
-                $.post("{{ route('mahasiswa.home-tagihan-payment', ':code') }}".replace(':code', code), { // Ganti placeholder :code dengan nilai kode tagihan
-                        _token: '{{ csrf_token() }}',
-                    },
-                    function(data, status) {
-                        snap.pay(data.snap_token, {
-                            onSuccess: function(result) {
-                                location.reload();
-                            },
-                            onPending: function(result) {
-                                location.reload();
-                            },
-                            onError: function(result) {
-                                location.reload();
-                            }
-                        });
-                    });
-            });
-        });
-    </script>
-
     <script>
         // Fungsi untuk memperbarui tabel dengan data terbaru
         function updateTable() {
@@ -148,7 +132,7 @@
                 })
                 .then(data => {
                     // Perbarui tabel HTML dengan data terbaru
-                    const tbody = document.querySelector('#table1 tbody');
+                    const tbody = document.querySelector('#table2 tbodya');
                     tbody.innerHTML = ''; // Hapus semua baris yang ada sebelumnya
 
                     let number = 1;

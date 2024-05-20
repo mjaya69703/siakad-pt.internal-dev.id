@@ -47,18 +47,7 @@
 
     <!-- Menu untuk dosen -->
     @auth('dosen')
-        <li class="sidebar-item">
-            <a href="{{ route('dosen.home-index') }}" class='sidebar-link'>
-                <i class="fa-solid fa-home"></i>
-                <span>Home</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a href="{{ route('dosen.home-profile') }}" class='sidebar-link'>
-                <i class="fa-solid fa-user-edit"></i>
-                <span>Profile User</span>
-            </a>
-        </li>
+        @include('dosen.home-sidebar')
     @endauth
 
     <li class="sidebar-title">Multi Menu</li>

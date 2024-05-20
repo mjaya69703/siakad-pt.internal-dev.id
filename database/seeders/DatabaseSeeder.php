@@ -235,9 +235,9 @@ class DatabaseSeeder extends Seeder
             'days_id'  => '1',
             'bsks'  => '3',
             'code'  => Str::random(8),
-            'date'  => '2024-04-30',
-            'start'  => '11:00:00',
-            'ended'  => '16:00:00',
+            'date'  => now()->format('Y-m-d'),
+            'start'  => '01:00:00',
+            'ended'  => '23:00:00',
 
         ]);
         \App\Models\JadwalKuliah::create([
@@ -250,9 +250,9 @@ class DatabaseSeeder extends Seeder
             'days_id'  => '1',
             'bsks'  => '3',
             'code'  => Str::random(8),
-            'date'  => '2024-04-30',
-            'start'  => '11:00:00',
-            'ended'  => '16:00:00',
+            'date'  => now()->format('Y-m-d'),
+            'start'  => '01:00:00',
+            'ended'  => '23:00:00',
 
         ]);
 

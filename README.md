@@ -50,9 +50,9 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   ( CRUD ) Data Mahasiswa
 
 -   Fitur Kelola Data Keuangan
-    -   ( CRUD ) Data Tagihan 
-    -   ( CRUD ) Data Pembayaran 
-    -   ( CRUD ) Data Keuangan 
+    -   ( CRUD ) Data Tagihan
+    -   ( CRUD ) Data Pembayaran
+    -   ( CRUD ) Data Keuangan
     -   Pembayaran Biaya Kuliah via MidTrans
 
 <b>Fitur Role Finance Departement</b>
@@ -64,16 +64,32 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Menerbitkan Tagihan ( Personal / Group By Program Studi or Program Kuliah )
     -   Lihat Data Pembayaran Mahasiswa
     -   ( CRUD ) Data Keuangan Income, Expense, Pending, Sisa Saldo
+-   Fitur Data Approval
+    -   Approve and Reject Data Absensi Cuti, Izin dan Sakit Karyawan ( New )
 
 <b>Fitur Role Mahasiswa Aktif</b>
 
--   Fitur Umum Untuk Semua Akun ( Dashboard, Profile, Update Profile, Change Password )
+-   Fitur Dasar
+    -   Halaman Profile , Edit Profile dan Ubah Password
 -   Fitur Lihat Jadwal Kuliah dan Absensi
 -   Fitur Lihat Tagihan dan Lihat Riwayat Pembayaran
+
+<b>Fitur Role Dosen Aktif ( New )</b>
+
+-   Fitur Dasar
+    -   Halaman Profile , Edit Profile dan Ubah Password
+-   Fitur Lihat Jadwal Mengajar dan Verifikasi Absen Mahasiswa
 
 ## How to Install
 
 1. Persyaratan Software
+
+    A. Khusus Windows
+
+    - Sudah Menginstall Composer
+    - Sudah Menginstall WAMP Stack ( Rekomendasi Laragon)
+
+    B. Khusus Linux
 
     - Sudah Menginstall Git / GitBash
     - Sudah Menginstall Composer
