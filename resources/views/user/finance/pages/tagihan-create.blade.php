@@ -14,6 +14,28 @@
 @section('subdesc')
     Halaman untuk melihat data tagihan
 @endsection
+@section('custom-css')
+    <style>
+        @media (max-width: 768px) {
+            .card-body {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .icon {
+                margin: 10px 0;
+            }
+
+            .text-putih {
+                margin-left: 0px !important;
+                /* Mengatur margin-left menjadi 0 */
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+@endsection
 @section('content')
     <section class="section">
         <div class="row">
@@ -24,7 +46,7 @@
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\TagihanKuliah::all()->count() }}<br> Tagihan</span>
+                                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\TagihanKuliah::all()->count() }}<br> Tagihan</span>
                                 </div>
                             </div>
                         </a>
@@ -34,7 +56,7 @@
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\HistoryTagihan::where('stat', 1)->count() }}<br> Pembayaran</span>
+                                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ \App\Models\HistoryTagihan::where('stat', 1)->count() }}<br> Pembayaran</span>
                                 </div>
                             </div>
                         </a>
@@ -44,7 +66,7 @@
                             <div class="card btn btn-outline-success">
                                 <div class="card-body d-flex justify-content-around align-items-center">
                                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-dollar" style="font-size: 42px"></i></span>
-                                    <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ number_format($income, 0, ',', '.') }}<br> Income ( IDR )</span>
+                                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($income, 0, ',', '.') }}<br> Income ( IDR )</span>
                                 </div>
                             </div>
                         </a>
