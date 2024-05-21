@@ -51,7 +51,7 @@ class PembayaranController extends Controller
             return $history->tagihan->price;
         });
         $data['tagihan'] = TagihanKuliah::all();
-        $data['history'] = HistoryTagihan::latest()->get();
+        $data['history'] = HistoryTagihan::where('stat', 1)->latest()->get();
         $data['prefix'] = $this->setPrefix();
 
 

@@ -176,7 +176,7 @@ switch ($rawType) {
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel16">Edit Program Kuliah - {{ $item->name }}</h4>
                         <div class="">
-    
+
                             <button type="submit" class="btn btn-outline-primary" >
                                 <i class="fas fa-paper-plane"></i>
                             </button>
@@ -192,8 +192,8 @@ switch ($rawType) {
                                 <label for="taka_id">Tahun Akademik</label>
                                 <select name="taka_id" id="taka_id" class="form-select">
                                     <option value="" selected>Pilih Tahun Akademik</option>
-                                    @foreach ($taka as $taka)
-                                        <option value="{{ $taka->id }}" {{ $item->taka_id == $taka->id ? 'selected' : '' }}>{{ $taka->name }}</option>
+                                    @foreach ($taka as $tk)
+                                        <option value="{{ $tk->id }}" {{ $item->taka_id == $tk->id ? 'selected' : '' }}>{{ $tk->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('taka_id')

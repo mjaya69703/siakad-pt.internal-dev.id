@@ -306,16 +306,16 @@ class HomeController extends Controller
         // Mencari tagihan berdasarkan `users_id`
         $user = Auth::guard('mahasiswa')->user();
 
-        $checkData = HistoryTagihan::where('tagihan_code', $code)->where('users_id', $user->id)->count();
-        if($checkData === 0){
+        $checkData = HistoryTagihan::where('tagihan_code', $code)->where('users_id', $user->id)->where('stat', 1)->first();
+        if($checkData){
 
-
+            Alert::error('error', 'Kamu sudah membayar tagihan ini');
+            return back();
+        } else {
             $data['tagihan'] = TagihanKuliah::where('code', $code)->first();
 
             return view('mahasiswa.pages.mhs-tagihan-view', $data);
-        } else {
-            Alert::error('error', 'Kamu sudah membayar tagihan ini');
-            return back();
+
         }
     }
 
