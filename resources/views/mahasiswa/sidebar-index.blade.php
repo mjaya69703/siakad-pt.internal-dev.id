@@ -22,3 +22,9 @@
         <span>Data Tagihan</span>
     </a>
 </li>
+<li class="sidebar-item  {{ Route::is('mahasiswa.home-tagihan-*', request()->path()) ? 'active' : '' }}">
+    <a href="{{ route('mahasiswa.home-tagihan-index') }}" class='sidebar-link'>
+        <i class="fa-solid fa-ticket"></i>
+        <span>Ticket Support</span>
+    </a>
+</li>
