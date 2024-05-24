@@ -42,7 +42,7 @@ class User extends Authenticatable
     public function getTypeAttribute($value)
     {
         $types = [
-            0 => 'Web Administrator',       // => Prefix web-admin  => For Monitoring Antar Departement
+            0 => 'Web Administrator',       // => Prefix web-admin  => For Website Development
             1 => 'Departement Finance',     // => Prefix finance    => For Pelayanan Administrasi Umum dan Keuangan ( BAU )
             2 => 'Departement Officer',     // => Prefix officer    => For Penerimaan Mahasiswa, Etc. ( Officer Staff )
             3 => 'Departement Academic',    // => Prefix academic   => For Pelayanan Akademik ( BAAK Staff )
