@@ -324,6 +324,14 @@ Route::group(['prefix' => 'mahasiswa', 'middleware' => ['mhs-access:Mahasiswa Ak
     Route::patch('/profile/update-kontak',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
     Route::patch('/profile/update-password',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
 
+    // PRIVATE FUNCTION SUPPORT TICKET => PROFILE
+    Route::get('/support',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'index'])->name('support.ticket-index');
+    Route::get('/support/open',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'open'])->name('support.ticket-open');
+    Route::get('/support/create/{dept}',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'create'])->name('support.ticket-create');
+    Route::post('/support/create/store',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'store'])->name('support.ticket-store');
+
+
+
     // AJAX ASYNC
     Route::get('/ajax/getTagihan',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanIndexAjax'])->name('ajax-tagihan-index');
 });

@@ -22,9 +22,17 @@
         <span>Data Tagihan</span>
     </a>
 </li>
-<li class="sidebar-item  {{ Route::is('mahasiswa.home-tagihan-*', request()->path()) ? 'active' : '' }}">
-    <a href="{{ route('mahasiswa.home-tagihan-index') }}" class='sidebar-link'>
+<li class="sidebar-item has-sub {{ Route::is('mahasiswa.support.*', request()->path()) ? 'active' : '' }}">
+    <a href="#" class='sidebar-link'>
         <i class="fa-solid fa-ticket"></i>
         <span>Ticket Support</span>
     </a>
+    <ul class="submenu">
+        <li class="submenu-item {{ Route::is('mahasiswa.support.ticket-index', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route('mahasiswa.support.ticket-index') }}" class="submenu-link">Lihat Ticket</a>
+        </li>
+        <li class="submenu-item {{ Route::is('mahasiswa.support.ticket-open', 'mahasiswa.support.ticket-create', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route('mahasiswa.support.ticket-open') }}" class="submenu-link">Buka Ticket</a>
+        </li>
+    </ul>
 </li>

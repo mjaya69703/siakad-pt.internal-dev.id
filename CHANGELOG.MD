@@ -1,8 +1,18 @@
 ## CHANGE-LOGS
 
+<b>24/05/2024 - Update v.0.0003f - alpha</b>
+
+```
+- ( Mahasiswa ) Tambah Menu - Buka Support Ticket
+- ( Mahasiswa ) Tambah Menu - Daftar Support Ticket
+```
+
 <b>23/05/2024 - Update v.0.0003e - alpha</b>
 
+```
+
 -   Initialisasi Fitur Support Ticket
+```
 
 <b>20/05/2024 - Update v.0.0003d - alpha</b>
 
