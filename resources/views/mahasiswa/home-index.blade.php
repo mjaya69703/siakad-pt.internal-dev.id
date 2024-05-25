@@ -27,7 +27,7 @@
                 margin: 10px 0;
             }
 
-            .text-white {
+            .text-putih {
                 margin-left: 0px !important;
                 /* Mengatur margin-left menjadi 0 */
                 margin-top: 10px;
@@ -46,7 +46,7 @@
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
-                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ number_format($sisatagihan, 0, ',', '.') }}<br>Tagihan <br> ( IDR )</span>
+                                <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($sisatagihan, 0, ',', '.') }}<br>Tagihan <br> ( IDR )</span>
                             </div>
                         </div>
                     </a>
@@ -56,7 +56,7 @@
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-money-bill-transfer" style="font-size: 42px"></i></span>
-                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ number_format($history, 0, ',', '.') }}<br>Pembayaran <br> ( IDR )</span>
+                                <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($history, 0, ',', '.') }}<br>Pembayaran <br> ( IDR )</span>
                             </div>
                         </div>
                     </a>
@@ -66,7 +66,7 @@
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-check" style="font-size: 42px"></i></span>
-                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ $habsen }} <br>Absen <br> Hadir</span>
+                                <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ $habsen }} <br>Absen <br> Hadir</span>
                             </div>
                         </div>
                     </a>
@@ -76,7 +76,7 @@
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-book-open-reader" style="font-size: 42px"></i></span>
-                                <span class="text-white" style="margin-left: 25px; font-size: 16px;">{{ $jadkul }} <br>Jadwal <br> Kuliah</span>
+                                <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ $jadkul }} <br>Jadwal <br> Kuliah</span>
                             </div>
                         </div>
                     </a>
