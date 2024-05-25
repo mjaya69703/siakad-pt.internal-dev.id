@@ -9,6 +9,7 @@
     Lihat Ticket
 @endsection
 @section('urlmenu')
+{{ route('mahasiswa.support.ticket-index') }}
 @endsection
 @section('custom-css')
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/extensions/summernote/summernote-lite.css">
@@ -140,7 +141,7 @@
             autoRefreshTimer = setInterval(function() {
                 // Lakukan refresh halaman
                 location.reload();
-            }, 5000); // Refresh setiap 5 detik
+            }, 15000); // Refresh setiap 5 detik
         }
 
         // Fungsi untuk menghentikan auto-refresh

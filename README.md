@@ -1,7 +1,7 @@
 <p align="center"><a href="https://siakad-pt.internal-dev.id" target="_blank"><img src="https://siakad-pt.internal-dev.id/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003c - Changelogs</a>
+<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003h - Changelogs</a>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
@@ -14,7 +14,7 @@
 
 <img src="https://siakad-pt.internal-dev.id/storage/images/web/Picture1.png" style="width: 100%;" align="center">
 
-Web Siakad Perguruan Tinggi yang dibuat oleh Muhamad Jaya Kusuma menggunakan Base Framework Laravel 10 yang kini telah diupdate ke Laravel 11. Siakad ini dibangun untuk mempermudah para mahasiswa, dosen dan para staff dalam melakukan akvitas pekerjaannya dilingkungan kampus.
+Web Siakad Perguruan Tinggi yang dibuat oleh Muhamad Jaya Kusuma menggunakan Base Framework Laravel 10 yang kini telah diupdate ke Laravel 11. Siakad ini dibangun untuk mempermudah para mahasiswa, dosen dan para staff dalam melakukan akvitas pekerjaannya dilingkungan kampus serta saling terintegrasi.
 
 ## Feature Project Siakad PT ( In Development )
 
@@ -65,7 +65,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Lihat Data Pembayaran Mahasiswa
     -   ( CRUD ) Data Keuangan Income, Expense, Pending, Sisa Saldo
 -   Fitur Data Approval
-    -   Approve and Reject Data Absensi Cuti, Izin dan Sakit Karyawan ( New )
+    -   Approve and Reject Data Absensi Cuti, Izin dan Sakit Karyawan
 
 <b>Fitur Role Mahasiswa Aktif</b>
 
@@ -73,8 +73,9 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Halaman Profile , Edit Profile dan Ubah Password
 -   Fitur Lihat Jadwal Kuliah dan Absensi
 -   Fitur Lihat Tagihan dan Lihat Riwayat Pembayaran
+-   Fitur Lihat Support dan Membuat Support Tiket Ke Berbagai Departement ( New )
 
-<b>Fitur Role Dosen Aktif ( New )</b>
+<b>Fitur Role Dosen Aktif</b>
 
 -   Fitur Dasar
     -   Halaman Profile , Edit Profile dan Ubah Password
@@ -87,7 +88,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     A. Khusus Windows
 
     - Sudah Menginstall Composer
-    - Sudah Menginstall WAMP Stack ( Rekomendasi Laragon)
+    - Sudah Menginstall WAMP Stack ( Rekomendasi Laragon )
 
     B. Khusus Linux
 

@@ -1,5 +1,11 @@
 ## CHANGE-LOGS
 
+<b>26/05/2024 - Update v.0.0003h - alpha</b>
+```
+- Tambah Logo Pada Halaman Authentikasi - All Role
+- Increase AutoRefresh Delay 5 Seconds to 15 Second
+- Create MIT LICENSE
+```
 <b>25/05/2024 - Update v.0.0003g - alpha</b>
 
 ```

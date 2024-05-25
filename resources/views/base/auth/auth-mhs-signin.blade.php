@@ -6,8 +6,10 @@
                 <div class="row">
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                         <div class="card card-plain">
+                            <img src="{{ asset('storage/images/web/site-logo.png')}}" alt="ESEC Logo" style="display: block; margin: 0 auto; max-width: 200px;">
+
                             <div class="card-header pb-0 text-start">
-                                <h4 class="font-weight-bolder">Sign In</h4>
+                                <h4 class="font-weight-bolder">Sign In to Student</h4>
                                 <p class="mb-0">Enter your email and password to sign in</p>
                             </div>
                             @include('sweetalert::alert')

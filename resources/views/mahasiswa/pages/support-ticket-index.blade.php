@@ -95,7 +95,7 @@
             setInterval(function() {
                 // Lakukan refresh halaman
                 location.reload();
-            }, 5000); // Refresh setiap 5 detik
+            }, 15000); // Refresh setiap 5 detik
         }
 
         // Memulai auto-refresh secara default
