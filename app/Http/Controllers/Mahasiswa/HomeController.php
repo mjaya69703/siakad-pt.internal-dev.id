@@ -307,7 +307,7 @@ class HomeController extends Controller
         $user = Auth::guard('mahasiswa')->user();
 
         $checkData = HistoryTagihan::where('tagihan_code', $code)->where('users_id', $user->id)->where('stat', 1)->first();
-        if($checkData){
+        if($checkData !== null){
 
             Alert::error('error', 'Kamu sudah membayar tagihan ini');
             return back();
