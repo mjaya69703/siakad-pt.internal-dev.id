@@ -1,7 +1,6 @@
 compiled.php
 config.php
 down
-views*
 views/*
 events.scanned.php
 maintenance.php
