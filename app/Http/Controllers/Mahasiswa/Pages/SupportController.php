@@ -41,7 +41,28 @@ class SupportController extends Controller
         // dd($request->dept);
         return view('mahasiswa.pages.support-ticket-create', $data);
     }
+    public function view(Request $request, $code)
+    {
+        $data['ticket'] = TicketSupport::where('code', $code)->first();
+        $initialSupport = TicketSupport::where('codr', $code)->latest()->get();
+        $data['support'] = $initialSupport;
 
+        return view('mahasiswa.pages.support-ticket-view', $data);
+    }
+
+    public function AjaxLastReply($code)
+    {
+        $latestSupport = TicketSupport::where('codr', $code)->latest()->get();
+        $newData = array_diff_assoc($latestSupport->toArray(), $this->support->toArray()); // Efficient data comparison
+
+        // Check for any changes
+        if (!empty($newData)) {
+            $this->support = $latestSupport; // Update controller's cached support data
+            return response()->json($latestSupport);
+        } else {
+            return response()->json(null); // No changes, send empty response to avoid unnecessary updates
+        }
+    }
     public function store(Request $request)
     {
         $request->validate([
@@ -65,4 +86,35 @@ class SupportController extends Controller
         Alert::success('Berhasil', 'Ticket telah berhasil dibuat!');
         return redirect()->route('mahasiswa.support.ticket-index');
     }
+
+    public function storeReply(Request $request, $code)
+    {
+        $request->validate([
+            'message' => 'required|string',
+        ]);
+
+        // UPDATE TICKET
+        $ticket = TicketSupport::where('code', $code)->first();
+        $ticket->stat_id = 4;
+        $ticket->updated_at = now();
+        $ticket->save();
+
+        $rticket = new TicketSupport;
+        $rticket->codr = $code;
+        $rticket->core = Str::random(6);
+        $rticket->prio_id = $ticket->raw_prio_id;
+        $rticket->dept_id = $ticket->raw_dept_id;
+        $rticket->sent_to = $ticket->raw_dept_id;
+        $rticket->users_id = Auth::guard('mahasiswa')->user()->id;
+        $rticket->subject = $request->subject;
+        $rticket->message = $request->message;
+        $rticket->save();
+
+
+
+        Alert::success('Berhasil', 'Ticket telah berhasil dibuat!');
+        return back();
+    }
+
+
 }

@@ -65,4 +65,9 @@ class TicketSupport extends Model
     {
         return $this->attributes['stat_id'];
     }
+
+    public function users()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'users_id');
+    }
 }

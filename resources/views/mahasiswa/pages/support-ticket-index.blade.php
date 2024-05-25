@@ -40,6 +40,7 @@
                             <th class="text-center">Departement</th>
                             <th class="text-center subject-column">Subject</th> <!-- Menambahkan class "subject-column" -->
                             <th class="text-center">Status</th>
+                            <th class="text-center">Last Reply</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +59,7 @@
                                     @endif
                                 </td>
                                 <td data-label="Departement">{{ $item->dept_id }}</td>
-                                <td data-label="Subject"><a href="">#{{ $item->code . ' - ' . $item->subject }}</a></td> <!-- Menambahkan style="width: 50%" -->
+                                <td data-label="Subject"><a href="{{ route('mahasiswa.support.ticket-view', $item->code) }}">#{{ $item->code . ' - ' . $item->subject }}</a></td> <!-- Menambahkan style="width: 50%" -->
                                 <td data-label="Status">
                                     @if ($item->raw_stat_id === 0)
                                         <span class="text-success"><b>{{ $item->stat_id }}</b></span>
@@ -76,6 +77,7 @@
                                         <span class="text-warning"><b>{{ $item->stat_id }}</b></span>
                                     @endif
                                 </td>
+                                <td data-label="Last Reply">{{ $item->updated_at->diffForHumans() }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -85,4 +87,18 @@
             </div>
         </div>
     </section>
+@endsection
+@section('custom-js')
+    <script>
+        // Fungsi untuk memulai auto-refresh setiap 5 detik
+        function startAutoRefresh() {
+            setInterval(function() {
+                // Lakukan refresh halaman
+                location.reload();
+            }, 5000); // Refresh setiap 5 detik
+        }
+
+        // Memulai auto-refresh secara default
+        startAutoRefresh();
+    </script>
 @endsection

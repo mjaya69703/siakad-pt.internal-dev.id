@@ -28,7 +28,7 @@
         <span>Ticket Support</span>
     </a>
     <ul class="submenu">
-        <li class="submenu-item {{ Route::is('mahasiswa.support.ticket-index', request()->path()) ? 'active' : '' }}">
+        <li class="submenu-item {{ Route::is('mahasiswa.support.ticket-index', 'mahasiswa.support.ticket-view', request()->path()) ? 'active' : '' }}">
             <a href="{{ route('mahasiswa.support.ticket-index') }}" class="submenu-link">Lihat Ticket</a>
         </li>
         <li class="submenu-item {{ Route::is('mahasiswa.support.ticket-open', 'mahasiswa.support.ticket-create', request()->path()) ? 'active' : '' }}">

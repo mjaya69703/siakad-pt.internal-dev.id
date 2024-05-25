@@ -1,5 +1,12 @@
 ## CHANGE-LOGS
 
+<b>25/05/2024 - Update v.0.0003g - alpha</b>
+
+```
+- ( Mahasiswa ) Tambah Menu - Buat Support Ticket with AutoRefresh
+- ( Mahasiswa ) Tambah Auto Refresh Pada Menu Daftar Support Tiket
+```
+
 <b>24/05/2024 - Update v.0.0003f - alpha</b>
 
 ```
