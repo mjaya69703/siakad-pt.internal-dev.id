@@ -56,9 +56,10 @@
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "php artisan key:generate",
             "php artisan config:cache",
-            "php artisan migrate",
-            "npm install",
-            "npm run build"
+            "php artisan migrate --seed",
+            "php artisan storage:link",
+            "php artisan view:clear",
+            "php artisan view:cache",
         ]
     },
     "extra": {

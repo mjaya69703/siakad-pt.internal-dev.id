@@ -98,6 +98,9 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     - Sudah Menginstall MySQL atau MariaDB
     - Sudah Menginstall WebServer Nginx or apache
 
+    C. Khusus Docker
+    - Sudah Menginstall Docker
+
 2. Clone Repository
 
 ```
@@ -110,6 +113,14 @@ setup.bash
 // Apabila Menggunakan Linux
 chmod +x setup.sh
 ./setup.sh
+
+// Apabila Menggunakan Docker
+docker compose up -d --build
+docker compose exec phpmyadmin chmod 777 /sessions
+docker compose exec php bash
+chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+composer setup
 ```
 
 3. Edit File Environment ( .env )
@@ -178,3 +189,4 @@ setup.bat
 -   Framework PHP <a href="https://laravel.com">Laravel 11</a>
 -   Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
 -   Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
+-   Dockerize Script <a href="https://github.com/refactorian/laravel-docker">Mazer Dashboard By zuramai</a>

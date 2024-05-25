@@ -4,7 +4,8 @@
 ```
 - Tambah Logo Pada Halaman Authentikasi - All Role
 - Increase AutoRefresh Delay 5 Seconds to 15 Second
-- Create MIT LICENSE
+- Setup Automation with docker
+- Register MIT LICENSE
 ```
 <b>25/05/2024 - Update v.0.0003g - alpha</b>
 
