@@ -126,7 +126,7 @@ chmod +x docker.sh
 
 3. Edit File Environment ( .env )
 
--   Sesuaikan Database Kamu
+-   Sesuaikan Database Kamu ( For Windows and Linux Installation)
 
 ```
 DB_PORT=3306
@@ -157,6 +157,12 @@ MIDTRANS_SERVER_KEY=SB-Mid-server-xxxx   ##   => Input your MidTrans serverKey
 MIDTRANS_IS_PRODUCTION=false             ##   => false or true => Choose your condition
 MIDTRANS_IS_SANITIZED=true
 MIDTRANS_IS_3DS=true
+```
+-   Sesuaikan Konfigurasi CloudFlare Turnstile ( .env )
+
+```
+TURNSTILE_SITE_KEY=2x00000000000000000000AB                 ## TURNSTILE SITE KEY
+TURNSTILE_SECRET_KEY=2x0000000000000000000000000000000AA    ## TURNSTILE SECRET KEY
 ```
 
 4. Menjalankan Project

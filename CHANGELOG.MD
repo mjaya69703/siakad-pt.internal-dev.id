@@ -1,5 +1,9 @@
 ## CHANGE-LOGS
 
+<b>27/05/2024 - Update v.0.0003i - alpha</b>
+```
+- ( Security ) Add the cloudflare turnstile for all authentication
+```
 <b>26/05/2024 - Update v.0.0003h - alpha</b>
 
 ```

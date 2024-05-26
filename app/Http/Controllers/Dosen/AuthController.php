@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 // SECTION ADDONS SYSTEM
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Coderflex\LaravelTurnstile\Rules\TurnstileCheck;
+use Coderflex\LaravelTurnstile\Facades\LaravelTurnstile;
 use Auth;
 use Str;
 // SECTION ADDONS EXTERNAL
@@ -37,6 +39,12 @@ class AuthController extends Controller
     }
 
     public function AuthSignInPost(Request $request){
+        $request->validate([
+            'login' => 'required',
+            'password' => 'required',
+            'cf-turnstile-response' => ['required', new TurnstileCheck()],
+        ]);
+
         // Ambil input 'login' dari request
         $login = $request->input('login');
 
@@ -151,7 +159,7 @@ class AuthController extends Controller
 
     public function AuthSignOutPost(Request $request){
         Auth::guard('dosen')->logout();
-        
+
         Alert::success('Success', 'Anda berhasil logout');
         return redirect()->route('dosen.auth-signin-page');
     }

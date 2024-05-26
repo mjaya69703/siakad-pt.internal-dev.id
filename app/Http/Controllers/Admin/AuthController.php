@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // SECTION ADDONS SYSTEM
+use Coderflex\LaravelTurnstile\Rules\TurnstileCheck;
+use Coderflex\LaravelTurnstile\Facades\LaravelTurnstile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Auth;
@@ -109,6 +111,12 @@ class AuthController extends Controller
     }
 
     public function AuthSignInPost(Request $request){
+
+        $request->validate([
+            'login' => 'required',
+            'password' => 'required',
+            'cf-turnstile-response' => ['required', new TurnstileCheck()],
+        ]);
         // Ambil input 'login' dari request
         $login = $request->input('login');
 
@@ -129,6 +137,7 @@ class AuthController extends Controller
         }
 
         $remember_me = $request->has('remember_me') ? true : false;
+
 
         // Coba untuk melakukan autentikasi menggunakan metode 'attempt' dari facade 'Auth'
         if (Auth::attempt(array($fieldType => $login, 'password' => $request->input('password')), $remember_me) ) {

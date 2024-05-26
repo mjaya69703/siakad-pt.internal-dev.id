@@ -11,6 +11,17 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
     ),
   ),
+  'coderflex/laravel-turnstile' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Coderflex\\LaravelTurnstile\\LaravelTurnstileServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LaravelTurnstile' => 'Coderflex\\LaravelTurnstile\\Facades\\LaravelTurnstile',
+    ),
+  ),
   'intervention/image-laravel' => 
   array (
     'providers' => 

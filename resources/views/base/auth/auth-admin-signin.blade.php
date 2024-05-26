@@ -18,13 +18,27 @@
 
                                     <div class="mb-3">
                                         <input type="text" class="form-control form-control-lg" name="login" placeholder="Username / Phone Number / Email Adress ..." aria-label="Email">
+                                        @error('login')
+
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" aria-label="password">
+                                        @error('password')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
-                                    <div class="form-check form-switch">
+
+                                    <div class="form-check form-switch mb-3">
                                         <input class="form-check-input" type="checkbox" id="rememberMe">
                                         <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    </div>
+                                    <div class="">
+                                        <x-turnstile-widget theme="auto" language="id"/>
+                                        @error('cf-turnstile-response')
+                                            <p class="error">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
