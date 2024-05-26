@@ -29,6 +29,12 @@
                 <span>Absen Izin & Cuti</span>
             </a>
         </li>
+        <li class="sidebar-item  {{ Route::is($prefix . 'support.ticket-index', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route($prefix . 'support.ticket-index') }}" class='sidebar-link'>
+                <i class="fa-solid fa-ticket"></i>
+                <span>Support Ticket</span>
+            </a>
+        </li>
         @if (Auth::user()->raw_type === 0)
             {{-- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
             @include('user.admin.admin-sidebar-index')

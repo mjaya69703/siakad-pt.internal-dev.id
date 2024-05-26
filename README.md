@@ -24,8 +24,11 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
 
 -   Authentikasi User / Staff / Admin, Mahasiswa dan Dosen
 -   Fitur Dasar
+
     -   Halaman Profile , Edit Profile dan Ubah Password
     -   Halaman Jurnal Presensi ( Absensi )
+    -   Halaman Support Ticket
+
 -   Fitur Kelola Data Akademik
 
     -   ( CRUD ) Data Fakultas
@@ -60,6 +63,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
 -   Fitur Dasar
     -   Halaman Profile , Edit Profile dan Ubah Password
     -   Halaman Jurnal Presensi ( Absensi )
+    -   Halaman Support Ticket
 -   Fitur Kelola Data Keuangan
     -   Menerbitkan Tagihan ( Personal / Group By Program Studi or Program Kuliah )
     -   Lihat Data Pembayaran Mahasiswa
@@ -99,6 +103,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     - Sudah Menginstall WebServer Nginx or apache
 
     C. Khusus Docker
+
     - Sudah Menginstall Docker
 
 2. Clone Repository
@@ -189,4 +194,4 @@ setup.bat
 -   Framework PHP <a href="https://laravel.com">Laravel 11</a>
 -   Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
 -   Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
--   Dockerize Script <a href="https://github.com/refactorian/laravel-docker">Mazer Dashboard By zuramai</a>
+-   Dockerize Script <a href="https://github.com/refactorian/laravel-docker">Laravel Docker</a>

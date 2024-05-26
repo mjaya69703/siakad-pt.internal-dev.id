@@ -208,6 +208,10 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
         Route::patch('/finance/approval-absen/{code}/update/accept',[App\Http\Controllers\Admin\Pages\Finance\ApprovalController::class, 'updateAbsenAccept'])->name('approval.absen-update-accept');
         Route::patch('/finance/approval-absen/{code}/update/reject',[App\Http\Controllers\Admin\Pages\Finance\ApprovalController::class, 'updateAbsenReject'])->name('approval.absen-update-reject');
 
+        // PRIVATE FUNCTION => SUPPORT TICKET
+        Route::get('/support',[App\Http\Controllers\Admin\Pages\Finance\TicketSupportController::class, 'index'])->name('support.ticket-index');
+        Route::get('/support/view/{code}',[App\Http\Controllers\Admin\Pages\Finance\TicketSupportController::class, 'view'])->name('support.ticket-view');
+        Route::post('/support/create/store-reply/{code}',[App\Http\Controllers\Admin\Pages\Finance\TicketSupportController::class, 'storeReply'])->name('support.ticket-store-reply');
 
 
     });
@@ -270,6 +274,10 @@ Route::group(['prefix' => 'finance', 'middleware' => ['user-access:Departement F
         Route::patch('/approval-absen/{code}/update/accept',[App\Http\Controllers\Admin\Pages\Finance\ApprovalController::class, 'updateAbsenAccept'])->name('approval.absen-update-accept');
         Route::patch('/approval-absen/{code}/update/reject',[App\Http\Controllers\Admin\Pages\Finance\ApprovalController::class, 'updateAbsenReject'])->name('approval.absen-update-reject');
 
+        // PRIVATE FUNCTION => SUPPORT TICKET
+        Route::get('/support',[App\Http\Controllers\Admin\Pages\Finance\TicketSupportController::class, 'index'])->name('support.ticket-index');
+        Route::get('/support/view/{code}',[App\Http\Controllers\Admin\Pages\Finance\TicketSupportController::class, 'view'])->name('support.ticket-view');
+        Route::post('/support/create/store-reply/{code}',[App\Http\Controllers\Admin\Pages\Finance\TicketSupportController::class, 'storeReply'])->name('support.ticket-store-reply');
 
     });
 
@@ -324,7 +332,7 @@ Route::group(['prefix' => 'mahasiswa', 'middleware' => ['mhs-access:Mahasiswa Ak
     Route::patch('/profile/update-kontak',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveDataKontak'])->name('home-profile-save-kontak');
     Route::patch('/profile/update-password',[App\Http\Controllers\Mahasiswa\HomeController::class, 'saveDataPassword'])->name('home-profile-save-password');
 
-    // PRIVATE FUNCTION SUPPORT TICKET => PROFILE
+    // PRIVATE FUNCTION => SUPPORT TICKET
     Route::get('/support',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'index'])->name('support.ticket-index');
     Route::get('/support/open',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'open'])->name('support.ticket-open');
     Route::get('/support/view/{code}',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'view'])->name('support.ticket-view');

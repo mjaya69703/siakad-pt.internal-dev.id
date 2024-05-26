@@ -21,7 +21,7 @@
 @endsection
 @section('content')
     <section class="content">
-        <form action="{{ route('mahasiswa.support.ticket-store-reply', $ticket->code) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route($prefix . 'support.ticket-store-reply', $ticket->code) }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="card mb-2">
@@ -35,9 +35,9 @@
                 </div>
                 <div class="card-body row">
                     <div class="form-group col-lg-4 col-12">
-                        <label for="mhs_name">Nama Mahasiswa</label>
-                        <input type="text" name="mhs_name" id="mhs_name" class="form-control" readonly value="{{ Auth::guard('mahasiswa')->user()->mhs_name }}">
-                        @error('mhs_name')
+                        <label for="name">Nama Mahasiswa</label>
+                        <input type="text" name="name" id="name" class="form-control" readonly value="{{ Auth::user()->name }}">
+                        @error('name')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -66,8 +66,16 @@
                     </div>
                     <div class="form-group col-lg-4 col-12">
                         <label for="stat_id">Status</label>
-                        <input type="text" name="stat_id" id="stat_id" required class="form-control" readonly value="{{ $ticket->stat_id }}">
-
+                        <select name="stat_id" id="stat_id" class="form-select">
+                            <option value="" selected>Pilih Status</option>
+                            <option value="0" {{ $ticket->raw_stat_id === 0 ? 'selected' : '' }}>Open</option>
+                            <option value="1" {{ $ticket->raw_stat_id === 1 ? 'selected' : '' }}>In Progress</option>
+                            <option value="2" {{ $ticket->raw_stat_id === 2 ? 'selected' : '' }}>Closed</option>
+                            <option value="3" {{ $ticket->raw_stat_id === 3 ? 'selected' : '' }}>Answered</option>
+                            <option value="3" {{ $ticket->raw_stat_id === 4 ? 'selected' : '' }}>Student Reply</option>
+                            <option value="5" {{ $ticket->raw_stat_id === 5 ? 'selected' : '' }}>On Hold</option>
+                            <option value="6" {{ $ticket->raw_stat_id === 6 ? 'selected' : '' }}>Pending Student</option>
+                        </select>
                         @error('stat_id')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -106,9 +114,13 @@
                                         </div>
                                         <span><b>{{ $item->admin->name . ' - ' . $item->created_at->diffForHumans() }}</b><br>{{ $item->admin->type }}</span>
                                     @endif
+
                                 </div>
-                                <a href="" class="btn btn-danger text-center">Delete</a>
-                                <a href="" class="btn btn-danger text-center">Delete</a>
+                                <div class="d-flex justify-content-between">
+
+                                    <a href="" class="btn btn-primary text-center"><i class="fa-solid fa-edit"></i></a>
+                                    <a href="" class="btn btn-danger text-center"><i class="fa-solid fa-trash"></i></a>
+                                </div>
                             </div>
                             <div class="col-lg-9">
                                 <p>{!! $item->message !!}</p>
@@ -124,10 +136,17 @@
                 <div class="form-group row">
                     <div class="col-lg-3">
                         <div class="d-flex">
-                            <div class="avatar avatar-lg me-3">
-                                <img src="{{ asset('storage/images/' . $ticket->users->mhs_image) }}" class="avatar-sm" alt="">
-                            </div>
-                            <span><b>{{ $ticket->users->mhs_name . ' - ' . $ticket->created_at->diffForHumans() }}</b><br>Kelas {{ $ticket->users->kelas->name }}</span>
+                            @if ($ticket->users_id !== null)
+                                <div class="avatar avatar-lg me-3">
+                                    <img src="{{ asset('storage/images/' . $ticket->users->mhs_image) }}" class="avatar-sm" alt="">
+                                </div>
+                                <span><b>{{ $ticket->users->mhs_name . ' - ' . $ticket->created_at->diffForHumans() }}</b><br>Kelas {{ $ticket->users->kelas->name }}</span>
+                            @elseif ($ticket->admin_id !== null)
+                                <div class="avatar avatar-lg me-3">
+                                    <img src="{{ asset('storage/images/' . $ticket->admin->image) }}" class="avatar-sm" alt="">
+                                </div>
+                                <span><b>{{ $ticket->admin->name . ' - ' . $ticket->created_at->diffForHumans() }}</b><br>{{ $ticket->admin->type }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-9">
