@@ -9,6 +9,7 @@ services:
             - 5173:5173
         volumes:
             - .:/var/www:cached
+        restart: unless-stopped
 
     ####################################################################################################
     # Nginx
@@ -23,6 +24,7 @@ services:
             - .docker/nginx/nginx.conf:/etc/nginx/nginx.conf
         depends_on:
             - php
+        restart: unless-stopped
 
     ####################################################################################################
     # DATABASE (MySQL)
@@ -41,6 +43,7 @@ services:
             MYSQL_DATABASE: siakadPT
             MYSQL_USER: siakadPT
             MYSQL_PASSWORD: siakadPT
+        restart: unless-stopped
 
     ####################################################################################################
     # phpMyAdmin
@@ -57,6 +60,7 @@ services:
             PMA_ARBITRARY: 1
         volumes:
             - .docker/phpmyadmin/sessions:/sessions
+        restart: unless-stopped
 
     ####################################################################################################
     # Adminer
