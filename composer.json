@@ -52,11 +52,10 @@
             "@php artisan key:generate --ansi"
         ],
         "setup": [
-            "mkdir storage/framework/views",
-            "php artisan view:clear",
-            "php artisan view:cache",
             "composer install",
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "php artisan view:clear",
+            "php artisan view:cache",
             "php artisan key:generate",
             "php artisan config:cache",
             "php artisan migrate --seed",
