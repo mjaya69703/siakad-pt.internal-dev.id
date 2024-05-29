@@ -1,1 +1,1 @@
-composer update
+composer install

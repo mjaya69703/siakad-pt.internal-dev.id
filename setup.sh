@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Menjalankan Composer Update..."
-composer update && echo "Proses Installasi SiakadPT telah Selesai..."
+composer install && echo "Proses Installasi SiakadPT telah Selesai..."
 chmod +x setup.sh
 chmod +x seed.sh
 chmod +x clear.sh
