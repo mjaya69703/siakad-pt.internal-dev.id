@@ -1,7 +1,7 @@
 <p align="center"><a href="https://siakad-pt.internal-dev.id" target="_blank"><img src="https://siakad-pt.internal-dev.id/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003h - Changelogs</a>
+<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003j - Changelogs</a>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
@@ -158,11 +158,31 @@ MIDTRANS_IS_PRODUCTION=false             ##   => false or true => Choose your co
 MIDTRANS_IS_SANITIZED=true
 MIDTRANS_IS_3DS=true
 ```
--   Sesuaikan Konfigurasi CloudFlare Turnstile ( .env )
+-   Addons Cloudflare Turnstile Capctha ( Opsional )
 
 ```
+1. Change This File In .env
 TURNSTILE_SITE_KEY=2x00000000000000000000AB                 ## TURNSTILE SITE KEY
 TURNSTILE_SECRET_KEY=2x0000000000000000000000000000000AA    ## TURNSTILE SECRET KEY
+
+2. Enable This Script In
+a. resource/auth/auth-admin-signin.blade.php
+b. resource/auth/auth-dsn-signin.blade.php
+c. resource/auth/auth-mhs-signin.blade.php
+
+<div class="">
+    <x-turnstile-widget theme="auto" language="id"/>
+    @error('cf-turnstile-response')
+        <p class="error">{{ $message }}</p>
+    @enderror
+</div>
+
+3. Enable This Script In
+a. app/Http/Controllers/Admin/AuthController/ In Function AuthSignInPost
+b. app/Http/Controllers/Dosen/AuthController/ In Function AuthSignInPost
+c. app/Http/Controllers/Mahasiswa/AuthController/ In Function AuthSignInPost
+
+'cf-turnstile-response' => ['required', new TurnstileCheck()],  // ENABLE THIS IF YOU WANT USE TURNSTILE
 ```
 
 4. Menjalankan Project

@@ -34,12 +34,13 @@
                                         <input class="form-check-input" type="checkbox" id="rememberMe">
                                         <label class="form-check-label" for="rememberMe">Remember me</label>
                                     </div>
-                                    <div class="">
+                                    {{-- ENABLE THIS IF YOU WANT ACTIVATE TURNSTILE --}}
+                                    {{-- <div class="">
                                         <x-turnstile-widget theme="auto" language="id"/>
                                         @error('cf-turnstile-response')
                                             <p class="error">{{ $message }}</p>
                                         @enderror
-                                    </div>
+                                    </div>  --}}
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
                                     </div>

@@ -1,5 +1,16 @@
 ## CHANGE-LOGS
 
+<b>30/05/2024 - Update v.0.0003i - alpha</b>
+```
+- Changed CloudFlare Turnstile as Optional to Disabled by default
+```
+<b>29/05/2024 - Update v.0.0003i - alpha</b>
+```
+- Split .env.example for local and for docker
+- Fix failed Installation setup.sh & setup.bat
+```
+<b>28/05/2024 - Update v.0.0003i - alpha</b>
+- Update Readme.MD
 <b>27/05/2024 - Update v.0.0003i - alpha</b>
 ```
 - ( Security ) Add the cloudflare turnstile for all authentication
