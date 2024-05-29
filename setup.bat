@@ -5,6 +5,7 @@ echo Proses Installasi SiakadPT telah Selesai....
 pause
 
 echo Setup Environment...
+mkdir storage\framework\views
 cp .env.example .env
 php artisan key:generate
 rm public/storage
@@ -12,7 +13,6 @@ php artisan storage:link
 pause
 
 echo Tolong setting .env sebelum melanjutkan tahap installasi
-code .
 pause
 echo Sudah Selesai Setting .env ?
 pause
