@@ -2,6 +2,7 @@
 
 <p align="center">
 <a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003j - Changelogs</a>
+<br>
 <span>Latest Update: 30 Mei 2024</span>
 </p>
 <p align="center">
