@@ -2,12 +2,13 @@
 
 <p align="center">
 <a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003j - Changelogs</a>
+<span>Latest Update: 30 Mei 2024</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
 <a href="https://facebook.com/kyouma052"><img src="https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white" alt="Facebook"></a>
 <a href="https://instagram.com/mjaya69703"><img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white" alt="Instagram"></a>
-<a href="mailto:admin@internal-dev.id"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"></a>
+<a href="mailto:jaya.kusuma@internal-dev.id"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"></a>
 </p>
 
 ## About Project SiakadPT By Internal-Dev
@@ -158,6 +159,7 @@ MIDTRANS_IS_PRODUCTION=false             ##   => false or true => Choose your co
 MIDTRANS_IS_SANITIZED=true
 MIDTRANS_IS_3DS=true
 ```
+
 -   Addons Cloudflare Turnstile Capctha ( Opsional )
 
 ```
@@ -209,6 +211,10 @@ seed.bat
 clear.bat
 - Run Installer Linux
 setup.bat
+
+For Docker
+- Run Installer Docker
+docker.bat
 ```
 
 ## CREDITS

@@ -20,8 +20,28 @@ use App\Models\TahunAkademik;
 
 class ProgramKuliahController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
+
     public function index()
     {
+        $data['prefix'] = $this->setPrefix();
         $data['taka'] = TahunAkademik::all();
         $data['pstudi'] = ProgramStudi::all();
         $data['proku'] = ProgramKuliah::all();
@@ -31,6 +51,7 @@ class ProgramKuliahController extends Controller
 
     public function store(Request $request)
     {
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:255',

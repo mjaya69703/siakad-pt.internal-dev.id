@@ -22,14 +22,35 @@ use App\Models\TahunAkademik;
 
 class KurikulumController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
+
     public function index()
     {
+        $data['prefix'] = $this->setPrefix();
         $data['kurikulum'] = Kurikulum::all();
 
         return view('user.admin.master.admin-kurikulum-index', $data);
     }
     public function view($id)
     {
+        $data['prefix'] = $this->setPrefix();
         $data['kuri'] = Kurikulum::all();
         $data['taka'] = TahunAkademik::all();
         $data['pstudi'] = ProgramStudi::all();

@@ -29,28 +29,22 @@
                         <li class="dropdown-header">
                             <h6>Notifications</h6>
                         </li>
+                        @php
+                            $notif = App\Models\Notification::all();
+                        @endphp
+                        @foreach ($notif as $item)     
                         <li class="dropdown-item notification-item">
                             <a class="d-flex align-items-center" href="#">
                                 <div class="notification-icon bg-primary">
-                                    <i class="bi bi-cart-check"></i>
+                                    <i class="fa-solid fa-bell"></i>
                                 </div>
                                 <div class="notification-text ms-4">
-                                    <p class="notification-title font-bold">Successfully check out</p>
-                                    <p class="notification-subtitle font-thin text-sm">Order ID #256</p>
+                                    <p class="notification-title font-bold">{{ $item->name }}</p>
+                                    <p class="notification-subtitle font-thin text-sm">{{ $item->desc }}</p>
                                 </div>
                             </a>
                         </li>
-                        <li class="dropdown-item notification-item">
-                            <a class="d-flex align-items-center" href="#">
-                                <div class="notification-icon bg-success">
-                                    <i class="bi bi-file-earmark-check"></i>
-                                </div>
-                                <div class="notification-text ms-4">
-                                    <p class="notification-title font-bold">Homework submitted</p>
-                                    <p class="notification-subtitle font-thin text-sm">Algebra math homework</p>
-                                </div>
-                            </a>
-                        </li>
+                        @endforeach
                         <li>
                             <p class="text-center py-2 mb-0"><a href="#">See all notification</a></p>
                         </li>

@@ -9,27 +9,6 @@
     Tambah Dosen
 @endsection
 @section('urlmenu')
-@php
-$prefix = '';
-$rawType = Auth::user()->raw_type;
-switch ($rawType) {
-    case 1:
-        $prefix = 'faculty.';
-        break;
-    case 2:
-        $prefix = 'administrative.';
-        break;
-    case 3:
-        $prefix = 'academic.';
-        break;
-    case 4:
-        $prefix = 'facility.';
-        break;
-    default:
-        $prefix = 'web-admin.';
-        break;
-}
-@endphp
     {{ route('web-admin.workers.lecture-index') }}
 @endsection
 @section('subdesc')

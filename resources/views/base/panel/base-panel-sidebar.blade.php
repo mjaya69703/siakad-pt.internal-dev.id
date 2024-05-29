@@ -35,6 +35,12 @@
                 <span>Support Ticket</span>
             </a>
         </li>
+        <li class="sidebar-item  {{ Route::is($prefix . 'system.notify-index', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route($prefix . 'system.notify-index') }}" class='sidebar-link'>
+                <i class="fa-solid fa-bell"></i>
+                <span>Notifikasi</span>
+            </a>
+        </li>
         @if (Auth::user()->raw_type === 0)
             {{-- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
             @include('user.admin.admin-sidebar-index')

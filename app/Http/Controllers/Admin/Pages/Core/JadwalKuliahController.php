@@ -28,9 +28,28 @@ use App\Models\Mahasiswa;
 
 class JadwalKuliahController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
 
     public function index()
     {
+        $data['prefix'] = $this->setPrefix();
         $data['kuri'] = Kurikulum::all();
         $data['taka'] = TahunAkademik::all();
         $data['dosen'] = MataKuliah::where('dosen');
@@ -46,6 +65,7 @@ class JadwalKuliahController extends Controller
 
     public function create()
     {
+        $data['prefix'] = $this->setPrefix();
         $data['kuri'] = Kurikulum::all();
         $data['taka'] = TahunAkademik::all();
         $data['dosen'] = Dosen::all();
@@ -60,6 +80,7 @@ class JadwalKuliahController extends Controller
 
     public function viewAbsen($code)
     {
+        $data['prefix'] = $this->setPrefix();
         $data['kuri'] = Kurikulum::all();
         $data['taka'] = TahunAkademik::all();
         $data['dosen'] = Dosen::all();

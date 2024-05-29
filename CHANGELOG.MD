@@ -1,20 +1,32 @@
 ## CHANGE-LOGS
 
-<b>30/05/2024 - Update v.0.0003i - alpha</b>
+<b>30/05/2024 - Update v.0.0003j - alpha</b>
+
 ```
 - Changed CloudFlare Turnstile as Optional to Disabled by default
+- Move Prefix Code in view to Controller
+- Initialisasi Fitur Notifikasi - Create Notify
 ```
+
 <b>29/05/2024 - Update v.0.0003i - alpha</b>
+
 ```
 - Split .env.example for local and for docker
 - Fix failed Installation setup.sh & setup.bat
 ```
+
 <b>28/05/2024 - Update v.0.0003i - alpha</b>
-- Update Readme.MD
+
+```
+-   Update Readme.MD
+```
+
 <b>27/05/2024 - Update v.0.0003i - alpha</b>
+
 ```
 - ( Security ) Add the cloudflare turnstile for all authentication
 ```
+
 <b>26/05/2024 - Update v.0.0003h - alpha</b>
 
 ```

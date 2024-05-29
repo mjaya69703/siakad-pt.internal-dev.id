@@ -23,8 +23,28 @@ use App\Models\Mahasiswa;
 
 class KelasController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
+
     public function index()
     {
+        $data['prefix'] = $this->setPrefix();
         $data['kelas'] = Kelas::all();
         $data['taka'] = TahunAkademik::all();
         $data['pstudi'] = ProgramStudi::all();
@@ -35,6 +55,7 @@ class KelasController extends Controller
     }
     public function viewMahasiswa($code)
     {
+        $data['prefix'] = $this->setPrefix();
         $class = Kelas::where('code', $code)->first();
         $data['kelas'] = Kelas::where('code', $code)->first();
         $data['taka'] = TahunAkademik::all();
@@ -49,6 +70,7 @@ class KelasController extends Controller
     }
     public function cetakMahasiswa($code)
     {
+        $data['prefix'] = $this->setPrefix();
         $class = Kelas::where('code', $code)->first();
         $data['kelas'] = Kelas::where('code', $code)->first();
         $data['mahasiswa'] = Mahasiswa::where('class_id', $class->id)->get();
