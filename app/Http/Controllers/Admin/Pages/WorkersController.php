@@ -21,9 +21,29 @@ use App\Models\Mahasiswa;
 
 class WorkersController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
     // KHUSUS KELOLA DATA ROLE ADMIN
     public function indexAdmin()
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['admin'] = User::where('type', 0)->get();
 
         return view('user.admin.pages.workers-admin-index', $data);
@@ -32,12 +52,16 @@ class WorkersController extends Controller
     public function createAdmin()
     {
         $data['admin'] = User::where('type', 0)->get();
+        $data['prefix'] = $this->setPrefix();
+
 
         return view('user.admin.pages.workers-admin-create', $data);
 
     }
     public function editAdmin(Request $request, $code)
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['admin'] = User::where('type', 0)->where('code', $code)->first();
 
         return view('user.admin.pages.workers-admin-edit', $data);
@@ -61,7 +85,7 @@ class WorkersController extends Controller
             'password_confirm' => 'nullable|string|same:password',
         ]);
 
-        
+
         $user->name = $request->name;
         $user->user = $request->user;
         $user->status = $request->status;
@@ -79,7 +103,7 @@ class WorkersController extends Controller
         $user->type = $request->type;
         $user->code = Str::random(6);
 
-        
+
         $user->password = Hash::make($request->password);
         $user->save();
         if ($request->hasFile('image')) {
@@ -87,7 +111,7 @@ class WorkersController extends Controller
             $name = 'profile-'. $user->code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile');
             $destinationPaths = storage_path('app/public/images');
-            
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());
@@ -124,7 +148,7 @@ class WorkersController extends Controller
             'password_confirm' => 'nullable|string|same:password',
         ]);
 
-        
+
         $user->name = $request->name;
         $user->user = $request->user;
         $user->status = $request->status;
@@ -140,7 +164,7 @@ class WorkersController extends Controller
         $user->contact_phone_1 = $request->contact_phone_1;
         $user->contact_phone_2 = $request->contact_phone_2;
         $user->type = $request->type;
-        
+
         $user->password = Hash::make($request->password);
         $user->save();
         if ($request->hasFile('image')) {
@@ -148,7 +172,7 @@ class WorkersController extends Controller
             $name = 'profile-'. $user->code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile');
             $destinationPaths = storage_path('app/public/images');
-            
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());
@@ -183,6 +207,8 @@ class WorkersController extends Controller
     // KHUSUS KELOLA DATA ROLE WORKER
     public function indexWorkers()
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['admin'] = User::whereIn('type', [1,2,3,4])->get();
         // dd($data['admin']->count());
 
@@ -191,6 +217,8 @@ class WorkersController extends Controller
     }
     public function createWorkers()
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['admin'] = User::whereIn('type', [1,2,3,4])->get();
 
         return view('user.admin.pages.workers-staff-create', $data);
@@ -198,6 +226,8 @@ class WorkersController extends Controller
     }
     public function editWorkers(Request $request, $code)
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['admin'] = User::where('type', 0)->where('code', $code)->first();
 
         return view('user.admin.pages.workers-staff-edit', $data);
@@ -221,7 +251,7 @@ class WorkersController extends Controller
             'password_confirm' => 'nullable|string|same:password',
         ]);
 
-        
+
         $user->name = $request->name;
         $user->user = $request->user;
         $user->status = $request->status;
@@ -239,7 +269,7 @@ class WorkersController extends Controller
         $user->type = $request->type;
         $user->code = Str::random(6);
 
-        
+
         $user->password = Hash::make($request->password);
         $user->save();
         if ($request->hasFile('image')) {
@@ -247,7 +277,7 @@ class WorkersController extends Controller
             $name = 'profile-'. $user->code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile');
             $destinationPaths = storage_path('app/public/images');
-            
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());
@@ -284,7 +314,7 @@ class WorkersController extends Controller
             'password_confirm' => 'nullable|string|same:password',
         ]);
 
-        
+
         $user->name = $request->name;
         $user->user = $request->user;
         $user->status = $request->status;
@@ -300,7 +330,7 @@ class WorkersController extends Controller
         $user->contact_phone_1 = $request->contact_phone_1;
         $user->contact_phone_2 = $request->contact_phone_2;
         $user->type = $request->type;
-        
+
         $user->password = Hash::make($request->password);
         $user->save();
         if ($request->hasFile('image')) {
@@ -308,7 +338,7 @@ class WorkersController extends Controller
             $name = 'profile-'. $user->code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile');
             $destinationPaths = storage_path('app/public/images');
-            
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());
@@ -343,6 +373,8 @@ class WorkersController extends Controller
     // KHUSUS KELOLA DATA ROLE DOSEN
     public function indexLecture()
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['dosen'] = Dosen::all();
 
         return view('user.admin.pages.workers-lecture-index', $data);
@@ -350,6 +382,8 @@ class WorkersController extends Controller
     }
     public function createLecture()
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['dosen'] = Dosen::all();
 
         return view('user.admin.pages.workers-lecture-create', $data);
@@ -357,6 +391,8 @@ class WorkersController extends Controller
     }
     public function editLecture(Request $request, $code)
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['dosen'] = Dosen::where('dsn_code', $code)->first();
 
         return view('user.admin.pages.workers-lecture-edit', $data);
@@ -380,7 +416,7 @@ class WorkersController extends Controller
             'password_confirm' => 'nullable|string|same:password',
         ]);
 
-        
+
         $user->dsn_name = $request->dsn_name;
         $user->dsn_user = $request->dsn_user;
         $user->dsn_nidn = $request->dsn_nidn;
@@ -392,7 +428,7 @@ class WorkersController extends Controller
         $user->dsn_mail = $request->dsn_mail;
         // $user->type = $request->type;
         $user->dsn_code = Str::random(6);
-        
+
         $user->password = Hash::make($request->password);
         $user->save();
         if ($request->hasFile('dsn_image')) {
@@ -400,7 +436,7 @@ class WorkersController extends Controller
             $name = 'profile-'. $user->dsn_code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile/dosen');
             $destinationPaths = storage_path('app/public/images');
-            
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());
@@ -440,7 +476,7 @@ class WorkersController extends Controller
             'password_confirm' => 'nullable|string|same:password',
         ]);
 
-        
+
         $user->dsn_name = $request->dsn_name;
         $user->dsn_user = $request->dsn_user;
         $user->dsn_stat = $request->dsn_stat;
@@ -451,7 +487,7 @@ class WorkersController extends Controller
         $user->dsn_mail = $request->dsn_mail;
         // $user->type = $request->type;
         // $user->code = Str::random(6);
-        
+
         $user->password = Hash::make($request->password);
         $user->save();
         if ($request->hasFile('dsn_image')) {
@@ -459,7 +495,7 @@ class WorkersController extends Controller
             $name = 'profile-'. $user->dsn_code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile/dosen');
             $destinationPaths = storage_path('app/public/images');
-            
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());
@@ -497,6 +533,8 @@ class WorkersController extends Controller
     // KHUSUS KELOLA DATA ROLE MAHASISWA
     public function indexStudent()
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['student'] = Mahasiswa::all();
 
         return view('user.admin.pages.workers-student-index', $data);
@@ -504,6 +542,8 @@ class WorkersController extends Controller
     }
     public function createStudent()
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['kelas'] = Kelas::all();
         $data['student'] = Mahasiswa::all();
 
@@ -512,6 +552,8 @@ class WorkersController extends Controller
     }
     public function editStudent(Request $request, $code)
     {
+        $data['prefix'] = $this->setPrefix();
+
         $data['kelas'] = Kelas::all();
         $data['student'] = Mahasiswa::where('mhs_code', $code)->first();
 
@@ -536,7 +578,7 @@ class WorkersController extends Controller
             'password_confirm' => 'nullable|string|same:password',
         ]);
 
-        
+
         $user->class_id = $request->class_id;
         $user->mhs_name = $request->mhs_name;
         $user->mhs_user = $request->mhs_user;
@@ -563,7 +605,7 @@ class WorkersController extends Controller
         $user->mhs_code = Str::random(6);
 
 
-        
+
         $user->password = Hash::make($request->password);
         $user->save();
         if ($request->hasFile('mhs_image')) {
@@ -571,7 +613,7 @@ class WorkersController extends Controller
             $name = 'profile-'. $user->mhs_code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile/dosen');
             $destinationPaths = storage_path('app/public/images');
-            
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());
@@ -610,7 +652,7 @@ class WorkersController extends Controller
             'password_confirm' => 'nullable|string|same:password',
         ]);
 
-        
+
         $user->class_id = $request->class_id;
         $user->mhs_name = $request->mhs_name;
         // $user->mhs_user = $request->mhs_user;
@@ -635,7 +677,7 @@ class WorkersController extends Controller
         $user->mhs_addr_provinsi = $request->mhs_addr_provinsi;
         $user->mhs_stat = $request->mhs_stat;
 
-        
+
         $user->password = Hash::make($request->password);
         $user->save();
         if ($request->hasFile('mhs_image')) {
@@ -643,7 +685,7 @@ class WorkersController extends Controller
             $name = 'profile-'. $user->mhs_code.'-' .uniqid().'.'.$image->getClientOriginalExtension();
             $destinationPath = storage_path('app/public/images/profile/dosen');
             $destinationPaths = storage_path('app/public/images');
-            
+
             // Compress image
             $manager = new ImageManager(new Driver());
             $image = $manager->read($image->getRealPath());

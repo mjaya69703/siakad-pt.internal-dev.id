@@ -115,7 +115,7 @@ class AuthController extends Controller
         $request->validate([
             'login' => 'required',
             'password' => 'required',
-            // 'cf-turnstile-response' => ['required', new TurnstileCheck()],  // ENABLE THIS IF YOU WANT USE TURNSTILE
+            'cf-turnstile-response' => ['required', new TurnstileCheck()],  // ENABLE THIS IF YOU WANT USE TURNSTILE
         ]);
         // Ambil input 'login' dari request
         $login = $request->input('login');
