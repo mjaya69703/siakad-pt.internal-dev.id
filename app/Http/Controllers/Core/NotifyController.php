@@ -132,4 +132,5 @@ class NotifyController extends Controller
         Alert::success('Succcess', 'Data berhasil dihapus!');
         return back();
     }
+
 }
