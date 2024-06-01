@@ -23,10 +23,13 @@ Route::get('/error/notfound', [App\Http\Controllers\Root\ErrorController::class,
 //     return view('base.base-auth-index');
 //     // return view('base.panel.base-panel-content');
 // });
-Route::get('/dev', function () {
-    return view('base.base-root-index');
-    // return view('base.panel.base-panel-content');
-});
+    Route::get('/dev', function () {
+        return view('base.base-root-index');
+        // return view('base.panel.base-panel-content');
+    });
+
+
+
 
 // Route::get('/', [App\Http\Controllers\Root\HomeController::class, 'index'])->name('root.root-index');
 

@@ -21,17 +21,18 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown me-3">
+                    @php
+                        $notif = App\Models\Notification::latest()->paginate(2);
+                    @endphp
                     <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                         <i class='bi bi-bell bi-sub fs-4'></i>
-                        <span class="badge badge-notification bg-danger">7</span>
+                        <span class="badge badge-notification bg-danger">{{ $notif->count() }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-center dropdown-menu-sm-end notification-dropdown" aria-labelledby="dropdownMenuButton">
                         <li class="dropdown-header">
                             <h6>Notifications</h6>
                         </li>
-                        @php
-                            $notif = App\Models\Notification::all();
-                        @endphp
+
                         @foreach ($notif as $item)     
                         <li class="dropdown-item notification-item">
                             <a class="d-flex align-items-center" href="#">
