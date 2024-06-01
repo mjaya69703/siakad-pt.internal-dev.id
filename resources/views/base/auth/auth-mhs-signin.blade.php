@@ -39,7 +39,7 @@
                                     <div class="">
                                         <x-turnstile-widget theme="auto" language="id"/>
                                         @error('cf-turnstile-response')
-                                            <p class="error">{{ $message }}</p>
+                                            <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="text-center">

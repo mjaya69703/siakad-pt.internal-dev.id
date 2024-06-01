@@ -1,5 +1,12 @@
 ## CHANGE-LOGS
 
+<b>01/06/2024 - Update v.0.0003k - alpha</b>
+
+```
+- Disable CloudFlare Turnstile By Default ( CAN ENABLED )
+- Fix Notification CSS
+```
+
 <b>30/05/2024 - Update v.0.0003j - alpha</b>
 
 ```

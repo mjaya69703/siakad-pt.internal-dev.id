@@ -30,11 +30,6 @@
         font-size: 24px;
         line-height: 1.2;
     }
-    .notification-icon {
-        display: flex;
-        justify-content: center; /* Ini akan membuat ikon berada di tengah secara horizontal */
-        align-items: center; /* Ini akan membuat ikon berada di tengah secara vertikal */
-    }
 </style>
 <style>
     table {

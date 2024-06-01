@@ -8723,9 +8723,9 @@ html[data-bs-theme="dark"] .user-dropdown-name {
 @media screen and (max-width: 576px) {
     .dropdown-center[data-bs-popper] {
         left: 50%;
-        transform: translateX(-50%)
-
-        }    }
+        transform: translateX(-50%);
+    }
+}
 html[data-bs-theme="dark"] .form-group {
     margin-bottom: 0.7rem;
 }
@@ -9505,11 +9505,14 @@ html[data-bs-theme="dark"] .navbar-top .notification-icon {
     height: 40px;
     border-radius: 50%;
     color: #fff;
-    text-align: center;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* text-align: center; */
+    /* vertical-align: middle; */
 }
 html[data-bs-theme="dark"] .navbar-top .notification-icon i {
-    vertical-align: -moz-middle-with-baseline;
+    /* vertical-align: -moz-middle-with-baseline; */
     font-size: 20px;
 }
 html[data-bs-theme="dark"] .layout-horizontal .container {
