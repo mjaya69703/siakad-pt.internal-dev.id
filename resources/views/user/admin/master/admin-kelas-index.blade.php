@@ -48,15 +48,15 @@
                                 <td data-label="Wali Dosen">{{ $item->dosen->dsn_name }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateKelas{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
-                                    <a href="{{ route('web-admin.master.kelas-mahasiswa-view', $item->code) }}" style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-users"></i></a>
+                                    <a href="{{ route($prefix.'master.kelas-mahasiswa-view', $item->code) }}" style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-users"></i></a>
                                     <form id="delete-form-{{ $item->code }}"
-                                        action="{{ route('web-admin.master.kelas-destroy', $item->code) }}" method="POST">
+                                        action="{{ route($prefix.'master.kelas-destroy', $item->code) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                             data-original-title="Delete"
-                                            data-url="{{ route('web-admin.master.kelas-destroy', $item->code) }}"
+                                            data-url="{{ route($prefix.'master.kelas-destroy', $item->code) }}"
                                             data-name="{{ $item->name }}"
                                             onclick="deleteData('{{ $item->code }}')">
                                             <i class="fas fa-trash"></i>
@@ -75,7 +75,7 @@
 <div class="me-1 mb-1 d-inline-block">
 
     <!--Extra Large Modal -->
-    <form action="{{ route('web-admin.master.kelas-store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route($prefix.'master.kelas-store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal fade text-left w-100" id="tambahKelas" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel16" aria-hidden="true">
@@ -177,7 +177,7 @@
 
     <!--Extra Large Modal -->
     @foreach ($kelas as $item)
-    <form action="{{ route('web-admin.master.kelas-update', $item->code) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route($prefix.'master.kelas-update', $item->code) }}" method="POST" enctype="multipart/form-data">
         @method('patch')
         @csrf
         <div class="modal fade text-left w-100" id="updateKelas{{$item->code}}" tabindex="-1" role="dialog"

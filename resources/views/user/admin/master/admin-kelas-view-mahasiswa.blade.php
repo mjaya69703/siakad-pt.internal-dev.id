@@ -105,8 +105,8 @@ table th {
             <h5 class="card-title d-flex justify-content-between align-items-center">
                 @yield('submenu')
                 <div class="">
-                    <a href="{{ route('web-admin.master.kelas-index') }}" class="btn btn-outline-warning mt-1"><i class="fa-solid fa-backward"></i></a>
-                    <form action="{{ route('web-admin.master.kelas-mahasiswa-cetak', $kelas->code) }}" method="post">
+                    <a href="{{ route($prefix.'master.kelas-index') }}" class="btn btn-outline-warning mt-1"><i class="fa-solid fa-backward"></i></a>
+                    <form action="{{ route($prefix.'master.kelas-mahasiswa-cetak', $kelas->code) }}" method="post">
                         @csrf
                         <button type="submit"  style="margin-right: 10px" class="btn btn-outline-danger mt-1"><i class="fa-solid fa-file-pdf"></i></button>
                     </form>
@@ -147,15 +147,15 @@ table th {
 
                         <td class="d-flex justify-content-center align-items-center">
                             <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateAbsen{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
-                            {{-- <a href="{{ route('web-admin.master.jadkul-view-absen', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-user-check"></i></a> --}}
+                            {{-- <a href="{{ route($prefix.'master.jadkul-view-absen', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-user-check"></i></a> --}}
                             {{-- <form id="delete-form-{{ $item->code }}"
-                                action="{{ route('web-admin.master.jadkul-destroy', $item->code) }}" method="POST">
+                                action="{{ route($prefix.'master.jadkul-destroy', $item->code) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                     data-original-title="Delete"
-                                    data-url="{{ route('web-admin.master.jadkul-destroy', $item->code) }}"
+                                    data-url="{{ route($prefix.'master.jadkul-destroy', $item->code) }}"
                                     data-name="{{ $item->name }}"
                                     onclick="deleteData('{{ $item->code }}')">
                                     <i class="fas fa-trash"></i>

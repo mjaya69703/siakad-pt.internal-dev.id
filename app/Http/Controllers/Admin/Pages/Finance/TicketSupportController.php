@@ -59,8 +59,18 @@ class TicketSupportController extends Controller
         $data['ticket'] = TicketSupport::where('code', $code)->first();
         $data['support'] = TicketSupport::where('codr', $code)->latest()->get();
         $data['prefix'] = $this->setPrefix();
+        
+        
+        // dd($checkStatus);
+        $checkStatus = TicketSupport::where('code', $code)->first();
+        if($checkStatus->raw_stat_id === 2){
+            Alert::error('error', 'Ticket Sudah diClose');
+            return back();
+        } else {
 
-        return view('user.finance.pages.support-ticket-view', $data);
+            return view('user.finance.pages.support-ticket-view', $data);
+        }
+
     }
 
     public function storeReply(Request $request, $code)

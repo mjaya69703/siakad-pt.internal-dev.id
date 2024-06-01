@@ -49,6 +49,14 @@
             {{-- MENU KHUSUS UNTUK DEPARTEMENT FINANCE --}}
             @include('user.finance.home-sidebar')
             {{-- END -- MENU KHUSUS UNTUK DEPARTEMENT FINANCE --}}
+        @elseif(Auth::user()->raw_type === 2)
+            {{-- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
+            @include('user.officer.home-sidebar')
+            {{-- END -- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
+        @elseif(Auth::user()->raw_type === 3)
+            {{-- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
+            @include('user.academic.home-sidebar')
+            {{-- END -- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
         @endif
     @endguest
 

@@ -39,7 +39,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   ( CRUD ) Data Program Kuliah
     -   ( CRUD ) Data Kelas
     -   ( CRUD ) Data Kurikulum
-    -   ( CRUD ) Data MataKuliah
+    -   ( CRUD ) Data Mata Kuliah
     -   ( CRUD ) Data JadwalKuliah
 
 -   Fitur Kelola Data Inventaris
@@ -60,7 +60,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   ( CRUD ) Data Keuangan
     -   Pembayaran Biaya Kuliah via MidTrans
 
-<b>Fitur Role Finance Departement</b>
+<b>Fitur Role Departement Finance</b>
 
 -   Fitur Dasar
     -   Halaman Profile , Edit Profile dan Ubah Password
@@ -70,16 +70,40 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Menerbitkan Tagihan ( Personal / Group By Program Studi or Program Kuliah )
     -   Lihat Data Pembayaran Mahasiswa
     -   ( CRUD ) Data Keuangan Income, Expense, Pending, Sisa Saldo
--   Fitur Data Approval
-    -   Approve and Reject Data Absensi Cuti, Izin dan Sakit Karyawan
+-   Fitur Data Approval - Approve and Reject Data Absensi Cuti, Izin dan Sakit Karyawan
+
+<b>Fitur Role Departement Officer ( New )</b>
+
+-   Fitur Dasar
+    -   Halaman Profile , Edit Profile dan Ubah Password
+    -   Halaman Jurnal Presensi ( Absensi )
+    -   Halaman Support Ticket
+
+<b>Fitur Role Departement Akademik ( New )</b>
+
+-   Fitur Dasar
+
+    -   Halaman Profile , Edit Profile dan Ubah Password
+    -   Halaman Jurnal Presensi ( Absensi )
+    -   Halaman Support Ticket
+
+-   Fitur Kelola Data Pengguna
+
+    -   ( CRUD ) Data Mahasiswa
+
+-   Fitur Kelola Data Akademik
+    -   ( CRUD ) Data Kelas
+    -   ( CRUD ) Data Kurikulum
+    -   ( CRUD ) Data Mata Kuliah
+    -   ( CRUD ) Data JadwalKuliah
 
 <b>Fitur Role Mahasiswa Aktif</b>
 
 -   Fitur Dasar
-    -   Halaman Profile , Edit Profile dan Ubah Password
+-   Halaman Profile , Edit Profile dan Ubah Password
 -   Fitur Lihat Jadwal Kuliah dan Absensi
 -   Fitur Lihat Tagihan dan Lihat Riwayat Pembayaran
--   Fitur Lihat Support dan Membuat Support Tiket Ke Berbagai Departement ( New )
+-   Fitur Lihat Support dan Membuat Support Tiket Ke Berbagai Departement
 
 <b>Fitur Role Dosen Aktif</b>
 

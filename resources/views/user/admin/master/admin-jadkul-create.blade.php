@@ -12,7 +12,7 @@
     Data Terakhir yang dibuat
 @endsection
 @section('urlmenu')
-    #
+    {{ route($prefix.'master.jadkul-index') }}
 @endsection
 @section('subdesc')
     Halaman untuk mengelola Data Jadwal Kuliah
@@ -21,13 +21,13 @@
 <section class="section row">
 
     <div class="col-lg-12 col-12">
-        <form action="{{ route('web-admin.master.jadkul-store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route($prefix.'master.jadkul-store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="card-title">@yield('submenu')</h5>
                     <div class="">
-                        <a href="{{ route('web-admin.master.jadkul-index') }}" class="mt-1 btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
+                        <a href="{{ route($prefix.'master.jadkul-index') }}" class="mt-1 btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
                         <button type="submit" class="mt-1 btn btn-outline-primary"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                 <h5 class="card-title d-flex justify-content-between align-items-center">
                     @yield('submenu0')
                     <div class="">
-                        <a href="{{ route('web-admin.master.jadkul-create') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
+                        <a href="{{ route($prefix.'master.jadkul-create') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
                     </div>
                 </h5>
             </div>
@@ -210,15 +210,15 @@
                             <td data-label="Waktu Perkuliahan">{{ $item->start }} <br> - <br> {{ $item->ended }}</td>
                             <td class="d-flex justify-content-center align-items-center">
                                 <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateJadkul{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
-                                {{-- <a href="{{ route('web-admin.master.jadkul-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}
+                                {{-- <a href="{{ route($prefix.'master.jadkul-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}
                                 <form id="delete-form-{{ $item->code }}"
-                                    action="{{ route('web-admin.master.jadkul-destroy', $item->code) }}" method="POST">
+                                    action="{{ route($prefix.'master.jadkul-destroy', $item->code) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                         data-original-title="Delete"
-                                        data-url="{{ route('web-admin.master.jadkul-destroy', $item->code) }}"
+                                        data-url="{{ route($prefix.'master.jadkul-destroy', $item->code) }}"
                                         data-name="{{ $item->name }}"
                                         onclick="deleteData('{{ $item->code }}')">
                                         <i class="fas fa-trash"></i>
@@ -241,7 +241,7 @@
 
     <!--Extra Large Modal -->
     @foreach ($jadkul as $item)
-    <form action="{{ route('web-admin.master.jadkul-update', $item->code) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route($prefix.'master.jadkul-update', $item->code) }}" method="POST" enctype="multipart/form-data">
         @method('patch')
         @csrf
         <div class="modal fade text-left w-100" id="updateJadkul{{$item->code}}" tabindex="-1" role="dialog"

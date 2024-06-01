@@ -105,7 +105,7 @@ table th {
             <h5 class="card-title d-flex justify-content-between align-items-center">
                 @yield('submenu')
                 <div class="">
-                    <a href="{{ route('web-admin.master.jadkul-index') }}" class="btn btn-outline-warning mt-1"><i class="fa-solid fa-backward"></i></a>
+                    <a href="{{ route($prefix.'master.jadkul-index') }}" class="btn btn-outline-warning mt-1"><i class="fa-solid fa-backward"></i></a>
                     <a href="#"  style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#cetakDataAbsen" class="btn btn-outline-danger mt-1"><i class="fa-solid fa-file-pdf"></i></a>
                 </div>
             </h5>
@@ -139,15 +139,15 @@ table th {
                         <td data-label="Waktu Absen">{{ \Carbon\Carbon::parse($item->absen_time)->format('H:i') }} WIB</td>
                         <td class="d-flex justify-content-center align-items-center">
                             <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateAbsen{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
-                            {{-- <a href="{{ route('web-admin.master.jadkul-view-absen', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-user-check"></i></a> --}}
+                            {{-- <a href="{{ route($prefix.'master.jadkul-view-absen', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-user-check"></i></a> --}}
                             {{-- <form id="delete-form-{{ $item->code }}"
-                                action="{{ route('web-admin.master.jadkul-destroy', $item->code) }}" method="POST">
+                                action="{{ route($prefix.'master.jadkul-destroy', $item->code) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                     data-original-title="Delete"
-                                    data-url="{{ route('web-admin.master.jadkul-destroy', $item->code) }}"
+                                    data-url="{{ route($prefix.'master.jadkul-destroy', $item->code) }}"
                                     data-name="{{ $item->name }}"
                                     onclick="deleteData('{{ $item->code }}')">
                                     <i class="fas fa-trash"></i>
@@ -167,7 +167,7 @@ table th {
 
     <!--Extra Large Modal -->
     @foreach ($absen as $item)
-    <form action="{{ route('web-admin.master.jadkul-absen-update', $item->code) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route($prefix.'master.jadkul-absen-update', $item->code) }}" method="POST" enctype="multipart/form-data">
         @method('patch')
         @csrf
         <div class="modal fade text-left w-100" id="updateAbsen{{$item->code}}" tabindex="-1" role="dialog"
@@ -208,7 +208,7 @@ table th {
 </div>
 <div class="me-1 mb-1 d-inline-block">
 
-    <form action="{{ route('web-admin.master.jadkul-absen-cetak', $jadkul->code) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route($prefix.'master.jadkul-absen-cetak', $jadkul->code) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal fade text-left w-100" id="cetakDataAbsen" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel16" aria-hidden="true">

@@ -10,7 +10,6 @@
 @endsection
 @if (Auth::check())
     @section('urlmenu')
-        @include('base.base-dash-prefix')
         {{ route($prefix . 'home-index') }}
     @endsection
 @else

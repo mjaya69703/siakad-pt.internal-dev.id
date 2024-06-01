@@ -21,14 +21,14 @@
 <section class="section row">
 
     <div class="col-lg-12 col-12">
-        <form action="{{ route('web-admin.master.matkul-store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route($prefix.'master.matkul-store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="card-title">@yield('submenu')</h5>
                     <div class="">
 
-                        <a href="{{ route('web-admin.master.matkul-index') }}" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
+                        <a href="{{ route($prefix.'master.matkul-index') }}" class="btn btn-outline-warning"><i class="fa-solid fa-backward"></i></a>
                         <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
 

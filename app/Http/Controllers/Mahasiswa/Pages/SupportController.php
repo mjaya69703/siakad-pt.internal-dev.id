@@ -47,7 +47,14 @@ class SupportController extends Controller
         $initialSupport = TicketSupport::where('codr', $code)->latest()->get();
         $data['support'] = $initialSupport;
 
-        return view('mahasiswa.pages.support-ticket-view', $data);
+        $checkStatus = TicketSupport::where('code', $code)->first();
+        if($checkStatus->raw_stat_id === 2){
+            Alert::error('Error', 'Ticket Sudah diClose');
+            return back();
+        } else {
+
+            return view('mahasiswa.pages.support-ticket-view', $data);
+        }
     }
 
     public function AjaxLastReply($code)

@@ -29,13 +29,35 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
         ]);
         User::create([
-            'name' => 'Finance Departement',
+            'name' => 'Staff Finance',
             'code' => Str::random(6),
             'user' => 'finance',
             'gend' => 'L',
             'type' => 1,
             'email' => 'finance@example.com',
             'phone' => '080012345661',
+            'password' => Hash::make('Admin123'),
+            'status' => 1,
+        ]);
+        User::create([
+            'name' => 'Staff Officer',
+            'code' => Str::random(6),
+            'user' => 'officer',
+            'gend' => 'L',
+            'type' => 2,
+            'email' => 'officer@example.com',
+            'phone' => '080012345662',
+            'password' => Hash::make('Admin123'),
+            'status' => 1,
+        ]);
+        User::create([
+            'name' => 'Staff Akademik',
+            'code' => Str::random(6),
+            'user' => 'academic',
+            'gend' => 'L',
+            'type' => 3,
+            'email' => 'academic@example.com',
+            'phone' => '080012345663',
             'password' => Hash::make('Admin123'),
             'status' => 1,
         ]);

@@ -198,11 +198,11 @@
                                     <select name="type" id="type" class="form-select">
                                         <option value="" selected>Pilih Role Users</option>
                                         <option value="0">Web Administrator</option>
-                                        <option value="1">Koordinator Program</option>
-                                        <option value="2">Staff Administrasi</option>
-                                        <option value="3">Staff Akademik</option>
-                                        <option value="4">Staff Sarana dan Prasarana</option>
-
+                                        <option value="1">Departement Finance</option>
+                                        <option value="2">Departement Officer</option>
+                                        <option value="3">Departement Academic</option>
+                                        <option value="4">Departement Admin</option>
+                                        <option value="5">Departement Support</option>
 
                                     </select>
                                     @error('type')

@@ -35,7 +35,7 @@
         <li class="sidebar-item has-sub {{ Route::is('web-admin.workers.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-user-tie"></i>
-                <span>Data Master Pengguna</span>
+                <span>Master Pengguna</span>
             </a>
             <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.workers.admin-*', request()->path()) ? 'active' : '' }}">
@@ -55,7 +55,7 @@
         <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
-                <span>Data Master Akademik</span>
+                <span>Master Akademik</span>
             </a>
             <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.master.fakultas-*', request()->path()) ? 'active' : '' }}">
@@ -87,7 +87,7 @@
         <li class="sidebar-item has-sub {{ Route::is('web-admin.inventory.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
-                <span>Data Master Inventaris</span>
+                <span>Master Inventaris</span>
             </a>
             <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.inventory.gedung-*', request()->path()) ? 'active' : '' }}">

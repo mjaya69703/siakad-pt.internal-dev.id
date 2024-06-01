@@ -10,13 +10,13 @@
 @endsection
 @section('urlmenu')
 {{-- KONDISIONAL BACK BUTTON --}}
-{{ route('web-admin.workers.student-index') }}
+{{ route($prefix.'workers.student-index') }}
 @endsection
 @section('subdesc')
     Halaman untuk mengedit data pengguna {{ $student->mhs_name }}
 @endsection
 @section('content')
-<form action="{{ route('web-admin.workers.student-update', $student->mhs_code) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route($prefix.'workers.student-update', $student->mhs_code) }}" method="POST" enctype="multipart/form-data">
     @method('PATCH')
     @csrf
     <section class="section row">

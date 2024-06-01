@@ -5,6 +5,12 @@
 ```
 - Disable CloudFlare Turnstile By Default ( CAN ENABLED )
 - Fix Notification CSS
+- Initialisasi Role Departement Officer & Departement Akademik
+- ( DEPARTEMEN AKADEMIK ) Tambah Fitur - CRUD Data Mahasiswa
+- ( DEPARTEMEN AKADEMIK ) Tambah Fitur - CRUD Data Kelas
+- ( DEPARTEMEN AKADEMIK ) Tambah Fitur - CRUD Data Kurikulum
+- ( DEPARTEMEN AKADEMIK ) Tambah Fitur - CRUD Data Mata Kuliah
+- ( DEPARTEMEN AKADEMIK ) Tambah Fitur - CRUD Data Jadwal Kuliah
 ```
 
 <b>30/05/2024 - Update v.0.0003j - alpha</b>

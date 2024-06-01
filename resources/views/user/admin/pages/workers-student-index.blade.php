@@ -21,7 +21,7 @@
             <h5 class="card-title d-flex justify-content-between align-items-center">
                 @yield('menu')
                 <div class="">
-                    <a href="{{ route('web-admin.workers.student-create') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
+                    <a href="{{ route($prefix.'workers.student-create') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
                 </div>
             </h5>
         </div>
@@ -52,15 +52,15 @@
                         <td data-label="Status Mahasiswa">{{ $item->mhs_stat }}</td>
                         <td class="d-flex justify-content-center align-items-center">
                             <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#viewContact{{ $item->mhs_code }}" class="btn btn-outline-info"><i class="fas fa-phone"></i></a>
-                            <a href="{{ route('web-admin.workers.student-edit', $item->mhs_code) }}" style="margin-right: 10px" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route($prefix.'workers.student-edit', $item->mhs_code) }}" style="margin-right: 10px" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                             <form id="delete-form-{{ $item->mhs_code }}"
-                                action="{{ route('web-admin.workers.student-destroy', $item->mhs_code) }}" method="POST">
+                                action="{{ route($prefix.'workers.student-destroy', $item->mhs_code) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                     data-original-title="Delete"
-                                    data-url="{{ route('web-admin.workers.student-destroy', $item->mhs_code) }}"
+                                    data-url="{{ route($prefix.'workers.student-destroy', $item->mhs_code) }}"
                                     data-name="{{ $item->name }}"
                                     onclick="deleteData('{{ $item->mhs_code }}')">
                                     <i class="fas fa-trash"></i>

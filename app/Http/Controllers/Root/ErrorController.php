@@ -6,10 +6,31 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // EKSTENSION
 use Alert;
+use Auth;
 
 class ErrorController extends Controller
 {
+    private function setPrefix()
+    {
+        $rawType = Auth::user()->raw_type;
+        switch ($rawType) {
+            case 1:
+                return 'finance.';
+            case 2:
+                return 'officer.';
+            case 3:
+                return 'academic.';
+            case 4:
+                return 'admin.';
+            case 5:
+                return 'support.';
+            default:
+                return 'web-admin.';
+        }
+    }
+
     public function ErrorVerify(){
+        $data['prefix'] = $this->setPrefix();
         $data['title'] = "ESEC - ESchool Ecosystem";
         $data['menu'] = "Error Verify";
         $data['submenu'] = "Please verify your account";
@@ -19,6 +40,8 @@ class ErrorController extends Controller
     }
 
     public function ErrorAccess(){
+        $data['prefix'] = $this->setPrefix();
+
         $data['title'] = "ESEC - ESchool Ecosystem";
         $data['menu'] = "Error Authorization";
         $data['submenu'] = "You are not authorized to access this page";

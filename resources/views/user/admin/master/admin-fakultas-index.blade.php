@@ -21,7 +21,7 @@
 <section class="section row">
 
     <div class="col-lg-4 col-12">
-        <form action="{{ route('web-admin.master.fakultas-store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route($prefix.'master.fakultas-store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -83,15 +83,15 @@
                                 <td data-label="Kepala Fakultas">{{ $item->head->dsn_name }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updateFakultas{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
-                                    {{-- <a href="{{ route('web-admin.staffmanager-dosen-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}
+                                    {{-- <a href="{{ route($prefix.'staffmanager-dosen-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}
                                     <form id="delete-form-{{ $item->code }}"
-                                        action="{{ route('web-admin.master.fakultas-destroy', $item->code) }}" method="POST">
+                                        action="{{ route($prefix.'master.fakultas-destroy', $item->code) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <a type="button" class="bs-tooltip btn btn-rounded btn-outline-danger"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                             data-original-title="Delete"
-                                            data-url="{{ route('web-admin.master.fakultas-destroy', $item->code) }}"
+                                            data-url="{{ route($prefix.'master.fakultas-destroy', $item->code) }}"
                                             data-name="{{ $item->name }}"
                                             onclick="deleteData('{{ $item->code }}')">
                                             <i class="fas fa-trash"></i>
@@ -111,7 +111,7 @@
 
     <!--Extra Large Modal -->
     @foreach ($fakultas as $item)
-    <form action="{{ route('web-admin.master.fakultas-update', $item->code) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route($prefix.'master.fakultas-update', $item->code) }}" method="POST" enctype="multipart/form-data">
         @method('patch')
         @csrf
         <div class="modal fade text-left w-100" id="updateFakultas{{$item->code}}" tabindex="-1" role="dialog"

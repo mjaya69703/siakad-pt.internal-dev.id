@@ -9,7 +9,7 @@
     Lihat Ticket
 @endsection
 @section('urlmenu')
-    {{ route('mahasiswa.support.ticket-index') }}
+    {{ route($prefix.'support.ticket-index') }}
 @endsection
 @section('custom-css')
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/extensions/summernote/summernote-lite.css">
