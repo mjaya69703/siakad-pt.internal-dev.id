@@ -61,6 +61,17 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Admin123'),
             'status' => 1,
         ]);
+        User::create([
+            'name' => 'Staff Support',
+            'code' => Str::random(6),
+            'user' => 'support',
+            'gend' => 'L',
+            'type' => 5,
+            'email' => 'support@example.com',
+            'phone' => '080012345665',
+            'password' => Hash::make('Admin123'),
+            'status' => 1,
+        ]);
         Dosen::create([
             'dsn_nidn' => str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT),
             'dsn_stat' => '1',

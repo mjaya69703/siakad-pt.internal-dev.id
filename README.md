@@ -1,9 +1,9 @@
 <p align="center"><a href="https://siakad-pt.internal-dev.id" target="_blank"><img src="https://siakad-pt.internal-dev.id/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003k - Changelogs</a>
+<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003l - Changelogs</a>
 <br>
-<span>Latest Update: 1 Juni 2024</span>
+<span>Latest Update: 2 Juni 2024</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
@@ -72,14 +72,14 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   ( CRUD ) Data Keuangan Income, Expense, Pending, Sisa Saldo
 -   Fitur Data Approval - Approve and Reject Data Absensi Cuti, Izin dan Sakit Karyawan
 
-<b>Fitur Role Departement Officer ( New )</b>
+<b>Fitur Role Departement Officer</b>
 
 -   Fitur Dasar
     -   Halaman Profile , Edit Profile dan Ubah Password
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
 
-<b>Fitur Role Departement Akademik ( New )</b>
+<b>Fitur Role Departement Akademik</b>
 
 -   Fitur Dasar
 
@@ -96,6 +96,18 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   ( CRUD ) Data Kurikulum
     -   ( CRUD ) Data Mata Kuliah
     -   ( CRUD ) Data JadwalKuliah
+
+<b>Fitur Role Departement Support ( New )</b>
+
+-   Fitur Dasar
+
+    -   Halaman Profile , Edit Profile dan Ubah Password
+    -   Halaman Jurnal Presensi ( Absensi )
+    -   Halaman Support Ticket
+
+-   Fitur Kelola Data Inventory
+    -   ( CRUD ) Data Gedung
+    -   ( CRUD ) Data Ruangan
 
 <b>Fitur Role Mahasiswa Aktif</b>
 

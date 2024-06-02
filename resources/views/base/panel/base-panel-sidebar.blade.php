@@ -57,6 +57,10 @@
             {{-- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
             @include('user.academic.home-sidebar')
             {{-- END -- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
+        @elseif(Auth::user()->raw_type === 5)
+            {{-- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
+            @include('user.support.home-sidebar')
+            {{-- END -- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
         @endif
     @endguest
 

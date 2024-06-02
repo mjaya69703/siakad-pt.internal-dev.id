@@ -1,5 +1,13 @@
 ## CHANGE-LOGS
 
+<b>02/06/2024 - Update v.0.0003l - alpha</b>
+
+```
+- Initialisasi Role Departement Support
+- ( DEPARTEMEN Support ) Tambah Fitur - CRUD Data Gedung
+- ( DEPARTEMEN Support ) Tambah Fitur - CRUD Data Ruangan
+```
+
 <b>01/06/2024 - Update v.0.0003k - alpha</b>
 
 ```
