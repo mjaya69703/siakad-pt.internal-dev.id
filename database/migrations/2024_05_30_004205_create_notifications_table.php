@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->integer('auth_id');                                  // AUTHOR ID
-            $table->integer('send_to');                                  // SEND TO => 0 = FOR ALL ; 1 = FOR STAFF ; 2 = FOR LECTURE ; 3 = FOR STUDENT 
+            $table->integer('send_to');                                  // SEND TO => 0 = FOR ALL ; 1 = FOR STAFF ; 2 = FOR LECTURE ; 3 = FOR STUDENT
             $table->integer('dept_id')->nullable();                      // DEPT ID => FOR STAFF ONLY
             $table->integer('user_id')->nullable();                      // USER ID => FOR STAFF ONLY
             $table->integer('faku_id')->nullable();                      // FAKU ID => FOR LECTURE AND STUDENT
@@ -24,8 +24,9 @@ return new class extends Migration
             $table->integer('student_id')->nullable();                   // STUDENT ID => FOR STUDENT ONLY
             $table->integer('lecture_id')->nullable();                   // LECTURE ID => FOR LECTURE ONLY
             $table->string('name');                                      // TITLE NOTIFICATION
+            $table->string('slug');                                      // URL NOTIFICATION
             $table->string('type');                                      // CATEGORY NOTIFICATION
-            $table->string('desc');                                      // DESCRIPTION NOTIFICATION
+            $table->longText('desc');                                      // DESCRIPTION NOTIFICATION
             $table->string('code')->unique();                            // CODE NOTIFICATION
             $table->boolean('read')->default(false);              // MARK AS READ
             $table->timestamps();

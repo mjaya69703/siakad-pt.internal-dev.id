@@ -28,6 +28,7 @@ use App\Models\Ruang;
 use App\Models\Kelas;
 use App\Models\Balance;
 use App\Models\AbsensiMahasiswa;
+use App\Models\Notification;
 
 class HomeController extends Controller
 {
@@ -43,7 +44,9 @@ class HomeController extends Controller
         $data['sisatagihan'] = $data['tagihan'] - $data['history'];
         $data['jadkul'] = JadwalKuliah::where('kelas_id', $user->class_id)->count();
         $data['habsen'] = AbsensiMahasiswa::where('author_id', $user->id)->where('absen_type', 'H')->count();
+        $data['notify'] = Notification::where('send_to', 3)->latest()->paginate(5);
 
+        // dd($data['notif']);
         // dd($data['history']);
 
 

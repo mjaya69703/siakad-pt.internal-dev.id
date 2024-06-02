@@ -39,8 +39,8 @@ class NotifyController extends Controller
     {
         $data['prefix'] = $this->setPrefix();
 
-        $data['Notify'] = Notification::all();
-        
+        $data['notify'] = Notification::all();
+
         return view('user.admin.system.notify-index', $data);
     }
 
@@ -75,6 +75,7 @@ class NotifyController extends Controller
         $notify->lecture_id = $request->lecture_id;
         $notify->name = $request->name;
         $notify->type = $request->type;
+        $notify->slug = Str::slug($request->name);
         $notify->code = Str::random(7);
         $notify->desc = $request->desc;
         $notify->save();
@@ -89,33 +90,15 @@ class NotifyController extends Controller
         $notify = Notification::where('code', $code)->first();
 
         $request->validate([
-            'send_to' => 'required|integer',
-            'dept_id' => 'nullable|integer',
-            'user_id' => 'nullable|integer',
-            'faku_id' => 'nullable|integer',
-            'prodi_id' => 'nullable|integer',
-            'proku_id' => 'nullable|integer',
-            'class_id' => 'nullable|integer',
-            'student_id' => 'nullable|integer',
-            'lecture_id' => 'nullable|integer',
             'name' => 'required|string',
             'type' => 'required|string',
             'desc' => 'required|string',
         ]);
 
         $notify->auth_id = Auth::user()->id;
-        $notify->send_to = $request->send_to;
-        $notify->dept_id = $request->dept_id;
-        $notify->user_id = $request->user_id;
-        $notify->faku_id = $request->faku_id;
-        $notify->prodi_id = $request->prodi_id;
-        $notify->proku_id = $request->proku_id;
-        $notify->class_id = $request->class_id;
-        $notify->student_id = $request->student_id;
-        $notify->lecture_id = $request->lecture_id;
         $notify->name = $request->name;
         $notify->type = $request->type;
-        $notify->code = Str::random(7);
+        // $notify->code = Str::random(7);
         $notify->desc = $request->desc;
         $notify->save();
 
@@ -128,7 +111,7 @@ class NotifyController extends Controller
     {
         $notify = Notification::where('code', $code)->first();
         $notify->delete();
-        
+
         Alert::success('Succcess', 'Data berhasil dihapus!');
         return back();
     }

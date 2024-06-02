@@ -85,14 +85,50 @@
             <div class="col-lg-3 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Log Activity - {{ \Carbon\Carbon::now()->format('d M Y') }}</h4>
+                        <h4 class="card-title">Pengumuman - {{ \Carbon\Carbon::now()->format('d M Y') }}</h4>
                     </div>
                     <div class="card-body">
-                        <span>16.24 <b>Administrator</b> - telah login</span><br>
-                        <span>16.28 <b>Administrator</b> - telah mengubah password</span><br>
+                        @forelse ($notify as $item)
+
+                        <span>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y'.' - '.'H'.'.'.'i') }} - <a href="#" data-bs-toggle="modal" data-bs-target="#updateFakultas{{ $item->code }}">{{ $item->name }}</a></span><br>
+                        @empty
+                        <span class="">Tidak Ada Pengumuman Hari Ini</span>
+                        @endforelse
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <div class="me-1 mb-1 d-inline-block">
+
+        <!--Extra Large Modal -->
+        @foreach ($notify as $item)
+            <div class="modal fade text-left w-100" id="updateFakultas{{$item->code}}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel16" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-l"
+                    role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel16">Notifikasi - {{ $item->name }}</h4>
+                            <div class="">
+
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group">
+                                    <p class="text-center"><b>{{ $item->name }}</b></p>
+                                    <p>{!! $item->desc !!}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @endsection

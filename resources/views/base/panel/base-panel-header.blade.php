@@ -34,7 +34,7 @@
                         </li>
 
                         @foreach ($notif as $item)
-                            
+
                         <li class="dropdown-item notification-item">
                             <a class="d-flex align-items-center" href="#">
                                 <div class="notification-icon bg-primary">
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="notification-text ms-4">
                                     <p class="notification-title font-bold">{{ $item->name }}</p>
-                                    <p class="notification-subtitle font-thin text-sm">{{ $item->desc }}</p>
+                                    <p class="notification-subtitle font-thin text-sm">{{ substr($item->desc, 0 ,25) }}</p>
                                 </div>
                             </a>
                         </li>
@@ -120,8 +120,8 @@
                     @endauth
                 </ul>
             </div>
-            
-            
+
+
         </div>
     </div>
 </nav>

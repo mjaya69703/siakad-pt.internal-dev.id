@@ -1,5 +1,10 @@
 ## CHANGE-LOGS
 
+<b>03/06/2024 - Update v.0.0003m - alpha</b>
+```
+- Tambah Lihat Notifikasi / Pengumuman pada Dashboard Mahasiswa
+- ( CRUD ) Tambah Menu Notifikasi / Pengumuman
+```
 <b>02/06/2024 - Update v.0.0003l - alpha</b>
 
 ```

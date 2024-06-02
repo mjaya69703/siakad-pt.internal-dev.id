@@ -1,9 +1,9 @@
 <p align="center"><a href="https://siakad-pt.internal-dev.id" target="_blank"><img src="https://siakad-pt.internal-dev.id/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003l - Changelogs</a>
+<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003m - Changelogs</a>
 <br>
-<span>Latest Update: 2 Juni 2024</span>
+<span>Latest Update: 3 Juni 2024</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
@@ -30,6 +30,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Halaman Profile , Edit Profile dan Ubah Password
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
+    -   Halaman Kelola Notifikasi
 
 -   Fitur Kelola Data Akademik
 
@@ -66,6 +67,8 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Halaman Profile , Edit Profile dan Ubah Password
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
+    -   Halaman Kelola Notifikasi
+
 -   Fitur Kelola Data Keuangan
     -   Menerbitkan Tagihan ( Personal / Group By Program Studi or Program Kuliah )
     -   Lihat Data Pembayaran Mahasiswa
@@ -78,6 +81,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Halaman Profile , Edit Profile dan Ubah Password
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
+    -   Halaman Kelola Notifikasi
 
 <b>Fitur Role Departement Akademik</b>
 
@@ -86,7 +90,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Halaman Profile , Edit Profile dan Ubah Password
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
-
+    -   Halaman Kelola Notifikasi
 -   Fitur Kelola Data Pengguna
 
     -   ( CRUD ) Data Mahasiswa
@@ -104,7 +108,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Halaman Profile , Edit Profile dan Ubah Password
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
-
+    -   Halaman Kelola Notifikasi
 -   Fitur Kelola Data Inventory
     -   ( CRUD ) Data Gedung
     -   ( CRUD ) Data Ruangan
@@ -116,6 +120,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
 -   Fitur Lihat Jadwal Kuliah dan Absensi
 -   Fitur Lihat Tagihan dan Lihat Riwayat Pembayaran
 -   Fitur Lihat Support dan Membuat Support Tiket Ke Berbagai Departement
+-   Lihat Pengumuman Pada Dashboard
 
 <b>Fitur Role Dosen Aktif</b>
 

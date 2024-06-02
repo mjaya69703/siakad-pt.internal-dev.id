@@ -17,4 +17,8 @@ class Notification extends Model
         $this->read = true;
         $this->save();
     }
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'auth_id');
+    }
 }
