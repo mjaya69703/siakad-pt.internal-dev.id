@@ -1,9 +1,9 @@
 <p align="center"><a href="https://siakad-pt.internal-dev.id" target="_blank"><img src="https://siakad-pt.internal-dev.id/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003m - Changelogs</a>
+<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003n - Changelogs</a>
 <br>
-<span>Latest Update: 3 Juni 2024</span>
+<span>Latest Update: 4 Juni 2024</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
@@ -64,6 +64,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
 <b>Fitur Role Departement Finance</b>
 
 -   Fitur Dasar
+
     -   Halaman Profile , Edit Profile dan Ubah Password
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
@@ -91,6 +92,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
     -   Halaman Kelola Notifikasi
+
 -   Fitur Kelola Data Pengguna
 
     -   ( CRUD ) Data Mahasiswa
@@ -109,6 +111,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
     -   Halaman Kelola Notifikasi
+
 -   Fitur Kelola Data Inventory
     -   ( CRUD ) Data Gedung
     -   ( CRUD ) Data Ruangan
@@ -127,6 +130,10 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
 -   Fitur Dasar
     -   Halaman Profile , Edit Profile dan Ubah Password
 -   Fitur Lihat Jadwal Mengajar dan Verifikasi Absen Mahasiswa
+
+<b>Fitur Home Page</b>
+
+-   Fitur Kotak Saran Delivery to Email Developer
 
 ## How to Install
 

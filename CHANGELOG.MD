@@ -1,10 +1,18 @@
 ## CHANGE-LOGS
 
+<b>04/06/2024 - Update v.0.0003n - alpha</b>
+
+```
+- Tambah Fitur Kotak Saran Di Home Page with Email Notif to Developer
+```
+
 <b>03/06/2024 - Update v.0.0003m - alpha</b>
+
 ```
 - Tambah Lihat Notifikasi / Pengumuman pada Dashboard Mahasiswa
 - ( CRUD ) Tambah Menu Notifikasi / Pengumuman
 ```
+
 <b>02/06/2024 - Update v.0.0003l - alpha</b>
 
 ```

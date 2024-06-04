@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Root;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // SECTION ADDONS SYSTEM
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\File;
 use Auth;
 use Hash;
@@ -15,6 +16,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\Fakultas;
+use App\Models\KotakSaran;
 
 class HomeController extends Controller
 {
@@ -45,6 +47,49 @@ class HomeController extends Controller
     {
         $data['fakultas'] = Fakultas::all();
         $data['prefix'] = $this->setPrefix();
-        return view('base.base-root-index', $data);
+        $data['title'] = " - ESEC Academy";
+        $data['menu'] = "Halaman Utama";
+        return view('root.root-index', $data);
+    }
+
+    public function adviceIndex()
+    {
+        $data['fakultas'] = Fakultas::all();
+        $data['title'] = " - ESEC Academy";
+        $data['menu'] = "Kotak Saran";
+        $data['prefix'] = $this->setPrefix();
+        return view('root.pages.advice-index', $data);
+    }
+    public function adviceStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'desc' => 'required',
+        ]);
+
+        $saran = new KotakSaran;
+        $saran->name = $request->name;
+        $saran->email = $request->email;
+        $saran->subject = $request->subject;
+        $saran->desc = $request->desc;
+        if($saran->save()){
+            Mail::send('base.resource.mail-kotak-saran-admin', ['saran' => $saran], function($message) use ($saran) {
+                $message->to([
+                    'jaya.kusuma@internal-dev.id', 
+                    'mjaya69703@gmail.com'
+                ]);
+                $message->subject('[ SARAN ] - ESEC Academy - ' . $saran->subject);
+                $message->from('admin@internal-dev.id', 'SIAKAD PT by Internal-Dev');
+            });
+            
+            Alert::success('Sukses', 'Terima kasih telah mengirimkan Saran ^_^');
+            return back();
+        } else {
+            Alert::error('Error', 'Email tidak berhasil dikirim.');
+            return back();
+        }
+        
     }
 }
