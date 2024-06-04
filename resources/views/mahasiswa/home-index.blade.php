@@ -66,7 +66,7 @@
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-user-check" style="font-size: 42px"></i></span>
-                                <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ $habsen }} <br>Absen <br> Hadir</span>
+                                <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ $habsen }} <br>Absen <br> Kehadiran</span>
                             </div>
                         </div>
                     </a>
@@ -76,7 +76,7 @@
                         <div class="card btn btn-outline-success">
                             <div class="card-body d-flex justify-content-around align-items-center">
                                 <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-book-open-reader" style="font-size: 42px"></i></span>
-                                <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ $jadkul }} <br>Jadwal <br> Kuliah</span>
+                                <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ $jadkul }} <br>Jadwal <br> Perkuliahan</span>
                             </div>
                         </div>
                     </a>

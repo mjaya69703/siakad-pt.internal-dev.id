@@ -4,7 +4,7 @@
             <div class="card btn btn-outline-success">
                 <div class="card-body d-flex justify-content-around align-items-center">
                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-wallet" style="font-size: 42px"></i></span>
-                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($balSekarang, 0, ',', '.') }}<br> Sisa Saldo ( IDR )</span>
+                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($balSekarang, 0, ',', '.') }}<br> Sisa Saldo <br>( IDR )</span>
                 </div>
             </div>
         </a>
@@ -14,7 +14,7 @@
             <div class="card btn btn-outline-success">
                 <div class="card-body d-flex justify-content-around align-items-center">
                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-file-invoice-dollar" style="font-size: 42px"></i></span>
-                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($balPending, 0, ',', '.') }}<br> Pending ( IDR )</span>
+                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($balPending, 0, ',', '.') }}<br> Pending <br>( IDR )</span>
                 </div>
             </div>
         </a>
@@ -24,7 +24,7 @@
             <div class="card btn btn-outline-success">
                 <div class="card-body d-flex justify-content-around align-items-center">
                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-dollar" style="font-size: 42px"></i></span>
-                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($balIncome, 0, ',', '.') }}<br> Income ( IDR )</span>
+                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($balIncome, 0, ',', '.') }}<br> Income <br>( IDR )</span>
                 </div>
             </div>
         </a>
@@ -34,7 +34,7 @@
             <div class="card btn btn-outline-success">
                 <div class="card-body d-flex justify-content-around align-items-center">
                     <span class="icon" style="margin-right: 25px;"><i class="fa-solid fa-dollar" style="font-size: 42px"></i></span>
-                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($balExpense, 0, ',', '.') }}<br> Expenses ( IDR )</span>
+                    <span class="text-putih" style="margin-left: 25px; font-size: 16px;">{{ number_format($balExpense, 0, ',', '.') }}<br> Expenses <br>( IDR )</span>
                 </div>
             </div>
         </a>

@@ -1,5 +1,12 @@
 ## CHANGE-LOGS
 
+<b>05/06/2024 - Update v.0.0003n - alpha</b>
+
+```
+- Fix - Role Support tidak muncul
+- Fix - Notifikasi Semua Orang tidak muncul di Role Mahasiswa
+```
+
 <b>04/06/2024 - Update v.0.0003n - alpha</b>
 
 ```

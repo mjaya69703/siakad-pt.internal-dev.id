@@ -209,7 +209,7 @@ class WorkersController extends Controller
     {
         $data['prefix'] = $this->setPrefix();
 
-        $data['admin'] = User::whereIn('type', [1,2,3,4])->get();
+        $data['admin'] = User::whereIn('type', [1,2,3,4,5])->get();
         // dd($data['admin']->count());
 
         return view('user.admin.pages.workers-staff-index', $data);

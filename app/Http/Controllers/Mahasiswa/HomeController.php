@@ -44,7 +44,7 @@ class HomeController extends Controller
         $data['sisatagihan'] = $data['tagihan'] - $data['history'];
         $data['jadkul'] = JadwalKuliah::where('kelas_id', $user->class_id)->count();
         $data['habsen'] = AbsensiMahasiswa::where('author_id', $user->id)->where('absen_type', 'H')->count();
-        $data['notify'] = Notification::where('send_to', 3)->latest()->paginate(5);
+        $data['notify'] = Notification::whereIn('send_to', [0, 3])->latest()->paginate(5);
 
         // dd($data['notif']);
         // dd($data['history']);
