@@ -22,6 +22,8 @@
                 @yield('submenu')
                 <div class="">
                     <a href="{{ route('web-admin.workers.admin-create') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
+                    <a href="{{ route('web-admin.services.convert.export-users') }}" class="btn btn-outline-success"><i class="fa-solid fa-file-export"></i></a>
+                    <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#importUsers"><i class="fa-solid fa-file-import"></i></a>
                 </div>
             </h5>
         </div>
@@ -40,7 +42,7 @@
                 </thead>
                 <tbody>
                     @foreach ($admin as $key => $item)
-                        
+
                     <tr>
                         <td data-label="Number">{{ ++$key }}</td>
                         <td data-label="Nama Karyawan">{{ $item->name }}</td>
@@ -49,7 +51,7 @@
                         <td data-label="Join Date">{{ \Carbon\Carbon::parse($item->created_at)->format('l, d M Y') }}</td>
                         @if($item->status === 1)
                         <td data-label="Status"><span class="text-success">Active</span></td>
-                        
+
                         @elseif($item->status === 0)
                         <td data-label="Status"><span class="text-danger">Non-Active</span></td>
                         @endif
@@ -72,7 +74,7 @@
                         </td>
                     </tr>
                     @endforeach
- 
+
                 </tbody>
             </table>
         </div>
@@ -81,20 +83,18 @@
 </section>
 <div class="me-1 mb-1 d-inline-block">
 
-    {{-- <!--Extra Large Modal -->
-    @foreach ($matkul as $item)
-    <form action="{{ route('web-admin.master.matkul-update', $item->code) }}" method="POST" enctype="multipart/form-data">
-        @method('patch')
+    <!--Extra Large Modal -->
+    <form action="{{ route('web-admin.services.convert.import-users') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="modal fade text-left w-100" id="updateMatkul{{$item->code}}" tabindex="-1" role="dialog"
+        <div class="modal fade text-left w-100" id="importUsers" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel16" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-l"
                 role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel16">Edit Mata Kuliah - {{ $item->name }}</h4>
+                        <h4 class="modal-title" id="myModalLabel16">Import Pengguna</h4>
                         <div class="">
-    
+
                             <button type="submit" class="btn btn-outline-primary" >
                                 <i class="fas fa-paper-plane"></i>
                             </button>
@@ -106,116 +106,10 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="name">Nama Mata Kuliah</label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ $item->name }}">
-                                @error('name')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="code">Kode Mata Kuliah</label>
-                                <input type="text" name="code" id="code" class="form-control" value="{{ $item->code }}">
-                                @error('code')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="requ_id">Persyaratan Mata Kuliah</label>
-                                <select name="requ_id" id="requ_id" class="form-select" name="requ_id" id="requ_id">
-                                    <option value="" selected>Pilih Persyaratan Mata Kuliah</option>
-                                    @foreach ($matkul as $item_r)
-                                    <option value="{{ $item_r->id }}" {{ $item->requ_id == $item_r->id ? 'selected' : '' }}>{{ $item_r->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('requ_id')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="bsks">Bebas SKS Mata Kuliah</label>
-                                <input type="number" min="10" max="40" name="bsks" id="bsks" class="form-control" value="{{ $item->bsks }}">
-                                @error('bsks')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="kuri_id">Kurikulum</label>
-                                <select name="kuri_id" id="kuri_id" class="form-select" name="kuri_id" id="kuri_id">
-                                    <option value="" selected>Pilih Kurikulum</option>
-                                    @foreach ($kuri as $item_k)
-                                    <option value="{{ $item_k->id }}" {{ $item->kuri_id == $item_k->id ? 'selected' : '' }}>{{ $item_k->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('kuri_id')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="taka_id">Tahun Akademik</label>
-                                <select name="taka_id" id="taka_id" class="form-select" name="taka_id" id="taka_id">
-                                    <option value="" selected>Pilih Tahun Akademik</option>
-                                    @foreach ($taka as $item_t)
-                                    <option value="{{ $item_t->id }}" {{ $item->taka_id == $item_t->id ? 'selected' : '' }}>{{ $item_t->name . ' - ' . $item_t->semester }}</option>
-                                    @endforeach
-                                </select>
-                                @error('taka_id')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="pstudi_id">Program Studi</label>
-                                <select name="pstudi_id" id="pstudi_id" class="form-select" name="pstudi_id" id="pstudi_id">
-                                    <option value="" selected>Pilih Program Studi</option>
-                                    @foreach ($pstudi as $item_p)
-                                    <option value="{{ $item_p->id }}" {{ $item->pstudi_id == $item_p->id ? 'selected' : '' }}>{{ $item_p->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('pstudi_id')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="dosen_1">Dosen Pengampu</label>
-                                <select name="dosen_1" id="dosen_1" class="form-select" name="dosen_1" id="dosen_1">
-                                    <option value="" selected>Pilih Dosen Pengampu</option>
-                                    @foreach ($dosen as $item_d1)
-                                    <option value="{{ $item_d1->id }}" {{ $item->dosen_1 == $item_d1->id ? 'selected' : '' }}>{{ $item_d1->dsn_name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('dosen_1')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror 
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="dosen_2">Dosen Cadangan 1</label>
-                                <select name="dosen_2" id="dosen_2" class="form-select" name="dosen_2" id="dosen_2">
-                                    <option value="" selected>Pilih Dosen Cadangan 1</option>
-                                    @foreach ($dosen as $item_d2)
-                                    <option value="{{ $item_d2->id }}" {{ $item->dosen_2 == $item_d2->id ? 'selected' : '' }}>{{ $item_d2->dsn_name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('dosen_2')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror 
-                            </div>
-                            <div class="form-group col-lg-4 col-12">
-                                <label for="dosen_3">Dosen Cadangan 2</label>
-                                <select name="dosen_3" id="dosen_3" class="form-select" name="dosen_3" id="dosen_3">
-                                    <option value="" selected>Pilih Dosen Cadangan 1</option>
-                                    @foreach ($dosen as $item_d3)
-                                    <option value="{{ $item_d3->id }}" {{ $item->dosen_3 == $item_d3->id ? 'selected' : '' }}>{{ $item_d3->dsn_name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('dosen_3')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror                               
-                            </div>
-
-                            <div class="form-group col-lg-12 col-12">
-                                <label for="desc">Deskripsi Mata Kuliah</label>
-                                <textarea name="desc" id="dark" class="form-control" placeholder="isikan deskripsi matakuliah ...." cols="30" rows="10">{{ $item->desc == null ? '' : $item->desc }}</textarea>
-                                @error('desc')
+                            <div class="form-group col-12">
+                                <label for="import">Import Files ( xlsx, csv )</label>
+                                <input type="file" name="import" id="import" class="form-control" accept=".xls, .xlsx, .csv">
+                                @error('import')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -225,12 +119,11 @@
             </div>
         </div>
     </form>
-    @endforeach --}}
 </div>
 <div class="me-1 mb-1 d-inline-block">
 
 @foreach ($admin as $item)
-    
+
 <div class="modal fade text-left w-100" id="viewContact{{ $item->code }}" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel16" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-l"

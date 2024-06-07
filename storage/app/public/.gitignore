@@ -1,1 +1,3 @@
 !.gitignore
+excel-files/*
+invoices/*

@@ -86,6 +86,13 @@
       0 => 'Termwind\\Laravel\\TermwindServiceProvider',
     ),
   ),
+  'rap2hpoutre/fast-excel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Rap2hpoutre\\FastExcel\\Providers\\FastExcelServiceProvider',
+    ),
+  ),
   'realrashid/sweet-alert' => 
   array (
     'providers' => 

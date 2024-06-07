@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Rap2hpoutre\FastExcel\FastExcel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,9 +29,6 @@ Route::get('/error/notfound', [App\Http\Controllers\Root\ErrorController::class,
         return view('base.base-root-index');
         // return view('base.panel.base-panel-content');
     });
-
-
-
 
 // Route::get('/', [App\Http\Controllers\Root\HomeController::class, 'index'])->name('root.root-index');
 
@@ -91,6 +88,10 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
     Route::post('/presensi/save-absen',[App\Http\Controllers\Admin\HomeController::class, 'saveAbsen'])->name('home-presensi-input-absen');
     Route::post('/presensi/save-izin',[App\Http\Controllers\Admin\HomeController::class, 'saveIzinCuti'])->name('home-presensi-input-izin');
     Route::patch('/presensi/update-absen',[App\Http\Controllers\Admin\PresensiController::class, 'absenPulang'])->name('home-presensi-update-absen');
+
+
+    Route::get('/services/convert/export-users',[App\Http\Controllers\Services\Convert\ExportController::class, 'exportUsers'])->name('services.convert.export-users');
+    Route::post('/services/convert/import-users',[App\Http\Controllers\Services\Convert\ImportController::class, 'importUsers'])->name('services.convert.import-users');
 
     // STATUS ACTIVE BOLEH AKSES INI
     Route::middleware(['is-active:1'])->group(function () {

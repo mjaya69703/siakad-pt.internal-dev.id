@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.9",
         "maatwebsite/excel": "^3.1",
         "midtrans/midtrans-php": "^2.5",
+        "rap2hpoutre/fast-excel": "^5.5",
         "realrashid/sweet-alert": "^7.1",
         "spatie/ignition": "^1.14"
     },
