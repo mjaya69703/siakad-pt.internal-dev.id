@@ -14,7 +14,7 @@
 
 ## About Project SiakadPT By Internal-Dev
 
-<img src="https://siakad-pt.internal-dev.id/storage/images/web/Picture1.png" style="width: 100%;" align="center">
+<img src="./storage/app/public/images/web/Picture1.png" style="width: 100%;" align="center">
 
 Web Siakad Perguruan Tinggi yang dibuat oleh Muhamad Jaya Kusuma menggunakan Base Framework Laravel 10 yang kini telah diupdate ke Laravel 11. Siakad ini dibangun untuk mempermudah para mahasiswa, dosen dan para staff dalam melakukan akvitas pekerjaannya dilingkungan kampus serta saling terintegrasi.
 
