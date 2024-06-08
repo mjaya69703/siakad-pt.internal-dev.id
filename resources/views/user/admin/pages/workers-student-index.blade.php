@@ -22,6 +22,8 @@
                 @yield('menu')
                 <div class="">
                     <a href="{{ route($prefix.'workers.student-create') }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
+                    <a href="{{ route($prefix.'services.convert.export-student') }}" class="btn btn-outline-success"><i class="fa-solid fa-file-export"></i></a>
+                    <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#importStudent"><i class="fa-solid fa-file-import"></i></a>
                 </div>
             </h5>
         </div>
@@ -78,47 +80,86 @@
 </section>
 <div class="me-1 mb-1 d-inline-block">
 
-@foreach ($student as $item)
-    
-<div class="modal fade text-left w-100" id="viewContact{{ $item->mhs_code }}" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel16" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-l"
-        role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel16">Lihat Data Kontak - {{ $item->mhs_name }} </h4>
-                <div class="">
+    <!--Extra Large Modal -->
+    <form action="{{ route($prefix.'services.convert.import-student') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="modal fade text-left w-100" id="importStudent" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel16" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-l"
+                role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel16">Import Mahasiswa</h4>
+                        <div class="">
 
-                    <button type="button" class="btn btn-outline-danger mt-1" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
+                            <button type="submit" class="btn btn-outline-primary" >
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                                aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="import">Import Files ( xlsx, csv )</label>
+                                <input type="file" name="import" id="import" class="form-control" accept=".xls, .xlsx, .csv">
+                                @error('import')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group col-lg-12 col-12">
-                        <label for="kode_kelas">Nomor Telepon</label>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <input type="text" class="form-control" value="{{ $item->mhs_phone }}">
-                            <a href="https://wa.me/{{ $item->mhs_phone }}" target="_blank" class="btn btn-outline-success" style="margin-left: 10px"><i class="fa-solid fa-square-phone"></i></a>
+        </div>
+    </form>
+</div>
+<div class="me-1 mb-1 d-inline-block">
+
+    @foreach ($student as $item)
+        
+    <div class="modal fade text-left w-100" id="viewContact{{ $item->mhs_code }}" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel16" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-l"
+            role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel16">Lihat Data Kontak - {{ $item->mhs_name }} </h4>
+                    <div class="">
+
+                        <button type="button" class="btn btn-outline-danger mt-1" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-12">
+                            <label for="kode_kelas">Nomor Telepon</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <input type="text" class="form-control" value="{{ $item->mhs_phone }}">
+                                <a href="https://wa.me/{{ $item->mhs_phone }}" target="_blank" class="btn btn-outline-success" style="margin-left: 10px"><i class="fa-solid fa-square-phone"></i></a>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-lg-12 col-12">
+                            <label for="kode_kelas">Alamat Email</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <input type="text" class="form-control" value="{{ $item->mhs_mail }}">
+                                <a href="mailto:{{ $item->mhs_mail }}" class="btn btn-outline-danger" style="margin-left: 10px"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+
                         </div>
 
                     </div>
-                    <div class="form-group col-lg-12 col-12">
-                        <label for="kode_kelas">Alamat Email</label>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <input type="text" class="form-control" value="{{ $item->mhs_mail }}">
-                            <a href="mailto:{{ $item->mhs_mail }}" class="btn btn-outline-danger" style="margin-left: 10px"><i class="fa-solid fa-envelope"></i></a>
-                        </div>
-
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endforeach
+    @endforeach
 
 </div>
 @endsection

@@ -56,12 +56,12 @@ class Mahasiswa extends Authenticatable
         return $this->attributes['mhs_reli'];
     }
 
-    public function getPhoneAttribute($value)
+    public function getMhsPhoneAttribute($value)
     {
         // Periksa apakah nomor telepon dimulai dengan "0"
         if (strpos($value, '0') === 0) {
             // Jika ya, ubah menjadi "+62" dan hapus angka "0" di awal
-            return '+62' . substr($value, 1);
+            return '62' . substr($value, 1);
         }
 
         // Jika tidak dimulai dengan "0", biarkan seperti itu

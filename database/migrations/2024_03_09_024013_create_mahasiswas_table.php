@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             // KONEK MODEL
-            $table->integer('years_id')->default(0);
+            $table->integer('years_id')->default(0); 
             $table->integer('class_id')->default(0);
             // DATA PRIBADI
             $table->integer('mhs_stat')->default(0);
@@ -30,8 +30,7 @@ return new class extends Migration
             $table->string('mhs_addr_kelurahan')->nullable();
             $table->string('mhs_addr_kecamatan')->nullable();
             $table->string('mhs_addr_kota')->nullable();
-            $table->string('mhs_addr_provinsi')->nullable();
-            // DATA ORANG TUA / WALI
+            $table->string('mhs_addr_provinsi')->nullable();            // DATA ORANG TUA / WALI
             $table->string('mhs_parent_mother')->nullable();
             $table->string('mhs_parent_father')->nullable();
             $table->string('mhs_parent_mother_phone')->nullable();

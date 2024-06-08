@@ -1,9 +1,12 @@
 ## CHANGE-LOGS
 
 <b>08/06/2024 - Update v.0.0003o - alpha</b>
+
 ```
 - Tambah Fitur Export Import Pegawai / Karyawan
+- Tambah Fitur Export Import Mahasiswa
 ```
+
 <b>05/06/2024 - Update v.0.0003n - alpha</b>
 
 ```

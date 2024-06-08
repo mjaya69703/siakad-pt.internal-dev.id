@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use Auth;
 use Hash;
 use Str;
+use Carbon\Carbon;
 // SECTION ADDONS EXTERNAL
 use Alert;
 use Rap2hpoutre\FastExcel\FastExcel;
@@ -23,7 +24,7 @@ class ExportController extends Controller
     {
         $users = User::all();
 
-        (new FastExcel($users))->export('users.csv', function ($user) {
+        (new FastExcel($users))->export('export-users-'.uniqid().'.csv', function ($user) {
             return [
                 'Username' => $user->user,
                 'Email' => $user->email,
@@ -38,7 +39,31 @@ class ExportController extends Controller
             ];
         });
 
-        return (new FastExcel($users))->download('file.csv');
+        return (new FastExcel($users))->download('export-users-'.uniqid().'.csv');
+
+    }
+
+    public function exportStudent()   
+    {
+        $users = Mahasiswa::all();
+
+        (new FastExcel($users))->export('export-student-'.uniqid().'.csv', function ($user) {
+            return [
+                'NIM' => $user->mhs_nim,
+                'Email' => $user->mhs_mail,
+                'Phone' => $user->mhs_phone,
+                'FullName' => $user->mhs_name,
+                'Gender' => $user->mhs_gend,
+                'Religion' => $user->mhs_raw_reli,
+                'BirthPlace' => $user->mhs_birthplace,
+                'BirthDate' => $user->mhs_birthdate,
+                'TypeUser' => $user->mhs_stat,
+                'YearsID' => $user->years_id,
+                'ClassID' => $user->class_id,
+            ];
+        });
+
+        return (new FastExcel($users))->download('export-student-'.uniqid().'.csv');
 
     }
 }
