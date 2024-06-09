@@ -19,10 +19,12 @@
         <div class="row">
             <div class="col-lg-12 col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header  d-flex align-items-center justify-content-between">
                         <h5 class="card-title">
                             @yield('menu') - @yield('submenu')
                         </h5>
+                        <a href="@yield('urlmenu')" class="btn btn-warning"><i class="fa-solid fa-backward"></i></a>
+
                     </div>
                     <div class="card-body">
                         <table class="table table-striped" id="table1">

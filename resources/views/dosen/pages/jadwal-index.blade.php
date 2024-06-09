@@ -51,9 +51,10 @@
                                         <td data-label="Tanggal Kuliah">{{ $item->days_id }} <br> {{ \Carbon\Carbon::parse($item->date)->format('d M Y') }}</td>
                                         <td data-label="Waktu Perkuliahan">{{ $item->start }} <br> - <br> {{ $item->ended }}</td>
                                         <td class="d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('dosen.akademik.jadwal-absen', $item->code) }}" style="margin-right: 10px" class="btn btn-success"><i class="fas fa-calendar-check"></i></a>
+                                            <a href="{{ route('dosen.akademik.jadwal-view-absen', $item->code) }}" style="margin-right: 10px" class="btn btn-success"><i class="fas fa-calendar-check"></i></a>
+                                            <a href="{{ route('dosen.akademik.jadwal-view-feedback', $item->code) }}" style="margin-right: 10px" class="btn btn-warning"><i class="fas fa-star"></i></a>
 
-                                            <a href="{{ route('dosen.akademik.jadwal-absen', $item->code) }}" style="margin-right: 10px" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                                            {{-- <a href="{{ route('dosen.akademik.jadwal-absen', $item->code) }}" style="margin-right: 10px" class="btn btn-info"><i class="fas fa-edit"></i></a> --}}
 
                                         </td>
                                     </tr>

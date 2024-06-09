@@ -17,6 +17,8 @@ use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\JadwalKuliah;
 use App\Models\Mahasiswa;
 use App\Models\AbsensiMahasiswa;
+use App\Models\FBPerkuliahan as ModelsFBPerkuliahan;
+use App\Models\FeedBack\FBPerkuliahan;
 
 
 class JadwalAjarController extends Controller
@@ -28,7 +30,7 @@ class JadwalAjarController extends Controller
 
         return view('dosen.pages.jadwal-index', $data);
     }
-    public function indexAbsen($code)
+    public function viewAbsen($code)
     {
         $dosenId = Auth::guard('dosen')->user();
         $jadkul = JadwalKuliah::where('code', $code)->first();
@@ -36,6 +38,13 @@ class JadwalAjarController extends Controller
         $data['absen'] = AbsensiMahasiswa::where('jadkul_code', $code)->get();
 
         return view('dosen.pages.jadwal-absen', $data);
+    }
+    public function viewFeedBack($code)
+    {
+        $data['feedback'] = FBPerkuliahan::where('fb_jakul_code', $code)->get();
+        $data['code'] = $code;
+
+        return view('dosen.pages.jadwal-feedback', $data);
     }
     public function updateAbsen(Request $request,$code)
     {

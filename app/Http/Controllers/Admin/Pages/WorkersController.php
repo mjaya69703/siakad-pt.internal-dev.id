@@ -219,7 +219,7 @@ class WorkersController extends Controller
     {
         $data['prefix'] = $this->setPrefix();
 
-        $data['admin'] = User::whereIn('type', [1,2,3,4])->get();
+        $data['admin'] = User::whereIn('type', [1,2,3,4,5])->get();
 
         return view('user.admin.pages.workers-staff-create', $data);
 
@@ -228,7 +228,7 @@ class WorkersController extends Controller
     {
         $data['prefix'] = $this->setPrefix();
 
-        $data['admin'] = User::where('type', 0)->where('code', $code)->first();
+        $data['admin'] = User::whereIn('type', [1,2,3,4,5])->where('code', $code)->first();
 
         return view('user.admin.pages.workers-staff-edit', $data);
 
@@ -298,7 +298,7 @@ class WorkersController extends Controller
     }
     public function updateWorkers(Request $request, $code)
     {
-        $user = User::where('type', 0)->where('code', $code)->first();
+        $user = User::whereIn('type', [1,2,3,4,5])->where('code', $code)->first();
 
         $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:8196',

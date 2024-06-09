@@ -29,6 +29,7 @@ use App\Models\Kelas;
 use App\Models\Balance;
 use App\Models\AbsensiMahasiswa;
 use App\Models\Notification;
+use App\Models\FeedBack\FBPerkuliahan;
 
 class HomeController extends Controller
 {
@@ -415,5 +416,42 @@ class HomeController extends Controller
 
         // Or you can return the PDF to be downloaded
         return $pdf->download('Invoice-Pembayaran-'.$data['history']->tagihan->name.'-'.$data['history']->tagihan_code.'.pdf');
+    }
+
+    public function storeFBPerkuliahan(Request $request, $code)
+    {
+        $user = Auth::guard('mahasiswa')->user();
+
+        $checkData = FBPerkuliahan::where('fb_jakul_code', $code)->where('fb_users_code', $user->mhs_code)->first();
+
+        $request->validate([
+            'fb_score' => 'required|in:Tidak Puas,Cukup Puas,Sangat Puas',
+            'fb_reason' => 'required'
+        ],[
+            'fb_score.required' => 'Skor feedback harus diisi.',
+            'fb_score.in' => 'Skor feedback harus salah satu dari: Tidak Puas, Cukup Puas, Sangat Puas.',
+            'fb_reason.required' => 'Alasan feedback harus diisi.',
+        ]);
+
+        if($checkData !== null) {
+            Alert::error('Error', 'Kamu sudah memberikan FeedBack pada perkuliahan ini.');
+            return back();
+        } else {
+            $fb = new FBPerkuliahan;
+
+            $fb->fb_users_code = $user->mhs_code;
+            $fb->fb_jakul_code = $code;
+            $fb->fb_code = uniqid(8);
+            $fb->fb_score = $request->fb_score;
+            $fb->fb_reason = $request->fb_reason;
+
+            $fb->save();
+
+            Alert::success('Sukses', 'Terima kasih telah memberi FeedBack ^_^');
+            return back();
+
+
+        }
+
     }
 }

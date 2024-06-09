@@ -43,7 +43,7 @@ class ExportController extends Controller
 
     }
 
-    public function exportStudent()   
+    public function exportStudent()
     {
         $users = Mahasiswa::all();
 
@@ -54,10 +54,10 @@ class ExportController extends Controller
                 'Phone' => $user->mhs_phone,
                 'FullName' => $user->mhs_name,
                 'Gender' => $user->mhs_gend,
-                'Religion' => $user->mhs_raw_reli,
+                'Religion' => $user->raw_mhs_reli,
                 'BirthPlace' => $user->mhs_birthplace,
                 'BirthDate' => $user->mhs_birthdate,
-                'TypeUser' => $user->mhs_stat,
+                'TypeUser' => $user->raw_mhs_stat,
                 'YearsID' => $user->years_id,
                 'ClassID' => $user->class_id,
             ];
