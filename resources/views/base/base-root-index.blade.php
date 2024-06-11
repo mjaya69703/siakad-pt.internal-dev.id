@@ -181,7 +181,7 @@
                                                             @endphp
                                                             @foreach ($pstudi as $item)
                                                                 <li class="subsubmenu-item ">
-                                                                    <a href="ui-widgets-chatbox.html" class="subsubmenu-link">{{ $item->name }}</a>
+                                                                    <a href="{{ route('root.home-prodi', $item->slug) }}" class="subsubmenu-link">{{ $item->name }}</a>
                                                                 </li>
                                                             @endforeach
 
@@ -229,9 +229,9 @@
                 </header>
                 <div class="content-wrapper container">
                     @include('sweetalert::alert')
-                
+
                     @yield('content')
-                
+
                 </div>
 
 

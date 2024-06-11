@@ -183,6 +183,7 @@ class DatabaseSeeder extends Seeder
             'name'       => 'Teknik Informatika',
             'code'       => 'TI',
             'title'      => ', S.Kom',
+            'slug'       => Str::slug('Teknik Informatika'),
             'head_id'    => '1',
             'faku_id'    => '1',
         ]);
@@ -190,6 +191,7 @@ class DatabaseSeeder extends Seeder
             'name'       => 'Sistem Informasi',
             'code'       => 'SI',
             'title'      => ', S.Kom',
+            'slug'       => Str::slug('Sistem Informasi'),
             'head_id'    => '1',
             'faku_id'    => '1',
         ]);

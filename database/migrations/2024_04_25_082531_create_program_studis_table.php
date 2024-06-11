@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('faku_id');  // ID Fakultas
             $table->string('name');      // Nama Program Studi
             $table->string('code')->unique();      // Kode Program Studi
+            $table->string('slug')->unique();      // Slug Program Studi
             $table->integer('head_id');  // Kepala Program Studi
             $table->string('title');     // Gelar Program Studi
             $table->timestamps();

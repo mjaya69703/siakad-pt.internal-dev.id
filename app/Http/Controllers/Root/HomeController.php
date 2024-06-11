@@ -17,6 +17,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\Fakultas;
 use App\Models\KotakSaran;
+use App\Models\ProgramStudi;
 
 class HomeController extends Controller
 {
@@ -60,6 +61,15 @@ class HomeController extends Controller
         $data['prefix'] = $this->setPrefix();
         return view('root.pages.advice-index', $data);
     }
+    public function prodiIndex($slug)
+    {
+        $data['fakultas'] = Fakultas::all();
+        $data['pstudi'] = ProgramStudi::where('slug', $slug)->first();
+        $data['title'] = " - ESEC Academy";
+        $data['menu'] = "Program Studi ". $data['pstudi']->name;
+        $data['prefix'] = $this->setPrefix();
+        return view('root.pages.prodi-index', $data);
+    }
     public function adviceStore(Request $request)
     {
         $request->validate([
@@ -77,19 +87,19 @@ class HomeController extends Controller
         if($saran->save()){
             Mail::send('base.resource.mail-kotak-saran-admin', ['saran' => $saran], function($message) use ($saran) {
                 $message->to([
-                    'jaya.kusuma@internal-dev.id', 
+                    'jaya.kusuma@internal-dev.id',
                     'mjaya69703@gmail.com'
                 ]);
                 $message->subject('[ SARAN ] - ESEC Academy - ' . $saran->subject);
                 $message->from('admin@internal-dev.id', 'SIAKAD PT by Internal-Dev');
             });
-            
+
             Alert::success('Sukses', 'Terima kasih telah mengirimkan Saran ^_^');
             return back();
         } else {
             Alert::error('Error', 'Email tidak berhasil dikirim.');
             return back();
         }
-        
+
     }
 }
