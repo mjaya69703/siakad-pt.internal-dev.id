@@ -81,7 +81,7 @@ class JadwalKuliah extends Model
 
     public function matkul()
     {
-        return $this->belongsTo(MataKuliah::class, 'makul_id');
+        return $this->belongsTo(MataKuliah::class, 'makul_id',);
     }
     public function dosen()
     {

@@ -13,7 +13,6 @@
 @endsection
 @section('custom-css')
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/extensions/summernote/summernote-lite.css">
-
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/compiled/css/form-editor-summernote.css">
 @endsection
 @section('subdesc')

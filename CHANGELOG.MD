@@ -1,10 +1,24 @@
 ## CHANGE-LOGS
 
+<b>13/06/2024 - Update v.0.0003q - alpha</b>
+
+```
+- Tambah Fitur Kelola Tugas Kuliah - Role Dosen
+```
+
+<b>12/06/2024 - Update v.0.0003p - alpha</b>
+
+```
+- Init FrontPage Admission
+```
+
 <b>09/06/2024 - Update v.0.0003p - alpha</b>
+
 ```
 - Tambah Fitur Beri FeedBack Setelah Perkuliahan - Role Mahasiswa
 - Tambah Fitur Lihat FeedBack tiap Perkuliahan - Role Dosen
 ```
+
 <b>08/06/2024 - Update v.0.0003o - alpha</b>
 
 ```
