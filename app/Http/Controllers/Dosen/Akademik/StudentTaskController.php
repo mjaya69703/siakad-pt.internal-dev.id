@@ -103,4 +103,13 @@ class StudentTaskController extends Controller
         Alert::success('Data berhasil diupdate');
         return back();
     }
+
+    public function destroy($code)
+    {
+        $stask = studentTask::where('code', $code)->first();
+        $stask->delete();
+        
+        Alert::success('success', 'Data berhasil dihapus');
+        return back();
+    }
 }
