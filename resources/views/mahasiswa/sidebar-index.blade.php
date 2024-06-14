@@ -16,6 +16,12 @@
         <span>Jadwal Kuliah</span>
     </a>
 </li>
+<li class="sidebar-item  {{ Route::is('mahasiswa.akademik.tugas-*', request()->path()) ? 'active' : '' }}">
+    <a href="{{ route('mahasiswa.akademik.tugas-index') }}" class='sidebar-link'>
+        <i class="fa-solid fa-list-check"></i>
+        <span>Tugas Kuliah</span>
+    </a>
+</li>
 <li class="sidebar-item  {{ Route::is('mahasiswa.home-tagihan-*', request()->path()) ? 'active' : '' }}">
     <a href="{{ route('mahasiswa.home-tagihan-index') }}" class='sidebar-link'>
         <i class="fa-solid fa-file-invoice"></i>
