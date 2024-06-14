@@ -15,4 +15,9 @@ class studentTask extends Model
     {
         return $this->belongsTo(JadwalKuliah::class, 'jadkul_id',);
     }
+
+    public function dosen()
+    {
+        return $this->belongsTo(Dosen::class, 'dosen_id',);
+    }
 }

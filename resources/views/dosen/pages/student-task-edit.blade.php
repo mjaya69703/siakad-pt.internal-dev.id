@@ -16,7 +16,7 @@
 @endsection
 @section('custom-css')
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/extensions/choices.js/public/assets/styles/choices.css">
-        <link rel="stylesheet" href="{{ asset('dist') }}/assets/extensions/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="{{ asset('dist') }}/assets/extensions/summernote/summernote-lite.css">
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/compiled/css/form-editor-summernote.css">
 @endsection
 @section('content')
@@ -40,9 +40,8 @@
                             <div class="form-group col-lg-4 col-12">
                                 <label for="jadkul_id">Pilih Jadwal Kuliah</label>
                                 <select name="jadkul_id" id="jadkul_id" class="choices form-select">
-\                                    @foreach ($jadkul as $item)
+\                                   @foreach ($jadkul as $item)
                                         <option value="{{ $item->id }}" {{ $item->id == $task->jadkul_id ? 'selected' : ''}}>{{ $item->kelas->name . ' - ' . $item->matkul->name . ' - ' . $item->pert_id }}</option>
-                                        
                                     @endforeach
                                 </select>
                                 @error('jadkul_id')

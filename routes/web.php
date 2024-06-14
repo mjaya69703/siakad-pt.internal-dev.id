@@ -554,12 +554,17 @@ Route::group(['prefix' => 'mahasiswa', 'middleware' => ['mhs-access:Mahasiswa Ak
 
     // PRIVATE FUNCTION => SUPPORT TICKET
     Route::get('/support',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'index'])->name('support.ticket-index');
+    Route::get('/support',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'index'])->name('support.ticket-index');
     Route::get('/support/open',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'open'])->name('support.ticket-open');
     Route::get('/support/view/{code}',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'view'])->name('support.ticket-view');
     Route::get('/support/create/{dept}',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'create'])->name('support.ticket-create');
     Route::post('/support/create/store',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'store'])->name('support.ticket-store');
     Route::post('/support/create/store-reply/{code}',[App\Http\Controllers\Mahasiswa\Pages\SupportController::class, 'storeReply'])->name('support.ticket-store-reply');
 
+    // PRIVATE FUNCTION => TUGAS KULIAH
+    Route::get('/tugas-kuliah',[App\Http\Controllers\Mahasiswa\Pages\StudentTaskController::class, 'index'])->name('akademik.tugas-index');
+    Route::get('/tugas-kuliah/{code}/view',[App\Http\Controllers\Mahasiswa\Pages\StudentTaskController::class, 'view'])->name('akademik.tugas-view');
+    Route::post('/tugas-kuliah/{code}/store',[App\Http\Controllers\Mahasiswa\Pages\StudentTaskController::class, 'store'])->name('akademik.tugas-store');
 
 
     // AJAX ASYNC
