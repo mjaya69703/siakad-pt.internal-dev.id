@@ -135,7 +135,7 @@ table th {
                         <td data-label="Nama Dosen">{{ $item->dosen->dsn_name }}</td>
                         <td data-label="Metode">{{ $item->meth_id }}</td>
                         <td data-label="Lokasi">{{ $item->ruang->gedung->name }}<br>{{ $item->ruang->name . ' - Lantai ' . $item->ruang->floor }}</td>
-                        <td data-label="Tanggal Kuliah">{{ $item->days_id }} <br> - <br> {{ \Carbon\Carbon::parse($item->date)->format('d M Y') }}</td>
+                        <td data-label="Tanggal Kuliah">{{ \Carbon\Carbon::parse($item->date)->isoFormat('dddd') }} <br> {{ \Carbon\Carbon::parse($item->date)->isoFormat('d MMMM Y') }}</td>
                         <td data-label="Waktu Perkuliahan">{{ $item->start }} <br> - <br> {{ $item->ended }}</td>
                         <td class="d-flex justify-content-between align-items-center">
                             <a href="{{ route('mahasiswa.home-jadkul-absen', $item->code) }}" style="margin-right: 10px" class="btn btn-info"><i class="fas fa-calendar-check"></i> Absensi</a>
