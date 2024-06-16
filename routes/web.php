@@ -516,6 +516,8 @@ Route::group(['prefix' => 'dosen', 'middleware' => ['dsn-access:Dosen Aktif'], '
     // PRIVATE FUNCTION => DATA AKADEMIK - Kelola Tugas
     Route::get('/data-akademik/kelola-tugas',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'index'])->name('akademik.stask-index');
     Route::get('/data-akademik/kelola-tugas/tambah',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'create'])->name('akademik.stask-create');
+    Route::get('/data-akademik/kelola-tugas/view/{code}',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'view'])->name('akademik.stask-view');
+    Route::get('/data-akademik/kelola-tugas/view/detail/{code}',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'viewDetail'])->name('akademik.stask-view-detail');
     Route::get('/data-akademik/kelola-tugas/edit/{code}',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'edit'])->name('akademik.stask-edit');
     Route::post('/data-akademik/kelola-tugas/store',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'store'])->name('akademik.stask-store');
     Route::patch('/data-akademik/kelola-tugas/update/{code}',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'update'])->name('akademik.stask-update');

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name'); // NAMA PERIODE TAHUN AKADEMIK ex: Tahun Akademik 2023/2024 Ganjil
             $table->string('code')->unique(); // KODE TAHUN AKADEMIK ex: Kode Semester - Tahun Akademik => Semester 2 - TA. 2023/2024 => 022023
-            $table->string('semester');
+            $table->integer('semester');
             $table->year('year_start');
             $table->integer('is_active')->default(0);
             $table->timestamps();

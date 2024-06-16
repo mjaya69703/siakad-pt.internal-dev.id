@@ -14,6 +14,7 @@ use Alert;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
+use App\Models\HasilStudi;
 use App\Models\studentTask;
 use App\Models\studentScore;
 
@@ -35,7 +36,14 @@ class StudentTaskController extends Controller
 
         $data['stask'] = StudentTask::where('code', $code)->first();
 
-        return view('mahasiswa.pages.stask-view', $data);
+        $score = studentScore::where('stask_id', $data['stask']->id)->where('student_id', Auth::guard('mahasiswa')->user()->id)->get();
+        if($score->count() == 1){
+            Alert::error('Error', 'Kamu sudah mengumpulkan tugas ini.');
+            return back();
+        } else {
+            return view('mahasiswa.pages.stask-view', $data);
+        }
+
     }
 
     public function store(Request $request, $code)
@@ -55,20 +63,7 @@ class StudentTaskController extends Controller
             'file_1.required' => 'File 1 harus diunggah.',
             'file_1.mimes' => 'File 1 harus berupa file dokumen PDF, Word, Excel, atau gambar.',
             'file_1.max' => 'File 1 tidak boleh lebih dari 20 MB.',
-            'file_2.mimes' => 'File 2 harus berupa file dokumen PDF, Word, Excel, atau gambar.',
-            'file_2.max' => 'File 2 tidak boleh lebih dari 20 MB.',
-            'file_3.mimes' => 'File 3 harus berupa file dokumen PDF, Word, Excel, atau gambar.',
-            'file_3.max' => 'File 3 tidak boleh lebih dari 20 MB.',
-            'file_4.mimes' => 'File 4 harus berupa file dokumen PDF, Word, Excel, atau gambar.',
-            'file_4.max' => 'File 4 tidak boleh lebih dari 20 MB.',
-            'file_5.mimes' => 'File 5 harus berupa file dokumen PDF, Word, Excel, atau gambar.',
-            'file_5.max' => 'File 5 tidak boleh lebih dari 20 MB.',
-            'file_6.mimes' => 'File 6 harus berupa file dokumen PDF, Word, Excel, atau gambar.',
-            'file_6.max' => 'File 6 tidak boleh lebih dari 20 MB.',
-            'file_7.mimes' => 'File 7 harus berupa file dokumen PDF, Word, Excel, atau gambar.',
-            'file_7.max' => 'File 7 tidak boleh lebih dari 20 MB.',
-            'file_8.mimes' => 'File 8 harus berupa file dokumen PDF, Word, Excel, atau gambar.',
-            'file_8.max' => 'File 8 tidak boleh lebih dari 20 MB.',
+            // Add similar messages for other files if needed
         ]);
 
         $stask = studentTask::where('code', $code)->first();
@@ -77,12 +72,12 @@ class StudentTaskController extends Controller
         $task = new studentScore;
         $task->stask_id = $stask->id;
         $task->desc = $request->desc;
+        $task->code = Str::of(mt_rand(100000, 999999))->limit(6, '');
         $task->student_id = $user->id;
-        
-        
+
         for ($i = 1; $i <= 8; $i++) {
             $fileKey = 'file_' . $i;
-            
+
             if ($request->hasFile($fileKey)) {
                 $file = $request->file($fileKey);
                 $filename = time() . '-part-' . $i . $file->getClientOriginalName();
@@ -92,8 +87,27 @@ class StudentTaskController extends Controller
         }
         $task->save();
 
+        $khs = HasilStudi::where('student_id', $user->id)->where('smt_id', $user->taka->raw_semester)->first();
+        // dd($khs->count())
+
+        if ($khs === null) {
+            $ckhs = new HasilStudi;
+            $ckhs->student_id = $user->id;
+            $ckhs->taka_id = $user->taka->id;
+            $ckhs->smt_id = $user->taka->raw_semester;
+            $ckhs->score_tugas = 10;
+            $ckhs->max_tugas = 1;
+            $ckhs->code = Str::random(6);
+            $ckhs->save();
+        } elseif ($khs !== null) {
+            $ukhs = HasilStudi::where('student_id', $user->id)->where('smt_id', $user->taka->raw_semester)->first();
+            $ukhs->score_tugas += 10;
+            $ukhs->max_tugas += 1;
+            $ukhs->save();
+        }
+
         Alert::success('Sukses', 'Tugas berhasil disimpan');
-        return back();
+        return redirect()->route('mahasiswa.akademik.tugas-index');
     }
 
 

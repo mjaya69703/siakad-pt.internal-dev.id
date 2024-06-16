@@ -9,7 +9,7 @@
     Edit Tugas Kuliah
 @endsection
 @section('urlmenu')
-    #
+    {{ route('dosen.akademik.stask-index') }}
 @endsection
 @section('subdesc')
     Halaman untuk menambah Tugas Kuliah
@@ -32,7 +32,9 @@
                             <h5 class="card-title d-flex justify-content-between align-items-center">
                                 @yield('submenu') - {{ $task->jadkul->matkul->name . ' - ' . $task->jadkul->pert_id }}
                                 <div class="">
-                                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+                                    <button type="submit" class="btn mt-1 btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+                                    <a href="@yield('urlmenu')" class="btn mt-1 btn-warning"><i class="fa-solid fa-backward"></i></a>
+
                                 </div>
                             </h5>
                         </div>

@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Str;
 Use Hash;
+use Carbon\Carbon;
 // DEFAULT AUTHENTIKASI
 use App\Models\User;
 use App\Models\Dosen;
@@ -117,6 +118,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Dosen123'),
         ]);
         Mahasiswa::create([
+            'taka_id' => '1',
             'class_id' => '1',
             'mhs_nim' => str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT),
             'mhs_name' => 'Mahasiswa A',
@@ -129,6 +131,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Mahasiswa123'),
         ]);
         Mahasiswa::create([
+            'taka_id' => '1',
             'class_id' => '1',
             'mhs_nim' => str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT),
             'mhs_name' => 'Mahasiswa B',
@@ -141,6 +144,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Mahasiswa123'),
         ]);
         Mahasiswa::create([
+            'taka_id' => '2',
             'class_id' => '2',
             'mhs_nim' => str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT),
             'mhs_name' => 'Mahasiswa C',
@@ -153,6 +157,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Mahasiswa123'),
         ]);
         Mahasiswa::create([
+            'taka_id' => '2',
             'class_id' => '2',
             'mhs_nim' => str_pad(rand(0, 9999999999), 10, '0', STR_PAD_LEFT),
             'mhs_name' => 'Mahasiswa D',
@@ -198,13 +203,13 @@ class DatabaseSeeder extends Seeder
         \App\Models\TahunAkademik::create([
             'name'       => 'TA. 2023/2024',
             'code'       => '012023',
-            'semester'   => 'Semester I',
+            'semester'   => '1',
             'year_start' => '2023',
         ]);
         \App\Models\TahunAkademik::create([
             'name'       => 'TA. 2023/2024',
             'code'       => '022023',
-            'semester'   => 'Semester II',
+            'semester'   => '2',
             'year_start' => '2023',
         ]);
         \App\Models\ProgramKuliah::create([
@@ -290,6 +295,36 @@ class DatabaseSeeder extends Seeder
             'ended'  => '23:00:00',
 
         ]);
+        \App\Models\JadwalKuliah::create([
+            'makul_id'  => '1',
+            'kelas_id'  => '2',
+            'dosen_id'  => '1',
+            'ruang_id'  => '1',
+            'pert_id'  => '2',
+            'meth_id'  => '1',
+            'days_id'  => '1',
+            'bsks'  => '3',
+            'code'  => Str::random(8),
+            'date'  => now()->format('Y-m-d'),
+            'start'  => '01:00:00',
+            'ended'  => '23:00:00',
+
+        ]);
+        \App\Models\JadwalKuliah::create([
+            'makul_id'  => '1',
+            'kelas_id'  => '1',
+            'dosen_id'  => '1',
+            'ruang_id'  => '1',
+            'pert_id'  => '2',
+            'meth_id'  => '1',
+            'days_id'  => '1',
+            'bsks'  => '3',
+            'code'  => Str::random(8),
+            'date'  => now()->format('Y-m-d'),
+            'start'  => '01:00:00',
+            'ended'  => '23:00:00',
+
+        ]);
 
         // SEEDER KHUSUS DATA MASTER INVENTARIS
         \App\Models\Gedung::create([
@@ -339,6 +374,43 @@ class DatabaseSeeder extends Seeder
             'name'    => 'UKT Semester 2',
             'code'    => 'UKT-'.Str::random(8),
             'price'    => '2200000',
+        ]);
+        // DEFAULT TUGAS SEEDER
+        \App\Models\studentTask::create([
+            'dosen_id'    => '1',
+            'jadkul_id'    => '1',
+            'code'    => Str::random(8),
+            'title'    => 'First Task',
+            'detail_task'    => 'First Task Deskription',
+            'exp_date'  => Carbon::now()->addDays(7),
+            'exp_time'  => Carbon::now()->addHours(12),
+        ]);
+        \App\Models\studentTask::create([
+            'dosen_id'    => '1',
+            'jadkul_id'    => '2',
+            'code'    => Str::random(8),
+            'title'    => 'First Task',
+            'detail_task'    => 'First Task Deskription',
+            'exp_date'  => Carbon::now()->addDays(7),
+            'exp_time'  => Carbon::now()->addHours(12),
+        ]);
+        \App\Models\studentTask::create([
+            'dosen_id'    => '1',
+            'jadkul_id'    => '3',
+            'code'    => Str::random(8),
+            'title'    => 'Second Task',
+            'detail_task'    => 'Second Task Deskription',
+            'exp_date'  => Carbon::now()->addDays(7),
+            'exp_time'  => Carbon::now()->addHours(12),
+        ]);
+        \App\Models\studentTask::create([
+            'dosen_id'    => '1',
+            'jadkul_id'    => '4',
+            'code'    => Str::random(8),
+            'title'    => 'Second Task',
+            'detail_task'    => 'Second Task Deskription',
+            'exp_date'  => Carbon::now()->addDays(7),
+            'exp_time'  => Carbon::now()->addHours(12),
         ]);
 
     }

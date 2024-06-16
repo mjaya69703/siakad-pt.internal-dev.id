@@ -15,6 +15,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\JadwalKuliah;
+use App\Models\studentScore;
 use App\Models\studentTask;
 
 class StudentTaskController extends Controller
@@ -33,6 +34,26 @@ class StudentTaskController extends Controller
         $data['stask'] = studentTask::latest()->paginate(5);
 
         return view('dosen.pages.student-task-create', $data);
+    }
+    public function view($code)
+    {
+        $data['jadkul'] = JadwalKuliah::all();
+        $data['stask'] = studentTask::latest()->paginate(5);
+        $data['task'] = studentTask::where('code', $code)->first();
+        $data['score'] = studentScore::where('stask_id', $data['task']->id)->get();
+
+        // dd($data['score']);
+
+        return view('dosen.pages.student-task-view', $data);
+    }
+    public function viewDetail($code)
+    {
+        $data['stask'] = studentTask::latest()->paginate(5);
+        $data['score'] = studentScore::where('code', $code)->first();
+
+        dd($data['score']);
+
+        return view('dosen.pages.student-task-view', $data);
     }
     public function edit($code)
     {
@@ -108,7 +129,7 @@ class StudentTaskController extends Controller
     {
         $stask = studentTask::where('code', $code)->first();
         $stask->delete();
-        
+
         Alert::success('success', 'Data berhasil dihapus');
         return back();
     }

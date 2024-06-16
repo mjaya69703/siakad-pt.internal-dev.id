@@ -6,7 +6,7 @@
     Data Tugas Kuliah
 @endsection
 @section('submenu')
-    Tugas {{ $stask->jadkul->matkul->name }} - {{ $stask->jadkul->pert_id }} 
+    Tugas {{ $stask->jadkul->matkul->name }} - {{ $stask->jadkul->pert_id }}
 @endsection
 @section('urlmenu')
 {{ route('mahasiswa.akademik.tugas-index') }}

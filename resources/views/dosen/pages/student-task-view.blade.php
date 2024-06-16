@@ -3,16 +3,16 @@
     Kelola Tugas - Siakad By Internal Developer
 @endsection
 @section('menu')
-    Kelola Tugas
+    Kumpulan Tugas Mahasiswa
 @endsection
 @section('submenu')
-    Edit Tugas Kuliah
+    Lihat Daftar Kumpulan Tugas Mahasiswa
 @endsection
 @section('urlmenu')
-    #
+    {{ route('dosen.akademik.stask-index') }}
 @endsection
 @section('subdesc')
-    Halaman untuk melihat Tugas Kuliah
+    Lihat Daftar Kumpulan Tugas Mahasiswa
 @endsection
 @section('content')
     <section class="content">
@@ -23,7 +23,8 @@
                         <h5 class="card-title d-flex justify-content-between align-items-center">
                             @yield('menu')
                             <div class="">
-                                <a href="{{ route('dosen.akademik.stask-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
+                                <a href="{{ route('dosen.akademik.stask-create') }}" class="btn mt-1 btn-primary"><i class="fa-solid fa-plus"></i></a>
+                                <a href="@yield('urlmenu')" class="btn mt-1 btn-warning"><i class="fa-solid fa-backward"></i></a>
                             </div>
                         </h5>
                     </div>
@@ -33,24 +34,26 @@
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th class="text-center">Nama Mata Kuliah</th>
-                                    <th class="text-center">Nama Kelas</th>
                                     <th class="text-center">Judul Tugas</th>
-                                    <th class="text-center">Batas Akhir</th>
+                                    <th class="text-center">Nama Mahasiswa</th>
+                                    <th class="text-center">Score Tugas</th>
+                                    <th class="text-center">Waktu Kirim</th>
                                     <th class="text-center">Button</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($stask as $key => $item)
+                                @foreach ($score as $key => $item)
                                     <tr>
                                         <td data-label="Number">{{ ++$key }}</td>
-                                        <td data-label="Nama Mata Kuliah">{{ $item->jadkul->matkul->name }} <br> {{ $item->jadkul->pert_id }}</td>
-                                        <td data-label="Nama Kelas">{{ $item->jadkul->kelas->name }}</td>
-                                        <td data-label="Judul Tugas">{{ $item->title }}</td>
-                                        <td data-label="Masa Berlaku">{{ \Carbon\Carbon::parse($item->exp_date)->format('d M Y') . ' - ' .\Carbon\Carbon::parse($item->exp_time)->format('H:i') }}</td>
+                                        <td data-label="Nama Mata Kuliah">{{ $item->task->jadkul->matkul->name }} <br> {{ $item->task->jadkul->pert_id }}</td>
+                                        <td data-label="Judul Tugas">{{ $item->task->title }}</td>
+                                        <td data-label="Nama Mahasiswa">{{ $item->student->mhs_name }}</td>
+                                        <td data-label="Score Tugas">{{ $item->score != null ? $item->score : '-'}}</td>
+                                        <td data-label="Waktu Kirim">{{ \Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y') }} <br> {{ \Carbon\Carbon::parse($item->created_at)->format('H:i') }}</td>
                                         <td class="d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('dosen.akademik.stask-view', $item->code) }}" style="margin-right: 10px" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('dosen.akademik.stask-edit', $item->code) }}" style="margin-right: 10px" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                            <form id="delete-form-{{ $item->code }}"
+                                            <a href="{{ route('dosen.akademik.stask-view-detail', $item->code) }}" style="margin-right: 10px" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            {{-- <a href="{{ route('dosen.akademik.stask-edit', $item->code) }}" style="margin-right: 10px" class="btn btn-primary"><i class="fas fa-edit"></i></a> --}}
+                                            {{-- <form id="delete-form-{{ $item->code }}"
                                                 action="{{ route('dosen.akademik.stask-destroy', $item->code) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -62,7 +65,7 @@
                                                     onclick="deleteData('{{ $item->code }}')">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-                                            </form>
+                                            </form> --}}
 
                                         </td>
                                     </tr>

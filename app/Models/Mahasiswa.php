@@ -72,4 +72,8 @@ class Mahasiswa extends Authenticatable
     {
         return $this->belongsTo(Kelas::class, 'class_id');
     }
+    public function taka()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'taka_id');
+    }
 }
