@@ -1,5 +1,6 @@
 $("#summernote").summernote({
   tabsize: 2,
+  theme: 'bs4-dark',
   height: 120,
 })
 $("#hint").summernote({

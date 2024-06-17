@@ -1,5 +1,10 @@
 ## CHANGE-LOGS
 
+<b>17/06/2024 - Update v.0.0003m - alpha</b>
+```
+- Dosen bisa memberi nilai tugas pada mahasiswa
+- Ketika dosen memberi nilai akan langsung Sync dengan terhimpun ke KHS
+```
 <b>16/06/2024 - Update v.0.0003l - alpha</b>
 ```
 - Initialisasi Fitur Kartu Hasil Studi - Integrasi ke Skor Tugas

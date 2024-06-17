@@ -519,8 +519,10 @@ Route::group(['prefix' => 'dosen', 'middleware' => ['dsn-access:Dosen Aktif'], '
     Route::get('/data-akademik/kelola-tugas/view/{code}',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'view'])->name('akademik.stask-view');
     Route::get('/data-akademik/kelola-tugas/view/detail/{code}',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'viewDetail'])->name('akademik.stask-view-detail');
     Route::get('/data-akademik/kelola-tugas/edit/{code}',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'edit'])->name('akademik.stask-edit');
+    Route::get('/data-akademik/kelola-tugas/edit/{code}/score',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'editScore'])->name('akademik.stask-edit-score');
     Route::post('/data-akademik/kelola-tugas/store',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'store'])->name('akademik.stask-store');
     Route::patch('/data-akademik/kelola-tugas/update/{code}',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'update'])->name('akademik.stask-update');
+    Route::patch('/data-akademik/kelola-tugas/update/{code}/score',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'updateScore'])->name('akademik.stask-update-score');
     Route::delete('/data-akademik/kelola-tugas/delete/{code}',[App\Http\Controllers\Dosen\Akademik\StudentTaskController::class, 'destroy'])->name('akademik.stask-destroy');
 
     // PRIVATE FUNCTION => GRAPHIC AJAX FUNCTION

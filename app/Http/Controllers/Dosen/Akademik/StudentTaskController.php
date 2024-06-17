@@ -15,6 +15,8 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\JadwalKuliah;
+use App\Models\Mahasiswa;
+use App\Models\HasilStudi;
 use App\Models\studentScore;
 use App\Models\studentTask;
 
@@ -51,9 +53,9 @@ class StudentTaskController extends Controller
         $data['stask'] = studentTask::latest()->paginate(5);
         $data['score'] = studentScore::where('code', $code)->first();
 
-        dd($data['score']);
+        // dd($data['score']);
 
-        return view('dosen.pages.student-task-view', $data);
+        return view('dosen.pages.student-task-view-score', $data);
     }
     public function edit($code)
     {
@@ -122,6 +124,36 @@ class StudentTaskController extends Controller
         $stask->save();
 
         Alert::success('Data berhasil diupdate');
+        return back();
+    }
+
+    public function updateScore($code, Request $request)
+    {
+        $score = studentScore::where('code', $code)->first();
+        $score->score = $request->score;
+        $score->save();
+
+        $user = Mahasiswa::where('id', $request->student_id)->first();
+        $khs = HasilStudi::where('student_id', $user->id)->where('smt_id', $user->taka->raw_semester)->first();
+        // dd($khs->count())
+
+        if ($khs === null) {
+            $ckhs = new HasilStudi;
+            $ckhs->student_id = $user->id;
+            $ckhs->taka_id = $user->taka->id;
+            $ckhs->smt_id = $user->taka->raw_semester;
+            $ckhs->score_tugas = $request->score;
+            $ckhs->max_tugas = 1;
+            $ckhs->code = Str::random(6);
+            $ckhs->save();
+        } elseif ($khs !== null) {
+            $ukhs = HasilStudi::where('student_id', $user->id)->where('smt_id', $user->taka->raw_semester)->first();
+            $ukhs->score_tugas += $request->score;
+            $ukhs->max_tugas += 1;
+            $ukhs->save();
+        }
+
+        Alert::success('success', 'Score berhasil diupdate');
         return back();
     }
 

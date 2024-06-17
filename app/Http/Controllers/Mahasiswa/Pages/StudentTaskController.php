@@ -70,41 +70,44 @@ class StudentTaskController extends Controller
         $user = Auth::guard('mahasiswa')->user();
 
         $task = new studentScore;
-        $task->stask_id = $stask->id;
-        $task->desc = $request->desc;
-        $task->code = Str::of(mt_rand(100000, 999999))->limit(6, '');
-        $task->student_id = $user->id;
 
         for ($i = 1; $i <= 8; $i++) {
             $fileKey = 'file_' . $i;
 
             if ($request->hasFile($fileKey)) {
                 $file = $request->file($fileKey);
-                $filename = time() . '-part-' . $i . $file->getClientOriginalName();
-                $path = $file->storeAs('uploads/tugas', $filename, 'public');
-                $task->$fileKey = $path;
+                $filename = time() . '-part-' . $i . '.' . $file->getClientOriginalExtension(); // Menggunakan ekstensi file asli
+                $path = $file->storeAs('public/uploads/tugas', $filename); // Menyimpan file ke dalam direktori public/uploads/tugas
+                $task->{'file_' . $i} = 'tugas/' . $filename; // Menyimpan path relatif dari file ke dalam properti dinamis $task
             }
-        }
-        $task->save();
+            // Setelah menangani file, atur nilai-nilai lainnya
+            $task->stask_id = $stask->id;  // Pastikan variabel $stask telah didefinisikan sebelumnya
+            $task->desc = $request->desc;
+            $task->code = Str::of(mt_rand(100000, 999999))->limit(6, '');
+            $task->student_id = $user->id;
 
-        $khs = HasilStudi::where('student_id', $user->id)->where('smt_id', $user->taka->raw_semester)->first();
-        // dd($khs->count())
-
-        if ($khs === null) {
-            $ckhs = new HasilStudi;
-            $ckhs->student_id = $user->id;
-            $ckhs->taka_id = $user->taka->id;
-            $ckhs->smt_id = $user->taka->raw_semester;
-            $ckhs->score_tugas = 10;
-            $ckhs->max_tugas = 1;
-            $ckhs->code = Str::random(6);
-            $ckhs->save();
-        } elseif ($khs !== null) {
-            $ukhs = HasilStudi::where('student_id', $user->id)->where('smt_id', $user->taka->raw_semester)->first();
-            $ukhs->score_tugas += 10;
-            $ukhs->max_tugas += 1;
-            $ukhs->save();
+            // Simpan $task untuk setiap iterasi
+            $task->save();
         }
+
+        // $khs = HasilStudi::where('student_id', $user->id)->where('smt_id', $user->taka->raw_semester)->first();
+        // // dd($khs->count())
+
+        // if ($khs === null) {
+        //     $ckhs = new HasilStudi;
+        //     $ckhs->student_id = $user->id;
+        //     $ckhs->taka_id = $user->taka->id;
+        //     $ckhs->smt_id = $user->taka->raw_semester;
+        //     $ckhs->score_tugas = 10;
+        //     $ckhs->max_tugas = 1;
+        //     $ckhs->code = Str::random(6);
+        //     $ckhs->save();
+        // } elseif ($khs !== null) {
+        //     $ukhs = HasilStudi::where('student_id', $user->id)->where('smt_id', $user->taka->raw_semester)->first();
+        //     $ukhs->score_tugas += 10;
+        //     $ukhs->max_tugas += 1;
+        //     $ukhs->save();
+        // }
 
         Alert::success('Sukses', 'Tugas berhasil disimpan');
         return redirect()->route('mahasiswa.akademik.tugas-index');
