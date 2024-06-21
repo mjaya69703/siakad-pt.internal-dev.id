@@ -4,21 +4,34 @@ namespace App\Http\Controllers\Dosen;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// UNTUK PLUGIN TAMBAHAN
+// SECTION ADDONS SYSTEM
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
-use Alert;
 use Auth;
 use Hash;
+use Str;
+use PDF;
+// SECTION ADDONS EXTERNAL
+use Alert;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+// SECTION MODELS
+use App\Models\Dosen;
+use App\Models\FeedBack\FBPerkuliahan;
+use App\Models\Notification;
 
 class HomeController extends Controller
 {
     public function index(){
 
+        $dosenId = Auth::guard('dosen')->user()->id;
 
-        return view('dosen.home-index');
+        $data['feedback'] = FBPerkuliahan::whereHas('jadkul', function ($query) use ($dosenId) {
+            $query->where('dosen_id', $dosenId);
+        })->get();
+        $data['notify'] = Notification::whereIn('send_to', [0, 2])->latest()->paginate(5);
+
+        return view('dosen.home-index', $data);
 
     }
     public function profile(){

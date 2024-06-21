@@ -527,6 +527,7 @@ Route::group(['prefix' => 'dosen', 'middleware' => ['dsn-access:Dosen Aktif'], '
 
     // PRIVATE FUNCTION => GRAPHIC AJAX FUNCTION
     Route::get('/services/ajax/graphic/{code}/kepuasan-mengajar',[App\Http\Controllers\Services\Ajax\GraphicController::class, 'getKepuasanMengajar'])->name('services.ajax.graphic.kepuasan-mengajar');
+    Route::get('/services/ajax/graphic/kepuasan-mengajar/dosen',[App\Http\Controllers\Services\Ajax\GraphicController::class, 'getKepuasanMengajarDosen'])->name('services.ajax.graphic.kepuasan-mengajar-dosen');
 
 
 });

@@ -28,4 +28,25 @@ class GraphicController extends Controller
             'sangatpuas' => $sangatPuas,
         ]);
     }
+
+    public function getKepuasanMengajarDosen()
+    {
+        $dosenId = Auth::guard('dosen')->user()->id;
+
+        $tidakPuas = FBPerkuliahan::whereHas('jadkul', function ($query) use ($dosenId) {
+            $query->where('dosen_id', $dosenId);
+        })->where('fb_score', 'Tidak Puas')->count();
+        $cukupPuas = FBPerkuliahan::whereHas('jadkul', function ($query) use ($dosenId) {
+            $query->where('dosen_id', $dosenId);
+        })->where('fb_score', 'Cukup Puas')->count();
+        $sangatPuas = FBPerkuliahan::whereHas('jadkul', function ($query) use ($dosenId) {
+            $query->where('dosen_id', $dosenId);
+        })->where('fb_score', 'Sangat Puas')->count();
+
+        return response()->json([
+            'tidakpuas' => $tidakPuas,
+            'cukuppuas' => $cukupPuas,
+            'sangatpuas' => $sangatPuas,
+        ]);
+    }
 }

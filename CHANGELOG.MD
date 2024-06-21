@@ -3,6 +3,7 @@
 <b>21/06/2024 - Update v.0.0003m - alpha</b>
 
 ```
+- Revisi Dashboard Dosen
 - Revisi Menu Program Studi
 ```
 

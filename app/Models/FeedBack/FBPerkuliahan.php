@@ -10,4 +10,9 @@ class FBPerkuliahan extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function jadkul()
+    {
+        return $this->belongsTo(\App\Models\JadwalKuliah::class, 'fb_jakul_code', 'code');
+    }
 }
