@@ -54,13 +54,20 @@ class ProgramStudiController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:3',
+            'cnim' => 'required|string|max:99999|numeric',
             'head_id' => 'required',
             'faku_id' => 'required',
+            'title' => 'required',
+            'level' => 'required',
         ]);
 
         $pstudi = new ProgramStudi;
         $pstudi->name = $request->name;
         $pstudi->code = $request->code;
+        $pstudi->cnim = $request->cnim;
+        $pstudi->slug = Str::slug($request->name);
+        $pstudi->level = $request->level;
+        $pstudi->title = $request->title;
         $pstudi->head_id = $request->head_id;
         $pstudi->faku_id = $request->faku_id;
         $pstudi->save();
@@ -74,13 +81,20 @@ class ProgramStudiController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:3',
+            'cnim' => 'required|string|max:99999|numeric',
             'head_id' => 'required',
             'faku_id' => 'required',
+            'title' => 'required',
+            'level' => 'required',
         ]);
 
         $pstudi = ProgramStudi::where('code', $code)->first();
         $pstudi->name = $request->name;
         $pstudi->code = $request->code;
+        $pstudi->cnim = $request->cnim;
+        $pstudi->slug = Str::slug($request->name);
+        $pstudi->level = $request->level;
+        $pstudi->title = $request->title;
         $pstudi->head_id = $request->head_id;
         $pstudi->faku_id = $request->faku_id;
         $pstudi->save();

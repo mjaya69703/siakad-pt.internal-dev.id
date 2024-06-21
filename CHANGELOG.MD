@@ -1,24 +1,38 @@
 ## CHANGE-LOGS
 
+<b>21/06/2024 - Update v.0.0003m - alpha</b>
+
+```
+- Revisi Menu Program Studi
+```
+
 <b>17/06/2024 - Update v.0.0003m - alpha</b>
+
 ```
 - Dosen bisa memberi nilai tugas pada mahasiswa
 - Ketika dosen memberi nilai akan langsung Sync dengan terhimpun ke KHS
 ```
+
 <b>16/06/2024 - Update v.0.0003l - alpha</b>
+
 ```
 - Initialisasi Fitur Kartu Hasil Studi - Integrasi ke Skor Tugas
 - Penambahan Attribut Semester
 - Revisi Dikit Dikit
 ```
+
 <b>15/06/2024 - Update v.0.0003q - alpha</b>
+
 ```
 - Revisi Waktu Carbon Menjadi Local Indonesia
 ```
+
 <b>14/06/2024 - Update v.0.0003q - alpha</b>
+
 ```
 - Tambah Fitur Kirim Tugas Online Role Mahasiswa
 ```
+
 <b>13/06/2024 - Update v.0.0003q - alpha</b>
 
 ```

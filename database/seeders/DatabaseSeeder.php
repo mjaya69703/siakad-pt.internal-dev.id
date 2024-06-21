@@ -187,7 +187,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\ProgramStudi::create([
             'name'       => 'Teknik Informatika',
             'code'       => 'TI',
+            'cnim'       => '4210',
             'title'      => ', S.Kom',
+            'level'      => 'S-1',
             'slug'       => Str::slug('Teknik Informatika'),
             'head_id'    => '1',
             'faku_id'    => '1',
@@ -195,7 +197,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\ProgramStudi::create([
             'name'       => 'Sistem Informasi',
             'code'       => 'SI',
+            'cnim'       => '4211',
             'title'      => ', S.Kom',
+            'level'      => 'S-1',
             'slug'       => Str::slug('Sistem Informasi'),
             'head_id'    => '1',
             'faku_id'    => '1',

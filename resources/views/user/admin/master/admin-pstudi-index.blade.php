@@ -56,6 +56,27 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="cnim">Kode Awal NIM ( 5 Angka )</label>
+                        <input type="text" class="form-control" name="cnim" id="cnim" placeholder="Inputkan kode awal NIM program studi..." maxlength="5" uppercase onkeydown="return /[0-9]/i.test(event.key)" >
+                        @error('cnim')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Gelar Program Studi</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Inputkan gelar program studi..." uppercase >
+                        @error('title')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="level">Jenjang Program Studi</label>
+                        <input type="text" class="form-control" name="level" id="level" placeholder="Inputkan jenjang program studi..." uppercase >
+                        @error('level')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="head_id">Kepala Program Studi</label>
                         <select name="head_id" id="head_id" class="form-select">
                             <option value="" selected>Pilih Kepala Program Studi</option>
@@ -83,6 +104,7 @@
                         <th class="text-center">#</th>
                         <th class="text-center">Nama Program Studi</th>
                         <th class="text-center">Kode Program Studi</th>
+                        <th class="text-center">Gelar Program Studi</th>
                         <th class="text-center">Kepala Program Studi</th>
                         <th class="text-center">Button</th>
                     </thead>
@@ -92,6 +114,7 @@
                                 <td data-label="Number">{{ ++$key }}</td>
                                 <td data-label="Program Studi">{{ $item->name }}</td>
                                 <td data-label="Kode Program Studi">{{ $item->fakultas->code . '-' . $item->code }}</td>
+                                <td data-label="Gelar Program Studi">{{ $item->level }} - ( {{ $item->title }} )</td>
                                 <td data-label="Kepala Program Studi">{{ $item->head->dsn_name }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="#" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#updatePStudi{{ $item->code }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
@@ -169,6 +192,27 @@
                                 <label for="code">Kode Program Studi ( 2 Angka )</label>
                                 <input type="text" class="form-control" name="code" id="code" placeholder="Inputkan kode program studi..." value="{{ $item->code }}" maxlength="2" uppercase onkeydown="return /[a-zA-Z0-9]/i.test(event.key)" >
                                 @error('code')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="cnim">Kode Awal NIM ( 5 Angka )</label>
+                                <input type="text" class="form-control" name="cnim" id="cnim" placeholder="Inputkan kode awal NIM program studi..." value="{{ $item->cnim }}" maxlength="5" uppercase onkeydown="return /[0-9]/i.test(event.key)" >
+                                @error('cnim')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Gelar Program Studi</label>
+                                <input type="text" class="form-control" name="title" id="title" placeholder="Inputkan gelar program studi..." value="{{ $item->title }}" uppercase >
+                                @error('title')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="level">Jenjang Program Studi</label>
+                                <input type="text" class="form-control" name="level" id="level" placeholder="Inputkan jenjang program studi..." value="{{ $item->level }}" uppercase >
+                                @error('level')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
