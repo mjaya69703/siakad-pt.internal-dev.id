@@ -306,6 +306,9 @@
                             },
                             series: [maleCount, femaleCount],
                             labels: ['Laki-laki', 'Perempuan'],
+                            legend: {
+                                position: 'bottom'
+                            }
                         };
 
                         var chart = new ApexCharts(document.querySelector('#genderMhsChart'), options);
@@ -317,6 +320,9 @@
                             },
                             series: [dmaleCount, dfemaleCount],
                             labels: ['Laki-laki', 'Perempuan'],
+                            legend: {
+                                position: 'bottom'
+                            }
                         };
 
                         var chart = new ApexCharts(document.querySelector('#genderDsnChart'), options);
@@ -327,6 +333,9 @@
                             },
                             series: [umaleCount, ufemaleCount],
                             labels: ['Laki-laki', 'Perempuan'],
+                            legend: {
+                                position: 'bottom'
+                            }
                         };
 
                         var chart = new ApexCharts(document.querySelector('#genderUsrChart'), options);
