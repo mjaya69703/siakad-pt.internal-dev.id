@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('news_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('code')->unique();
+            $table->string('desc');
             $table->timestamps();
         });
     }

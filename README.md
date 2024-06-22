@@ -3,7 +3,7 @@
 <p align="center">
 <a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003m - Changelogs</a>
 <br>
-<span>Latest Update: 21 Juni 2024</span>
+<span>Latest Update: 22 Juni 2024</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
@@ -31,6 +31,7 @@ Pada project yang saya buat ini akan memiliki 3 Model Utama sebagai basis authen
     -   Halaman Jurnal Presensi ( Absensi )
     -   Halaman Support Ticket
     -   Halaman Kelola Notifikasi
+    -   Halaman Kelola Kategori Berita ( CRUD )
 
 -   Fitur Kelola Data Akademik
 

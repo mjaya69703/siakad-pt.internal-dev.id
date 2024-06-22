@@ -417,5 +417,38 @@ class DatabaseSeeder extends Seeder
             'exp_time'  => Carbon::now()->addHours(12),
         ]);
 
+        // Kategori Berita
+        $categories = [
+            ['name' => 'Teknologi', 'desc' => 'Berita seputar teknologi'],
+            ['name' => 'Bisnis', 'desc' => 'Berita seputar dunia bisnis'],
+            ['name' => 'Kesehatan', 'desc' => 'Berita seputar kesehatan'],
+            ['name' => 'Sains', 'desc' => 'Berita seputar ilmu pengetahuan'],
+            ['name' => 'Hiburan', 'desc' => 'Berita seputar dunia hiburan'],
+            ['name' => 'Olahraga', 'desc' => 'Berita seputar olahraga'],
+            ['name' => 'Politik', 'desc' => 'Berita seputar politik'],
+            ['name' => 'Mode', 'desc' => 'Berita seputar dunia mode'],
+            ['name' => 'Travel', 'desc' => 'Berita seputar perjalanan'],
+            ['name' => 'Makanan', 'desc' => 'Berita seputar makanan'],
+            ['name' => 'Pendidikan', 'desc' => 'Berita seputar dunia pendidikan'],
+            ['name' => 'Lingkungan', 'desc' => 'Berita seputar lingkungan'],
+            ['name' => 'Gaya Hidup', 'desc' => 'Berita seputar gaya hidup'],
+            ['name' => 'Opini', 'desc' => 'Opini dan pandangan'],
+            ['name' => 'Cuaca', 'desc' => 'Berita seputar cuaca'],
+            ['name' => 'Seni', 'desc' => 'Berita seputar seni'],
+            ['name' => 'Film', 'desc' => 'Berita seputar dunia film'],
+            ['name' => 'Musik', 'desc' => 'Berita seputar musik'],
+            ['name' => 'Buku', 'desc' => 'Berita seputar dunia literatur'],
+            ['name' => 'Ekonomi', 'desc' => 'Berita seputar ekonomi'],
+        ];
+
+        foreach ($categories as $category) {
+            \App\Models\newsCategory::create([
+                'name' => $category['name'],
+                'code' => Str::random(6),
+                'slug' => Str::slug($category['name']),
+                'desc' => $category['desc'],
+            ]);
+        }
+
     }
 }

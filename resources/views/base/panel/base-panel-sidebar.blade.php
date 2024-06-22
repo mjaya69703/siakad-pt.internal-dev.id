@@ -41,6 +41,18 @@
                 <span>Notifikasi</span>
             </a>
         </li>
+
+        <li class="sidebar-item has-sub {{ Route::is($prefix.'news.*', request()->path()) ? 'active' : '' }}">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Data Berita</span>
+            </a>
+            <ul class="submenu">
+                <li class="submenu-item {{ Route::is($prefix . 'news.category-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route($prefix . 'news.category-index') }}" class="submenu-link">Kategori Berita</a>
+                </li>
+            </ul>
+        </li>
         @if (Auth::user()->raw_type === 0)
             {{-- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
             @include('user.admin.admin-sidebar-index')
