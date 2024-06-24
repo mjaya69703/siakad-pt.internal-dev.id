@@ -48,6 +48,9 @@
                 <span>Data Berita</span>
             </a>
             <ul class="submenu">
+                <li class="submenu-item {{ Route::is($prefix . 'news.post-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route($prefix . 'news.post-index') }}" class="submenu-link">Berita</a>
+                </li>
                 <li class="submenu-item {{ Route::is($prefix . 'news.category-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route($prefix . 'news.category-index') }}" class="submenu-link">Kategori Berita</a>
                 </li>

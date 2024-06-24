@@ -16,6 +16,8 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\Fakultas;
+use App\Models\newsPost;
+use App\Models\newsCategory;
 use App\Models\KotakSaran;
 use App\Models\ProgramStudi;
 
@@ -47,11 +49,24 @@ class HomeController extends Controller
     public function index()
     {
         $data['fakultas'] = Fakultas::all();
+        $data['posts'] = newsPost::latest()->paginate(7);
         $data['prefix'] = $this->setPrefix();
         $data['title'] = " - ESEC Academy";
         $data['menu'] = "Halaman Utama";
         return view('root.root-index', $data);
     }
+
+    public function postView($slug)
+    {
+        $data['fakultas'] = Fakultas::all();
+        $data['post'] = newsPost::where('slug', $slug)->first();
+        $data['posts'] = newsPost::latest()->paginate(7);
+        $data['prefix'] = $this->setPrefix();
+        $data['title'] = " - ESEC Academy";
+        $data['menu'] = "Lihat Postingan " . $data['post']->name;
+        return view('root.pages.news-view', $data);
+    }
+    
 
     public function adviceIndex()
     {

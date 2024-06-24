@@ -1,5 +1,6 @@
 !.gitignore
 excel-files/*
 invoices/*
+news/*
 uploads/*
 uploads/tugas/*

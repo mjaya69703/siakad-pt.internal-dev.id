@@ -55,100 +55,32 @@
         <hr>
         <div class="card mb-3">
             <div class="card-body">
-
-                <div class="berita row">
-                    <div class="col-lg-2 text-center">
-                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
-                    </div>
-                    <div class="col-lg-10">
-                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
-                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
-                        <div class="d-flex justify-content-between align-items-center">
-
-                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
-                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info"></i></a>
+                @if ($posts->count() == 0)
+                    <p>Nothing Post In Here</p>
+                    
+                @else
+                    @foreach ($posts as $key => $item)
+                        
+                        <div class="berita row">
+                            <div class="col-lg-2 text-center">
+                                <img src="{{ asset('storage/images/'. $item->image) }}" style="" class="rounded" alt="">
+                            </div>
+                            <div class="col-lg-10">
+                                <a href="{{ route('root.post-view', $item->slug) }}" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">{{ $item->name }}</a>
+                                <p class="mb-2">{{ Str::limit( strip_tags( $item->content ), 180 ) }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+        
+                                    <small>{{ $item->created_at->translatedFormat('l, d F Y - H.i') }} WIB <br> Author By <a href="#">Jaya Kusuma</a> - Kategori <a href="">{{ $item->category->name }}</a></small>
+                                    <a href="{{ route('root.post-view', $item->slug) }}" class="btn btn-xs btn-info"><i class="fa-solid fa-info"></i></a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="berita row">
-                    <div class="col-lg-2 text-center">
-                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
-                    </div>
-                    <div class="col-lg-10">
-                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
-                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
-                        <div class="d-flex justify-content-between align-items-center">
-
-                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
-                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="berita row">
-                    <div class="col-lg-2 text-center">
-                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
-                    </div>
-                    <div class="col-lg-10">
-                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
-                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
-                        <div class="d-flex justify-content-between align-items-center">
-
-                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
-                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="berita row">
-                    <div class="col-lg-2 text-center">
-                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
-                    </div>
-                    <div class="col-lg-10">
-                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
-                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
-                        <div class="d-flex justify-content-between align-items-center">
-
-                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
-                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="berita row">
-                    <div class="col-lg-2 text-center">
-                        <img src="{{ asset('storage/images/default/default-profile.jpg') }}" style="" class="rounded" alt="">
-                    </div>
-                    <div class="col-lg-10">
-                        <a href="" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">Lorem ipsum dolor sit amet consectetur adipisicing.</a>
-                        <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur id nihil praesentium reprehenderit a placeat veritatis provident voluptate ad doloremque?</p>
-                        <div class="d-flex justify-content-between align-items-center">
-
-                            <small>Kamis, 15 Februari 2024 - 14.25 WIB <br> Author By <a href="#">Jaya Kusuma</a></small>
-                            <a href="" class="btn btn-xs btn-info"><i class="fa-solid fa-info"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <hr>
+                        <hr>
+                    @endforeach
+                @endif
             </div>
         </div>
-        <div class="d-flex justify-content-center">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination pagination-primary  justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
+        {{ $posts->links('root.vendor.paginator') }}
 
     </div>
     <div class="col-lg-4 col-12">

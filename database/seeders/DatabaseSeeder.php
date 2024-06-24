@@ -450,5 +450,27 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        \App\Models\newsPost::create([
+            'category_id'    => '1',
+            'author_id'    => '1',
+            'name'    => 'Sample Post First',
+            'slug'    => 'sample-post-first',
+            'image'    => 'default/default-profile.jpg',
+            'metadesc'    => 'Meta Descriptsion Sample',
+            'keywords'    => 'Keywords 1, Keywords 2, Keywords 3',
+            'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, omnis quibusdam aliquam at nemo repellat nam ad adipisci itaque alias eveniet consequuntur molestiae cupiditate dolores, id magni autem vero quam, suscipit nulla facere molestias ipsum? Adipisci, animi natus. Modi, veniam doloribus assumenda in dolorem exercitationem quaerat tempora non temporibus magni earum voluptatibus autem quibusdam tempore voluptas aperiam, consequuntur alias fuga laudantium sed harum distinctio repudiandae facere omnis. Sint sunt dignissimos fugit velit voluptatibus adipisci esse minima explicabo. Nisi est architecto quasi suscipit amet quaerat nulla dolore illo quis inventore, error iusto nostrum eaque nemo, atque odio quas esse aut aperiam!',
+        ]);
+
+        \App\Models\newsPost::create([
+            'category_id'    => '2',
+            'author_id'    => '1',
+            'name'    => 'Sample Post Second',
+            'slug'    => 'sample-post-second',
+            'image'    => 'default/default-profile.jpg',
+            'metadesc'    => 'Meta Descriptsion Sample',
+            'keywords'    => 'Keywords 1, Keywords 2, Keywords 3',
+            'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, omnis quibusdam aliquam at nemo repellat nam ad adipisci itaque alias eveniet consequuntur molestiae cupiditate dolores, id magni autem vero quam, suscipit nulla facere molestias ipsum? Adipisci, animi natus. Modi, veniam doloribus assumenda in dolorem exercitationem quaerat tempora non temporibus magni earum voluptatibus autem quibusdam tempore voluptas aperiam, consequuntur alias fuga laudantium sed harum distinctio repudiandae facere omnis. Sint sunt dignissimos fugit velit voluptatibus adipisci esse minima explicabo. Nisi est architecto quasi suscipit amet quaerat nulla dolore illo quis inventore, error iusto nostrum eaque nemo, atque odio quas esse aut aperiam!',
+        ]);
+
     }
 }

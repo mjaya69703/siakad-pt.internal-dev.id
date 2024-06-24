@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('news_posts', function (Blueprint $table) {
             $table->id();
+            $table->integer('category_id');                     // KATEGORI ID
+            $table->integer('author_id');                     // KATEGORI ID
+            $table->string('name');                             // JUDUL POSTINGAN
+            $table->string('slug');                             // SLUG POSTINGAN
+            $table->string('image');                            // FEATURED IMAGE
+            $table->longText('content');                        // ISI KONTEN
+            $table->string('keywords');                         // KEYWORDS
+            $table->string('metadesc');                         // META DESKRIPSI
             $table->timestamps();
         });
     }
