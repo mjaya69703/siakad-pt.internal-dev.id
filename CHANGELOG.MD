@@ -1,5 +1,11 @@
 ## CHANGE-LOGS
 
+<b>25/06/2024 - Update v.0.0003m - alpha</b>
+
+```
+- Improve: Blog Feature
+```
+
 <b>24/06/2024 - Update v.0.0003m - alpha</b>
 
 ```

@@ -25,7 +25,7 @@
 <section class="section row">
 
     <div class="col-lg-12 col-12">
-        <form action="{{ route('web-admin.news.post-update', $post->slug) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('web-admin.news.post-update', $post->code) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             

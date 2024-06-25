@@ -70,7 +70,7 @@
                                 <p class="mb-2">{{ Str::limit( strip_tags( $item->content ), 180 ) }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
         
-                                    <small>{{ $item->created_at->translatedFormat('l, d F Y - H.i') }} WIB <br> Author By <a href="#">Jaya Kusuma</a> - Kategori <a href="">{{ $item->category->name }}</a></small>
+                                    <small>{{ $item->created_at->translatedFormat('l, d F Y - H.i') }} WIB <br> Author By <a href="#">{{ $item->author->name }}</a> - Kategori <a href="">{{ $item->category->name }}</a></small>
                                     <a href="{{ route('root.post-view', $item->slug) }}" class="btn btn-xs btn-info"><i class="fa-solid fa-info"></i></a>
                                 </div>
                             </div>

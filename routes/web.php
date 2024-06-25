@@ -94,9 +94,9 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
     // PRIVATE FUNCTION => KATEGORI BERITA
     Route::get('/berita',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'index'])->name('news.post-index');
     Route::get('/berita/create',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'create'])->name('news.post-create');
-    Route::get('/berita/view/{slug}',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'view'])->name('news.post-view');
+    Route::get('/berita/view/{code}',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'view'])->name('news.post-view');
     Route::post('/berita/store',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'store'])->name('news.post-store');
-    Route::patch('/berita/{slug}/update',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'update'])->name('news.post-update');
+    Route::patch('/berita/{code}/update',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'update'])->name('news.post-update');
     Route::delete('/berita/{slug}/destroy',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'destroy'])->name('news.post-destroy');
 
     // PRIVATE FUNCTION => KATEGORI BERITA

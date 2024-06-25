@@ -48,7 +48,7 @@
                                 <td data-label="Slug Post">{{ $item->slug }}</td>
                                 <td data-label="Slug Post">{{ $item->created_at->diffForHumans() }}</td>
                                 <td class="d-flex justify-content-center align-items-center">
-                                    <a href="{{ route('web-admin.news.post-view', $item->slug) }}" style="margin-right: 10px" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ route('web-admin.news.post-view', $item->code) }}" style="margin-right: 10px" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>
                                     {{-- <a href="{{ route($prefix.'staffmanager-dosen-view', $item->code) }}"  style="margin-right: 10px" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a> --}}
                                     <form id="delete-form-{{ $item->slug }}"
                                         action="{{ route($prefix.'news.post-destroy', $item->slug) }}" method="POST">

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('category_id');                     // KATEGORI ID
             $table->integer('author_id');                     // KATEGORI ID
             $table->string('name');                             // JUDUL POSTINGAN
+            $table->string('code')->unique();                   // KODE POSTINGAN
             $table->string('slug');                             // SLUG POSTINGAN
             $table->string('image');                            // FEATURED IMAGE
             $table->longText('content');                        // ISI KONTEN

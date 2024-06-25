@@ -47,9 +47,9 @@ class PostController extends Controller
         return view('user.pages.news-posts-index', $data);
     }
 
-    public function view($slug)
+    public function view($code)
     {
-        $data['post'] = newsPost::where('slug', $slug)->first();
+        $data['post'] = newsPost::where('code', $code)->first();
         $data['category'] = newsCategory::all();
 
         $data['prefix'] = $this->setPrefix();
@@ -108,6 +108,7 @@ class PostController extends Controller
         }
         $post->name = $request->name;
         $post->slug = Str::slug($request->name);
+        $post->code = Str::random(6);
         $post->content = $request->content;
         $post->keywords = $request->keywords;
         $post->metadesc = $request->metadesc;
@@ -119,7 +120,7 @@ class PostController extends Controller
         return back();
 
     }
-    public function update(Request $request, $slug)
+    public function update(Request $request, $code)
     {
         $request->validate([
             'name' => 'required',
@@ -140,7 +141,7 @@ class PostController extends Controller
             'category_id.required' => 'Kategori tidak boleh kosong.',
         ]);
 
-        $post = newsPost::where('slug', $slug)->first();
+        $post = newsPost::where('code', $code)->first();
         
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -168,7 +169,7 @@ class PostController extends Controller
         $post->save();
 
 
-        Alert::success('Success', 'Post berhasil ditambahkan.');
+        Alert::success('Success', 'Post berhasil diupdate.');
         return back();
 
     }

@@ -58,8 +58,8 @@
                     <thead>
                         <th class="text-center">#</th>
                         <th class="text-center">Nama Kategori</th>
-                        <th class="text-center">Slug</th>
                         <th class="text-center">Kode</th>
+                        <th class="text-center">Slug</th>
                         <th class="text-center">Deskripsi</th>
                         <th class="text-center">Button</th>
                     </thead>
