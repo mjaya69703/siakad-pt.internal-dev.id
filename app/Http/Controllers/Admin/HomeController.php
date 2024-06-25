@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Alert;
+use App\Helper\roleTrait;
 use Auth;
 use Hash;
 use Str;
@@ -22,24 +23,7 @@ use App\Models\Balance;
 
 class HomeController extends Controller
 {
-    private function setPrefix()
-    {
-        $rawType = Auth::user()->raw_type;
-        switch ($rawType) {
-            case 1:
-                return 'finance.';
-            case 2:
-                return 'officer.';
-            case 3:
-                return 'academic.';
-            case 4:
-                return 'admin.';
-            case 5:
-                return 'support.';
-            default:
-                return 'web-admin.';
-        }
-    }
+    use roleTrait;
 
     public function index()
     {

@@ -11,6 +11,7 @@ use Hash;
 use Str;
 // SECTION ADDONS EXTERNAL
 use Alert;
+use App\Helper\roleTrait;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
@@ -21,24 +22,8 @@ use App\Models\Mahasiswa;
 
 class WorkersController extends Controller
 {
-    private function setPrefix()
-    {
-        $rawType = Auth::user()->raw_type;
-        switch ($rawType) {
-            case 1:
-                return 'finance.';
-            case 2:
-                return 'officer.';
-            case 3:
-                return 'academic.';
-            case 4:
-                return 'admin.';
-            case 5:
-                return 'support.';
-            default:
-                return 'web-admin.';
-        }
-    }
+    use roleTrait;
+    
     // KHUSUS KELOLA DATA ROLE ADMIN
     public function indexAdmin()
     {
