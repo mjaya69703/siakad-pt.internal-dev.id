@@ -88,9 +88,9 @@
             <div class="card-body">
                 <h4 class="card-title text-center">Sambutan Rektor</h4>
                 <img src="{{ asset('storage/images/default/default-profile.jpg') }}" class="card-img-top mb-2" alt="">
-                <p class="text-center">Drs. Mulawarman Sudono, S.Tek <br>Rektor Utama Esec Academy</p>
+                <p class="text-center">{{ $web->school_head }} <br>Rektor Utama Esec Academy</p>
                 <hr>
-                <p style="text-align: justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolore laboriosam praesentium quas voluptatem ab facere repellendus reiciendis, fuga odio sequi. Nisi architecto totam eaque magnam hic cum aperiam commodi.</p>
+                <p style="text-align: justify">{{ $web->school_desc }}</p>
             </div>
         </div>
         <div class="card mb-3">

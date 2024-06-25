@@ -20,6 +20,7 @@ use App\Models\newsPost;
 use App\Models\newsCategory;
 use App\Models\KotakSaran;
 use App\Models\ProgramStudi;
+use App\Models\Settings\webSettings;
 
 class HomeController extends Controller
 {
@@ -49,6 +50,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['fakultas'] = Fakultas::all();
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['posts'] = newsPost::latest()->paginate(7);
         $data['prefix'] = $this->setPrefix();
         $data['title'] = " - ESEC Academy";
@@ -59,6 +61,7 @@ class HomeController extends Controller
     public function postView($slug)
     {
         $data['fakultas'] = Fakultas::all();
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['post'] = newsPost::where('slug', $slug)->first();
         $data['posts'] = newsPost::latest()->paginate(7);
         $data['prefix'] = $this->setPrefix();
@@ -71,6 +74,7 @@ class HomeController extends Controller
     public function adviceIndex()
     {
         $data['fakultas'] = Fakultas::all();
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['title'] = " - ESEC Academy";
         $data['menu'] = "Kotak Saran";
         $data['prefix'] = $this->setPrefix();
@@ -79,6 +83,7 @@ class HomeController extends Controller
     public function prodiIndex($slug)
     {
         $data['fakultas'] = Fakultas::all();
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['pstudi'] = ProgramStudi::where('slug', $slug)->first();
         $data['title'] = " - ESEC Academy";
         $data['menu'] = "Program Studi ". $data['pstudi']->name;

@@ -474,5 +474,19 @@ class DatabaseSeeder extends Seeder
             'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, omnis quibusdam aliquam at nemo repellat nam ad adipisci itaque alias eveniet consequuntur molestiae cupiditate dolores, id magni autem vero quam, suscipit nulla facere molestias ipsum? Adipisci, animi natus. Modi, veniam doloribus assumenda in dolorem exercitationem quaerat tempora non temporibus magni earum voluptatibus autem quibusdam tempore voluptas aperiam, consequuntur alias fuga laudantium sed harum distinctio repudiandae facere omnis. Sint sunt dignissimos fugit velit voluptatibus adipisci esse minima explicabo. Nisi est architecto quasi suscipit amet quaerat nulla dolore illo quis inventore, error iusto nostrum eaque nemo, atque odio quas esse aut aperiam!',
         ]);
 
+        \App\Models\Settings\webSettings::create([
+            'school_apps' => 'ESEC Apps v1.0 ',
+            'school_name' => 'ESEC Academy By Internal Dev',
+            'school_head' => 'Dr. Mulawarman Frietz, M.Kom',
+            'school_desc' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error soluta amet architecto doloribus necessitatibus fugit veritatis placeat debitis ratione. Modi rerum ut dolorem eos voluptates, illum doloremque incidunt facilis placeat corporis voluptatum, at repellat. Nemo dignissimos fugit, quidem optio repellendus porro id ab illo alias est voluptate. Culpa officiis velit, iure, facilis temporibus animi ducimus vitae, quo laudantium quidem nemo quia et rerum atque nulla? Cupiditate ea nesciunt autem molestias debitis placeat, obcaecati maiores ad, quae, alias aperiam dicta odio. Fugiat sapiente voluptatem quaerat, reprehenderit alias deserunt sunt magnam, et, sed temporibus mollitia? Impedit natus iste atque officia in quisquam amet commodi quod fugit quibusdam, sapiente inventore recusandae, esse velit. Obcaecati quidem deserunt tenetur. Voluptates non aliquid, blanditiis adipisci debitis dolores at, maxime rem ex ipsum veniam molestias culpa facilis aspernatur error hic. Nostrum sed rem animi a distinctio laborum tempora delectus earum cum molestiae vitae, unde vel reiciendis voluptatem.',
+            'school_link' => 'https://instagram.com/mjaya69703',
+            'school_email' => 'jaya.kusuma@internal-dev.id',
+            'school_phone' => '+6287848799145',
+            'social_ig' => 'https://instagram.com/mjaya69703',
+            'social_fb' => 'https://facebook.com/kyouma052',
+            'social_in' => 'https://id.linkedin.com/in/mjaya69703',
+            'social_tw' => 'https://x.com/mjaya69703',
+        ]);
+
     }
 }
