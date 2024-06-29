@@ -19,11 +19,13 @@ use App\Models\Mahasiswa;
 use App\Models\HasilStudi;
 use App\Models\studentScore;
 use App\Models\studentTask;
+use App\Models\Settings\webSettings;
 
 class StudentTaskController extends Controller
 {
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['jadkul'] = JadwalKuliah::all();
         $data['stask'] = studentTask::all();
 
@@ -32,6 +34,7 @@ class StudentTaskController extends Controller
 
     public function create()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['jadkul'] = JadwalKuliah::all();
         $data['stask'] = studentTask::latest()->paginate(5);
 
@@ -39,6 +42,7 @@ class StudentTaskController extends Controller
     }
     public function view($code)
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['jadkul'] = JadwalKuliah::all();
         $data['stask'] = studentTask::latest()->paginate(5);
         $data['task'] = studentTask::where('code', $code)->first();
@@ -50,6 +54,7 @@ class StudentTaskController extends Controller
     }
     public function viewDetail($code)
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['stask'] = studentTask::latest()->paginate(5);
         $data['score'] = studentScore::where('code', $code)->first();
 
@@ -59,6 +64,7 @@ class StudentTaskController extends Controller
     }
     public function edit($code)
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['jadkul'] = JadwalKuliah::all();
         $data['stask'] = studentTask::latest()->paginate(5);
         $data['task'] = studentTask::where('code', $code)->first();

@@ -20,6 +20,7 @@ use App\Models\Mahasiswa;
 use App\Models\Dosen;
 use App\Models\User;
 use App\Models\Balance;
+use App\Models\Settings\webSettings;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,7 @@ class HomeController extends Controller
     {
 
         $data['prefix'] = $this->setPrefix();
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['balIncome'] = Balance::where('type', 1)->sum('value');
         $data['balExpense'] = Balance::where('type', 2)->sum('value');
         $data['balPending'] = Balance::where('type', 0)->sum('value');
@@ -41,6 +43,8 @@ class HomeController extends Controller
     public function profile(){
 
         $data['prefix'] = $this->setPrefix();
+        $data['web'] = webSettings::where('id', 1)->first();
+
 
         return view('user.home-profile', $data);
     }
@@ -180,8 +184,9 @@ class HomeController extends Controller
         ->whereIn('absen_type', [0,1,5])
         ->whereTime('absen_time_in', '>', '08:00:00')
         ->get();
+        $data['web'] = webSettings::where('id', 1)->first();
 
-        dd($data['prefix']);
+        // dd($data['prefix']);
         return view('user.home-presensi', $data);
     }
     public function presensiGet(Request $request){
@@ -214,7 +219,7 @@ class HomeController extends Controller
                                         ->whereTime('absen_time_in', '>', '08:00:00')
                                         ->get();
 
-        dd($data['prefix']);
+        // dd($data['prefix']);
 
         return view('user.home-presensi-view', $data);
     }

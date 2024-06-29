@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-                        <img src="{{ asset('storage/images/web/site-logo.png')}}" alt="ESEC Logo" style="display: block; margin: 0 auto; max-width: 200px;">
+                        <img src="{{ asset('storage/images/'. $web->school_logo)}}" alt="ESEC Logo" style="display: block; margin: 0 auto; max-width: 200px;">
 
                         <div class="card card-plain">
                             <div class="card-header pb-0 text-start">

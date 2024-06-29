@@ -16,7 +16,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\TahunAkademik;
-// use App\Models\Dosen;
+use App\Models\Settings\webSettings;
 
 class TahunAkademikController extends Controller
 {
@@ -24,6 +24,7 @@ class TahunAkademikController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['taka'] = TahunAkademik::all();
         // $data['dosen'] = Dosen::where('dsn_stat', 1)->get();

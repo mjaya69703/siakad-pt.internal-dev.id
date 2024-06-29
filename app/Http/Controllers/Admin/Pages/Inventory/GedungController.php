@@ -16,6 +16,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\Gedung;
+use App\Models\Settings\webSettings;
 
 class GedungController extends Controller
 {
@@ -23,6 +24,7 @@ class GedungController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['gedung'] = Gedung::all();
 

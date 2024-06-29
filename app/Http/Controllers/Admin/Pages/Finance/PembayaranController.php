@@ -23,6 +23,7 @@ use App\Models\ProgramKuliah;
 use App\Models\Mahasiswa;
 use App\Models\TagihanKuliah;
 use App\Models\HistoryTagihan;
+use App\Models\Settings\webSettings;
 
 class PembayaranController extends Controller
 {
@@ -38,7 +39,7 @@ class PembayaranController extends Controller
         $data['tagihan'] = TagihanKuliah::all();
         $data['history'] = HistoryTagihan::where('stat', 1)->latest()->get();
         $data['prefix'] = $this->setPrefix();
-
+        $data['web'] = webSettings::where('id', 1)->first();
 
 
         return view('user.finance.pages.pembayaran-index', $data);

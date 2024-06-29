@@ -5,7 +5,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>@yield('title')</title>
+        <title>@yield('menu') - {{ $web->school_name }}</title>
+        @php
+            $web = \App\Models\Settings\WebSettings::where('id', 1)->first();
+        @endphp
 
         @include('base.panel.base-panel-header-script')
 
@@ -30,7 +33,7 @@
                     <div class="sidebar-header position-relative">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="logo">
-                                <a href="/"><img src="{{ asset('storage') }}/images/website/site-logo.png" alt="Logo" srcset="" style="max-height:100px;"></a>
+                                <a href="/"><img src="{{ asset('storage/images/' . $web->school_logo) }}" alt="Logo" srcset="" style="max-height:100px;"></a>
                                 {{-- <a href="index.html"><img src="{{ asset('dist') }}/assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a> --}}
                             </div>
                             <div class="theme-toggle d-flex gap-2  align-items-center mt-2">

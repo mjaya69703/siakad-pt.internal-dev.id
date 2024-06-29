@@ -476,9 +476,9 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Settings\webSettings::create([
             'school_apps' => 'ESEC Apps v1.0 ',
-            'school_name' => 'ESEC Academy By Internal Dev',
+            'school_name' => 'ESEC Academy',
             'school_head' => 'Dr. Mulawarman Frietz, M.Kom',
-            'school_desc' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error soluta amet architecto doloribus necessitatibus fugit veritatis placeat debitis ratione. Modi rerum ut dolorem eos voluptates, illum doloremque incidunt facilis placeat corporis voluptatum, at repellat. Nemo dignissimos fugit, quidem optio repellendus porro id ab illo alias est voluptate. Culpa officiis velit, iure, facilis temporibus animi ducimus vitae, quo laudantium quidem nemo quia et rerum atque nulla? Cupiditate ea nesciunt autem molestias debitis placeat, obcaecati maiores ad, quae, alias aperiam dicta odio. Fugiat sapiente voluptatem quaerat, reprehenderit alias deserunt sunt magnam, et, sed temporibus mollitia? Impedit natus iste atque officia in quisquam amet commodi quod fugit quibusdam, sapiente inventore recusandae, esse velit. Obcaecati quidem deserunt tenetur. Voluptates non aliquid, blanditiis adipisci debitis dolores at, maxime rem ex ipsum veniam molestias culpa facilis aspernatur error hic. Nostrum sed rem animi a distinctio laborum tempora delectus earum cum molestiae vitae, unde vel reiciendis voluptatem.',
+            'school_desc' => 'Salam sejahtera bagi seluruh mahasiswa dan dosen! Saya sebagai Rektor ESEC Academy dengan bangga menyambut Anda di portal Siakad kami. Platform ini adalah jembatan digital yang memudahkan akses dan meningkatkan efisiensi dalam proses akademik dan kemahasiswaan. Mari bersama-sama kita manfaatkan Siakad untuk menciptakan pengalaman belajar yang lebih baik dan membangun masa depan yang cerah bagi pendidikan kita.',
             'school_link' => 'https://instagram.com/mjaya69703',
             'school_email' => 'jaya.kusuma@internal-dev.id',
             'school_phone' => '+6287848799145',

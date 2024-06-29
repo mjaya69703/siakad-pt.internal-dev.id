@@ -14,6 +14,7 @@ use Alert;
 use App\Helper\roleTrait;
 // SECTION AUTH
 use App\Models\Notification;
+use App\Models\Settings\webSettings;
 
 class NotifyController extends Controller
 {
@@ -22,7 +23,7 @@ class NotifyController extends Controller
     public function index()
     {
         $data['prefix'] = $this->setPrefix();
-
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['notify'] = Notification::all();
 
         return view('user.admin.system.notify-index', $data);

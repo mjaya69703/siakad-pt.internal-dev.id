@@ -26,6 +26,7 @@ use App\Models\AbsensiMahasiswa;
 use App\Models\Ruang;
 use App\Models\Kelas;
 use App\Models\Mahasiswa;
+use App\Models\Settings\webSettings;
 
 class JadwalKuliahController extends Controller
 {
@@ -33,6 +34,7 @@ class JadwalKuliahController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['kuri'] = Kurikulum::all();
         $data['taka'] = TahunAkademik::all();
@@ -49,6 +51,7 @@ class JadwalKuliahController extends Controller
 
     public function create()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['kuri'] = Kurikulum::all();
         $data['taka'] = TahunAkademik::all();
@@ -64,6 +67,7 @@ class JadwalKuliahController extends Controller
 
     public function viewAbsen($code)
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['kuri'] = Kurikulum::all();
         $data['taka'] = TahunAkademik::all();
@@ -93,6 +97,7 @@ class JadwalKuliahController extends Controller
 
         // Dapatkan data absensi mahasiswa berdasarkan kode kelas yang dipilih 
         // $data['jadwal'] = JadwalKuliah::where('code', $code)->first();
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['jadkul'] = JadwalKuliah::where('code', $code)->first();
         $data['absen'] = AbsensiMahasiswa::whereHas('jadkul', function ($query) use ($request) {
             $query->whereHas('kelas', function ($q) use ($request) {

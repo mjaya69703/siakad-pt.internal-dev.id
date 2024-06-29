@@ -9528,11 +9528,11 @@ html[data-bs-theme="dark"] .layout-horizontal .header-top .container {
     align-items: center;
 }
 html[data-bs-theme="dark"] .layout-horizontal .header-top .burger-btn i {
-    height: 20px;
+    height: 40px;
     display: inline-block;
 }
 html[data-bs-theme="dark"] .layout-horizontal .header-top .logo img {
-    height: 20px;
+    height: 40px;
 }
 html[data-bs-theme="dark"] .layout-horizontal .header-top-right {
     display: flex;

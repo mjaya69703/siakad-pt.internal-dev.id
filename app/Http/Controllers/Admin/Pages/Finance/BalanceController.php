@@ -16,6 +16,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\Balance;
+use App\Models\Settings\webSettings;
 
 class BalanceController extends Controller
 {
@@ -24,6 +25,7 @@ class BalanceController extends Controller
     public function index()
     {
 
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['balance'] = Balance::all();
         $data['balIncome'] = Balance::where('type', 1)->sum('value');

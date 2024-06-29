@@ -20,6 +20,7 @@ use App\Models\MataKuliah;
 use App\Models\Kurikulum;
 use App\Models\Dosen;
 use App\Models\TahunAkademik;
+use App\Models\Settings\webSettings;
 
 class MataKuliahController extends Controller
 {
@@ -27,6 +28,7 @@ class MataKuliahController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['kuri'] = Kurikulum::all();
         $data['taka'] = TahunAkademik::all();
@@ -38,6 +40,7 @@ class MataKuliahController extends Controller
     }
     public function create()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['kuri'] = Kurikulum::all();
         $data['taka'] = TahunAkademik::all();

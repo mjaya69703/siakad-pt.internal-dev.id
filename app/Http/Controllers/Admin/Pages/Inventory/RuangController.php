@@ -17,6 +17,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\Gedung;
 use App\Models\Ruang;
+use App\Models\Settings\webSettings;
 
 class RuangController extends Controller
 {
@@ -24,6 +25,7 @@ class RuangController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['gedung'] = Gedung::all();
         $data['ruang'] = Ruang::all();

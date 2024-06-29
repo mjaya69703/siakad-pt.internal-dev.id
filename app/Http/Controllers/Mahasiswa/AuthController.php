@@ -15,6 +15,7 @@ use Str;
 use Alert;
 // SECTION AUTH
 use App\Models\Mahasiswa;
+use App\Models\Settings\webSettings;
 
 class AuthController extends Controller
 {
@@ -29,8 +30,9 @@ class AuthController extends Controller
             return redirect()->route('mahasiswa.home-index');
         }
 
-        $data['title'] = "ESEC PPDB - ESchool Ecosystem";
-        $data['menu'] = "Halaman Login Admin";
+        $data['web'] = webSettings::where('id', 1)->first();
+        $data['title'] = "Login Mahasiswa - " . $data['web']->school_name;
+        $data['menu'] = "Halaman Login Mahasiswa";
         $data['submenu'] = "SignIn to continue";
         $data['subdesc'] = "Gunakan id unique anda untuk login...";
 
@@ -88,8 +90,9 @@ class AuthController extends Controller
 
     public function AuthForgotPage()
     {
-        $data['title'] = "ESEC PPDB - ESchool Ecosystem";
-        $data['menu'] = "Halaman Login Admin";
+        $data['web'] = webSettings::where('id', 1)->first();
+        $data['title'] = "Reset Password Mahasiswa - " . $data['web']->school_name;
+        $data['menu'] = "Halaman Reset Password Mahasiswa";
         $data['submenu'] = "SignIn to continue";
         $data['subdesc'] = "Gunakan id unique anda untuk login...";
 
@@ -124,7 +127,8 @@ class AuthController extends Controller
     }
 
     public function AuthResetPage($token){
-        $data['title'] = 'ARPotRet';
+        $data['web'] = webSettings::where('id', 1)->first();
+        $data['title'] = "Reset Password Mahasiswa - " . $data['web']->school_name;
         $data['menu'] = 'Beranda';
         $data['submenu'] = 'Reset Password';
         $data['subdesc'] = 'Halaman untuk mereset Password pengguna';

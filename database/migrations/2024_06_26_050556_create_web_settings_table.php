@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('school_apps');      // NAMA APLIKASI
             $table->string('school_name');      // NAMA KAMPUS
             $table->string('school_head');      // KEPALA UNIV / REKTOR
-            $table->string('school_logo')->default('web/site_logo.png');      // LOGO KAMPUS
+            $table->string('school_logo')->default('website/site-logo.png');      // LOGO KAMPUS
             $table->string('school_link');      // WEB KAMPUS
             $table->longText('school_desc');      // KATA SAMBUTAN REKTOR
 

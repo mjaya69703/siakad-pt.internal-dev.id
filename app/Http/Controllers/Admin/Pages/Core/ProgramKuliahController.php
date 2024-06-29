@@ -18,6 +18,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\ProgramStudi;
 use App\Models\ProgramKuliah;
 use App\Models\TahunAkademik;
+use App\Models\Settings\webSettings;
 
 class ProgramKuliahController extends Controller
 {
@@ -25,6 +26,7 @@ class ProgramKuliahController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['taka'] = TahunAkademik::all();
         $data['pstudi'] = ProgramStudi::all();

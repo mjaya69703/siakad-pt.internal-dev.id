@@ -15,6 +15,7 @@ use Auth;
 use Hash;
 use App\Models\uAttendance;
 use Carbon\Carbon;
+use App\Models\Settings\webSettings;
 
 class PresensiController extends Controller
 {
@@ -22,6 +23,8 @@ class PresensiController extends Controller
     
     public function absenHarian()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
+
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
         $data['hadir'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
@@ -40,6 +43,7 @@ class PresensiController extends Controller
     }
     public function absenIzinCuti()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
         $data['hadir'] = uAttendance::where('absen_user_id', $data['userid'])->whereIn('absen_type', [0,1,4,5])->get();
@@ -59,6 +63,7 @@ class PresensiController extends Controller
 
         public function absenView($code)
     {
+        $data['web'] = webSettings::where('id', 1)->first();
 
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
@@ -90,6 +95,7 @@ class PresensiController extends Controller
 
     public function presensiList()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
 
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
@@ -112,6 +118,7 @@ class PresensiController extends Controller
     }
     public function presensiView($date)
     {
+        $data['web'] = webSettings::where('id', 1)->first();
 
         $data['userid'] = Auth::user()->id;
         $data['today'] = date('Y-m-d');
@@ -133,7 +140,7 @@ class PresensiController extends Controller
         // dd($data['absen']);
 
         if($data['absen']){
-
+            
             return view('user.home-presensi-update', $data);
         } else {
 

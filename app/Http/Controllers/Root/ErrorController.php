@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 // EKSTENSION
 use Alert;
 use Auth;
+// Models
+use App\Models\Settings\webSettings;
 
 class ErrorController extends Controller
 {
@@ -30,6 +32,7 @@ class ErrorController extends Controller
     }
 
     public function ErrorVerify(){
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['title'] = "ESEC - ESchool Ecosystem";
         $data['menu'] = "Error Verify";
@@ -40,8 +43,9 @@ class ErrorController extends Controller
     }
 
     public function ErrorAccess(){
+        
         $data['prefix'] = $this->setPrefix();
-
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['title'] = "ESEC - ESchool Ecosystem";
         $data['menu'] = "Error Authorization";
         $data['submenu'] = "You are not authorized to access this page";

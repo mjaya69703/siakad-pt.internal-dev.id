@@ -1,5 +1,23 @@
 ## CHANGE-LOGS
 
+<b>29/06/2024 - Update v.0.0003n - alpha</b>
+
+```
+- Improve Fitur Web Settings ( Admin )
+```
+
+<b>27/06/2024 - Update v.0.0003n - alpha</b>
+
+```
+- Tambah Fitur Web Settings ( Admin )
+```
+
+<b>26/06/2024 - Update v.0.0003m - alpha</b>
+
+```
+- Init webSettings Model to Front Page
+```
+
 <b>25/06/2024 - Update v.0.0003m - alpha</b>
 
 ```

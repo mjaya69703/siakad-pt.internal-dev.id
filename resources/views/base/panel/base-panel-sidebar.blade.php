@@ -89,16 +89,16 @@
         @include('dosen.home-sidebar')
     @endauth
 
-    <li class="sidebar-title">Multi Menu</li>
-    <li class="sidebar-item has-sub">
-        <a href="#" class='sidebar-link'>
-            <i class="fa-solid fa-school"></i>
-            <span>Nama Menu</span>
-        </a>
-        <ul class="submenu">
-            <li class="submenu-item">
-                <a href="#" class="submenu-link">Contoh Submenu</a>
-            </li>
-        </ul>
-    </li>
+
+    @if (Auth::user()->raw_type === 0)
+        <li class="sidebar-title">Special Menu</li>
+
+        <li class="sidebar-item  {{ Route::is($prefix . 'system.setting-index', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route($prefix . 'system.setting-index') }}" class='sidebar-link'>
+                <i class="fa-solid fa-gear"></i>
+                <span>Web Settings</span>
+            </a>
+        </li>
+    @endif
+
 </ul>

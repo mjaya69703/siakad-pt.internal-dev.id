@@ -3417,7 +3417,7 @@ fieldset:disabled .btn {
     }
     .dropdown-center[data-bs-popper] {
         left: 50%;
-        transform: translateX(-50%)
+        transform: translateX(-50%);
     }
 }
 @media (min-width: 768px) {
@@ -18855,7 +18855,6 @@ body .bi:before,
     width: 40px;
     height: 40px;
     object-fit: cover !important;
-
 }
 .navbar.navbar-header li {
     display: flex;
@@ -18920,11 +18919,11 @@ body .bi:before,
     align-items: center;
 }
 .layout-horizontal .header-top .burger-btn i {
-    height: 20px;
+    height: 40px;
     display: inline-block;
 }
 .layout-horizontal .header-top .logo img {
-    height: 20px;
+    height: 40px;
 }
 .layout-horizontal .header-top-right {
     display: flex;

@@ -19,13 +19,14 @@ use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\Dosen;
 use App\Models\FeedBack\FBPerkuliahan;
 use App\Models\Notification;
+use App\Models\Settings\webSettings;
 
 class HomeController extends Controller
 {
     public function index(){
 
         $dosenId = Auth::guard('dosen')->user()->id;
-
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['feedback'] = FBPerkuliahan::whereHas('jadkul', function ($query) use ($dosenId) {
             $query->where('dosen_id', $dosenId);
         })->get();
@@ -36,8 +37,8 @@ class HomeController extends Controller
     }
     public function profile(){
 
-
-        return view('dosen.home-profile');
+        $data['web'] = webSettings::where('id', 1)->first();
+        return view('dosen.home-profile', $data);
 
     }
 

@@ -16,6 +16,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\uAttendance;
+use App\Models\Settings\webSettings;
 
 class ApprovalController extends Controller
 {
@@ -23,6 +24,7 @@ class ApprovalController extends Controller
 
     public function indexAbsen()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['absen'] = uAttendance::where('absen_approve', 1)->latest()->get();
 
@@ -30,6 +32,7 @@ class ApprovalController extends Controller
     }
     public function indexAbsenApproved()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['absen'] = uAttendance::where('absen_approve', 2)->latest()->get();
 
@@ -37,6 +40,7 @@ class ApprovalController extends Controller
     }
     public function indexAbsenRejected()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['absen'] = uAttendance::where('absen_approve', 3)->latest()->get();
 

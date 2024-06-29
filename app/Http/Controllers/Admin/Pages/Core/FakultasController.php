@@ -17,6 +17,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\Fakultas;
 use App\Models\Dosen;
+use App\Models\Settings\webSettings;
 
 class FakultasController extends Controller
 {
@@ -24,6 +25,7 @@ class FakultasController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['fakultas'] = Fakultas::all();
         $data['dosen'] = Dosen::where('dsn_stat', 1)->get();

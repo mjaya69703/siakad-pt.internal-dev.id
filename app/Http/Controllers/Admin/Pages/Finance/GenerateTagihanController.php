@@ -23,6 +23,7 @@ use App\Models\ProgramKuliah;
 use App\Models\Mahasiswa;
 use App\Models\TagihanKuliah;
 use App\Models\HistoryTagihan;
+use App\Models\Settings\webSettings;
 
 class GenerateTagihanController extends Controller
 {
@@ -35,6 +36,7 @@ class GenerateTagihanController extends Controller
         })->with('tagihan')->get()->sum(function ($history) {
             return $history->tagihan->price;
         });
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['tagihan'] = TagihanKuliah::all();
         $data['history'] = HistoryTagihan::all();
         $data['mahasiswa'] = Mahasiswa::all();
@@ -59,7 +61,7 @@ class GenerateTagihanController extends Controller
         $data['prodi'] = ProgramStudi::all();
         $data['proku'] = ProgramKuliah::all();
         $data['prefix'] = $this->setPrefix();
-
+        $data['web'] = webSettings::where('id', 1)->first();
 
         return view('user.finance.pages.tagihan-create', $data);
     }

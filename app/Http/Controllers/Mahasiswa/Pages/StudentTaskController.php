@@ -17,13 +17,14 @@ use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\HasilStudi;
 use App\Models\studentTask;
 use App\Models\studentScore;
+use App\Models\Settings\webSettings;
 
 class StudentTaskController extends Controller
 {
     public function index()
     {
         $user = Auth::guard('mahasiswa')->user();
-
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['stask'] = StudentTask::whereHas('jadkul', function($query) use ($user) {
             $query->where('kelas_id', $user->class_id);
         })->get();
@@ -35,7 +36,7 @@ class StudentTaskController extends Controller
     {
 
         $data['stask'] = StudentTask::where('code', $code)->first();
-
+        $data['web'] = webSettings::where('id', 1)->first();
         $score = studentScore::where('stask_id', $data['stask']->id)->where('student_id', Auth::guard('mahasiswa')->user()->id)->get();
         if($score->count() == 1){
             Alert::error('Error', 'Kamu sudah mengumpulkan tugas ini.');

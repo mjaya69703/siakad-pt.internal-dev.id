@@ -77,7 +77,7 @@
                     <div class="header-top">
                         <div class="container">
                             <div class="logo">
-                                <a href="{{ route('root.home-index') }}" style="font-size: 24px"> {{ $web->school_name }}</a>
+                                <a href="{{ route('root.home-index') }}" style="font-size: 24px"><img src="{{ asset('storage/images/' . $web->school_logo) }}" alt="Logo Website" style="max-width: 100px; max-height: 100px"> {{ $web->school_name }}</a>
                             </div>
                             <div class="header-top-right">
 

@@ -16,6 +16,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\newsCategory;
 use App\Models\newsPost;
+use App\Models\Settings\webSettings;
 use App\Helper\roleTrait;
 
 class PostController extends Controller
@@ -24,6 +25,8 @@ class PostController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
+
         $data['posts'] = newsPost::latest()->get();
         $data['prefix'] = $this->setPrefix();
 
@@ -32,6 +35,7 @@ class PostController extends Controller
 
     public function view($code)
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['post'] = newsPost::where('code', $code)->first();
         $data['category'] = newsCategory::all();
 
@@ -42,6 +46,8 @@ class PostController extends Controller
     
     public function create()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
+
         $data['posts'] = newsPost::all();
         $data['category'] = newsCategory::all();
         $data['prefix'] = $this->setPrefix();

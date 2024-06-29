@@ -21,6 +21,7 @@ use App\Models\TahunAkademik;
 use App\Models\ProgramStudi;
 use App\Models\ProgramKuliah;
 use App\Models\Mahasiswa;
+use App\Models\Settings\webSettings;
 
 class KelasController extends Controller
 {
@@ -28,6 +29,7 @@ class KelasController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $data['kelas'] = Kelas::all();
         $data['taka'] = TahunAkademik::all();
@@ -39,6 +41,7 @@ class KelasController extends Controller
     }
     public function viewMahasiswa($code)
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $class = Kelas::where('code', $code)->first();
         $data['kelas'] = Kelas::where('code', $code)->first();
@@ -54,6 +57,7 @@ class KelasController extends Controller
     }
     public function cetakMahasiswa($code)
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['prefix'] = $this->setPrefix();
         $class = Kelas::where('code', $code)->first();
         $data['kelas'] = Kelas::where('code', $code)->first();

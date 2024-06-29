@@ -15,11 +15,13 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\TicketSupport;
+use App\Models\Settings\webSettings;
 
 class SupportController extends Controller
 {
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $userId = Auth::guard('mahasiswa')->user()->id;
         $data['ticket'] = TicketSupport::whereNotNull('code')->where('users_id', $userId)->latest()->get();
 
@@ -28,6 +30,7 @@ class SupportController extends Controller
 
     public function open()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
         $userId = Auth::guard('mahasiswa')->user()->id;
         $data['ticket'] = TicketSupport::whereNotNull('code')->where('users_id', $userId)->get();
 
@@ -37,7 +40,7 @@ class SupportController extends Controller
     public function create(Request $request, $dept)
     {
         $data['dept'] = $request->dept;
-
+        $data['web'] = webSettings::where('id', 1)->first();
         // dd($request->dept);
         return view('mahasiswa.pages.support-ticket-create', $data);
     }
@@ -46,7 +49,8 @@ class SupportController extends Controller
         $data['ticket'] = TicketSupport::where('code', $code)->first();
         $initialSupport = TicketSupport::where('codr', $code)->latest()->get();
         $data['support'] = $initialSupport;
-
+        $data['web'] = webSettings::where('id', 1)->first();
+        
         $checkStatus = TicketSupport::where('code', $code)->first();
         if($checkStatus->raw_stat_id === 2){
             Alert::error('Error', 'Ticket Sudah diClose');

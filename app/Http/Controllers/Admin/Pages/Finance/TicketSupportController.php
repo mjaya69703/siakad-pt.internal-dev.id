@@ -16,6 +16,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\TicketSupport;
+use App\Models\Settings\webSettings;
 
 class TicketSupportController extends Controller
 {
@@ -34,6 +35,7 @@ class TicketSupportController extends Controller
             $data['ticket'] = TicketSupport::whereNotNull('code')->where('dept_id', $userId)->latest()->get();
         }
         $data['prefix'] = $this->setPrefix();
+        $data['web'] = webSettings::where('id', 1)->first();
 
         return view('user.finance.pages.support-ticket-index', $data);
     }
@@ -43,7 +45,7 @@ class TicketSupportController extends Controller
         $data['ticket'] = TicketSupport::where('code', $code)->first();
         $data['support'] = TicketSupport::where('codr', $code)->latest()->get();
         $data['prefix'] = $this->setPrefix();
-        
+        $data['web'] = webSettings::where('id', 1)->first();
         
         // dd($checkStatus);
         $checkStatus = TicketSupport::where('code', $code)->first();

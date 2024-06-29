@@ -16,6 +16,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 // SECTION MODELS
 use App\Models\newsCategory;
+use App\Models\Settings\webSettings;
 
 class CategoryController extends Controller
 {
@@ -23,6 +24,8 @@ class CategoryController extends Controller
 
     public function index()
     {
+        $data['web'] = webSettings::where('id', 1)->first();
+
         $data['category'] = newsCategory::all();
         $data['prefix'] = $this->setPrefix();
 
