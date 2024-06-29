@@ -360,7 +360,7 @@ class WorkersController extends Controller
     public function indexLecture()
     {
         $data['prefix'] = $this->setPrefix();
-
+        $data['web'] = webSettings::where('id', 1)->first();
         $data['dosen'] = Dosen::all();
 
         return view('user.admin.pages.workers-lecture-index', $data);
