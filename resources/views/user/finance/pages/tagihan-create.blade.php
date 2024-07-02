@@ -15,6 +15,8 @@
     Halaman untuk melihat data tagihan
 @endsection
 @section('custom-css')
+    <link rel="stylesheet" href="{{ asset('dist') }}/assets/extensions/choices.js/public/assets/styles/choices.css">
+
     <style>
         @media (max-width: 768px) {
             .card-body {
@@ -300,7 +302,4 @@
 @section('custom-js')
     <script src="{{ asset('dist') }}/assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
     <script src="{{ asset('dist') }}/assets/static/js/pages/form-element-select.js"></script>
-@endsection
-@section('custom-css')
-    <link rel="stylesheet" href="{{ asset('dist') }}/assets/extensions/choices.js/public/assets/styles/choices.css">
 @endsection

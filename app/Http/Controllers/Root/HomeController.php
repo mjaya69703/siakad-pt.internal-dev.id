@@ -21,6 +21,7 @@ use App\Models\newsCategory;
 use App\Models\KotakSaran;
 use App\Models\ProgramStudi;
 use App\Models\Settings\webSettings;
+use App\Models\Notification;
 
 class HomeController extends Controller
 {
@@ -52,6 +53,7 @@ class HomeController extends Controller
         $data['fakultas'] = Fakultas::all();
         $data['web'] = webSettings::where('id', 1)->first();
         $data['posts'] = newsPost::latest()->paginate(7);
+        $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
         $data['prefix'] = $this->setPrefix();
         $data['title'] = " - ESEC Academy";
         $data['menu'] = "Halaman Utama";
@@ -61,6 +63,7 @@ class HomeController extends Controller
     public function postView($slug)
     {
         $data['fakultas'] = Fakultas::all();
+        $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
         $data['web'] = webSettings::where('id', 1)->first();
         $data['post'] = newsPost::where('slug', $slug)->first();
         $data['posts'] = newsPost::latest()->paginate(7);

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use \Carbon\Carbon;
 
 class uAttendance extends Model
 {
@@ -36,6 +37,19 @@ class uAttendance extends Model
         ];
 
         return isset($statuses[$value]) ? $statuses[$value] : null;
+    }
+    
+    public function getDurasiKerja()
+    {
+        // Parse waktu absen dari atribut model
+        $absen_time_in = Carbon::parse($this->absen_time_in);
+        $absen_time_out = Carbon::parse($this->absen_time_out);
+
+        // Menghitung selisih waktu
+        $durasi = $absen_time_out->diff($absen_time_in);
+
+        // Format durasi dalam jam dan menit
+        return sprintf('%d Jam %02d Menit', $durasi->h, $durasi->i);
     }
 
     public function getRawAbsenTypeAttribute()

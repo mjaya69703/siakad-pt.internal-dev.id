@@ -4,7 +4,6 @@
     @else
         <!-- Bagian menu untuk pengguna yang telah login -->
         {{-- HAK AKSES WEB ADMINISTRATOR --}}
-        <li class="sidebar-title">Menu</li>
         <li class="sidebar-item {{ Route::is($prefix . 'home-index', request()->path()) ? 'active' : '' }}">
             <a href="{{ route($prefix . 'home-index') }}" class='sidebar-link'>
                 <i class="fa-solid fa-home"></i>
@@ -17,6 +16,8 @@
                 <span>Profile User</span>
             </a>
         </li>
+
+        <li class="sidebar-title">Menu Rutinitas</li>
         <li class="sidebar-item  {{ Route::is($prefix . 'presensi.absen-harian', request()->path()) ? 'active' : '' }}">
             <a href="{{ route($prefix . 'presensi.absen-harian') }}" class='sidebar-link'>
                 <i class="fa-solid fa-calendar-check"></i>
@@ -35,10 +36,12 @@
                 <span>Support Ticket</span>
             </a>
         </li>
+
+        <li class="sidebar-title">Menu Publikasi</li>
         <li class="sidebar-item  {{ Route::is($prefix . 'system.notify-index', request()->path()) ? 'active' : '' }}">
             <a href="{{ route($prefix . 'system.notify-index') }}" class='sidebar-link'>
                 <i class="fa-solid fa-bell"></i>
-                <span>Notifikasi</span>
+                <span>Data Pemberitahuan</span>
             </a>
         </li>
 
@@ -90,15 +93,20 @@
     @endauth
 
 
-    @if (Auth::user()->raw_type === 0)
-        <li class="sidebar-title">Special Menu</li>
+    @guest
 
-        <li class="sidebar-item  {{ Route::is($prefix . 'system.setting-index', request()->path()) ? 'active' : '' }}">
-            <a href="{{ route($prefix . 'system.setting-index') }}" class='sidebar-link'>
-                <i class="fa-solid fa-gear"></i>
-                <span>Web Settings</span>
-            </a>
-        </li>
-    @endif
+    @else
+        
+        @if (Auth::user()->raw_type === 0)
+            <li class="sidebar-title">Special Menu</li>
+
+            <li class="sidebar-item  {{ Route::is($prefix . 'system.setting-index', request()->path()) ? 'active' : '' }}">
+                <a href="{{ route($prefix . 'system.setting-index') }}" class='sidebar-link'>
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Web Settings</span>
+                </a>
+            </li>
+        @endif
+    @endguest
 
 </ul>

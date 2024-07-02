@@ -1,5 +1,5 @@
         {{-- MENU KHUSUS UNTUK FINANCE DEPARTEMENT --}}
-        <li class="sidebar-title">Finance Departement</li>
+        <li class="sidebar-title">Menu Finansial</li>
         <li class="sidebar-item has-sub {{ Route::is('web-admin.finance.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-vault"></i>
@@ -31,11 +31,11 @@
 
 
         {{-- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
-        <li class="sidebar-title">Data Master</li>
+        <li class="sidebar-title">Menu Pusat Informasi</li>
         <li class="sidebar-item has-sub {{ Route::is('web-admin.workers.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
-                <i class="fa-solid fa-user-tie"></i>
-                <span>Master Pengguna</span>
+                <i class="fa-solid fa-users"></i>
+                <span>Data Pengguna</span>
             </a>
             <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.workers.admin-*', request()->path()) ? 'active' : '' }}">
@@ -55,21 +55,37 @@
         <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
-                <span>Master Akademik</span>
+                <span>Data Akademik</span>
             </a>
             <ul class="submenu">
+                <li class="submenu-item {{ Route::is('web-admin.master.taka-*', request()->path()) ? 'active' : '' }}">
+                    <a href="{{ route('web-admin.master.taka-index') }}" class="submenu-link">Data Tahun Akademik</a>
+                </li>
                 <li class="submenu-item {{ Route::is('web-admin.master.fakultas-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.fakultas-index') }}" class="submenu-link">Data Fakultas</a>
                 </li>
                 <li class="submenu-item {{ Route::is('web-admin.master.pstudi-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.pstudi-index') }}" class="submenu-link">Data Program Studi</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.taka-*', request()->path()) ? 'active' : '' }}">
-                    <a href="{{ route('web-admin.master.taka-index') }}" class="submenu-link">Data Tahun Akademik</a>
-                </li>
+            </ul>
+        </li>
+        <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-school"></i>
+                <span>Data PMB</span>
+            </a>
+            <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.master.proku-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.proku-index') }}" class="submenu-link">Data Program Kuliah</a>
                 </li>
+            </ul>
+        </li>
+        <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
+            <a href="#" class='sidebar-link'>
+                <i class="fa-solid fa-school"></i>
+                <span>Data KBM</span>
+            </a>
+            <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.master.kurikulum-*', request()->path()) ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.kurikulum-index') }}" class="submenu-link">Data Kurikulum</a>
                 </li>
@@ -87,7 +103,7 @@
         <li class="sidebar-item has-sub {{ Route::is('web-admin.inventory.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
-                <span>Master Inventaris</span>
+                <span>Data Inventaris</span>
             </a>
             <ul class="submenu">
                 <li class="submenu-item {{ Route::is('web-admin.inventory.gedung-*', request()->path()) ? 'active' : '' }}">
@@ -99,7 +115,7 @@
             </ul>
         </li>
 
-        <li class="sidebar-title">Talent Management</li>
+        {{-- <li class="sidebar-title">Talent Management</li>
         <li class="sidebar-item has-sub">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-list-check"></i>
@@ -116,5 +132,5 @@
                     <a href="#" class="submenu-link">Presence Report</a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
         {{-- END -- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}

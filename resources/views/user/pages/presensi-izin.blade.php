@@ -159,6 +159,7 @@
                                 <th class="text-center">Tanggal</th>
                                 <th class="text-center">Masuk</th>
                                 <th class="text-center">Keluar</th>
+                                <th class="text-center">Durasi Kerja</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Button</th>
                             </thead>
@@ -170,6 +171,7 @@
                                         <td data-label="Tanggal">{{ $item->absen_date }}</td>
                                         <td data-label="Masuk">{{ $item->absen_time_in }}</td>
                                         <td data-label="Keluar">{{ $item->absen_time_out == null ? '-' : $item->absen_time_out }}</td>
+                                        <td data-label="Durasi Kerja">{{ $item->getDurasiKerja() }}</td>
                                         <td data-label="Status">{{ $item->absen_type }}</td>
                                         <td class="d-flex justify-content-center align-items-center">
                                             @if ($item->raw_absen_approve == 0)

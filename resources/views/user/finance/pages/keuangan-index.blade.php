@@ -1,18 +1,15 @@
 @extends('base.base-dash-index')
-@section('title')
-    Data Keuangan - Siakad By Internal Developer
-@endsection
 @section('menu')
     Data Keuangan
 @endsection
 @section('submenu')
-    Lihat
+    Data Keuangan Kampus
 @endsection
 @section('urlmenu')
     #
 @endsection
 @section('subdesc')
-    Halaman untuk melihat data keuangan
+    Daftar Pemasukan dan Pengeluaran Kampus
 @endsection
 @section('custom-css')
     <style>

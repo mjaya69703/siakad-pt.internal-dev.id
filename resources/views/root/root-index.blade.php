@@ -96,28 +96,19 @@
         <div class="card mb-3">
             <div class="card-body">
                 <div class="list-group list-group-horizontal-sm mb-1 text-center" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="list-terbaru-list" data-bs-toggle="list" href="#list-terbaru" role="tab">Berita Terbaru</a>
+                    <a class="list-group-item list-group-item-action active" id="list-terbaru-list" data-bs-toggle="list" href="#list-terbaru" role="tab">Daftar Pengumuman</a>
                     <a class="list-group-item list-group-item-action" id="list-terpopular-list" data-bs-toggle="list" href="#list-terpopular" role="tab">Berita Terpopuler</a>
                 </div>
                 <div class="tab-content text-justify" style="text-align: justify">
-                    <div class="tab-pane fade show active" id="list-terbaru" role="tabpanel" aria-labelledby="list-terbaru-list">Irure enim occaecat labore sit qui aliquip
-                        reprehenderit amet
-                        velit. Deserunt ullamco ex elit nostrud ut dolore nisi officia magna sit occaecat
-                        laboris sunt dolor.
-                        Nisi eu minim cillum occaecat aute est cupidatat aliqua labore aute occaecat ea
-                        aliquip
-                        sunt amet.
-                        Aute mollit dolor ut exercitation irure commodo non amet consectetur quis amet
-                        culpa.
-                        Quis ullamco
-                        nisi amet qui aute irure eu. Magna labore dolor quis ex labore id nostrud deserunt
-                        dolor
-                        eiusmod eu
-                        pariatur culpa mollit in irure Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                        Iusto quis
-                        porro doloribus est natus doloremque, eos laudantium
-                        exercitationem impedit sapiente tenetur soluta reiciendis deserunt!</div>
+                    <div class="tab-pane fade show active" id="list-terbaru" role="tabpanel" aria-labelledby="list-terbaru-list">
+                        <h6 class="text-center mt-2 mb-2">Pengumuman - {{ \Carbon\Carbon::now()->format('d M Y') }}</h6>
+
+                        @forelse ($notify as $item)
+                            <span>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y'.' - '.'H'.'.'.'i') }} - <a href="#" data-bs-toggle="modal" data-bs-target="#updateFakultas{{ $item->code }}">{{ $item->name }}</a></span><br>
+                        @empty
+                            <span class="">Tidak Ada Pengumuman Hari Ini</span>
+                        @endforelse
+                    </div>
                     <div class="tab-pane fade" id="list-terpopular" role="tabpanel" aria-labelledby="list-terpopular-list">Cupidatat
                         quis ad sint excepteur laborum in esse qui. Et excepteur consectetur ex nisi eu do
                         cillum ad laborum.
@@ -138,5 +129,37 @@
         </div>
     </div>
 </div>
-    
+<div class="me-1 mb-1 d-inline-block">
+
+    <!--Extra Large Modal -->
+    @foreach ($notify as $item)
+        <div class="modal fade text-left w-100" id="updateFakultas{{$item->code}}" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel16" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-l"
+                role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel16">Notifikasi - {{ $item->name }}</h4>
+                        <div class="">
+
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                                aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <p class="text-center"><b>{{ $item->name }}</b></p>
+                                <p>{!! $item->desc !!}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
 @endsection

@@ -10,24 +10,30 @@
         <span>Profile User</span>
     </a>
 </li>
+
+<li class="sidebar-title">Menu Akademik</li>
 <li class="sidebar-item  {{ Route::is('mahasiswa.home-jadkul-*', request()->path()) ? 'active' : '' }}">
     <a href="{{ route('mahasiswa.home-jadkul-index') }}" class='sidebar-link'>
         <i class="fa-solid fa-calendar"></i>
-        <span>Jadwal Kuliah</span>
+        <span>Data Jadwal Kuliah</span>
     </a>
 </li>
 <li class="sidebar-item  {{ Route::is('mahasiswa.akademik.tugas-*', request()->path()) ? 'active' : '' }}">
     <a href="{{ route('mahasiswa.akademik.tugas-index') }}" class='sidebar-link'>
         <i class="fa-solid fa-list-check"></i>
-        <span>Tugas Kuliah</span>
+        <span>Data Tugas Kuliah</span>
     </a>
 </li>
+
+<li class="sidebar-title">Menu Finansial</li>
 <li class="sidebar-item  {{ Route::is('mahasiswa.home-tagihan-*', request()->path()) ? 'active' : '' }}">
     <a href="{{ route('mahasiswa.home-tagihan-index') }}" class='sidebar-link'>
         <i class="fa-solid fa-file-invoice"></i>
         <span>Data Tagihan</span>
     </a>
 </li>
+
+<li class="sidebar-title">Menu Bantuan</li>
 <li class="sidebar-item has-sub {{ Route::is('mahasiswa.support.*', request()->path()) ? 'active' : '' }}">
     <a href="#" class='sidebar-link'>
         <i class="fa-solid fa-ticket"></i>

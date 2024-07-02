@@ -1,4 +1,4 @@
-        <li class="sidebar-title">Departement Akademik</li>
+        <li class="sidebar-title">Menu Akademik</li>
         <li class="sidebar-item {{ Route::is($prefix . 'workers.student-*', request()->path()) ? 'active' : '' }}">
             <a href="{{ route($prefix . 'workers.student-index') }}" class='sidebar-link'>
                 <i class="fa-solid fa-users"></i>
@@ -8,7 +8,7 @@
         <li class="sidebar-item has-sub {{ Route::is($prefix.'master.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
-                <span>Master Akademik</span>
+                <span>Data Perkuliahan</span>
             </a>
             <ul class="submenu">
                 <li class="submenu-item {{ Route::is($prefix.'master.kurikulum-*', request()->path()) ? 'active' : '' }}">

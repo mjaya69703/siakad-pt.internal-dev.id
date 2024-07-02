@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="form-group col-12 col-lg-6">
                                     <label for="absen_date">Pilih Tanggal</label>
-                                    <input type="date" class="form-control" name="absen_date" id="absen_date" placeholder="Pilih Tanggal...">
+                                    <input type="date" class="form-control" name="absen_date" id="absen_date" value="{{ \Carbon\Carbon::now()->format('mm/dd/yyyy') }}" placeholder="Pilih Tanggal...">
 
 
                                     @error('absen_date')
@@ -124,14 +124,14 @@
                                 </div>
                                 <div class="form-group col-12 col-lg-6">
                                     <label for="absen_time_in">Jam Masuk</label>
-                                    <input type="time" class="form-control" name="absen_time_in" id="absen_time_in" placeholder="Jam Masuk">
+                                    <input type="time" class="form-control" name="absen_time_in" id="absen_time_in" value="{{ \Carbon\Carbon::now()->format('H:i:s') }}" placeholder="Jam Masuk">
                                     @error('absen_time_in')
                                         <span class="text-danger" style="font-size: 10px">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group col-12 col-lg-6">
                                     <label for="absen_time_out">Jam Keluar</label>
-                                    <input type="time" class="form-control" name="absen_time_out" id="absen_time_out" placeholder="Jam Masuk">
+                                    <input type="time" class="form-control" name="absen_time_out" id="absen_time_out" placeholder="Jam Pulang">
                                     @error('absen_time_out')
                                         <span class="text-danger" style="font-size: 10px">{{ $message }}</span>
                                     @enderror
@@ -162,6 +162,7 @@
                                 <th class="text-center">Tanggal</th>
                                 <th class="text-center">Masuk</th>
                                 <th class="text-center">Keluar</th>
+                                <th class="text-center">Durasi Kerja</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Button</th>
                             </thead>
@@ -173,6 +174,7 @@
                                         <td data-label="Tanggal">{{ $item->absen_date }}</td>
                                         <td data-label="Masuk">{{ $item->absen_time_in }}</td>
                                         <td data-label="Keluar">{{ $item->absen_time_out == null ? '-' : $item->absen_time_out }}</td>
+                                        <td data-label="Durasi Kerja">{{ $item->getDurasiKerja() }}</td>
                                         <td data-label="Status">{{ $item->absen_type }}</td>
                                         <td class="d-flex justify-content-center align-items-center">
                                             @if ($item->raw_absen_approve == 0)

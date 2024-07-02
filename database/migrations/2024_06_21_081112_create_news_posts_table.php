@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('news_posts', function (Blueprint $table) {
             $table->id();
             $table->integer('category_id');                     // KATEGORI ID
-            $table->integer('author_id');                     // KATEGORI ID
+            $table->integer('author_id')->default(0);                     // KATEGORI ID
             $table->string('name');                             // JUDUL POSTINGAN
             $table->string('code')->unique();                   // KODE POSTINGAN
             $table->string('slug');                             // SLUG POSTINGAN

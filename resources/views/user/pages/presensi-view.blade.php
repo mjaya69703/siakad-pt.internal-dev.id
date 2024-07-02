@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="form-group col-12 col-lg-4">
                                     <label for="absen_time_out">Jam Keluar</label>
-                                    <input type="time" class="form-control" name="absen_time_out" id="absen_time_out" placeholder="Jam Masuk" value="{{ $absen->absen_time_out == null ? now()->format('H:i') : $absen->absen_time_out }}">
+                                    <input type="time" class="form-control" name="absen_time_out" id="absen_time_out" placeholder="Jam Masuk" value="{{ $absen->absen_time_out == null ? now()->format('H:i:s') : $absen->absen_time_out }}">
                                     @error('absen_time_out')
                                         <span class="text-danger" style="font-size: 10px">{{ $message }}</span>
                                     @enderror

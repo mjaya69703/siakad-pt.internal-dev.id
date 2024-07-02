@@ -1,18 +1,15 @@
 @extends('base.base-dash-index')
-@section('title')
-    Data Notifikasi - Siakad By Internal Developer
-@endsection
 @section('menu')
-    Data Notifikasi
+    Pengumuman
 @endsection
 @section('submenu')
-    Daftar Notifikasi
+    Daftar Pengumuman
 @endsection
 @section('urlmenu')
     #
 @endsection
 @section('subdesc')
-    Halaman untuk mengelola Notifikasi
+    Halaman untuk mengelola Pengumuman
 @endsection
 @section('content')
     <section class="content row">
