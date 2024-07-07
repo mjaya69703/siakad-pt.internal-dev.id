@@ -3,7 +3,7 @@
 <p align="center">
 <a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003n - Changelogs</a>
 <br>
-<span>Latest Update: 29 Juni 2024</span>
+<span>Latest Update: 08 Juli 2024</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
@@ -261,7 +261,7 @@ docker.bat
 
 ## CREDITS
 
--   Framework PHP <a href="https://laravel.com">Laravel 11</a>
+-   Framework PHP Laravel <a href="https://laravel.com">Laravel 11</a>
 -   Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
 -   Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
 -   Dockerize Script <a href="https://github.com/refactorian/laravel-docker">Laravel Docker</a>

@@ -9,36 +9,19 @@
             <div class="card-body">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
+                        @foreach ($album as $item)
+
                         <div class="carousel-item active">
-                            <a href="/back">
+                            <a href="{{ route('root.gallery-show', $item->slug) }}">
 
-                                <img src="{{ asset('dist') }}/assets/compiled/png/1.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
+                                <img src="{{ asset('storage/images/gallery/'.$item->cover) }}" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5>First slide label</h5>
+                                    <h5>{{ $item->name }}</h5>
                                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="carousel-item">
-                            <a href="/unzuo">
-
-                                <img src="{{ asset('dist') }}/assets/compiled/png/2.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Second slide label</h5>
-                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="/ushio">
-
-                                <img src="{{ asset('dist') }}/assets/compiled/png/3.png" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Third slide label</h5>
-                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                </div>
-                            </a>
-                        </div>
+                        @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -57,10 +40,10 @@
             <div class="card-body">
                 @if ($posts->count() == 0)
                     <p>Nothing Post In Here</p>
-                    
+
                 @else
                     @foreach ($posts as $key => $item)
-                        
+
                         <div class="berita row">
                             <div class="col-lg-2 text-center">
                                 <img src="{{ asset('storage/images/'. $item->image) }}" style="" class="rounded" alt="">
@@ -69,7 +52,7 @@
                                 <a href="{{ route('root.post-view', $item->slug) }}" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">{{ $item->name }}</a>
                                 <p class="mb-2">{{ Str::limit( strip_tags( $item->content ), 180 ) }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
-        
+
                                     <small>{{ $item->created_at->translatedFormat('l, d F Y - H.i') }} WIB <br> Author By <a href="#">{{ $item->author->name }}</a> - Kategori <a href="">{{ $item->category->name }}</a></small>
                                     <a href="{{ route('root.post-view', $item->slug) }}" class="btn btn-xs btn-info"><i class="fa-solid fa-info"></i></a>
                                 </div>

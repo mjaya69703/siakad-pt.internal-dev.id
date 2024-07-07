@@ -4,6 +4,8 @@
 ```
 - Add Limit Resource For Docker Resource
 - Add Option Code Server to Docker Compose
+- Initialize Albums Photo for Web Admin
+- Initialize Albums Photo in Root Pages
 ```
 <b>29/06/2024 - Update v.0.0003n - alpha</b>
 

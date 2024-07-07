@@ -488,5 +488,9 @@ class DatabaseSeeder extends Seeder
             'social_tw' => 'https://x.com/mjaya69703',
         ]);
 
+        $this->call([
+            GalleryAlbumSeeder::class,
+        ]);
+
     }
 }

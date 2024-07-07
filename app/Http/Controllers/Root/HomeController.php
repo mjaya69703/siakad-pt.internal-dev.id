@@ -22,6 +22,7 @@ use App\Models\KotakSaran;
 use App\Models\ProgramStudi;
 use App\Models\Settings\webSettings;
 use App\Models\Notification;
+use App\Models\GalleryAlbum;
 
 class HomeController extends Controller
 {
@@ -51,6 +52,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['fakultas'] = Fakultas::all();
+        $data['album'] = GalleryAlbum::where('isPublish', 1)->latest()->paginate(3);
         $data['web'] = webSettings::where('id', 1)->first();
         $data['posts'] = newsPost::latest()->paginate(7);
         $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
@@ -58,6 +60,19 @@ class HomeController extends Controller
         $data['title'] = " - ESEC Academy";
         $data['menu'] = "Halaman Utama";
         return view('root.root-index', $data);
+    }
+
+    public function galleryShow($slug)
+    {
+        $data['fakultas'] = Fakultas::all();
+        $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
+        $data['web'] = webSettings::where('id', 1)->first();
+        $data['album'] = GalleryAlbum::where('slug', $slug)->first();
+        $data['albums'] = GalleryAlbum::latest()->paginate(7);
+        $data['prefix'] = $this->setPrefix();
+        $data['title'] = " - ESEC Academy";
+        $data['menu'] = "Lihat Album " . $data['album']->name;
+        return view('root.pages.gallery-view', $data);
     }
 
     public function postView($slug)
@@ -72,7 +87,7 @@ class HomeController extends Controller
         $data['menu'] = "Lihat Postingan " . $data['post']->name;
         return view('root.pages.news-view', $data);
     }
-    
+
 
     public function adviceIndex()
     {
