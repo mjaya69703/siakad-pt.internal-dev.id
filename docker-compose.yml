@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
 
     ####################################################################################################
@@ -5,17 +7,22 @@ services:
     ####################################################################################################
     php:
         build: .docker/php
+        mem_limit: 256m
+        mem_reservation: 128M
+        cpus: 0.5
         ports:
             - 5173:5173
         volumes:
             - .:/var/www:cached
         restart: unless-stopped
-
     ####################################################################################################
     # Nginx
     ####################################################################################################
     nginx:
         image: nginx
+        mem_limit: 1G
+        mem_reservation: 128M
+        cpus: 1
         ports:
             - 80:80
         volumes:
@@ -31,6 +38,9 @@ services:
     ####################################################################################################
     db:
         image: mysql:8.1
+        mem_limit: 256m
+        mem_reservation: 128M
+        cpus: 0.5
         ports:
             - 3306:3306
         volumes:
@@ -45,11 +55,15 @@ services:
             MYSQL_PASSWORD: siakadPT
         restart: unless-stopped
 
+
     ####################################################################################################
     # phpMyAdmin
     ####################################################################################################
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
+        mem_limit: 256m
+        mem_reservation: 128M
+        cpus: 0.5
         ports:
             - 8080:80
         links:
@@ -61,6 +75,30 @@ services:
         volumes:
             - .docker/phpmyadmin/sessions:/sessions
         restart: unless-stopped
+
+    ####################################################################################################
+    # Code Server
+    ####################################################################################################
+    # code-server:
+    #     image: lscr.io/linuxserver/code-server:latest
+    #     container_name: code-server
+    #     mem_limit: 256m
+    #     mem_reservation: 128M
+    #     environment:
+    #         - PUID=1000
+    #         - PGID=1000
+    #         - TZ=Asia/Jakarta
+    #         - PASSWORD=TestImage #Password Your CodeServer
+    #         - DEFAULT_WORKSPACE=/config/workspace #optional
+    #     volumes:
+    #         - .docker/coder:/config
+    #         - .:/config/workspace
+    #     ports:
+    #         - 8281:8443
+    #     depends_on:
+    #         - php
+    #     restart: unless-stopped
+
 
     ####################################################################################################
     # Adminer

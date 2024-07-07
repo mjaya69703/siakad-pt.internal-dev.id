@@ -1,5 +1,10 @@
 ## CHANGE-LOGS
 
+<b>08/07/2024 - Update v.0.0003n - alpha</b>
+```
+- Add Limit Resource For Docker Resource
+- Add Option Code Server to Docker Compose
+```
 <b>29/06/2024 - Update v.0.0003n - alpha</b>
 
 ```
