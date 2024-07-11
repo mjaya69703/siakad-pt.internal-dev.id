@@ -21,7 +21,8 @@ class GalleryAlbumSeeder extends Seeder
                 'cover' => 'album-a.jpg',
                 'author_id' => 1,
                 'isPublish' => 1,
-                'slug' => 'album-a', // Sesuaikan dengan slug yang diinginkan
+                'slug' => 'album-a',
+                'file_1' => 'album-b.jpg',
             ],
             [
                 'name' => 'Album B',
@@ -29,7 +30,9 @@ class GalleryAlbumSeeder extends Seeder
                 'cover' => 'album-b.jpg',
                 'author_id' => 2,
                 'isPublish' => 1,
-                'slug' => 'album-b', // Sesuaikan dengan slug yang diinginkan
+                'slug' => 'album-b',
+                'file_1' => 'album-c.jpg',
+
             ],
             [
                 'name' => 'Album C',
@@ -37,7 +40,9 @@ class GalleryAlbumSeeder extends Seeder
                 'cover' => 'album-c.jpg',
                 'author_id' => 1,
                 'isPublish' => 0,
-                'slug' => 'album-c', // Sesuaikan dengan slug yang diinginkan
+                'slug' => 'album-c',
+                'file_1' => 'album-a.jpg',
+
             ],
             // Tambahkan data lainnya sesuai kebutuhan
         ];

@@ -20,6 +20,26 @@ return new class extends Migration
             $table->string('desc');                     // DESC ALBUM
             $table->string('cover');                    // COVER ALBUM PHOTOS
             $table->integer('isPublish')->default(1);   // DEFAULT 1 = TRUE ; 0 = FALSE
+            $table->string('file_1');         // FILENAME
+            $table->string('file_2')->nullable();         // FILENAME
+            $table->string('file_3')->nullable();         // FILENAME
+            $table->string('file_4')->nullable();         // FILENAME
+            $table->string('file_5')->nullable();         // FILENAME
+            $table->string('file_6')->nullable();         // FILENAME
+            $table->string('file_7')->nullable();         // FILENAME
+            $table->string('file_8')->nullable();         // FILENAME
+            $table->string('file_9')->nullable();         // FILENAME
+            $table->string('file_10')->nullable();         // FILENAME
+            $table->string('file_11')->nullable();         // FILENAME
+            $table->string('file_12')->nullable();         // FILENAME
+            $table->string('file_13')->nullable();         // FILENAME
+            $table->string('file_14')->nullable();         // FILENAME
+            $table->string('file_15')->nullable();         // FILENAME
+            $table->string('file_16')->nullable();         // FILENAME
+            $table->string('file_17')->nullable();         // FILENAME
+            $table->string('file_18')->nullable();         // FILENAME
+            $table->string('file_19')->nullable();         // FILENAME
+            $table->string('file_20')->nullable();         // FILENAME
             $table->timestamps();
         });
     }

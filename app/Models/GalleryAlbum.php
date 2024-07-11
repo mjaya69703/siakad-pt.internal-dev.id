@@ -11,11 +11,6 @@ class GalleryAlbum extends Model
 
     protected $guarded=[];
 
-    public function photos()
-    {
-        return $this->hasMany(GalleryPhotos::class, 'album_id', 'id');
-    }
-
     // Relationship with author (assuming 'author_id' points to a User model)
     public function author()
     {
