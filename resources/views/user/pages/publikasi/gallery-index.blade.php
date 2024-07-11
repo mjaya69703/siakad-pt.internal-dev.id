@@ -46,7 +46,7 @@
 
         <div class="d-flex justify-content-between align-items-center">
             <div class="a d-flex justify-content-center">
-                <form action="{{ route($prefix.'publish.gallery-search') }}" method="GET">
+                <form action="{{ route($prefix.'publish.album-search') }}" method="GET">
                     <div class="a d-flex justify-content-center">
                         <input type="search" class="form-control" placeholder="Search here..." name="search" id="search">
                         <button type="submit" class="btn btn-info" style="margin-left: 5px"><i class="fa-solid fa-search"></i></button>
@@ -56,7 +56,7 @@
 
             </div>
             <div class="b">
-                <a href="{{ route($prefix.'publish.gallery-index') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create</a>
+                <a href="{{ route($prefix.'publish.album-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create</a>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
             // Lakukan validasi minimal satu karakter sebelum melakukan pencarian
             if (query.length > 0) {
                 // Kirim permintaan pencarian ke endpoint yang sesuai
-                fetch(`{{ route($prefix.'publish.gallery-index') }}?query=${encodeURIComponent(query)}`)
+                fetch(`{{ route($prefix.'publish.album-index') }}?query=${encodeURIComponent(query)}`)
                     .then(response => response.json())
                     .then(data => {
                         // Handle data yang diterima dari server

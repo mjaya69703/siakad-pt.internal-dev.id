@@ -56,8 +56,8 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-item  {{ Route::is($prefix . 'publish.gallery-index', request()->path()) ? 'active' : '' }}">
-            <a href="{{ route($prefix . 'publish.gallery-index') }}" class='sidebar-link'>
+        <li class="sidebar-item  {{ Route::is($prefix . 'publish.album-index', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route($prefix . 'publish.album-index') }}" class='sidebar-link'>
                 <i class="fa-solid fa-images"></i>
                 <span>Data Album Foto</span>
             </a>

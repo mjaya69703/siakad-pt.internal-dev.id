@@ -45,4 +45,12 @@ class GalleryController extends Controller
         return view('user.pages.publikasi.gallery-index',['album' => $album], $data);
     }
 
+    public function create()
+    {
+        $data['prefix'] = $this->setPrefix();
+        $data['web'] = webSettings::where('id', 1)->first();
+
+        return view('user.pages.publikasi.gallery-create', $data);
+    }
+
 }
