@@ -64,8 +64,8 @@
         @foreach ($album as $item)
             <div class="col-6 col-sm-6 col-lg-3 mt-3 mb-3 mt-md-0 mb-md-0 text-center">
                 <div class="position-relative">
-                    <a href="#" class="overlay-container mb-2 mt-2">
-                        <img class="w-100 active" style="border-radius: 20px" src="{{ asset('storage/images/gallery/'.$item->cover) }}" data-bs-target="#Gallerycarousel" data-bs-slide-to="0">
+                    <a href="{{ route($prefix.'publish.album-show', $item->slug) }}" class="overlay-container mb-2 mt-2">
+                        <img class="w-100 active" style="border-radius: 20px" src="{{ asset('storage/'.$item->cover) }}" data-bs-target="#Gallerycarousel" data-bs-slide-to="0">
                         <span class="overlay-text">{{ $item->name }}</span>
                     </a>
                 </div>

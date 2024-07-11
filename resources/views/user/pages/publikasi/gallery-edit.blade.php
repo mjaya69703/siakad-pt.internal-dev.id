@@ -56,8 +56,8 @@
                     <div class="card-header">
                         <h5 class="card-title">Details Album</h5>
                     </div>
-                    <div class="card-body row">
-                        <div class="form-group col-lg-12 col-12">
+                    <div class="card-body">
+                        <div class="form-group">
                             <div class="position-relative">
                                 <img id="preview_1" class="card-img-top mt-2 img-fluid" src="#" alt="Preview" style="display: none; align-items: center; max-width: 700px;" >
                             </div>
@@ -73,10 +73,10 @@
                         </div>
                         @for($i = 2; $i <= 20; $i++)
 
-                            <div class="form-group col-lg-6 col-12" id="file_{{ $i }}_div" style="display: none;">
+                            <div class="form-group" id="file_{{ $i }}_div" style="display: none;">
                                 <div class="position-relative">
 
-                                    <img id="preview_{{ $i }}" class="card-img-top mt-2 img-fluid" src="#" alt="Preview" style="display: none; max-width: 400px;">
+                                    <img id="preview_{{ $i }}" class="card-img-top mt-2 img-fluid" src="#" alt="Preview" style="display: none; max-width: 700px;">
                                 </div>
                                 <label for="file_{{ $i }}">Gallery Images {{ $i }}</label>
                                 <input type="file" class="form-control" name="file_{{ $i }}" id="file_{{ $i }}" accept="image/*" onchange="previewImage(this, 'preview_{{ $i }}')">

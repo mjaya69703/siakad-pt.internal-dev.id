@@ -18,30 +18,30 @@ class GalleryAlbumSeeder extends Seeder
             [
                 'name' => 'Album A',
                 'desc' => 'Deskripsi Album A',
-                'cover' => 'album-a.jpg',
+                'cover' => 'images/gallery/album-a.jpg',
                 'author_id' => 1,
                 'isPublish' => 1,
                 'slug' => 'album-a',
-                'file_1' => 'album-b.jpg',
+                'file_1' => 'images/gallery/album-b.jpg',
             ],
             [
                 'name' => 'Album B',
                 'desc' => 'Deskripsi Album B',
-                'cover' => 'album-b.jpg',
+                'cover' => 'images/gallery/album-b.jpg',
                 'author_id' => 2,
                 'isPublish' => 1,
                 'slug' => 'album-b',
-                'file_1' => 'album-c.jpg',
+                'file_1' => 'images/gallery/album-c.jpg',
 
             ],
             [
                 'name' => 'Album C',
                 'desc' => 'Deskripsi Album C',
-                'cover' => 'album-c.jpg',
+                'cover' => 'images/gallery/album-c.jpg',
                 'author_id' => 1,
                 'isPublish' => 0,
                 'slug' => 'album-c',
-                'file_1' => 'album-a.jpg',
+                'file_1' => 'images/gallery/album-a.jpg',
 
             ],
             // Tambahkan data lainnya sesuai kebutuhan
