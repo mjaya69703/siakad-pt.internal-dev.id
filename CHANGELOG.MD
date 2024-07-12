@@ -1,4 +1,8 @@
 ## CHANGE-LOGS
+<b>13/07/2024 - Update v0.031a</b>
+- Implement Gallery Feature Create / Show and Update in Backend
+- Implement Gallery Show in HomePage
+- Update Preview images in readme :)
 
 <b>08/07/2024 - Update v.0.0003n - alpha</b>
 ```

@@ -1,9 +1,9 @@
 <p align="center"><a href="https://siakad-pt.internal-dev.id" target="_blank"><img src="https://siakad-pt.internal-dev.id/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v.0.0003n - Changelogs</a>
+<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v0.031a - Changelogs</a>
 <br>
-<span>Latest Update: 08 Juli 2024</span>
+<span>Latest Update: 13 Juli 2024</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
@@ -15,6 +15,10 @@
 ## About Project SiakadPT By Internal-Dev
 
 <img src="./storage/app/public/images/web/Picture1.png" style="width: 100%;" align="center">
+<p align="center">Halaman Utama</p>
+<hr>
+<img src="./storage/app/public/images/web/Picture2.png" style="width: 100%;" align="center">
+<p align="center">Halaman Admin / Backend</p>
 
 Web Siakad Perguruan Tinggi yang dibuat oleh Muhamad Jaya Kusuma menggunakan Base Framework Laravel 10 yang kini telah diupdate ke Laravel 11. Siakad ini dibangun untuk mempermudah para mahasiswa, dosen dan para staff dalam melakukan akvitas pekerjaannya dilingkungan kampus serta saling terintegrasi.
 

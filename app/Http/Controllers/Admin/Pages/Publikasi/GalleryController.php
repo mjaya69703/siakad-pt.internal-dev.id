@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use Auth;
 use Hash;
 use Str;
+use Storage;
 // SECTION ADDONS EXTERNAL
 use Alert;
 use App\Helper\roleTrait;
@@ -130,61 +131,65 @@ class GalleryController extends Controller
     }
     public function update(Request $request, $slug)
     {
+        $prefix = $this->setPrefix();
         $request->validate([
             'name' => 'required|string|max:255',
             'desc' => 'required|string',
-            'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_1' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_2' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_3' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_4' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_5' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_6' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_7' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_8' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_9' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_10' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_11' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_12' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_13' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_14' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_15' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_16' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_17' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_18' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_19' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_20' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $coverPath = $request->file('cover')->store('album_covers', 'public');
+        $album = GalleryAlbum::where('slug', $slug)->firstOrFail();
 
-        $album = GalleryAlbum::where('slug', $slug)->first();
+        // Handle cover image upload if provided
+        if ($request->hasFile('cover')) {
+            $request->validate([
+                'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $coverPath = $request->file('cover')->store('images/gallery/', 'public');
+
+            // Delete old cover if exists
+            if ($album->cover && $album->cover != 'gallery_image.png') {
+                Storage::disk('public')->delete($album->cover);
+            }
+
+            $album->cover = $coverPath;
+        }
+
+        // Update other album details
         $album->author_id = Auth::user()->id;
         $album->name = $request->name;
         $album->slug = Str::slug($request->name);
         $album->desc = $request->desc;
-        $album->cover = $coverPath;
+
+        // Handle file uploads (file_1 to file_20)
         for ($i = 1; $i <= 20; $i++) {
             $image_name = 'file_'.$i;
+
             if ($request->hasFile($image_name)) {
+                $request->validate([
+                    $image_name => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
 
                 $image = $request->file($image_name);
-                $name = uniqid().('file_'.$i).'.'.$image->getClientOriginalExtension();
+                $name = 'images/gallery/' . uniqid().'_' . $image_name . '.' . $image->getClientOriginalExtension();
                 $destinationPath = storage_path('app/public/images/gallery/');
                 $image->move($destinationPath, $name);
-                if ($album->$image_name != 'gallery_image.png') {
-                    File::delete($destinationPath.'/'.$album->$image_name); // hapus gambar lama
+
+                // Delete old file if exists and is not default
+                if ($album->$image_name && $album->$image_name != 'gallery_image.png') {
+                    Storage::disk('public')->delete($album->$image_name);
                 }
 
                 $album->$image_name = $name;
             }
         }
-        $album->save(); // Pastikan album disimpan terlebih dahulu
 
+        $album->save();
 
-
-        Alert::success('Success', 'Data berhasil ditambahkan');
-        return back();
+        Alert::success('Success', 'Data berhasil diupdate');
+        return redirect()->route($prefix.'publish.album-edit', $album->slug);
     }
+
 
 }

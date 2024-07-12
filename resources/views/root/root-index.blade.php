@@ -14,7 +14,7 @@
                         <div class="carousel-item active">
                             <a href="{{ route('root.gallery-show', $item->slug) }}">
 
-                                <img src="{{ asset('storage/images/gallery/'.$item->cover) }}" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
+                                <img src="{{ asset('storage/'.$item->cover) }}" style="height: 375px; width: 100%; object-fit: cover;" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>{{ $item->name }}</h5>
                                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>

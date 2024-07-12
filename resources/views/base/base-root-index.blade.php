@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="{{ asset('dist') }}/assets/custom/css/news-section.css">
         {{-- PLUGIN FONT AWESOME --}}
         <link rel="stylesheet" href="{{ asset('vendor') }}/fontawesome/css/all.min.css" rel="stylesheet">
-
+        @yield('custom-css')
 
         <style>
             .fontawesome-icons {
