@@ -19005,7 +19005,7 @@ body .bi:before,
     padding: 0.5rem 0.3rem 0.3rem 0.5rem;
     flex-wrap: wrap;
     max-height: 200px;
-    min-width: 200px;
+    min-width: 275px;
 }
 .layout-horizontal .main-navbar .submenu .submenu-group .submenu-item {
     position: relative;
@@ -19076,7 +19076,7 @@ body .bi:before,
     padding: 0.5rem;
     flex-direction: column;
     border-radius: 0.3rem;
-    min-width: 200px;
+    min-width: 250px;
 }
 @media screen and (max-width: 1199px) {
     .layout-horizontal .main-navbar {

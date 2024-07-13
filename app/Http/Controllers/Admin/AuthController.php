@@ -164,6 +164,10 @@ class AuthController extends Controller
                 Alert::success('Success', 'Anda berhasil login sebagai '. $user->type);
                 return redirect()->route('academic.home-index');
                 // return back();
+            }elseif($user->rawtype == 4){
+                Alert::success('Success', 'Anda berhasil login sebagai '. $user->type);
+                return redirect()->route('admin.home-index');
+                // return back();
             }elseif($user->rawtype == 5){
                 Alert::success('Success', 'Anda berhasil login sebagai '. $user->type);
                 return redirect()->route('support.home-index');

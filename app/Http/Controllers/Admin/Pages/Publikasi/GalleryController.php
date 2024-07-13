@@ -177,7 +177,7 @@ class GalleryController extends Controller
                 $image->move($destinationPath, $name);
 
                 // Delete old file if exists and is not default
-                if ($album->$image_name && $album->$image_name != 'gallery_image.png') {
+                if ($album->$image_name && $album->$image_name != 'gallery_image.png' && $album->$image_name != 'images/gallery/album-a.jpg' && $album->$image_name != 'images/gallery/album-b.jpg' && $album->$image_name != 'images/gallery/album-c.jpg') {
                     Storage::disk('public')->delete($album->$image_name);
                 }
 

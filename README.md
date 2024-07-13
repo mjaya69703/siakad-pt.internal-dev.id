@@ -72,6 +72,52 @@ Berikut kami informasikan Fitur Utama SiakadPT yang kami bangun.
 1. Lihat Publikasi Kata Sambutan, Gallery, Pengumuman, dan Berita / Blog.
 2. Kotak Saran & Masukan
 
+## Demo Page
+Kamu boleh mencoba fitur apapun pada fitur ini, Apabila kamu memiliki kritik atau saran kamu bisa mengisi pada homepage dibagian menu Kritik dan Saran yang terhubung langsung dengan email pribadi saya.
+
+```
+Link : https://siakad-pt.internal-dev.id
+
+Demo with User Account:
+Link : https://siakad-pt.internal-dev.id.test/admin/auth-signin
+1. Departement Web Administrator ( Super Admin )
+User : admin
+Pass : Admin123
+
+2. Departement Admin ( Admin Staff )
+User : admin2
+Pass : Admin123
+
+3. Departement Finance ( Finance Staff )
+User : finance
+Pass : Admin123
+
+4. Departement Academic ( Academic Staff )
+User : academic
+Pass : Admin123
+
+5. Departement Officer ( Officer Staff )
+User : officer
+Pass : Admin123
+
+6. Departement Support ( Support Staff )
+User : officer
+Pass : Admin123
+
+Demo with Dosen Account:
+Link : https://siakad-pt.internal-dev.id.test/dosen/auth-signin
+User : dosen.a@example.com // You can replace "a" with another alphabet to "d"
+Pass : Dosen123
+
+Demo with Mahasiswa Account:
+Link : https://siakad-pt.internal-dev.id.test/mahasiswa/auth-signin
+User : mahasiswa.a@example.com // You can replace "a" with another alphabet to "d"
+Pass : Mahasiswa123
+```
+
+Notes:
+1. Dilarang Melakukan Scan QRIS Pada Menu Pembayaran Mahasiswa
+
 ## How to Install
 
 1. Persyaratan Software

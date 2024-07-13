@@ -1,0 +1,255 @@
+/* BANNER SECTION */
+.breadcrumb-wrap-style-2 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    padding: 115px 15px 118px;
+}
+
+@media (max-width: 1199px) {
+    .breadcrumb-wrap-style-2 {
+        padding: 100px 15px 95px;
+    }
+}
+
+@media (max-width: 991px) {
+    .breadcrumb-wrap-style-2 {
+        padding: 85px 15px 80px;
+    }
+}
+
+@media (max-width: 767px) {
+    .breadcrumb-wrap-style-2 {
+        padding: 70px 15px 65px;
+    }
+}
+
+@media (max-width: 575px) {
+    .breadcrumb-wrap-style-2 {
+        padding: 55px 15px 50px;
+    }
+}
+
+.breadcrumb-wrap-style-2:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+.breadcrumb-wrap-style-2 .breadcrumb {
+    padding: 0;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: transparent;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 767px) {
+    .breadcrumb-wrap-style-2 .breadcrumb {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 575px) {
+    .breadcrumb-wrap-style-2 .breadcrumb {
+        margin-bottom: 5px;
+    }
+}
+
+.breadcrumb-wrap-style-2 .breadcrumb .breadcrumb-item:before {
+    color: #ebe8e8;
+}
+
+.breadcrumb-wrap-style-2 .breadcrumb .breadcrumb-item a {
+    color: #ebe8e8;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.breadcrumb-wrap-style-2 .breadcrumb .breadcrumb-item:hover a {
+    color: var(--color_primary);
+}
+
+.breadcrumb-wrap-style-2 .breadcrumb .breadcrumb-item.active {
+    color: #ffffff;
+}
+
+.breadcrumb-wrap-style-2 .inner-banner-title {
+    text-align: center;
+}
+
+.breadcrumb-wrap-style-2 .inner-banner-title .title {
+    max-width: 750px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    color: #ffffff;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+/* SECTION MAIN */
+.fontawesome-icons {
+    text-align: center;
+}
+
+article dl {
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 20px;
+}
+
+.fontawesome-icons .the-icon {
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.berita img {
+    max-width: 125px;
+}
+
+@media screen and (max-width: 767px) {
+    .footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Tulisan menjadi rata tengah secara horizontal */
+    }
+
+    .berita img {
+        width: 100%;
+        max-width: none;
+    }
+
+    .berita a {
+        text-align: center !important;
+        /* Menambahkan !important agar lebih dominan */
+    }
+
+    .berita p {
+        /* text-align: justify; */
+    }
+}
+/* SECTION OVERLAY GALLERY ALBUMS */
+.overlay-container {
+    display: block;
+    position: relative;
+}
+.img-press{
+    max-height: 150px !important;
+}
+
+.overlay-text {
+    position: absolute;
+    bottom: 0; /* Atur posisi teks di bagian bawah */
+    left: 0;
+    width: 100%;
+    background-color: rgba(
+        0,
+        123,
+        255,
+        0.75
+    ); /* Warna latar belakang dengan opacity 0.75 */
+    color: white; /* Warna teks */
+    padding: 10px 20px; /* Padding teks */
+    border-radius: 20px; /* Sudut rounded */
+    opacity: 0; /* Awalnya tidak terlihat */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Animasi transisi */
+    transform: translateY(100%); /* Geser teks ke luar area */
+}
+
+.overlay-container:hover .overlay-text {
+    opacity: 1; /* Munculkan overlay ketika hover */
+    transform: translateY(0); /* Geser teks ke posisi atas */
+}
+/* SECTION TABLE SUPER */
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+table caption {
+    font-size: 1.5em;
+    margin: 0.5em 0 0.75em;
+}
+
+table tr {
+    /* background-color: #f8f8f8; */
+    border: 1px solid #ddd;
+    padding: 0.35em;
+}
+
+table th,
+table td {
+    padding: 0.625em;
+
+    text-align: center;
+}
+
+table th {
+    font-size: 0.85em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.subject-column {
+    width: 50% !important;
+}
+
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
+
+    table caption {
+        font-size: 1.3em;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: 0.625em;
+    }
+
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: 0.8em;
+        text-align: right;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+    }
+}

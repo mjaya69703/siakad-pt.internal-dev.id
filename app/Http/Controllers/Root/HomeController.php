@@ -62,6 +62,31 @@ class HomeController extends Controller
         return view('root.root-index', $data);
     }
 
+    public function galleryIndex()
+    {
+        $data['fakultas'] = Fakultas::all();
+        $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
+        $data['web'] = webSettings::where('id', 1)->first();
+        // $data['album'] = GalleryAlbum::where('slug', $slug)->first();
+        $data['albums'] = GalleryAlbum::latest()->paginate(24);
+        $data['prefix'] = $this->setPrefix();
+        $data['title'] = " - ESEC Academy";
+        $data['menu'] = "Daftar Album Foto ";
+        return view('root.pages.gallery-index', $data);
+    }
+    public function gallerySearch(Request $request)
+    {
+        $data['fakultas'] = Fakultas::all();
+        $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
+        $data['web'] = webSettings::where('id', 1)->first();
+        // $data['album'] = GalleryAlbum::where('slug', $slug)->first();
+        $search = $request->input('search');
+        $albums = GalleryAlbum::where('name', 'like', "%$search%")->paginate(24);
+        $data['prefix'] = $this->setPrefix();
+        $data['title'] = " - ESEC Academy";
+        $data['menu'] = "Daftar Album Foto ";
+        return view('root.pages.gallery-index', compact('albums'), $data);
+    }
     public function galleryShow($slug)
     {
         $data['fakultas'] = Fakultas::all();

@@ -3,6 +3,11 @@
 - Implement Gallery Feature Create / Show and Update in Backend
 - Implement Gallery Show in HomePage
 - Update Preview images in readme :)
+- Add new Departement Admin with Assign Basic Features
+- Split Routing Files from web.php
+- Implement Gallery Page with Search Function
+- Rearrange Menu Bar & Resize Wrapper Menu with submenu
+- Split Basic css and js global to new files
 
 <b>08/07/2024 - Update v.0.0003n - alpha</b>
 ```

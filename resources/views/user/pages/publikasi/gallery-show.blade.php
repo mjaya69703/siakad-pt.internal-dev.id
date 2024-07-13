@@ -11,35 +11,6 @@
 @section('urlmenu')
     {{ route($prefix.'publish.album-index') }}
 @endsection
-@section('custom-css')
-
-    <style>
-        .overlay-container {
-            display: block;
-            position: relative;
-        }
-
-        .overlay-text {
-            position: absolute;
-            bottom: 0; /* Atur posisi teks di bagian bawah */
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 123, 255, 0.75); /* Warna latar belakang dengan opacity 0.75 */
-            color: white; /* Warna teks */
-            padding: 10px 20px; /* Padding teks */
-            border-radius: 20px; /* Sudut rounded */
-            opacity: 0; /* Awalnya tidak terlihat */
-            transition: opacity 0.3s ease, transform 0.3s ease; /* Animasi transisi */
-            transform: translateY(100%); /* Geser teks ke luar area */
-        }
-
-        .overlay-container:hover .overlay-text {
-            opacity: 1; /* Munculkan overlay ketika hover */
-            transform: translateY(0); /* Geser teks ke posisi atas */
-        }
-
-    </style>
-@endsection
 @section('content')
 <section class="section row">
     <div class="col-lg-12">
@@ -52,8 +23,6 @@
                         <button type="submit" class="btn btn-info" style="margin-left: 5px"><i class="fa-solid fa-search"></i></button>
                     </div>
                 </form>
-
-
             </div>
             <div class="b d-flex justify-content-center">
                 <a href="{{ route($prefix.'publish.album-create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create</a>
@@ -89,7 +58,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12 row mt-2">
+    <div class="col-lg-12 row mt-2 mb-2">
         <div class="col-12 col-sm-12 col-lg-3 mt-2 mb-2 mt-md-0 mb-md-0 text-center">
             <div class="position-relative">
                 <a href="#" class="overlay-container">
@@ -103,7 +72,7 @@
                 <div class="col-6 col-sm-12 col-lg-3 mt-2 mb-2 mt-md-0 mb-md-0 text-center">
                     <div class="position-relative">
                         <a href="#" class="overlay-container">
-                            <img class="w-100 active" style="border-radius: 20px" src="{{ asset('storage/'.$album->{'file_'.$i}) }}" data-bs-target="#Gallerycarousel" data-bs-slide-to="{{ $i - 1 }}">
+                            <img class="w-100 active" style="border-radius: 20px;" src="{{ asset('storage/'.$album->{'file_'.$i}) }}" data-bs-target="#Gallerycarousel" data-bs-slide-to="{{ $i - 1 }}">
                             <span class="overlay-text">Gallery Foto {{ $i }}</span>
                         </a>
                     </div>

@@ -63,6 +63,17 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
         ]);
         User::create([
+            'name' => 'Staff Admin',
+            'code' => Str::random(6),
+            'user' => 'admin2',
+            'gend' => 'L',
+            'type' => 4,
+            'email' => 'admin@example.com',
+            'phone' => '080012345664',
+            'password' => Hash::make('Admin123'),
+            'status' => 1,
+        ]);
+        User::create([
             'name' => 'Staff Support',
             'code' => Str::random(6),
             'user' => 'support',

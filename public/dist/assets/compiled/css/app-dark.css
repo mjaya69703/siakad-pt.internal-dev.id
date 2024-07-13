@@ -9658,7 +9658,7 @@ html[data-bs-theme="dark"]
     padding: 0.5rem 0.3rem 0.3rem 0.5rem;
     flex-wrap: wrap;
     max-height: 200px;
-    min-width: 200px;
+    min-width: 275px;
 }
 html[data-bs-theme="dark"]
     .layout-horizontal
@@ -9755,7 +9755,7 @@ html[data-bs-theme="dark"] .layout-horizontal .main-navbar .subsubmenu {
     padding: 0.5rem;
     flex-direction: column;
     border-radius: 0.3rem;
-    min-width: 200px;
+    min-width: 250px;
 }
 @media screen and (max-width: 1199px) {
     html[data-bs-theme="dark"] .layout-horizontal .main-navbar {
@@ -9814,7 +9814,7 @@ html[data-bs-theme="dark"] .layout-horizontal .main-navbar .subsubmenu {
         max-height: unset;
         padding: 0;
         min-width: unset;
-        width: 100%;
+        width: 125%;
     }
     html[data-bs-theme="dark"] .layout-horizontal .main-navbar .submenu.active {
         display: block;
