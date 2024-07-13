@@ -52,54 +52,55 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
+        <li class="sidebar-item has-sub {{ Route::is('web-admin.master.taka-*', 'web-admin.master.fakultas-*', 'web-admin.master.pstudi-*') ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
                 <span>Data Akademik</span>
             </a>
             <ul class="submenu">
-                <li class="submenu-item {{ Route::is('web-admin.master.taka-*', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.taka-*') ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.taka-index') }}" class="submenu-link">Data Tahun Akademik</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.fakultas-*', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.fakultas-*') ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.fakultas-index') }}" class="submenu-link">Data Fakultas</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.pstudi-*', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.pstudi-*') ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.pstudi-index') }}" class="submenu-link">Data Program Studi</a>
                 </li>
             </ul>
         </li>
-        <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
+        <li class="sidebar-item has-sub {{ Route::is('web-admin.master.proku-*') ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
                 <span>Data PMB</span>
             </a>
             <ul class="submenu">
-                <li class="submenu-item {{ Route::is('web-admin.master.proku-*', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.proku-*') ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.proku-index') }}" class="submenu-link">Data Program Kuliah</a>
                 </li>
             </ul>
         </li>
-        <li class="sidebar-item has-sub {{ Route::is('web-admin.master.*', request()->path()) ? 'active' : '' }}">
+        <li class="sidebar-item has-sub {{ Route::is('web-admin.master.kurikulum-*', 'web-admin.master.kelas-*', 'web-admin.master.matkul-*', 'web-admin.master.jadkul-*') ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
                 <span>Data KBM</span>
             </a>
             <ul class="submenu">
-                <li class="submenu-item {{ Route::is('web-admin.master.kurikulum-*', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.kurikulum-*') ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.kurikulum-index') }}" class="submenu-link">Data Kurikulum</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.kelas-*', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.kelas-*') ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.kelas-index') }}" class="submenu-link">Data Kelas</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.matkul-*', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.matkul-*') ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.matkul-index') }}" class="submenu-link">Data Mata Kuliah</a>
                 </li>
-                <li class="submenu-item {{ Route::is('web-admin.master.jadkul-*', request()->path()) ? 'active' : '' }}">
+                <li class="submenu-item {{ Route::is('web-admin.master.jadkul-*') ? 'active' : '' }}">
                     <a href="{{ route('web-admin.master.jadkul-index') }}" class="submenu-link">Data Jadwal Kuliah</a>
                 </li>
             </ul>
         </li>
+
         <li class="sidebar-item has-sub {{ Route::is('web-admin.inventory.*', request()->path()) ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
                 <i class="fa-solid fa-school"></i>
