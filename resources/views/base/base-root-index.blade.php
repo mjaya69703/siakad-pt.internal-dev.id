@@ -230,8 +230,8 @@
                             </li>
 
                             <li class="menu-item">
-                                <a href="#" class='menu-link'>
-                                    <span><i class="fa-solid fa-circle-info"></i> Pelayanan</span>
+                                <a href="{{ route('root.home-download') }}" class='menu-link'>
+                                    <span><i class="fa-solid fa-download"></i> Download</span>
                                 </a>
                             </li>
 
