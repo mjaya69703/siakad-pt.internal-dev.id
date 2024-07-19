@@ -231,7 +231,7 @@
 
                             <li class="menu-item">
                                 <a href="{{ route('root.home-download') }}" class='menu-link'>
-                                    <span><i class="fa-solid fa-download"></i> Download</span>
+                                    <span><i class="fa-solid fa-file-pdf"></i> Document</span>
                                 </a>
                             </li>
 
