@@ -36,14 +36,13 @@ class UpdateCheck extends Command
         $branch = 'dev-alpha';
         $url = "https://api.github.com/repos/$owner/$repo/branches/$branch";
 
-        // Replace this with the method you use to get the current local commit SHA
+        // Get the current local commit SHA
         $localCommitSha = trim(shell_exec('git rev-parse HEAD'));
 
         try {
             $response = $client->get($url, [
                 'headers' => [
                     'Accept' => 'application/vnd.github.v3+json',
-                    'Authorization' => 'token ' . env('GITHUB_TOKEN'),
                 ],
             ]);
 
