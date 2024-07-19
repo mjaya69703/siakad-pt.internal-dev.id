@@ -30,6 +30,12 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
     Route::post('/presensi/save-izin',[App\Http\Controllers\Admin\HomeController::class, 'saveIzinCuti'])->name('home-presensi-input-izin');
     Route::patch('/presensi/update-absen',[App\Http\Controllers\Admin\PresensiController::class, 'absenPulang'])->name('home-presensi-update-absen');
 
+    // PRIVATE FUNCTION => FILE DOKUMEN
+    Route::get('/document',[App\Http\Controllers\Admin\Pages\Publikasi\DocumentController::class, 'index'])->name('document-index');
+    Route::get('/document/create',[App\Http\Controllers\Admin\Pages\Publikasi\DocumentController::class, 'create'])->name('document-create');
+    Route::post('/document/create',[App\Http\Controllers\Admin\Pages\Publikasi\DocumentController::class, 'store'])->name('document-store');
+    Route::delete('/document/{code}/destroy',[App\Http\Controllers\Admin\Pages\Publikasi\DocumentController::class, 'destroy'])->name('document-destroy');
+
     // PRIVATE FUNCTION => KATEGORI BERITA
     Route::get('/berita',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'index'])->name('news.post-index');
     Route::get('/berita/create',[App\Http\Controllers\Admin\Pages\News\PostController::class, 'create'])->name('news.post-create');
@@ -200,5 +206,6 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
 
 
     });
+
 
 });

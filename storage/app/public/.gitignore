@@ -2,6 +2,7 @@
 excel-files/*
 invoices/*
 news/*
+document/*.pdf
 uploads/*
 uploads/tugas/*
 album_covers/*
