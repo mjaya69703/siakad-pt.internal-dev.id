@@ -1,27 +1,44 @@
+
 <nav class="navbar navbar-expand navbar-light navbar-top">
     <div class="container-fluid">
         <a href="#" class="burger-btn d-block">
             <i class="bi bi-justify fs-3"></i>
         </a>
-                        @php
-                            $notif = App\Models\Notification::latest()->paginate(2);
-                        @endphp
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+@php
+    $notif = App\Models\Notification::latest()->paginate(6);
+
+    if(Auth::check()){
+        if(Auth::user()->raw_type == '0'){
+            $ticket = App\Models\TicketSupport::latest()->paginate(6);
+        } else {
+            $ticket = App\Models\TicketSupport::latest()->where('dept_id', Auth::user()->raw_type)->paginate(6);
+        }
+        // Jika user adalah admin
+
+    } else if(Auth::guard('mahasiswa')->check()){
+        // Jika user adalah mahasiswa
+        $ticket = App\Models\TicketSupport::latest()->where('users_id', Auth::guard('mahasiswa')->user()->id)->paginate(6);
+    } else {
+
+    }
+@endphp
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-lg-0">
                 <li class="nav-item dropdown me-1">
                     <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class='bi bi-envelope bi-sub fs-4'></i>
+                        <span class="badge badge-notification bg-danger">{{ $ticket->count() }}</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
-                        <li>
-                            <h6 class="dropdown-header">Mail</h6>
+                    <ul class="dropdown-menu dropdown-menu-xl" aria-labelledby="dropdownMenuButton">
+                        <li class="dropdown-header">
+                            <h6>Ticket Support</h6>
                         </li>
-                        @foreach ($notif as $item2)
+                        @foreach ($ticket as $item)
                             
-                        <li><a class="dropdown-item" href="#">{!! $item2->name !!}</a></li>
+                        <li><a class="dropdown-item" href="#">{{ '#'.$item->code . ' - ' . $item->subject }}</a></li>
                         @endforeach
                     </ul>
                 </li>

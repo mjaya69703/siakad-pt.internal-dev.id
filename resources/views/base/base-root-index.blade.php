@@ -167,18 +167,12 @@
                                                 <a href="#" class='submenu-link'>Program Kuliah</a>
                                                 <!-- 3 Level Submenu -->
                                                 <ul class="subsubmenu">
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="#" class="subsubmenu-link">Regular Pagi</a>
-                                                    </li>
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="#" class="subsubmenu-link">Regular Sore</a>
-                                                    </li>
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="#" class="subsubmenu-link">Kelas Karyawan</a>
-                                                    </li>
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="#" class="subsubmenu-link">Program Beasiswa</a>
-                                                    </li>
+                                                    @foreach ($proku as $item)
+                                                        
+                                                        <li class="subsubmenu-item ">
+                                                            <a href="#" class="subsubmenu-link">{{ $item->name }}</a>
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
                                             </li>
                                             <li class="submenu-item">

@@ -1,9 +1,9 @@
 <p align="center"><a href="https://siakad-pt.internal-dev.id" target="_blank"><img src="https://siakad-pt.internal-dev.id/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v0.031a - Changelogs</a>
+<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v0.031b - Changelogs</a>
 <br>
-<span>Latest Update: 13 Juli 2024</span>
+<span>Latest Update: 20 Juli 2024</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
@@ -79,7 +79,7 @@ Kamu boleh mencoba fitur apapun pada fitur ini, Apabila kamu memiliki kritik ata
 Link : https://siakad-pt.internal-dev.id
 
 Demo with User Account:
-Link : https://siakad-pt.internal-dev.id.test/admin/auth-signin
+Link : https://siakad-pt.internal-dev.id/admin/auth-signin
 1. Departement Web Administrator ( Super Admin )
 User : admin
 Pass : Admin123
@@ -105,12 +105,12 @@ User : officer
 Pass : Admin123
 
 Demo with Dosen Account:
-Link : https://siakad-pt.internal-dev.id.test/dosen/auth-signin
+Link : https://siakad-pt.internal-dev.id/dosen/auth-signin
 User : dosen.a@example.com // You can replace "a" with another alphabet to "d"
 Pass : Dosen123
 
 Demo with Mahasiswa Account:
-Link : https://siakad-pt.internal-dev.id.test/mahasiswa/auth-signin
+Link : https://siakad-pt.internal-dev.id/mahasiswa/auth-signin
 User : mahasiswa.a@example.com // You can replace "a" with another alphabet to "d"
 Pass : Mahasiswa123
 ```

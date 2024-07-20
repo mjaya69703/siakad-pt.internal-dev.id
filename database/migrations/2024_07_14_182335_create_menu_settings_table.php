@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('menu_settings', function (Blueprint $table) {
             $table->id();
+            $table->integer('locate')->default(0);              # 0 = FRONT MENU; 1 = GLOBAL MENU; 2 = USER MENU; 
+            $table->integer('target')->default(0);              # 0 = FRONT MENU; 1 = GLOBAL MENU; 2 = USER MENU; 
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     */
+    */
     public function down(): void
     {
         Schema::dropIfExists('menu_settings');
