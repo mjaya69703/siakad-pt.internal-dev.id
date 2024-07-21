@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use Str;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use CzProject\GitPhp\GitRepository;
+use CzProject\GitPhp\Git;
 // SECTION ADDONS EXTERNAL
 use GuzzleHttp\Client;
 use Alert;
@@ -67,16 +72,126 @@ class WebSettingController extends Controller
     public function updatePerform(Request $request)
     {
         $branch = $request->input('branch');
-        $output = [];
-        $returnVar = null;
-        exec("git pull origin $branch 2>&1", $output, $returnVar);
+        $repoPath = base_path();
+        Log::info('Attempting to update branch: ' . $branch);
+        Log::info('Repository path: ' . $repoPath);
 
-        if ($returnVar === 0) {
+        // Periksa apakah direktori ada
+        if (!is_dir($repoPath)) {
+            Log::error('Repository path does not exist: ' . $repoPath);
+            return response()->json(['message' => 'Repository path not found.', 'status' => 'error']);
+        }
+
+        // Periksa apakah ini adalah repositori Git
+        if (!is_dir($repoPath . '/.git')) {
+            Log::error('Not a Git repository: ' . $repoPath);
+            return response()->json(['message' => 'Not a Git repository.', 'status' => 'error']);
+        }
+
+        // Coba jalankan git pull menggunakan czproject/git-php
+        try {
+            $git = new Git();
+            $repo = $git->open($repoPath);
+            $repo->checkout($branch);
+            $repo->pull('origin', $branch);
+            Log::info('Git pull successful.');
+
             return response()->json(['message' => 'Successfully updated to the latest version.', 'status' => 'success']);
-        } else {
-            return response()->json(['message' => 'Failed to update. Error: ' . implode("\n", $output), 'status' => 'error']);
+        } catch (\Exception $e) {
+            Log::error('Failed to update: ' . $e->getMessage());
+            Log::error('Error details: ' . $e->getTraceAsString());
+            return response()->json(['message' => 'Failed to update. Error: ' . $e->getMessage(), 'status' => 'error']);
         }
     }
+    // public function updatePerform(Request $request)
+    // {
+    //     $branch = $request->input('branch');
+    //     $repoPath = base_path();
+        
+    //     Log::info('Attempting to update branch: ' . $branch);
+    //     Log::info('Repository path: ' . $repoPath);
+
+    //     // Periksa apakah direktori ada
+    //     if (!is_dir($repoPath)) {
+    //         Log::error('Repository path does not exist: ' . $repoPath);
+    //         return response()->json(['message' => 'Repository path not found.', 'status' => 'error']);
+    //     }
+
+    //     // Periksa apakah ini adalah repositori Git
+    //     if (!is_dir($repoPath . '/.git')) {
+    //         Log::error('Not a Git repository: ' . $repoPath);
+    //         return response()->json(['message' => 'Not a Git repository.', 'status' => 'error']);
+    //     }
+
+    //     // Coba dapatkan versi Git
+    //     try {
+    //         $gitVersionProcess = new Process(['git', '--version']);
+    //         $gitVersionProcess->run();
+    //         if ($gitVersionProcess->isSuccessful()) {
+    //             Log::info('Git version: ' . trim($gitVersionProcess->getOutput()));
+    //         } else {
+    //             Log::error('Unable to get Git version: ' . $gitVersionProcess->getErrorOutput());
+    //         }
+    //     } catch (\Exception $e) {
+    //         Log::error('Exception when getting Git version: ' . $e->getMessage());
+    //     }
+
+    //     // Coba jalankan git pull
+    //     try {
+    //         $process = new Process(['git', 'pull', 'origin', $branch], $repoPath);
+    //         $process->setTimeout(60); // Berikan waktu lebih lama jika diperlukan
+    //         $process->run(function ($type, $buffer) {
+    //             if (Process::ERR === $type) {
+    //                 Log::error('Git pull error output: '.$buffer);
+    //             } else {
+    //                 Log::info('Git pull output: '.$buffer);
+    //             }
+    //         });
+
+    //         if (!$process->isSuccessful()) {
+    //             throw new ProcessFailedException($process);
+    //         }
+
+    //         $output = $process->getOutput();
+    //         Log::info('Git pull successful. Output: ' . $output);
+
+    //         return response()->json(['message' => 'Successfully updated to the latest version.', 'status' => 'success']);
+    //     } catch (\Exception $e) {
+    //         Log::error('Failed to update: ' . $e->getMessage());
+    //         Log::error('Error details: ' . $e->getTraceAsString());
+
+    //         // Coba dapatkan status repositori
+    //         try {
+    //             $statusProcess = new Process(['git', 'status'], $repoPath);
+    //             $statusProcess->run();
+    //             if ($statusProcess->isSuccessful()) {
+    //                 Log::info('Git status: ' . $statusProcess->getOutput());
+    //             } else {
+    //                 Log::error('Unable to get Git status: ' . $statusProcess->getErrorOutput());
+    //             }
+    //         } catch (\Exception $statusE) {
+    //             Log::error('Exception when getting Git status: ' . $statusE->getMessage());
+    //         }
+
+    //         return response()->json([
+    //             'message' => 'Failed to update. Error: ' . $e->getMessage(), 
+    //             'status' => 'error'
+    //         ]);
+    //     }
+    // }
+    // public function updatePerform(Request $request)
+    // {
+    //     $branch = $request->input('branch');
+    //     $output = [];
+    //     $returnVar = null;
+    //     exec("git pull origin $branch 2>&1", $output, $returnVar);
+
+    //     if ($returnVar === 0) {
+    //         return response()->json(['message' => 'Successfully updated to the latest version.', 'status' => 'success']);
+    //     } else {
+    //         return response()->json(['message' => 'Failed to update. Error: ' . implode("\n", $output), 'status' => 'error']);
+    //     }
+    // }
 
     public function update(Request $request)
     {

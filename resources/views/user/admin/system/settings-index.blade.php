@@ -169,18 +169,19 @@
         };
 
 
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const refreshBranchesBtn = document.getElementById('refreshBranches');
-            refreshBranchesBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                location.reload(); // Simply reload the page to refresh branches
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const refreshBranchesBtn = document.getElementById('refreshBranches');
+                refreshBranchesBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    location.reload(); // Simply reload the page to refresh branches
+                });
             });
-        });
+    
+    
+        </script>
 
-
-    </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const syncButton = document.getElementById('syncButton');
