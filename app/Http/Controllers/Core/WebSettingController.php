@@ -72,42 +72,60 @@ class WebSettingController extends Controller
     public function updatePerform(Request $request)
     {
         $branch = $request->input('branch');
-        $repoPath = base_path();
-        Log::info('Attempting to update branch: ' . $branch);
-        Log::info('Repository path: ' . $repoPath);
 
-        // Periksa apakah direktori ada
-        if (!is_dir($repoPath)) {
-            Log::error('Repository path does not exist: ' . $repoPath);
-            return response()->json(['message' => 'Repository path not found.', 'status' => 'error']);
-        }
+        // Run the Laravel command with the branch as an argument
+        $exitCode = Artisan::call('update:latest', [
+            '--branch' => $branch
+        ]);
 
-        // Periksa apakah ini adalah repositori Git
-        if (!is_dir($repoPath . '/.git')) {
-            Log::error('Not a Git repository: ' . $repoPath);
-            return response()->json(['message' => 'Not a Git repository.', 'status' => 'error']);
-        }
+        $output = Artisan::output();
 
-        // Coba jalankan git pull menggunakan czproject/git-php
-        try {
-            $git = new Git();
-            $repo = $git->open($repoPath);
-            $repo->checkout($branch);
-            $repo->pull('origin', $branch);
-            Log::info('Git pull successful.');
-
+        if ($exitCode === 0) {
             return response()->json(['message' => 'Successfully updated to the latest version.', 'status' => 'success']);
-        } catch (\Exception $e) {
-            Log::error('Failed to update: ' . $e->getMessage());
-            Log::error('Error details: ' . $e->getTraceAsString());
-            return response()->json(['message' => 'Failed to update. Error: ' . $e->getMessage(), 'status' => 'error']);
+        } else {
+            return response()->json(['message' => 'Failed to update. Error: ' . $output, 'status' => 'error']);
         }
     }
+
     // public function updatePerform(Request $request)
     // {
     //     $branch = $request->input('branch');
     //     $repoPath = base_path();
-        
+    //     Log::info('Attempting to update branch: ' . $branch);
+    //     Log::info('Repository path: ' . $repoPath);
+
+    //     // Periksa apakah direktori ada
+    //     if (!is_dir($repoPath)) {
+    //         Log::error('Repository path does not exist: ' . $repoPath);
+    //         return response()->json(['message' => 'Repository path not found.', 'status' => 'error']);
+    //     }
+
+    //     // Periksa apakah ini adalah repositori Git
+    //     if (!is_dir($repoPath . '/.git')) {
+    //         Log::error('Not a Git repository: ' . $repoPath);
+    //         return response()->json(['message' => 'Not a Git repository.', 'status' => 'error']);
+    //     }
+
+    //     // Coba jalankan git pull menggunakan czproject/git-php
+    //     try {
+    //         $git = new Git();
+    //         $repo = $git->open($repoPath);
+    //         $repo->checkout($branch);
+    //         $repo->pull('origin', $branch);
+    //         Log::info('Git pull successful.');
+
+    //         return response()->json(['message' => 'Successfully updated to the latest version.', 'status' => 'success']);
+    //     } catch (\Exception $e) {
+    //         Log::error('Failed to update: ' . $e->getMessage());
+    //         Log::error('Error details: ' . $e->getTraceAsString());
+    //         return response()->json(['message' => 'Failed to update. Error: ' . $e->getMessage(), 'status' => 'error']);
+    //     }
+    // }
+    // public function updatePerform(Request $request)
+    // {
+    //     $branch = $request->input('branch');
+    //     $repoPath = base_path();
+
     //     Log::info('Attempting to update branch: ' . $branch);
     //     Log::info('Repository path: ' . $repoPath);
 
@@ -174,7 +192,7 @@ class WebSettingController extends Controller
     //         }
 
     //         return response()->json([
-    //             'message' => 'Failed to update. Error: ' . $e->getMessage(), 
+    //             'message' => 'Failed to update. Error: ' . $e->getMessage(),
     //             'status' => 'error'
     //         ]);
     //     }
