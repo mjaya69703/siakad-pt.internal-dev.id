@@ -35,6 +35,7 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install npm@latest -g
 RUN npm install yarn -g
+RUN git config --global --add safe.directory /var/www
 
 # Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
