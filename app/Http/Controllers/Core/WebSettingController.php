@@ -11,6 +11,9 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use Str;
 // SECTION ADDONS EXTERNAL
@@ -128,5 +131,41 @@ class WebSettingController extends Controller
 
         Alert::success('Success', 'Data berhasil diupdate.');
         return back();
+    }
+
+    public function databaseExport()
+    {
+        $filename = 'backup-' . now()->format('Y-m-d_H-i-s') . '.sql';
+        $path = storage_path("app/$filename");
+
+        // Jalankan perintah mysqldump untuk membuat backup database
+        $command = "mysqldump --user=" . env('DB_USERNAME') . " --password=" . env('DB_PASSWORD') . " --host=" . env('DB_HOST') . " " . env('DB_DATABASE') . " > $path";
+        exec($command);
+
+        // Pastikan file ada
+        if (file_exists($path)) {
+            return response()->download($path)->deleteFileAfterSend(true);
+        }
+
+        return redirect()->back()->with('error', 'Failed to create database backup.');
+    }
+
+    public function databaseImport(Request $request)
+    {
+        $request->validate([
+            'sqldata' => 'required|file|mimes:sql',
+        ]);
+
+        $file = $request->file('sqldata');
+        $path = $file->getRealPath();
+        $command = "mysql --user=" . env('DB_USERNAME') . " --password=" . env('DB_PASSWORD') . " --host=" . env('DB_HOST') . " " . env('DB_DATABASE') . " < $path";
+
+        exec($command, $output, $return_var);
+
+        if ($return_var === 0) {
+            return redirect()->back()->with('success', 'Database imported successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Failed to import database.');
     }
 }
