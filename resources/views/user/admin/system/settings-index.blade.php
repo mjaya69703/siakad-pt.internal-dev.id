@@ -97,6 +97,40 @@
         <div class="col-lg-12 col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="card-title">Pengaturan Website</h4>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+                <div class="card-body row">
+                    <div id="alertPlaceholder"></div>
+                    <div class="col-lg-6 col-12">
+                        <label for="branch">Branch Channel</label>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <select name="branch" id="branch" class="form-select">
+                                <option value="" selected>Update Channel</option>
+                                @foreach($branches as $branch)
+                                    <option value="{{ $branch['name'] }}">{{ $branch['name'] }}</option>
+                                @endforeach
+                            </select>
+                            <div class="" style="margin-left: 5px">
+                                <button class="btn btn-warning" id="syncButton"><i class="fa-solid fa-sync"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <label for="branch">Version Control</label>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <input type="text" name="branch" id="branch" class="form-control">
+                            <div class="" style="margin-left: 5px">
+                                <a href="" class="btn btn-warning"><i class="fa-solid fa-sync"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="card-title">Data Identitas Kampus</h4>
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
@@ -120,5 +154,136 @@
             };
             reader.readAsDataURL(event.target.files[0]);
         };
+
+
     </script>
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const refreshBranchesBtn = document.getElementById('refreshBranches');
+            refreshBranchesBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                location.reload(); // Simply reload the page to refresh branches
+            });
+        });
+
+
+    </script> --}}
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const syncButton = document.getElementById('syncButton');
+        const branchSelect = document.getElementById('branch');
+        const alertPlaceholder = document.getElementById('alertPlaceholder');
+
+        syncButton.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            fetch('{{ route('web-admin.system.website-check') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alertPlaceholder.innerHTML = '';
+                if (data.message.includes('There is an update available')) {
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-warning';
+                    alertDiv.innerHTML = `${data.message} <a href="#" id="updateNow">Update Now</a>`;
+                    alertPlaceholder.appendChild(alertDiv);
+
+                    document.getElementById('updateNow').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const selectedBranch = branchSelect.value;
+
+                        fetch('{{ route('web-admin.system.website-update') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({ branch: selectedBranch })
+                        })
+                        .then(response => response.json())
+                        .then(updateData => {
+                            alertPlaceholder.innerHTML = '';
+                            const updateAlertDiv = document.createElement('div');
+                            updateAlertDiv.className = updateData.status === 'success' ? 'alert alert-success' : 'alert alert-danger';
+                            updateAlertDiv.innerHTML = updateData.message;
+                            alertPlaceholder.appendChild(updateAlertDiv);
+                        });
+                    });
+                } else {
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-success';
+                    alertDiv.textContent = data.message;
+                    alertPlaceholder.appendChild(alertDiv);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script> --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const syncButton = document.getElementById('syncButton');
+        const branchSelect = document.getElementById('branch');
+        const alertPlaceholder = document.getElementById('alertPlaceholder');
+
+        syncButton.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            fetch('{{ route('web-admin.system.website-check') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alertPlaceholder.innerHTML = '';
+                if (data.status === 'update_available') {
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-warning';
+                    alertDiv.innerHTML = `${data.message} <a href="#" id="updateNow">Update Now</a>`;
+                    alertPlaceholder.appendChild(alertDiv);
+
+                    document.getElementById('updateNow').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const selectedBranch = branchSelect.value;
+
+                        fetch('{{ route('web-admin.system.website-update') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({ branch: selectedBranch })
+                        })
+                        .then(response => response.json())
+                        .then(updateData => {
+                            alertPlaceholder.innerHTML = '';
+                            const updateAlertDiv = document.createElement('div');
+                            updateAlertDiv.className = updateData.status === 'success' ? 'alert alert-success' : 'alert alert-danger';
+                            updateAlertDiv.innerHTML = updateData.message;
+                            alertPlaceholder.appendChild(updateAlertDiv);
+                        });
+                    });
+                } else {
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-success';
+                    alertDiv.textContent = data.message;
+                    alertPlaceholder.appendChild(alertDiv);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
 @endsection

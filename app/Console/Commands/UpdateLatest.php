@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 
-class UpdateCheck extends Command
+class UpdateLatest extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'update:check';
+    protected $signature = 'update:latest';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Check update from alpha channel';
+    protected $description = 'Update the local repository from the alpha channel if an update is available';
 
     /**
      * Execute the console command.
@@ -53,11 +53,22 @@ class UpdateCheck extends Command
             if ($localCommitSha === $remoteCommitSha) {
                 $this->info("You are using the latest version.");
             } else {
-                $this->info("There is an update available. Your current version: $localCommitSha. Latest version: $remoteCommitSha.");
+                $this->info("An update is available. Updating from version: $localCommitSha to version: $remoteCommitSha.");
+
+                // Pull the latest changes from the remote repository
+                $output = [];
+                $returnVar = null;
+                exec("git pull origin $branch 2>&1", $output, $returnVar);
+
+                // Check if the command was successful
+                if ($returnVar === 0) {
+                    $this->info("Successfully updated to the latest version from the '$branch' branch.");
+                } else {
+                    $this->error("Failed to update. Error: " . implode("\n", $output));
+                }
             }
         } catch (\Exception $e) {
             $this->error('Error: ' . $e->getMessage());
         }
     }
-
 }

@@ -203,6 +203,8 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
         // MENU KHUSUS ATTRIBUTE SYSTEM => DATA WEB SETTINGS
         Route::get('/system/setting',[App\Http\Controllers\Core\WebSettingController::class, 'index'])->name('system.setting-index');
         Route::patch('/system/setting/update',[App\Http\Controllers\Core\WebSettingController::class, 'update'])->name('system.setting-update');
+        Route::post('/system/update/check',[App\Http\Controllers\Core\WebSettingController::class, 'updateCheck'])->name('system.website-check');
+        Route::post('/system/update/perform',[App\Http\Controllers\Core\WebSettingController::class, 'updatePerform'])->name('system.website-update');
 
 
     });

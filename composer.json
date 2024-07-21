@@ -11,6 +11,7 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^2.1",
         "coderflex/laravel-turnstile": "^2.0",
+        "czproject/git-php": "^4.2",
         "guzzlehttp/guzzle": "^7.8",
         "intervention/image": "^3.5",
         "intervention/image-laravel": "^1.2",

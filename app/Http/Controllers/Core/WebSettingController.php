@@ -10,9 +10,11 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Artisan;
 use Auth;
 use Str;
 // SECTION ADDONS EXTERNAL
+use GuzzleHttp\Client;
 use Alert;
 use App\Helper\roleTrait;
 // SECTION AUTH
@@ -22,12 +24,55 @@ class WebSettingController extends Controller
 {
     use roleTrait;
 
+
     public function index()
     {
         $data['prefix'] = $this->setPrefix();
         $data['web'] = webSettings::where('id', 1)->first();
 
+        // Fetch branches from GitHub
+        $client = new Client();
+        $owner = 'mjaya69703';
+        $repo = 'siakad-pt.internal-dev.id';
+        $url = "https://api.github.com/repos/$owner/$repo/branches";
+
+        try {
+            $response = $client->get($url, [
+                'headers' => [
+                    'Accept' => 'application/vnd.github.v3+json',
+                ],
+            ]);
+
+            $branches = json_decode($response->getBody(), true);
+            $data['branches'] = $branches;
+        } catch (\Exception $e) {
+            $data['branches'] = [];
+        }
+
         return view('user.admin.system.settings-index', $data);
+    }
+
+
+    public function updateCheck()
+    {
+        $output = Artisan::call('update:check');
+        $result = Artisan::output();
+
+        return response()->json(['message' => $result, 'status' => $output]);
+    }
+
+    public function updatePerform(Request $request)
+    {
+        $branch = $request->input('branch');
+        $output = [];
+        $returnVar = null;
+        exec("git pull origin $branch 2>&1", $output, $returnVar);
+
+        if ($returnVar === 0) {
+            return response()->json(['message' => 'Successfully updated to the latest version.', 'status' => 'success']);
+        } else {
+            return response()->json(['message' => 'Failed to update. Error: ' . implode("\n", $output), 'status' => 'error']);
+        }
     }
 
     public function update(Request $request)
@@ -80,7 +125,7 @@ class WebSettingController extends Controller
         // $web->social_in = $request->social_in;
         // $web->social_fb = $request->social_fb;
         $web->save();
-        
+
         Alert::success('Success', 'Data berhasil diupdate.');
         return back();
     }
