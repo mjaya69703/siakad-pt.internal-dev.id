@@ -1,4 +1,8 @@
 ## CHANGE-LOGS
+
+<b>21/07/2024 - Update v0.031b</b>
+- Efficiency & Spliting Routing By User Type
+
 <b>13/07/2024 - Update v0.031a</b>
 - Implement Gallery Feature Create / Show and Update in Backend
 - Implement Gallery Show in HomePage
