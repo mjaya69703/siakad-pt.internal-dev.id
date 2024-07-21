@@ -157,7 +157,7 @@
 
 
     </script>
-    {{-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const refreshBranchesBtn = document.getElementById('refreshBranches');
             refreshBranchesBtn.addEventListener('click', function(event) {
@@ -167,66 +167,7 @@
         });
 
 
-    </script> --}}
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const syncButton = document.getElementById('syncButton');
-        const branchSelect = document.getElementById('branch');
-        const alertPlaceholder = document.getElementById('alertPlaceholder');
-
-        syncButton.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            fetch('{{ route('web-admin.system.website-check') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                alertPlaceholder.innerHTML = '';
-                if (data.message.includes('There is an update available')) {
-                    const alertDiv = document.createElement('div');
-                    alertDiv.className = 'alert alert-warning';
-                    alertDiv.innerHTML = `${data.message} <a href="#" id="updateNow">Update Now</a>`;
-                    alertPlaceholder.appendChild(alertDiv);
-
-                    document.getElementById('updateNow').addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const selectedBranch = branchSelect.value;
-
-                        fetch('{{ route('web-admin.system.website-update') }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify({ branch: selectedBranch })
-                        })
-                        .then(response => response.json())
-                        .then(updateData => {
-                            alertPlaceholder.innerHTML = '';
-                            const updateAlertDiv = document.createElement('div');
-                            updateAlertDiv.className = updateData.status === 'success' ? 'alert alert-success' : 'alert alert-danger';
-                            updateAlertDiv.innerHTML = updateData.message;
-                            alertPlaceholder.appendChild(updateAlertDiv);
-                        });
-                    });
-                } else {
-                    const alertDiv = document.createElement('div');
-                    alertDiv.className = 'alert alert-success';
-                    alertDiv.textContent = data.message;
-                    alertPlaceholder.appendChild(alertDiv);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    });
-</script> --}}
+    </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const syncButton = document.getElementById('syncButton');
@@ -246,7 +187,7 @@
             .then(response => response.json())
             .then(data => {
                 alertPlaceholder.innerHTML = '';
-                if (data.status === 'update_available') {
+                if (data.message.includes('There is an update available')) {
                     const alertDiv = document.createElement('div');
                     alertDiv.className = 'alert alert-warning';
                     alertDiv.innerHTML = `${data.message} <a href="#" id="updateNow">Update Now</a>`;
