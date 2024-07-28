@@ -1,6 +1,6 @@
 @extends('base.base-root-index')
 @section('submenu')
-Dokumen Publik
+Public Document
 @endsection
 @section('custom-css')
 <style>
@@ -18,7 +18,7 @@ Dokumen Publik
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('root.home-index') }}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('root.gallery-index') }}">Album Foto</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('root.home-download') }}">Document</a></li>
         </ol>
     </nav>
     <div class="inner-banner-title">
@@ -33,17 +33,10 @@ Dokumen Publik
             </div>
             <div class="card-body row">
                 @foreach ($docs as $item)
-
                 <div class="form-group col-lg-12">
                     <p data-slug="{{ asset('storage/'. $item->path) }}" class="clickable"><img src="{{ asset('storage/'. $item->cover) }}" style="max-width: 50px; border-radius: 10px;" alt=""> {{ $item->name }}</p>
                 </div>
                 @endforeach
-                <div class="form-group col-lg-12">
-                    <p data-slug="https://repositori.kemdikbud.go.id/12978/1/SEJARAH%20SURAT%20PERINTAH%2011%20MARET%201996.pdf" class="clickable"><img src="{{ asset('dist/assets/static/images/faces/8.jpg') }}" style="max-width: 50px; border-radius: 10px;" alt=""> Naskah asli SuperSemar.</p>
-                </div>
-                <div class="form-group col-lg-12">
-                    <p data-slug="https://download.garuda.kemdikbud.go.id/article.php?article=816457&val=13335&title=Rancangan%20Implementasi%20Protokol%20SMime%20Pada%20Layanan%20E-mail%20Sebagai%20Upaya%20Peningkatan%20Jaminan%20Keamanan%20Dalam%20Transaksi%20Informasi%20Secara%20Online%20Studi%20Kasus%20%20PT%20XYZ" class="clickable"><img src="{{ asset('dist/assets/static/images/faces/8.jpg') }}" style="max-width: 50px; border-radius: 10px;" alt=""> File Dummy.</p>
-                </div>
             </div>
         </div>
     </div>
@@ -53,7 +46,7 @@ Dokumen Publik
                 <h5>Preview Files</h5>
             </div>
             <div class="card-body">
-                <iframe id="pdf-iframe" src="https://repositori.kemdikbud.go.id/12978/1/SEJARAH%20SURAT%20PERINTAH%2011%20MARET%201996.pdf" frameborder="0" style="width: 100%; height: 500px;"></iframe>
+                <iframe id="pdf-iframe" src="https://repositori.kemdikbud.go.id/12978/1/SEJARAH%20SURAT%20PERINTAH%2011%20MARET%201996.pdf" allow-embed style="width:100%; height: 500px;"></iframe>
             </div>
         </div>
     </div>
@@ -82,5 +75,6 @@ Dokumen Publik
             });
         });
     });
+
 </script>
 @endsection
