@@ -32,11 +32,15 @@ Public Document
                 <h5 class="card-title">{{ $menu }}</h5>
             </div>
             <div class="card-body row">
-                @foreach ($docs as $item)
+                @forelse ($docs as $item)
                 <div class="form-group col-lg-12">
                     <p data-slug="{{ asset('storage/'. $item->path) }}" class="clickable"><img src="{{ asset('storage/'. $item->cover) }}" style="max-width: 50px; border-radius: 10px;" alt=""> {{ $item->name }}</p>
                 </div>
-                @endforeach
+                @empty
+                <div class="form-group col-lg-12 text-center">
+                    Tidak ada dokumen.
+                </div>
+                @endforelse
             </div>
         </div>
     </div>
@@ -46,7 +50,7 @@ Public Document
                 <h5>Preview Files</h5>
             </div>
             <div class="card-body">
-                <iframe id="pdf-iframe" src="https://repositori.kemdikbud.go.id/12978/1/SEJARAH%20SURAT%20PERINTAH%2011%20MARET%201996.pdf" allow-embed style="width:100%; height: 500px;"></iframe>
+                <iframe id="pdf-iframe" src="https://test.pdf" allow-embed style="width:100%; height: 500px;"></iframe>
             </div>
         </div>
     </div>

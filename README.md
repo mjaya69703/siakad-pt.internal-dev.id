@@ -116,7 +116,7 @@ Pass : Mahasiswa123
 ```
 
 Notes:
-1. Dilarang Melakukan Scan QRIS Pada Menu Pembayaran Mahasiswa
+1. Dilarang Melakukan Pembayaran Menggunakan Real Money Pada Menu Tagihan Mahasiswa, Simulasi dapat dilakukan pada step 2
 2. Simulasi Pembayaran dapat dilakukan melalui <a href="https://simulator.sandbox.midtrans.com/qris/index">Sandbox Midtrans</a>
 
 ## How to Install
@@ -133,7 +133,7 @@ git clone https://github.com/mjaya69703/siakad-pt.internal-dev.id.git
 cd siakad-pt.internal-dev.id
 
 // Apabila Menggunakan Windows
-setup.bash
+setup.bat
 
 // Apabila Menggunakan Linux
 chmod +x setup.sh

@@ -2,8 +2,6 @@
 
 <b>21/07/2024 - Update v0.031b</b>
 - Efficiency & Spliting Routing By User Type
-<<<<<<< HEAD
-<<<<<<< HEAD
 - Implement Update via Website
 =======
 - Efficiency & Spliting Routing By User Type User
