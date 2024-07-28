@@ -215,15 +215,15 @@ setup.bat
 
 For Linux ( Execute In Terminal )
 - Run Migrate Refresh Seed
-seed.bat
+seed.sh
 - Run Clear Cache
-clear.bat
+clear.sh
 - Run Installer Linux
-setup.bat
+setup.sh
 
 For Docker
 - Run Installer Docker
-docker.bat
+docker.sh
 ```
 
 For Scan Inject Files in public
