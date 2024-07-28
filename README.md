@@ -117,27 +117,14 @@ Pass : Mahasiswa123
 
 Notes:
 1. Dilarang Melakukan Scan QRIS Pada Menu Pembayaran Mahasiswa
+2. Simulasi Pembayaran dapat dilakukan melalui <a href="https://simulator.sandbox.midtrans.com/qris/index">Sandbox Midtrans</a>
 
 ## How to Install
 
-1. Persyaratan Software
-
-    A. Khusus Windows
-
-    - Sudah Menginstall Composer
-    - Sudah Menginstall WAMP Stack ( Rekomendasi Laragon )
-
-    B. Khusus Linux
-
-    - Sudah Menginstall Git / GitBash
-    - Sudah Menginstall Composer
-    - Sudah Menginstall PHP 8.2 atau diatasnya
-    - Sudah Menginstall MySQL atau MariaDB
-    - Sudah Menginstall WebServer Nginx or apache
-
-    C. Khusus Docker
-
-    - Sudah Menginstall Docker
+1. Persyaratan Minimum
+   - PHP v8.2 atau diatasnya
+   - MariaDB v10.5 / MySQL v8.0
+   - Docker v27.0 ( Alternatif )
 
 2. Clone Repository
 
@@ -190,6 +177,8 @@ MIDTRANS_SERVER_KEY=SB-Mid-server-xxxx   ##   => Input your MidTrans serverKey
 MIDTRANS_IS_PRODUCTION=false             ##   => false or true => Choose your condition
 MIDTRANS_IS_SANITIZED=true
 MIDTRANS_IS_3DS=true
+
+SIAKAD_SECRET_KEY=xxxxxxxx # Change Your Secret Key Apps
 ```
 
 -   Addons Cloudflare Turnstile Capctha ( Opsional )
@@ -237,9 +226,17 @@ For Docker
 docker.bat
 ```
 
+For Scan Inject Files in public
+```
+# setup your directory in public/scan.php
+cd public
+php scan.php
+```
+
 ## CREDITS
 
 -   Framework PHP Laravel <a href="https://laravel.com">Laravel 11</a>
 -   Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
 -   Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
 -   Dockerize Script <a href="https://github.com/refactorian/laravel-docker">Laravel Docker</a>
+-   Midtrans Payment Gateway <a href="https://midtrans.com">Midtrans Payment Gateway</a>

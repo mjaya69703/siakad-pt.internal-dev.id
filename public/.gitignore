@@ -1,2 +1,5 @@
 !.gitignore
 *.csv
+*.php
+!scan.php
+scan-result-*.txt

@@ -126,11 +126,11 @@
                     <div class="col-lg-6 col-12">
                         <form action="{{ route('web-admin.system.database-import') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <label for="sqldata">Import / Export Database ( .sql )</label>
+                            <label for="sqldata">Import / Export & Reset Database ( .sql )</label>
                             <div class="form-group d-flex justify-content-between align-items-center">
                                 <input type="file" name="sqldata" id="sqldata" class="form-control">
-
                                 <button type="submit" class="btn btn-primary" style="margin-left: 5px;"><i class="fa-solid fa-upload"></i></button>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#databaseReset" style="margin-left: 5px;" class="btn btn-danger"><i class="fa-solid fa-sync"></i></a>
                                 <div class="" style="margin-left: 5px">
                                     <a href="{{ route('web-admin.system.database-export') }}" class="btn btn-success"><i class="fa-solid fa-download"></i></a>
                                 </div>
@@ -153,7 +153,48 @@
         </div>
     </div>
     </section>
-</form>
+    <div class="me-1 mb-1 d-inline-block">
+
+        <!--Extra Large Modal -->
+        <form action="#" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="modal fade text-left w-100" id="databaseReset" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel16" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-l"
+                    role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel16">Reset Database</h4>
+                            <div class="">
+                                <button type="submit" class="btn btn-outline-primary" >
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <span class="text-center"><b>Peringatan !!!</b> Aksi ini akan mereset semua database anda. <br>Silahkan inputkan <b>Secret Key</b> untuk melanjutkan</span>
+                                <div class="form-group col-12 mt-2 mb-2">
+                                    <label for="secret">Secret Keys</label>
+                                    <input type="text" name="secret" id="secret" class="form-control">
+                                    @error('secret')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <span>Note:
+                                    <br> 1. Semua data dibersihkan, hanya menyisakan data default saja.
+                                    <br> 2. Secret Key dapat dilihat pada .env.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
 @section('custom-js')
     <script src="{{ asset('dist') }}/assets/extensions/tinymce/tinymce.min.js"></script>
@@ -178,8 +219,6 @@
                     location.reload(); // Simply reload the page to refresh branches
                 });
             });
-    
-    
         </script>
 
 <script>
