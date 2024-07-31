@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 // HAK AKSES DEPARTEMENT SUPPORT
 Route::group(['prefix' => 'support', 'middleware' => ['user-access:Departement Support'], 'as' => 'support.'],function(){
 
-    // GENERAL ROUTES
-    require __DIR__.'/route-general.php';
+    // GLOBAL ROUTE
+    require __DIR__.'/route-global.php';
+    
 
     // STATUS ACTIVE BOLEH AKSES INI
     Route::middleware(['is-active:1'])->group(function () {
@@ -35,6 +36,5 @@ Route::group(['prefix' => 'support', 'middleware' => ['user-access:Departement S
         Route::delete('/system/notify/{code}/destroy',[App\Http\Controllers\Core\NotifyController::class, 'destroy'])->name('system.notify-destroy');
 
     });
-
 
 });

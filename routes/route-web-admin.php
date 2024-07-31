@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 // HAK AKSES WEB ADMINISTRATOR
 Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Administrator'], 'as' => 'web-admin.'],function(){
+    // GLOBAL MENU AUTHENTIKASI
 
-
-    // GENERAL ROUTES
-    require __DIR__.'/route-general.php';
+    // GLOBAL ROUTE
+    require __DIR__.'/route-global.php';
 
     // STATUS ACTIVE BOLEH AKSES INI
     Route::middleware(['is-active:1'])->group(function () {
