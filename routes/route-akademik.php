@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 // HAK AKSES DEPARTEMENT ACADEMIC
 Route::group(['prefix' => 'academic', 'middleware' => ['user-access:Departement Academic'], 'as' => 'academic.'],function(){
-
     // GENERAL ROUTES
     require __DIR__.'/route-general.php';
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // HAK AKSES WEB ADMINISTRATOR
 Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Administrator'], 'as' => 'web-admin.'],function(){
 
+
     // GENERAL ROUTES
     require __DIR__.'/route-general.php';
 

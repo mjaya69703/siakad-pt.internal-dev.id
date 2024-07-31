@@ -24,6 +24,7 @@ use App\Models\Settings\webSettings;
 use App\Models\Notification;
 use App\Models\GalleryAlbum;
 use App\Models\docsResource;
+use App\Models\ProgramKuliah;
 
 class HomeController extends Controller
 {
@@ -53,6 +54,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['fakultas'] = Fakultas::all();
+        $data['proku'] = ProgramKuliah::all();
         $data['album'] = GalleryAlbum::where('isPublish', 1)->latest()->paginate(3);
         $data['web'] = webSettings::where('id', 1)->first();
         $data['posts'] = newsPost::latest()->paginate(7);
@@ -66,6 +68,7 @@ class HomeController extends Controller
     public function galleryIndex()
     {
         $data['fakultas'] = Fakultas::all();
+        $data['proku'] = ProgramKuliah::all();
         $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
         $data['web'] = webSettings::where('id', 1)->first();
         // $data['album'] = GalleryAlbum::where('slug', $slug)->first();
@@ -78,6 +81,7 @@ class HomeController extends Controller
     public function gallerySearch(Request $request)
     {
         $data['fakultas'] = Fakultas::all();
+        $data['proku'] = ProgramKuliah::all();
         $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
         $data['web'] = webSettings::where('id', 1)->first();
         // $data['album'] = GalleryAlbum::where('slug', $slug)->first();
@@ -91,6 +95,7 @@ class HomeController extends Controller
     public function galleryShow($slug)
     {
         $data['fakultas'] = Fakultas::all();
+        $data['proku'] = ProgramKuliah::all();
         $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
         $data['web'] = webSettings::where('id', 1)->first();
         $data['album'] = GalleryAlbum::where('slug', $slug)->first();
@@ -104,6 +109,7 @@ class HomeController extends Controller
     public function postView($slug)
     {
         $data['fakultas'] = Fakultas::all();
+        $data['proku'] = ProgramKuliah::all();
         $data['notify'] = Notification::whereIn('send_to', [0,3])->get();
         $data['web'] = webSettings::where('id', 1)->first();
         $data['post'] = newsPost::where('slug', $slug)->first();
@@ -118,6 +124,7 @@ class HomeController extends Controller
     public function downloadIndex()
     {
         $data['fakultas'] = Fakultas::all();
+        $data['proku'] = ProgramKuliah::all();
         $data['web'] = webSettings::where('id', 1)->first();
         $data['title'] = " - ESEC Academy";
         $data['menu'] = "Download";
@@ -129,6 +136,7 @@ class HomeController extends Controller
     public function adviceIndex()
     {
         $data['fakultas'] = Fakultas::all();
+        $data['proku'] = ProgramKuliah::all();
         $data['web'] = webSettings::where('id', 1)->first();
         $data['title'] = " - ESEC Academy";
         $data['menu'] = "Kotak Saran";
@@ -138,11 +146,24 @@ class HomeController extends Controller
     public function prodiIndex($slug)
     {
         $data['fakultas'] = Fakultas::all();
+        $data['proku'] = ProgramKuliah::all();
         $data['web'] = webSettings::where('id', 1)->first();
         $data['pstudi'] = ProgramStudi::where('slug', $slug)->first();
         $data['title'] = " - ESEC Academy";
         $data['menu'] = "Program Studi ". $data['pstudi']->name;
         $data['prefix'] = $this->setPrefix();
+        return view('root.pages.prodi-index', $data);
+    }
+    public function prokuIndex($code)
+    {
+        $data['fakultas'] = Fakultas::all();
+        $data['proku'] = ProgramKuliah::all();
+        $data['web'] = webSettings::where('id', 1)->first();
+        $data['pstudi'] = ProgramKuliah::where('code', $code)->first();
+        $data['title'] = " - ESEC Academy";
+        $data['menu'] = "Program Kuliah ". $data['pstudi']->name;
+        $data['prefix'] = $this->setPrefix();
+
         return view('root.pages.prodi-index', $data);
     }
     public function adviceStore(Request $request)
