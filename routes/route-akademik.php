@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 // HAK AKSES DEPARTEMENT ACADEMIC
 Route::group(['prefix' => 'academic', 'middleware' => ['user-access:Departement Academic'], 'as' => 'academic.'],function(){
-    
-    // GLOBAL ROUTE
-    require __DIR__.'/route-global.php';
+    // GENERAL ROUTES
+    require __DIR__.'/route-general.php';
+
 
     // STATUS ACTIVE BOLEH AKSES INI
     Route::middleware(['is-active:1'])->group(function () {

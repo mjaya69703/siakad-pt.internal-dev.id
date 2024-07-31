@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 // HAK AKSES DEPARTEMENT FINANCE
 Route::group(['prefix' => 'finance', 'middleware' => ['user-access:Departement Finance'], 'as' => 'finance.'],function(){
-    
-    // GLOBAL ROUTE
-    require __DIR__.'/route-global.php';
+
+    // GENERAL ROUTES
+    require __DIR__.'/route-general.php';
 
     // STATUS ACTIVE BOLEH AKSES INI
     Route::middleware(['is-active:1'])->group(function () {

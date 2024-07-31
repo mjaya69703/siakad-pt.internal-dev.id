@@ -1,16 +1,8 @@
 ## CHANGE-LOGS
 
-<b>21/07/2024 - Update v0.031b</b>
+<b>21/07/2024 - Update v0.031c</b>
 - Efficiency & Spliting Routing By User Type
 - Implement Update via Website
-=======
-- Efficiency & Spliting Routing By User Type User
-- Efficiency & Spliting Routing By User Type UTest
->>>>>>> 907c6164fcc4f938d363b783c1ccd586d3dd1976
-=======
-- Efficiency & Spliting Routing By User Type User
-- Efficiency & Spliting Routing By User Type UTest
->>>>>>> 907c6164fcc4f938d363b783c1ccd586d3dd1976
 
 <b>13/07/2024 - Update v0.031a</b>
 - Implement Gallery Feature Create / Show and Update in Backend
