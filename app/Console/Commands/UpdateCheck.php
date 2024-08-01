@@ -12,7 +12,7 @@ class UpdateCheck extends Command
      *
      * @var string
      */
-    protected $signature = 'update:check';
+    protected $signature = 'update:check {--branch= : The branch to update from}';
 
     /**
      * The console command description.
@@ -31,10 +31,10 @@ class UpdateCheck extends Command
 
     public function handle()
     {
+        $branch = $this->option('branch') ?? 'stable';
         $client = new Client();
         $owner = 'mjaya69703';
         $repo = 'siakad-pt.internal-dev.id';
-        $branch = 'dev-alpha';
         $url = "https://api.github.com/repos/$owner/$repo/branches/$branch";
 
         // Get the current local commit SHA
