@@ -49,7 +49,7 @@
                                 <img src="{{ asset('storage/images/'. $item->image) }}" style="" class="rounded" alt="">
                             </div>
                             <div class="col-lg-10">
-                                <a href="{{ route('root.post-view', $item->slug) }}" style="font-size: 20px; color: #c2c2d9; font-weight: 800;">{{ $item->name }}</a>
+                                <a href="{{ route('root.post-view', $item->slug) }}" style="font-size: 20px; font-weight: 800;">{{ $item->name }}</a>
                                 <p class="mb-2">{{ Str::limit( strip_tags( $item->content ), 180 ) }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
 
