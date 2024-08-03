@@ -1,9 +1,9 @@
 <p align="center"><a href="https://siakad-pt.internal-dev.id" target="_blank"><img src="https://siakad-pt.internal-dev.id/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="CHANGELOG.MD">ESEC Academy - Open Source Project | v0.031b - Changelogs</a>
+<a href="changelog.md">ESEC Academy - Open Source Project | v0.032a - Changelogs</a>
 <br>
-<span>Latest Update: 20 Juli 2024</span>
+<span>Latest Update: 4 Agustus 2024</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>

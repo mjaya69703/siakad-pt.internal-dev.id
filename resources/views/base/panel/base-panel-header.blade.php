@@ -27,6 +27,9 @@
 @endphp
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-lg-0">
+                @auth('dosen')
+
+                @else
                 <li class="nav-item dropdown me-1">
                     <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class='bi bi-envelope bi-sub fs-4'></i>
@@ -37,11 +40,13 @@
                             <h6>Ticket Support</h6>
                         </li>
                         @foreach ($ticket as $item)
-                            
+
                         <li><a class="dropdown-item" href="#">{{ '#'.$item->code . ' - ' . $item->subject }}</a></li>
                         @endforeach
                     </ul>
                 </li>
+
+                @endauth
 
                 <li class="nav-item dropdown me-3">
                     <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
