@@ -296,10 +296,10 @@
                                     <label for="newPassword">Password Baru</label>
                                     <div class="d-flex justify-content-between align-items-center">
 
-                                        <input type="password" class="form-control" name="new_password" id="newPassword">
+                                        <input type="password" class="form-control" name="password" id="newPassword">
                                         <span class="btn btn-sm btn-outline-danger" style="margin-left: 5px" id="showPasswordButton"><i class="fa-solid fa-eye"></i></span>
                                     </div>
-                                    @error('new_password')
+                                    @error('password')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -307,10 +307,10 @@
                                     <label for="newPasswordKonfirm">Konfirmasi Password Baru</label>
                                     <div class="d-flex justify-content-between align-items-center">
 
-                                        <input type="password" class="form-control" name="new_password_confirmed" id="newPasswordKonfirm">
+                                        <input type="password" class="form-control" name="password_confirmed" id="newPasswordKonfirm">
                                         <span class="btn btn-sm btn-outline-danger" style="margin-left: 5px" id="showPasswordButton"><i class="fa-solid fa-eye"></i></span>
                                     </div>
-                                    @error('new_password_confirmed')
+                                    @error('password_confirmed')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
