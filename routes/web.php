@@ -32,7 +32,7 @@ Route::get('/error/notfound', [App\Http\Controllers\Root\ErrorController::class,
 
 
 Route::get('/dev', function () {
-    return view('base.base-root-index');
+    return view('tabler.main-content');
     // return view('base.panel.base-panel-content');
 });
 
