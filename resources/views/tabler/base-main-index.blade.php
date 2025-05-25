@@ -10,15 +10,85 @@
     <!-- END GLOBAL MANDATORY STYLES -->
     @yield('custom-css')
     <!-- BEGIN PLUGINS STYLES -->
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-flags.css" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-socials.css" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-payments.css" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-vendors.css" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-marketing.css" rel="stylesheet" />
     <link href="{{ asset('dashboard') }}/dist/css/tabler-themes.css" rel="stylesheet" />
     <!-- END PLUGINS STYLES -->
     <!-- BEGIN DEMO STYLES -->
     <link href="./preview/css/demo.css" rel="stylesheet" />
+    <style>
+        /* Chat Button Styles */
+        .chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--tblr-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .chat-button svg {
+            color: #fff;
+            width: 28px;
+            height: 28px;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Chat Popup Styles */
+        .chat-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background: var(--tblr-bg-surface);
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--tblr-border-color);
+            overflow: hidden;
+        }
+
+        .chat-popup.show {
+            display: block;
+            animation: slideUp 0.3s ease forwards;
+        }
+
+        .chat-popup-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--tblr-border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-popup-body {
+            padding: 20px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
     <!-- END DEMO STYLES -->
     <!-- BEGIN CUSTOM FONT -->
     <style>
@@ -90,10 +160,9 @@
                                                 <div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span>
                                                 </div>
                                                 <div class="col text-truncate">
-                                                    <a href="#" class="text-body d-block">Example 1</a>
-                                                    <div class="d-block text-secondary text-truncate mt-n1">Change
-                                                        deprecated html tags to text decoration classes (#29604)</div>
-                                                </div>
+                                                        <a href="#" class="text-body d-block">Pengumuman: Jadwal UTS</a>
+                                                        <div class="d-block text-secondary text-truncate mt-n1">Jadwal UTS Semester Ganjil 2023/2024 telah dirilis</div>
+                                                    </div>
                                                 <div class="col-auto">
                                                     <a href="#" class="list-group-item-actions">
                                                         <!-- Download SVG icon from http://tabler.io/icons/icon/star -->
@@ -108,11 +177,9 @@
                                             <div class="row align-items-center">
                                                 <div class="col-auto"><span class="status-dot d-block"></span></div>
                                                 <div class="col text-truncate">
-                                                    <a href="#" class="text-body d-block">Example 2</a>
-                                                    <div class="d-block text-secondary text-truncate mt-n1">
-                                                        justify-content:between ⇒ justify-content:space-between (#29734)
+                                                        <a href="#" class="text-body d-block">Info: Pembayaran UKT</a>
+                                                        <div class="d-block text-secondary text-truncate mt-n1">Pengingat: Batas akhir pembayaran UKT tanggal 30 September 2023</div>
                                                     </div>
-                                                </div>
                                                 <div class="col-auto">
                                                     <a href="#" class="list-group-item-actions show">
                                                         <!-- Download SVG icon from http://tabler.io/icons/icon/star -->
@@ -127,10 +194,9 @@
                                             <div class="row align-items-center">
                                                 <div class="col-auto"><span class="status-dot d-block"></span></div>
                                                 <div class="col text-truncate">
-                                                    <a href="#" class="text-body d-block">Example 3</a>
-                                                    <div class="d-block text-secondary text-truncate mt-n1">Update
-                                                        change-version.js (#29736)</div>
-                                                </div>
+                                                        <a href="#" class="text-body d-block">Akademik: KRS</a>
+                                                        <div class="d-block text-secondary text-truncate mt-n1">Pengisian KRS akan dibuka pada tanggal 15 September 2023</div>
+                                                    </div>
                                                 <div class="col-auto">
                                                     <a href="#" class="list-group-item-actions">
                                                         <!-- Download SVG icon from http://tabler.io/icons/icon/star -->
@@ -146,10 +212,9 @@
                                                 <div class="col-auto"><span class="status-dot status-dot-animated bg-green d-block"></span>
                                                 </div>
                                                 <div class="col text-truncate">
-                                                    <a href="#" class="text-body d-block">Example 4</a>
-                                                    <div class="d-block text-secondary text-truncate mt-n1">Regenerate
-                                                        package-lock.json (#29730)</div>
-                                                </div>
+                                                        <a href="#" class="text-body d-block">Info: Beasiswa</a>
+                                                        <div class="d-block text-secondary text-truncate mt-n1">Pendaftaran beasiswa prestasi telah dibuka</div>
+                                                    </div>
                                                 <div class="col-auto">
                                                     <a href="#" class="list-group-item-actions">
                                                         <!-- Download SVG icon from http://tabler.io/icons/icon/star -->
@@ -188,7 +253,7 @@
                             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
                                 <div class="card">
                                     <div class="card-header">
-                                        <div class="card-title">My Apps</div>
+                                        <div class="card-title">Aplikasi Kampus</div>
                                         <div class="card-actions btn-actions">
                                             <a href="#" class="btn-action">
                                                 <!-- Download SVG icon from http://tabler.io/icons/icon/settings -->
@@ -203,9 +268,66 @@
                                     <div class="card-body scroll-y p-2" style="max-height: 50vh">
                                         <div class="row g-0">
                                             <div class="col-4">
-                                                <a href="#" class="d-flex flex-column flex-center text-center text-secondary py-2 px-2 link-hoverable">
-                                                    <img src="./static/brands/amazon.svg" class="w-6 h-6 mx-auto mb-2" width="24" height="24" alt="" />
-                                                    <span class="h5">Amazon</span>
+                                                <a href="/siakad" class="d-flex flex-column flex-center text-center text-secondary py-2 px-2 link-hoverable">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-school w-6 h-6 mx-auto mb-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" />
+                                                        <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />
+                                                    </svg>
+                                                    <span class="h5">SIAKAD</span>
+                                                </a>
+                                            </div>
+                                            <div class="col-4">
+                                                <a href="/e-learning" class="d-flex flex-column flex-center text-center text-secondary py-2 px-2 link-hoverable">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-laptop w-6 h-6 mx-auto mb-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M3 19l18 0" />
+                                                        <path d="M5 6m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" />
+                                                    </svg>
+                                                    <span class="h5">E-Learning</span>
+                                                </a>
+                                            </div>
+                                            <div class="col-4">
+                                                <a href="/perpustakaan" class="d-flex flex-column flex-center text-center text-secondary py-2 px-2 link-hoverable">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-books w-6 h-6 mx-auto mb-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M5 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+                                                        <path d="M9 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+                                                        <path d="M5 8h4" />
+                                                        <path d="M9 16h4" />
+                                                        <path d="M13.803 4.56l2.184 -.53c.562 -.135 1.133 .19 1.282 .732l3.695 13.418a1.02 1.02 0 0 1 -.634 1.219l-.133 .041l-2.184 .53c-.562 .135 -1.133 -.19 -1.282 -.732l-3.695 -13.418a1.02 1.02 0 0 1 .634 -1.219l.133 -.041z" />
+                                                        <path d="M14 9l4 -1" />
+                                                        <path d="M16 16l3.923 -.98" />
+                                                    </svg>
+                                                    <span class="h5">Perpustakaan</span>
+                                                </a>
+                                            </div>
+                                            <div class="col-4">
+                                                <a href="/laboratorium" class="d-flex flex-column flex-center text-center text-secondary py-2 px-2 link-hoverable">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-test-pipe w-6 h-6 mx-auto mb-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M20 8.04l-12.122 12.124a2.857 2.857 0 1 1 -4.041 -4.04l12.122 -12.124" />
+                                                        <path d="M7 13h8" />
+                                                        <path d="M19 15l1.5 1.6a2 2 0 1 1 -3 0l1.5 -1.6z" />
+                                                        <path d="M15 3l6 6" />
+                                                    </svg>
+                                                    <span class="h5">Laboratorium</span>
+                                                </a>
+                                            </div>
+                                            <div class="col-4">
+                                                <a href="/kemahasiswaan" class="d-flex flex-column flex-center text-center text-secondary py-2 px-2 link-hoverable">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users w-6 h-6 mx-auto mb-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                                        <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                                                    </svg>
+                                                    <span class="h5">Kemahasiswaan</span>
+                                                </a>
+                                            </div>
+                                            <div class="col-4">
+                                                <a href="/keuangan" class="d-flex flex-column flex-center text-center text-secondary py-2 px-2 link-hoverable">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wallet w-6 h-6 mx-auto mb-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
+                                                        <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
+                                                    </svg>
+                                                    <span class="h5">Keuangan</span>
                                                 </a>
                                             </div>
 
@@ -217,20 +339,53 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)">
+                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/default.jpg)">
                             </span>
                             <div class="d-none d-xl-block ps-2">
-                                <div>Paweł Kuna</div>
-                                <div class="mt-1 small text-secondary">UI Designer</div>
+                                <div>Mahasiswa</div>
+                                <div class="mt-1 small text-secondary">NPM: 12345678</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <a href="#" class="dropdown-item">Status</a>
-                            <a href="./profile.html" class="dropdown-item">Profile</a>
-                            <a href="#" class="dropdown-item">Feedback</a>
+                            <a href="/siakad" class="dropdown-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" />
+                                    <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />
+                                </svg>
+                                SIAKAD
+                            </a>
+                            <a href="/profil-mahasiswa" class="dropdown-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                </svg>
+                                Profil
+                            </a>
+                            <a href="/riwayat-akademik" class="dropdown-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                    <path d="M9 17h6" />
+                                    <path d="M9 13h6" />
+                                </svg>
+                                Riwayat Akademik
+                            </a>
                             <div class="dropdown-divider"></div>
-                            <a href="./settings.html" class="dropdown-item">Settings</a>
-                            <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                            <a href="/pengaturan" class="dropdown-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                                    <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                                </svg>
+                                Pengaturan
+                            </a>
+                            <a href="/logout" class="dropdown-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                    <path d="M9 12h12l-3 -3" />
+                                    <path d="M18 15l3 -3" />
+                                </svg>
+                                Keluar
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -246,149 +401,91 @@
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
                                         <a class="nav-link" href="./">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
                                                     <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
                                                     <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
                                                     <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-                                                </svg></span>
-                                            <span class="nav-link-title"> Home </span>
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">Beranda</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item active dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/package -->
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#navbar-akademik" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
-                                                    <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
-                                                    <path d="M12 12l8 -4.5" />
-                                                    <path d="M12 12l0 9" />
-                                                    <path d="M12 12l-8 -4.5" />
-                                                    <path d="M16 5.25l-8 4.5" />
-                                                </svg></span>
-                                            <span class="nav-link-title"> Interface </span>
+                                                    <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" />
+                                                    <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">Akademik</span>
                                         </a>
                                         <div class="dropdown-menu">
                                             <div class="dropdown-menu-columns">
                                                 <div class="dropdown-menu-column">
-                                                    <a class="dropdown-item" href="./accordion.html">
-                                                        Accordion
-                                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-                                                    </a>
-                                                    <a class="dropdown-item" href="./alerts.html"> Alerts </a>
-                                                    <div class="dropend">
-                                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                                            Authentication
-                                                        </a>
-                                                        <div class="dropdown-menu">
-                                                            <a href="./sign-in.html" class="dropdown-item"> Sign in
-                                                            </a>
-                                                            <a href="./sign-in-link.html" class="dropdown-item"> Sign
-                                                                in link </a>
-                                                            <a href="./sign-in-illustration.html" class="dropdown-item"> Sign in with illustration </a>
-                                                            <a href="./sign-in-cover.html" class="dropdown-item"> Sign
-                                                                in with cover </a>
-                                                            <a href="./sign-up.html" class="dropdown-item"> Sign up
-                                                            </a>
-                                                            <a href="./forgot-password.html" class="dropdown-item">
-                                                                Forgot password </a>
-                                                            <a href="./terms-of-service.html" class="dropdown-item">
-                                                                Terms of service </a>
-                                                            <a href="./auth-lock.html" class="dropdown-item"> Lock
-                                                                screen </a>
-                                                            <a href="./2-step-verification.html" class="dropdown-item"> 2 step verification </a>
-                                                            <a href="./2-step-verification-code.html" class="dropdown-item"> 2 step verification code </a>
-                                                        </div>
-                                                    </div>
-                                                    <a class="dropdown-item" href="./avatars.html">
-                                                        Avatars
-                                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-                                                    </a>
-                                                    <a class="dropdown-item" href="./badges.html"> Badges </a>
-                                                    <a class="dropdown-item active" href="./blank.html"> Blank page
-                                                    </a>
-                                                    <a class="dropdown-item" href="./buttons.html"> Buttons </a>
-                                                    <div class="dropend">
-                                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                                            Cards
-                                                        </a>
-                                                        <div class="dropdown-menu">
-                                                            <a href="./cards.html" class="dropdown-item"> Sample cards
-                                                            </a>
-                                                            <a href="./card-actions.html" class="dropdown-item">
-                                                                Card actions
-                                                                <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-                                                            </a>
-                                                            <a href="./cards-masonry.html" class="dropdown-item">
-                                                                Cards Masonry </a>
-                                                        </div>
-                                                    </div>
-                                                    <a class="dropdown-item" href="./carousel.html"> Carousel </a>
-                                                    <a class="dropdown-item" href="./colors.html"> Colors </a>
-                                                    <a class="dropdown-item" href="./datagrid.html"> Data grid </a>
-                                                    <a class="dropdown-item" href="./dropdowns.html"> Dropdowns </a>
-                                                    <div class="dropend">
-                                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-error" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                                            Error pages
-                                                        </a>
-                                                        <div class="dropdown-menu">
-                                                            <a href="./error-404.html" class="dropdown-item"> 404 page
-                                                            </a>
-                                                            <a href="./error-500.html" class="dropdown-item"> 500 page
-                                                            </a>
-                                                            <a href="./error-maintenance.html" class="dropdown-item">
-                                                                Maintenance page </a>
-                                                        </div>
-                                                    </div>
-                                                    <a class="dropdown-item" href="./lists.html"> Lists </a>
-                                                    <a class="dropdown-item" href="./modals.html"> Modals </a>
-                                                </div>
-                                                <div class="dropdown-menu-column">
-                                                    <a class="dropdown-item" href="./markdown.html"> Markdown </a>
-                                                    <a class="dropdown-item" href="./navigation.html"> Navigation </a>
-                                                    <a class="dropdown-item" href="./offcanvas.html"> Offcanvas </a>
-                                                    <a class="dropdown-item" href="./pagination.html"> Pagination </a>
-                                                    <a class="dropdown-item" href="./placeholder.html"> Placeholder
-                                                    </a>
-                                                    <a class="dropdown-item" href="./segmented-control.html">
-                                                        Segmented control
-                                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-                                                    </a>
-                                                    <a class="dropdown-item" href="./scroll-spy.html">
-                                                        Scroll spy
-                                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-                                                    </a>
-                                                    <a class="dropdown-item" href="./social-icons.html"> Social icons
-                                                    </a>
-                                                    <a class="dropdown-item" href="./stars-rating.html"> Stars rating
-                                                    </a>
-                                                    <a class="dropdown-item" href="./steps.html"> Steps </a>
-                                                    <a class="dropdown-item" href="./tables.html"> Tables </a>
-                                                    <a class="dropdown-item" href="./tabs.html"> Tabs </a>
-                                                    <a class="dropdown-item" href="./tags.html"> Tags </a>
-                                                    <a class="dropdown-item" href="./toasts.html"> Toasts </a>
-                                                    <a class="dropdown-item" href="./typography.html"> Typography </a>
+                                                    <a class="dropdown-item" href="/program-studi">Program Studi</a>
+                                                    <a class="dropdown-item" href="/kalender-akademik">Kalender Akademik</a>
+                                                    <a class="dropdown-item" href="/jadwal-kuliah">Jadwal Kuliah</a>
+                                                    <a class="dropdown-item" href="/silabus">Silabus</a>
+                                                    <a class="dropdown-item" href="/e-learning">E-Learning</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#navbar-form" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->
+                                        <a class="nav-link dropdown-toggle" href="#navbar-kemahasiswaan" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
-                                                    <path d="M9 11l3 3l8 -8" />
-                                                    <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
-                                                </svg></span>
-                                            <span class="nav-link-title"> Forms </span>
+                                                    <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                                    <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">Kemahasiswaan</span>
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="./form-elements.html"> Form elements </a>
-                                            <a class="dropdown-item" href="./form-layout.html">
-                                                Form layouts
-                                                <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-                                            </a>
+                                            <a class="dropdown-item" href="/organisasi">Organisasi Mahasiswa</a>
+                                            <a class="dropdown-item" href="/beasiswa">Beasiswa</a>
+                                            <a class="dropdown-item" href="/prestasi">Prestasi Mahasiswa</a>
+                                            <a class="dropdown-item" href="/alumni">Alumni</a>
                                         </div>
                                     </li>
-
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#navbar-institusi" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                                    <path d="M3 21h18" />
+                                                    <path d="M19 21v-4" />
+                                                    <path d="M19 17a2 2 0 0 0 2 -2v-2a2 2 0 1 0 -4 0v2a2 2 0 0 0 2 2z" />
+                                                    <path d="M14 21v-14a3 3 0 0 0 -3 -3h-4a3 3 0 0 0 -3 3v14" />
+                                                    <path d="M9 17v4" />
+                                                    <path d="M8 13h2" />
+                                                    <path d="M8 9h2" />
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">Institusi</span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/profil">Profil</a>
+                                            <a class="dropdown-item" href="/visi-misi">Visi & Misi</a>
+                                            <a class="dropdown-item" href="/struktur-organisasi">Struktur Organisasi</a>
+                                            <a class="dropdown-item" href="/fasilitas">Fasilitas</a>
+                                            <a class="dropdown-item" href="/gallery">Galeri</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/kontak">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                                    <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                                                    <path d="M3 7l9 6l9 -6" />
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">Kontak</span>
+                                        </a>
+                                    </li>
                                 </ul>
                                 <!-- END NAVBAR MENU -->
                             </div>
@@ -425,44 +522,6 @@
                     @yield('content')
                 </div>
             </div>
-            <!-- END PAGE BODY -->
-            <!--  BEGIN FOOTER  -->
-            <footer class="footer footer-transparent d-print-none">
-                <div class="container-xl">
-                    <div class="row text-center align-items-center flex-row-reverse">
-                        <div class="col-lg-auto ms-lg-auto">
-                            <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item"><a href="https://docs.tabler.io" target="_blank" class="link-secondary" rel="noopener">Documentation</a></li>
-                                <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
-                                <li class="list-inline-item">
-                                    <a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
-                                        <!-- Download SVG icon from http://tabler.io/icons/icon/heart -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon text-pink icon-inline icon-4">
-                                            <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                                        </svg>
-                                        Sponsor
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                            <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item">
-                                    Copyright &copy; 2025
-                                    <a href="." class="link-secondary">Tabler</a>. All rights reserved.
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="./changelog.html" class="link-secondary" rel="noopener"> v1.2.0 </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!--  END FOOTER  -->
         </div>
     </div>
     <div class="settings">
@@ -760,6 +819,179 @@
         });
     </script>
     <!-- END PAGE SCRIPTS -->
+
+    <!-- BEGIN FLOATING CHAT BUTTON -->
+    <div class="chat-button" onclick="toggleChatPopup()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M8 9h8"></path>
+            <path d="M8 13h6"></path>
+            <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"></path>
+        </svg>
+    </div>
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-popup-header">
+            <h4 class="m-0">Hubungi Kami</h4>
+            <button type="button" class="btn-close" onclick="toggleChatPopup()"></button>
+        </div>
+        <div class="chat-popup-body">
+            <form id="whatsappForm" onsubmit="sendWhatsApp(event)">
+                <div class="mb-3">
+                    <label class="form-label">Nama</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">No. WhatsApp</label>
+                    <input type="tel" class="form-control" id="whatsapp" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Pesan</label>
+                    <textarea class="form-control" id="message" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-whatsapp" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path>
+                        <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path>
+                    </svg>
+                    Kirim Pesan
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- BEGIN FOOTER -->
+    <footer class="footer footer-transparent pt-5 mt-auto border-top">
+        <div class="container pb-5">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h3 class="h4 mb-4">Universitas</h3>
+                    <p class="text-muted">Mencetak generasi unggul yang berdaya saing global dengan keunggulan akademik dan karakter yang kuat.</p>
+                    <div class="social-links mt-4 d-flex gap-2">
+                        <a href="#" class="btn btn-icon btn-sm btn-ghost-secondary rounded-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+                            </svg>
+                        </a>
+                        <a href="#" class="btn btn-icon btn-sm btn-ghost-secondary rounded-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
+                                <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                <path d="M16.5 7.5l0 .01" />
+                            </svg>
+                        </a>
+                        <a href="#" class="btn btn-icon btn-sm btn-ghost-secondary rounded-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path d="M3 5m0 4a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" />
+                                <path d="M10 9l5 3l-5 3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="btn btn-icon btn-sm btn-ghost-secondary rounded-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <h4 class="h5 mb-4">Link Cepat</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="link-secondary">Tentang Kami</a></li>
+                        <li class="mb-2"><a href="#" class="link-secondary">Program Studi</a></li>
+                        <li class="mb-2"><a href="#" class="link-secondary">Pendaftaran</a></li>
+                        <li class="mb-2"><a href="#" class="link-secondary">Beasiswa</a></li>
+                        <li class="mb-2"><a href="#" class="link-secondary">Kalender Akademik</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <h4 class="h5 mb-4">Mahasiswa</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="link-secondary">SIAKAD</a></li>
+                        <li class="mb-2"><a href="#" class="link-secondary">E-Learning</a></li>
+                        <li class="mb-2"><a href="#" class="link-secondary">Perpustakaan</a></li>
+                        <li class="mb-2"><a href="#" class="link-secondary">Laboratorium</a></li>
+                        <li class="mb-2"><a href="#" class="link-secondary">Kemahasiswaan</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h4 class="h5 mb-4">Kontak</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                                <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+                            </svg>
+                            <span class="text-muted">Jl. Pendidikan No. 123, Kota Universitas 12345</span>
+                        </li>
+                        <li class="mb-3 d-flex gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
+                            </svg>
+                            <span class="text-muted">(021) 123-4567</span>
+                        </li>
+                        <li class="mb-3 d-flex gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
+                                <path d="M3 7l9 6l9 -6"></path>
+                            </svg>
+                            <span class="text-muted">info@universitas.ac.id</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="container py-4">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 text-lg-start text-center">
+                        <ul class="list-inline list-inline-dots mb-0">
+                            <li class="list-inline-item">Copyright © 2024 <a href="." class="link-secondary">Universitas</a>. All rights reserved.</li>
+                            <li class="list-inline-item"><a href="#" class="link-secondary">Kebijakan Privasi</a></li>
+                            <li class="list-inline-item"><a href="#" class="link-secondary">Syarat & Ketentuan</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 mt-3 mt-lg-0 text-lg-end text-center">
+                        <img src="/dist/img/logo-dark.svg" alt="Logo" class="h-8">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- END FOOTER -->
+
+
+
+    <script>
+        function toggleChatPopup() {
+            const popup = document.getElementById('chatPopup');
+            popup.classList.toggle('show');
+        }
+
+        function sendWhatsApp(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const message = document.getElementById('message').value;
+
+            // Format pesan
+            const formattedMessage = `Halo, saya ${name}\n\n${message}`;
+
+            // Buat URL WhatsApp dengan nomor dan pesan
+            const whatsappUrl = `https://wa.me/${whatsapp}?text=${encodeURIComponent(formattedMessage)}`;
+
+            // Buka WhatsApp di tab baru
+            window.open(whatsappUrl, '_blank');
+
+            // Reset form
+            event.target.reset();
+            toggleChatPopup();
+        }
+    </script>
+
 </body>
 
 </html>

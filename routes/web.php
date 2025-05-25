@@ -35,6 +35,10 @@ Route::get('/dev', function () {
     return view('tabler.main-content');
     // return view('base.panel.base-panel-content');
 });
+Route::get('/tabauth', function () {
+    return view('tabler.signin-content');
+    // return view('base.panel.base-panel-content');
+});
 
 // Route::get('/', [App\Http\Controllers\Root\HomeController::class, 'index'])->name('root.root-index');
 

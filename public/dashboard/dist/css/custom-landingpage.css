@@ -1,0 +1,120 @@
+/* Import Font (Contoh: Poppins) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    padding-top: 70px; /* Sesuaikan jika tinggi navbar berubah */
+}
+
+/* Navbar Customizations */
+.navbar-custom {
+    background-color: rgba(255, 255, 255, 0.95); /* Sedikit transparan */
+    backdrop-filter: blur(5px); /* Efek blur untuk browser yang mendukung */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: #0056b3 !important; /* Warna utama brand */
+}
+
+.nav-link {
+    transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #0056b3 !important; /* Warna utama saat hover/active */
+}
+
+/* Hero Section */
+.hero-section {
+    /* Anda bisa menggunakan gambar spesifik kampus di sini */
+    background: linear-gradient(rgba(21, 53, 99, 0.7), rgba(21, 53, 99, 0.7)), url('https://via.placeholder.com/1920x1080.png?text=Suasana+Kampus') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 120px 0;
+    text-align: center;
+    position: relative; /* Untuk elemen pseudo jika diperlukan */
+    transition: padding 0.3s ease;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem; /* Ukuran font lebih besar untuk judul */
+}
+
+/* Section Padding */
+.section-padding {
+    padding: 80px 0;
+}
+
+/* Card Customizations */
+.card-custom {
+    border: none;
+    border-radius: 10px; /* Sudut lebih rounded */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Agar gambar tidak keluar dari border-radius */
+}
+
+.card-custom:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.card-custom .card-title {
+    color: #0056b3; /* Warna judul card */
+}
+
+/* Button Customizations */
+.btn-custom-primary {
+    background-color: #0056b3; /* Warna primer kampus */
+    border-color: #0056b3;
+    color: white;
+    padding: 10px 25px;
+    font-weight: 600;
+    border-radius: 50px; /* Tombol lebih rounded */
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-custom-primary:hover {
+    background-color: #00418a;
+    border-color: #003773;
+    transform: translateY(-2px);
+}
+
+.btn-light:hover {
+    transform: translateY(-2px);
+}
+
+/* Carousel Customizations */
+.carousel-caption-custom {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 1.5rem;
+    border-radius: .5rem;
+}
+
+/* Footer */
+footer a:hover {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+/* Efek transisi umum untuk link */
+a {
+    transition: color 0.2s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    .hero-section {
+        padding: 80px 0;
+    }
+    .section-padding {
+        padding: 60px 0;
+    }
+}
