@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             // KONEKSI MODEL
+            $table->enum('profile', ['Mahasiswa', 'Dosen', 'Staff'])->default('Mahasiswa');
             $table->tinyInteger('type')->default('0');
             // DATA PRIBADI
             $table->string('code')->unique();
@@ -40,7 +41,13 @@ return new class extends Migration
             $table->string('verify_token')->nullable();
             $table->timestamp('token_created_at')->nullable(); // new column
 
+            // AUDIT TRACKING
             $table->timestamps();
+            $table->softDeletes();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('deleted_by')->nullable();
+
         });
     }
 

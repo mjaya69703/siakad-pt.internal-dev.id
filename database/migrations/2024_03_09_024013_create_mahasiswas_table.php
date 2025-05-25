@@ -47,7 +47,13 @@ return new class extends Migration
             // VERIFIED TOKEN
             $table->string('verify_token')->nullable();
             $table->timestamp('token_created_at')->nullable(); // new column
+
+            // AUDIT TRACKING
             $table->timestamps();
+            $table->softDeletes();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('deleted_by')->nullable();
         });
     }
 

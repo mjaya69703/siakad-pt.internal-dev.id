@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// LATEST DEVELOPMENT
+Route::get('/dev', [App\Http\Controllers\DevController::class, 'index'])->name('dev.home-index');
+
+
+Route::get('/tabauth', function () {
+    return view('tabler.signin-content');
+});
+
 // HALAMAN UTAMA / FRONTEND
 Route::get('/', [App\Http\Controllers\Root\HomeController::class, 'index'])->name('root.home-index');
 Route::get('/post/view/{slug}', [App\Http\Controllers\Root\HomeController::class, 'postView'])->name('root.post-view');
@@ -30,20 +38,20 @@ Route::get('/error/verify', [App\Http\Controllers\Root\ErrorController::class, '
 Route::get('/error/access', [App\Http\Controllers\Root\ErrorController::class, 'ErrorAccess'])->name('error.access');
 Route::get('/error/notfound', [App\Http\Controllers\Root\ErrorController::class, 'ErrorNotFound'])->name('error.notfound');
 
-
-Route::get('/dev', function () {
-    return view('tabler.main-content');
-    // return view('base.panel.base-panel-content');
-});
-Route::get('/tabauth', function () {
-    return view('tabler.signin-content');
-    // return view('base.panel.base-panel-content');
-});
-
-// Route::get('/', [App\Http\Controllers\Root\HomeController::class, 'index'])->name('root.root-index');
-
 // HALAMAN AUTHENTIKASI
 Route::middleware(['guest'])->group(function () {
+
+    // AUTH - SIGNIN
+    Route::get('/signin', [App\Http\Controllers\AuthController::class, 'renderSignin'])->name('auth.render-signin');
+    Route::post('/signin', [App\Http\Controllers\AuthController::class, 'handleSignin'])->name('auth.handle-signin');
+    // AUTH - SIGNUP
+    // Route::get('/signup', [App\Http\Controllers\AuthController::class, 'renderSignup'])->name('auth.render-signup');
+    // Route::post('/signup', [App\Http\Controllers\AuthController::class, 'handleSignup'])->name('auth.handle-signup');
+    // AUTH - FORGOT PASSWORD
+    Route::get('/forgot', [App\Http\Controllers\AuthController::class, 'renderForgot'])->name('auth.render-forgot');
+    Route::post('/forgot', [App\Http\Controllers\AuthController::class, 'handleForgot'])->name('auth.handle-forgot');
+    // AUTH - LOGOUT
+    Route::post('/logout', [App\Http\Controllers\AuthController::class, 'handleLogout'])->name('auth.handle-logout');
 
     // AUTENTIKASI MAHASISWA
     Route::get('/mahasiswa/auth-signin', [App\Http\Controllers\Mahasiswa\AuthController::class, 'AuthSignInPage'])->name('mahasiswa.auth-signin-page');
@@ -71,22 +79,23 @@ Route::middleware(['guest'])->group(function () {
 
 });
 
+
 // HAK AKSES DEPARTEMENT WEB ADMINISTRATOR
-require __DIR__.'/route-web-admin.php';
+require __DIR__.'/users/route-web-admin.php';
 // HAK AKSES DEPARTEMENT ADMIN
-require __DIR__.'/route-admin.php';
+require __DIR__.'/users/route-admin.php';
 // HAK AKSES DEPARTEMENT AKADEMIK
-require __DIR__.'/route-akademik.php';
+require __DIR__.'/users/route-akademik.php';
 // HAK AKSES DEPARTEMENT FINANSIAL
-require __DIR__.'/route-finance.php';
+require __DIR__.'/users/route-finance.php';
 // HAK AKSES DEPARTEMENT OFFICER
-require __DIR__.'/route-officer.php';
+require __DIR__.'/users/route-officer.php';
 // HAK AKSES DEPARTEMENT SUPPORT
-require __DIR__.'/route-support.php';
+require __DIR__.'/users/route-support.php';
 // HAK AKSES DOSEN
-require __DIR__.'/route-dosen.php';
+require __DIR__.'/lectures/route-dosen.php';
 // HAK AKSES MAHASISWA
-require __DIR__.'/route-mahasiswa.php';
+require __DIR__.'/students/route-mahasiswa.php';
 
 
 

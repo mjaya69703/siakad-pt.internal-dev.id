@@ -1,5 +1,4 @@
-@extends('tabler.base-main-index')
-
+@extends('core-themes.core-mainpage')
 @section('custom-css')
     <style>
         :root {

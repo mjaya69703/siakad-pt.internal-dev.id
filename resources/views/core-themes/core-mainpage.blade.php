@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Blank page - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>{{ (isset($menus) ? $menus . ' - ' : '') . $pages . ' - '. $academy }}</title>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="{{ asset('dashboard') }}/dist/css/tabler.css" rel="stylesheet" />
     <!-- END GLOBAL MANDATORY STYLES -->
@@ -13,7 +13,7 @@
     <link href="{{ asset('dashboard') }}/dist/css/tabler-themes.css" rel="stylesheet" />
     <!-- END PLUGINS STYLES -->
     <!-- BEGIN DEMO STYLES -->
-    <link href="./preview/css/demo.css" rel="stylesheet" />
+    <link href="{{ asset('dashboard') }}/preview/css/demo.css" rel="stylesheet" />
     <style>
         /* Chat Button Styles */
         .chat-button {

@@ -1,15 +1,15 @@
-<p align="center"><a href="https://siakad-pt.internal-dev.id" target="_blank"><img src="https://siakad-pt.internal-dev.id/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://siakad-pt.idev-fun.org" target="_blank"><img src="https://siakad-pt.idev-fun.org/storage/images/website/site-logo.png" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="changelog.md">ESEC Academy - Open Source Project | v0.032a - Changelogs</a>
+<a href="changelog.md">ESEC Academy - Siakad PT Open Source Project | v1.01 - Changelogs</a>
 <br>
-<span>Latest Update: 4 Agustus 2024</span>
+<span>Latest Update: 26 Mei 2025</span>
 </p>
 <p align="center">
 <a href="https://github.com/mjaya69703"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
 <a href="https://facebook.com/kyouma052"><img src="https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white" alt="Facebook"></a>
 <a href="https://instagram.com/mjaya69703"><img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white" alt="Instagram"></a>
-<a href="mailto:jaya.kusuma@internal-dev.id"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"></a>
+<a href="mailto:mjaya69703@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"></a>
 </p>
 
 ## Preview Images
@@ -76,10 +76,10 @@ Berikut kami informasikan Fitur Utama SiakadPT yang kami bangun.
 Kamu boleh mencoba fitur apapun pada fitur ini, Apabila kamu memiliki kritik atau saran kamu bisa mengisi pada homepage dibagian menu Kritik dan Saran yang terhubung langsung dengan email pribadi saya.
 
 ```
-Link : https://siakad-pt.internal-dev.id
+Link : https://siakad-pt.idev-fun.org
 
 Demo with User Account:
-Link : https://siakad-pt.internal-dev.id/admin/auth-signin
+Link : https://siakad-pt.idev-fun.org/admin/auth-signin
 1. Departement Web Administrator ( Super Admin )
 User : admin
 Pass : Admin123
@@ -105,12 +105,12 @@ User : officer
 Pass : Admin123
 
 Demo with Dosen Account:
-Link : https://siakad-pt.internal-dev.id/dosen/auth-signin
+Link : https://siakad-pt.idev-fun.org/dosen/auth-signin
 User : dosen.a@example.com // You can replace "a" with another alphabet to "d"
 Pass : Dosen123
 
 Demo with Mahasiswa Account:
-Link : https://siakad-pt.internal-dev.id/mahasiswa/auth-signin
+Link : https://siakad-pt.idev-fun.org/mahasiswa/auth-signin
 User : mahasiswa.a@example.com // You can replace "a" with another alphabet to "d"
 Pass : Mahasiswa123
 ```
@@ -238,5 +238,6 @@ php scan.php
 -   Framework PHP Laravel <a href="https://laravel.com">Laravel 11</a>
 -   Themes Authentication <a href="https://www.creative-tim.com/product/argon-dashboard">Argon Dashboard 2 By Creative Tim</a>
 -   Themes BackEnd <a href="https://github.com/zuramai/mazer">Mazer Dashboard By zuramai</a>
+-   Themes Tabler ( Latest Themes ) <a href="https://github.com/tabler/tabler">Tabler Dashboard By tabler</a>
 -   Dockerize Script <a href="https://github.com/refactorian/laravel-docker">Laravel Docker</a>
 -   Midtrans Payment Gateway <a href="https://midtrans.com">Midtrans Payment Gateway</a>

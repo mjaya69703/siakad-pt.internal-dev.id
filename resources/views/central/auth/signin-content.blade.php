@@ -1,4 +1,4 @@
-@extends('tabler.base-main-index')
+@extends('core-themes.core-mainpage')
 @section('content')
     <div class="page page-center">
         <div class="container container-normal py-4">

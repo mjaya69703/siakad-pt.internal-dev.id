@@ -7,7 +7,8 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['user-access:Web Adminis
     // GLOBAL MENU AUTHENTIKASI
 
     // GLOBAL ROUTE
-    require __DIR__.'/route-global.php';
+    require __DIR__.'/../private-core.php';
+
 
     // STATUS ACTIVE BOLEH AKSES INI
     Route::middleware(['is-active:1'])->group(function () {

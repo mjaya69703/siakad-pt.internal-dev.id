@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'support', 'middleware' => ['user-access:Departement Support'], 'as' => 'support.'],function(){
 
     // GLOBAL ROUTE
-    require __DIR__.'/route-global.php';
+    require __DIR__.'/../private-core.php';
+
 
 
     // STATUS ACTIVE BOLEH AKSES INI
