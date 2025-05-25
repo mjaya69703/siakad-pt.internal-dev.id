@@ -23,7 +23,7 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-            set -e  # Exit jika ada error
+            set -e
             echo "Switching to project directory..."
             cd /home/siakad-pt/htdocs/siakad-pt.internal-dev.id
 
@@ -34,9 +34,11 @@ jobs:
             source ~/.nvm/nvm.sh
             nvm use 22
 
-            echo "Pulling latest code from latest branch..."
-            git checkout latest
-            git pull origin latest
+            echo "Fetching all branches..."
+            git fetch origin
+
+            echo "Checking out latest branch..."
+            git checkout -B latest origin/latest
 
             echo "Updating dependencies..."
             composer update
