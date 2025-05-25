@@ -1,0 +1,59 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - latest
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+          
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY_BASE64 }}" | base64 -d > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+            set -e  # Exit jika ada error
+            echo "Switching to project directory..."
+            cd /home/siakad-pt/htdocs/siakad-pt.internal-dev.id
+
+            echo "Cleaning old dependencies..."
+            rm -rf node_modules
+
+            echo "Using Node.js version 22..."
+            source ~/.nvm/nvm.sh
+            nvm use 22
+
+            echo "Pulling latest code from latest branch..."
+            git checkout latest
+            git pull origin latest
+
+            echo "Updating dependencies..."
+            composer update
+
+            echo "Installing dependencies..."
+            npm install
+
+            echo "Building the project..."
+            npm run build
+
+            echo "Clearing Laravel cache..."
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            echo "Running migrations with fresh database..."
+            php artisan migrate:fresh --seed --force
+
+            echo "Deployment finished!"
+          EOF
