@@ -27,7 +27,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
             z-index: 1;
         }
 
@@ -44,6 +44,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -58,7 +59,7 @@
             margin-top: -7rem;
             position: relative;
             z-index: 3;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(10px);
             transition: transform 0.3s ease;
         }
@@ -85,7 +86,7 @@
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
         .feature-icon {
@@ -108,7 +109,7 @@
             border: none;
             border-radius: 1.5rem;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             opacity: 0;
             transform: translateY(30px);
@@ -600,7 +601,6 @@
             </div>
         </div>
     </section>
-
 @endsection
 
 @section('custom-js')
@@ -614,7 +614,7 @@
                 const increment = target / (duration / 16);
                 const updateCount = () => {
                     count += increment;
-                    if(count < target) {
+                    if (count < target) {
                         counter.innerText = Math.ceil(count) + '+';
                         requestAnimationFrame(updateCount);
                     } else {
@@ -653,7 +653,7 @@
 
             // Smooth scroll untuk navigasi
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+                anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {

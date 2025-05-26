@@ -7,9 +7,12 @@ Route::group(['prefix' => 'dosen', 'middleware' => ['dsn-access:Dosen Aktif'], '
     // GLOBAL MENU AUTHENTIKASI
     Route::get('/signout',[App\Http\Controllers\Dosen\AuthController::class, 'AuthSignOutPost'])->name('auth-signout-post');
 
+    Route::get('/profile',[App\Http\Controllers\Private\Dosen\RootController::class, 'renderProfile'])->name('profile-render');
+    Route::patch('/profile',[App\Http\Controllers\Private\Dosen\RootController::class, 'handleProfile'])->name('profile-handle');
+
     // GLOBAL MENU
     Route::get('/home',[App\Http\Controllers\Dosen\HomeController::class, 'index'])->name('home-index');
-    Route::get('/profile',[App\Http\Controllers\Dosen\HomeController::class, 'profile'])->name('home-profile');
+    Route::get('/profile/old',[App\Http\Controllers\Dosen\HomeController::class, 'profile'])->name('home-profile');
 
     // PRIVATE FUNCTION => PROFILE
     Route::patch('/profile/update-image',[App\Http\Controllers\Dosen\HomeController::class, 'saveImageProfile'])->name('home-profile-save-image');

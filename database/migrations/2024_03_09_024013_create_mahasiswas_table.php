@@ -13,6 +13,135 @@ return new class extends Migration
     {
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
+            // RELASI INTI
+            $table->tinyInteger('type')->default('0');
+            $table->integer('semester')->default(0);
+            $table->integer('taka_regist')->default(0);
+            $table->integer('taka_active')->default(0);
+
+            // PROFILE SINGKAT
+            $table->string('name');
+            $table->string('photo')->default('default.jpg');
+            $table->string('username')->nullable()->unique();
+
+            // DATA KONTAK
+            $table->string('phone')->unique();
+            $table->string('email')->unique();
+            $table->string('link_ig')->nullable();          // SOSIAL MEDIA INSTAGRAM
+            $table->string('link_fb')->nullable();          // SOSIAL MEDIA FACEBOOK
+            $table->string('link_in')->nullable();          // SOSIAL MEDIA LINKEDIN
+
+            // DATA BIODATA
+            $table->string('bio_blood')->nullable();        // BIODATA GOLONGAN DARAH
+            $table->string('bio_height')->nullable();       // BIODATA TINGGI BADAN
+            $table->string('bio_weight')->nullable();       // BIODATA BERAT BADAN
+            $table->string('bio_gender')->nullable();       // BIODATA JENIS KELAMIN
+            $table->string('bio_religion')->nullable();     // BIODATA AGAMA
+            $table->string('bio_placebirth')->nullable();   // BIODATA TEMPAT LAHIR
+            $table->string('bio_nationality')->nullable();  // BIODATA KEWARGANEGARAAN
+            $table->date('bio_datebirth')->nullable();      // BIODATA TANGGAL LAHIR
+
+            // DATA KEAMANAN
+            $table->string('code')->unique();
+            $table->string('password');
+            $table->boolean('fst_setup')->default(false);
+            $table->boolean('tfa_setup')->default(false);
+
+            // DATA ALAMAT RUMAH BERDASARKAN KTP
+            $table->text('ktp_addres')->nullable();
+            $table->text('ktp_rt')->nullable();
+            $table->text('ktp_rw')->nullable();
+            $table->text('ktp_village')->nullable();
+            $table->text('ktp_subdistrict')->nullable();
+            $table->text('ktp_poscode')->nullable();
+            $table->text('ktp_city')->nullable();
+            $table->text('ktp_province')->nullable();
+
+            // DATA ALAMAT RUMAH BERDASARKAN DOMISILI
+            $table->enum('domicile_same', ['Yes', 'No'])->default('No');
+            $table->text('domicile_addres')->nullable();
+            $table->string('domicile_rt')->nullable();
+            $table->string('domicile_rw')->nullable();
+            $table->string('domicile_village')->nullable();
+            $table->string('domicile_subdistrict')->nullable();
+            $table->string('domicile_poscode')->nullable();
+            $table->string('domicile_city')->nullable();
+            $table->string('domicile_province')->nullable();
+
+            // DATA PENGHUBUNG GOOGLE
+            $table->string('google_id')->nullable();
+            $table->string('google_token')->nullable();
+            $table->string('google_refresh_token')->nullable();
+            
+            // DATA EDUKASI TERAKHIR
+            $table->string('title_front')->nullable();
+            $table->string('title_behind')->nullable();
+            // DATA PENDIDIKAN PERTAMA
+            $table->enum('edu1_type', ['SMA/SMK', 'Diploma', 'Sarjana', 'Magister', 'Doktor'])->default('SMA/SMK');
+            $table->string('edu1_place')->nullable();
+            $table->string('edu1_major')->nullable();
+            $table->string('edu1_average_score')->nullable();
+            $table->string('edu1_graduate_year')->nullable();
+            // DATA PENDIDIKAN KEDUA
+            $table->enum('edu2_type', ['SMA/SMK', 'Diploma', 'Sarjana', 'Magister', 'Doktor'])->nullable();
+            $table->string('edu2_place')->nullable();
+            $table->string('edu2_major')->nullable();
+            $table->string('edu2_average_score')->nullable();
+            $table->string('edu2_graduate_year')->nullable();
+            // DATA PENDIDIKAN KETIGA
+            $table->enum('edu3_type', ['SMA/SMK', 'Diploma', 'Sarjana', 'Magister', 'Doktor'])->nullable();
+            $table->string('edu3_place')->nullable();
+            $table->string('edu3_major')->nullable();
+            $table->string('edu3_average_score')->nullable();
+            $table->string('edu3_graduate_year')->nullable();
+            
+            // RELASI DENGAN TABEL LAIN
+            $table->integer('prodi_id')->default(0);
+            $table->integer('kelas_id')->default(0);
+
+            // DATA NOMOR IDENTITAS
+            $table->string('numb_kk')->nullable()->unique();
+            $table->string('numb_ktp')->nullable()->unique();
+            $table->string('numb_nim')->nullable()->unique();
+            $table->string('numb_reg')->nullable()->unique();
+            $table->string('numb_nisn')->nullable()->unique();
+
+            // DATA BIODATA AYAH
+            $table->string('father_name')->nullable();
+            $table->date('father_datebirth')->nullable();
+            $table->enum('father_lifestat', ['Hidup', 'Meninggal'])->default('Hidup');
+            $table->string('father_education')->nullable();
+            $table->string('father_occupation')->nullable();
+            $table->string('father_income')->nullable();
+            $table->string('father_phone')->nullable();
+            $table->text('father_address')->nullable();
+
+            // DATA BIODATA IBU
+            $table->string('mother_name')->nullable();
+            $table->date('mother_datebirth')->nullable();
+            $table->enum('mother_lifestat', ['Hidup', 'Meninggal'])->default('Hidup');
+            $table->string('mother_education')->nullable();
+            $table->string('mother_occupation')->nullable();
+            $table->string('mother_income')->nullable();
+            $table->string('mother_phone')->nullable();
+            $table->text('mother_address')->nullable();
+
+            // DATA BIODATA WALI ( OPSIONAL )
+            $table->string('guard_name')->nullable();
+            $table->string('guard_nik')->nullable();
+            $table->date('guard_datebirth')->nullable();
+            $table->string('guard_relation')->nullable();
+            $table->string('guard_phone')->nullable();
+            $table->text('guard_address')->nullable();
+            
+            // AUDIT TRACKING
+            $table->timestamps();
+            $table->softDeletes();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('deleted_by')->nullable();
+
+            // UNDER THIS WILL BE DELETED
             // KONEK MODEL
             $table->integer('taka_id')->default(0);
             $table->integer('years_id')->default(0);
@@ -41,19 +170,14 @@ return new class extends Migration
 
             // DATA AKUN
             $table->string('mhs_user')->unique();
-            $table->string('password');
+            // $table->string('password');
             $table->string('mhs_mail')->unique();
             $table->string('mhs_phone')->unique();
             // VERIFIED TOKEN
             $table->string('verify_token')->nullable();
             $table->timestamp('token_created_at')->nullable(); // new column
 
-            // AUDIT TRACKING
-            $table->timestamps();
-            $table->softDeletes();
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->unsignedBigInteger('deleted_by')->nullable();
+
         });
     }
 

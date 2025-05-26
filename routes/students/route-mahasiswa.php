@@ -7,9 +7,12 @@ Route::group(['prefix' => 'mahasiswa', 'middleware' => ['mhs-access:Mahasiswa Ak
     // GLOBAL MENU AUTHENTIKASI
     Route::get('/signout',[App\Http\Controllers\Mahasiswa\AuthController::class, 'AuthSignOutPost'])->name('auth-signout-post');
 
+    Route::get('/profile',[App\Http\Controllers\Private\Mahasiswa\RootController::class, 'renderProfile'])->name('profile-render');
+    Route::patch('/profile',[App\Http\Controllers\Private\Mahasiswa\RootController::class, 'handleProfile'])->name('profile-handle');
+
     // GLOBAL MENU
     Route::get('/home',[App\Http\Controllers\Mahasiswa\HomeController::class, 'index'])->name('home-index');
-    Route::get('/profile',[App\Http\Controllers\Mahasiswa\HomeController::class, 'profile'])->name('home-profile');
+    Route::get('/profile/old',[App\Http\Controllers\Mahasiswa\HomeController::class, 'profile'])->name('home-profile');
     Route::get('/tagihan',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanIndex'])->name('home-tagihan-index');
     Route::get('/tagihan/{code}/invoice',[App\Http\Controllers\Mahasiswa\HomeController::class, 'tagihanInvoice'])->name('home-tagihan-invoice');
     Route::get('/jadwal-kuliah',[App\Http\Controllers\Mahasiswa\HomeController::class, 'jadkulIndex'])->name('home-jadkul-index');

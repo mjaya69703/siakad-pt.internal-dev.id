@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/signout',[App\Http\Controllers\Admin\AuthController::class, 'AuthSignOutPost'])->name('auth-signout-post');
 
+    Route::get('/profile',[App\Http\Controllers\Private\User\RootController::class, 'renderProfile'])->name('profile-render');
+    Route::patch('/profile',[App\Http\Controllers\Private\User\RootController::class, 'handleProfile'])->name('profile-handle');
+
     // GLOBAL MENU
     Route::get('/home',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home-index');
     Route::get('/home/ajax/GetMhsGender',[App\Http\Controllers\Admin\HomeController::class, 'getMhsGender'])->name('home.ajax-mhs-gender');
-    Route::get('/profile',[App\Http\Controllers\Admin\HomeController::class, 'profile'])->name('home-profile');
+    Route::get('/profile/old',[App\Http\Controllers\Admin\HomeController::class, 'profile'])->name('home-profile');
     Route::get('/absen-harian',[App\Http\Controllers\Admin\PresensiController::class, 'absenHarian'])->name('presensi.absen-harian');
     Route::get('/absen-izin-cuti',[App\Http\Controllers\Admin\PresensiController::class, 'absenIzinCuti'])->name('presensi.absen-izin-cuti');
     Route::get('/absen-harian/view/{code}',[App\Http\Controllers\Admin\PresensiController::class, 'absenView'])->name('presensi.absen-harian-view');

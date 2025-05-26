@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dev', [App\Http\Controllers\DevController::class, 'index'])->name('dev.home-index');
 
 
-Route::get('/tabauth', function () {
-    return view('tabler.signin-content');
+Route::get('/backpage', function () {
+    return view('core-themes.core-backpage');
 });
 
 // HALAMAN UTAMA / FRONTEND
@@ -51,7 +51,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/forgot', [App\Http\Controllers\AuthController::class, 'renderForgot'])->name('auth.render-forgot');
     Route::post('/forgot', [App\Http\Controllers\AuthController::class, 'handleForgot'])->name('auth.handle-forgot');
     // AUTH - LOGOUT
-    Route::post('/logout', [App\Http\Controllers\AuthController::class, 'handleLogout'])->name('auth.handle-logout');
+    Route::get('/logout', [App\Http\Controllers\AuthController::class, 'handleLogout'])->name('auth.handle-logout');
 
     // AUTENTIKASI MAHASISWA
     Route::get('/mahasiswa/auth-signin', [App\Http\Controllers\Mahasiswa\AuthController::class, 'AuthSignInPage'])->name('mahasiswa.auth-signin-page');

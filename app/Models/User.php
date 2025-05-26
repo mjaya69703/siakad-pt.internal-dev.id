@@ -7,57 +7,73 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\User\Mahasiswa;
+use App\Models\User\Dosen;
+use App\Models\User\Staff;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+
+    protected $table = 'users';
     protected $guarded = [];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
 
     public function getTypeAttribute($value)
     {
         $types = [
-            0 => 'Web Administrator',       // => Prefix web-admin  => For Website Development
-            1 => 'Departement Finance',     // => Prefix finance    => For Pelayanan Administrasi Umum dan Keuangan ( BAU )
-            2 => 'Departement Officer',     // => Prefix officer    => For Penerimaan Mahasiswa, Etc. ( Officer Staff )
-            3 => 'Departement Academic',    // => Prefix academic   => For Pelayanan Akademik ( BAAK Staff )
-            4 => 'Departement Admin',       // => Prefix admin      => For Penghubung antar departement dan dosen
-            5 => 'Departement Support',     // => Prefix support    => For IT Technical, Lab Technician, Helper
+            0 => 'Web Administrator',               // => Prefix web-admin  => For Website Development
+            1 => 'Departement Akademik',            // => Prefix akademik   => For Pelayanan Akademik (BAAK Staff)
+            2 => 'Departement Keuangan',            // => Prefix finance    => For Pelayanan Keuangan dan Pembayaran
+            3 => 'Departement Kemahasiswaan',       // => Prefix kemahasiswaan => For Kegiatan dan Organisasi Mahasiswa
+            4 => 'Departement Infrastruktur & IT',  // => Prefix it         => For Pengelolaan Infrastruktur dan Sistem
+            5 => 'Departement Perpustakaan',        // => Prefix library    => For Pengelolaan Perpustakaan dan Peminjaman
+            6 => 'Departement Umum',                // => Prefix umum       => For Administrasi Umum, Fasilitas, dan Kepegawaian (SDM)
+            7 => 'Departement Admisi'               // => Prefix admisi     => For Penerimaan Mahasiswa Baru (PMB) dan Pendaftaran
         ];
 
         return isset($types[$value]) ? $types[$value] : 'Unknown';
     }
+
+    public function getPhotoAttribute($value)
+    {
+        return $value == 'default.jpg' ? asset('storage/images/profile/default.jpg') : asset('storage/images/profile/users/' . $value);
+    }
+
 
     public function getRawTypeAttribute()
     {
         return $this->attributes['type'];
     }
 
+    public function getWaPhoneAttribute()
+    {
+        if ($this->phone) {
+            return preg_replace('/^0/', '62', $this->phone);
+        }
+
+        return null;
+    }
+
+    public function getPrefixAttribute()
+    {
+        $prefixes = [
+            0 => 'web-admin.',
+            1 => 'akademik.',
+            2 => 'finance.',
+            3 => 'kemahasiswaan.',
+            4 => 'it.',
+            5 => 'library.',
+            6 => 'umum.',
+            7 => 'admisi.',
+        ];
+
+        // Jika type valid, kembalikan prefixnya, kalau tidak 'unknown'
+        return isset($prefixes[$this->attributes['type']]) ? $prefixes[$this->attributes['type']] : 'unknown';
+    }
+
+
+    // WILL BE DELETED
     public function getAgamaAttribute($value)
     {
         $relis = [
