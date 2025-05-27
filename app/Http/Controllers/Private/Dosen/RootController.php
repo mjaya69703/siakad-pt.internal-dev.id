@@ -101,18 +101,18 @@ class RootController extends Controller
 
             $dosen = Auth::guard('dosen')->user();
             $data = $validator->validated();
-            
+
             // Handle photo upload
             if ($request->hasFile('photo')) {
                 // Delete old photo if exists
                 if ($dosen->photo && $dosen->photo !== 'default.jpg') {
-                    Storage::delete('images/profile/' . $dosen->photo);
+                    Storage::disk('public')->delete('images/profile/' . $dosen->photo);
                 }
 
                 // Store new photo
-                $photoName = time() . '_' . $request->photo->getClientOriginalName();
-                $request->photo->storeAs('images/profile', $photoName);
-                $dosen->photo = $photoName;
+                $photoName = time() . '-' . $dosen->code . '-' . uniqid() . '-' . uniqid() .'.' . $request->photo->getClientOriginalExtension();
+                $request->photo->storeAs('images/profile', $photoName, 'public');
+                $data['photo'] = $photoName;
             }
 
             // Update dosen information

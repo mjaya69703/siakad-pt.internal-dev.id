@@ -101,27 +101,23 @@ class RootController extends Controller
                     ->withInput();
             }
 
-
             $user = Auth::user();
             $data = $validator->validated();
 
             // Handle photo upload
             if ($request->hasFile('photo')) {
-                // Delete old photo if exists
+                // Hapus foto lama
                 if ($user->photo && $user->photo !== 'default.jpg') {
-                    Storage::delete('images/profile/' . $user->photo);
+                    Storage::disk('public')->delete('images/profile/' . $user->photo);
                 }
-
-                // Store new photo
-                $photoName = time() . '_' . $request->photo->getClientOriginalName();
-                $request->photo->storeAs('images/profile', $photoName);
+            
+                // Simpan foto baru
+                $photoName = time() . '-' . $user->code . '-' . uniqid() .'.' . $request->photo->getClientOriginalExtension();
+                $request->photo->storeAs('images/profile', $photoName, 'public');
                 $data['photo'] = $photoName;
             }
 
-            
             $user->update($data);
-
-
 
             Alert::success('Success', 'Profile updated successfully');
             return redirect()->back();

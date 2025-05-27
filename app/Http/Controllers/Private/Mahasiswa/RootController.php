@@ -129,14 +129,16 @@ class RootController extends Controller
             if ($request->hasFile('photo')) {
                 // Delete old photo if exists
                 if ($mahasiswa->photo && $mahasiswa->photo !== 'default.jpg') {
-                    Storage::delete('images/profile/' . $mahasiswa->photo);
+                    Storage::disk('public')->delete('images/profile/' . $mahasiswa->photo);
                 }
 
                 // Store new photo
-                $photoName = time() . '_' . $request->photo->getClientOriginalName();
-                $request->photo->storeAs('images/profile', $photoName);
+                $photoName = time() . '-' . $mahasiswa->code . '-' . uniqid() . '-' . uniqid() .'.' . $request->photo->getClientOriginalExtension();
+                $request->photo->storeAs('images/profile', $photoName, 'public');
                 $data['photo'] = $photoName;
             }
+
+
 
             // Update mahasiswa information
             $mahasiswa->update($data);
