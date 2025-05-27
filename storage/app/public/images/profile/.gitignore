@@ -1,3 +1,5 @@
 !gitignore
+!default.jpg
+!default-old.jpg
 profile/*
 profile/absen/*

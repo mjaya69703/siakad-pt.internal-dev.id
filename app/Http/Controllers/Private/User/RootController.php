@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RootController extends Controller
 {
@@ -97,7 +101,9 @@ class RootController extends Controller
                     ->withInput();
             }
 
+
             $user = Auth::user();
+            $data = $validator->validated();
 
             // Handle photo upload
             if ($request->hasFile('photo')) {
@@ -109,18 +115,19 @@ class RootController extends Controller
                 // Store new photo
                 $photoName = time() . '_' . $request->photo->getClientOriginalName();
                 $request->photo->storeAs('images/profile', $photoName);
-
-                $user->photo = $photoName;
+                $data['photo'] = $photoName;
             }
 
-            // Update user information
-            $user->update($validator->validated());
+            
+            $user->update($data);
 
-            return redirect()->back()->with('success', 'Profile updated successfully');
+
+
+            Alert::success('Success', 'Profile updated successfully');
+            return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', 'Failed to update profile: ' . $e->getMessage())
-                ->withInput();
+            Alert::error('Error', 'Failed to update profile: ' . $e->getMessage());
+            return redirect()->back()->withInput();
         }
     }
 }

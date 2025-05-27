@@ -100,7 +100,8 @@ class RootController extends Controller
             }
 
             $dosen = Auth::guard('dosen')->user();
-
+            $data = $validator->validated();
+            
             // Handle photo upload
             if ($request->hasFile('photo')) {
                 // Delete old photo if exists
@@ -115,7 +116,7 @@ class RootController extends Controller
             }
 
             // Update dosen information
-            $dosen->update($validator->validated());
+            $dosen->update($data);
 
             return redirect()->back()->with('success', 'Profile updated successfully');
         } catch (\Exception $e) {

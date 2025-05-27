@@ -110,23 +110,23 @@ return new class extends Migration
 
             // UNDER THIS WILL BE DELETED
             // DATA PRIBADI
-            $table->string('birth_place')->nullable();
-            $table->date('birth_date')->nullable();
-            $table->string('gend')->nullable(); // GENDER
-            $table->string('reli')->nullable(); // RELIGION
-            // DATA KONTAK DARURAT
-            $table->string('contact_name_1')->nullable();
-            $table->string('contact_name_2')->nullable();
-            $table->string('contact_phone_1')->nullable();
-            $table->string('contact_phone_2')->nullable();
-            // DATA AKUN
-            $table->string('user');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
-            // VERIFIED TOKEN
-            $table->tinyInteger('status')->default(0);
-            $table->string('verify_token')->nullable();
-            $table->timestamp('token_created_at')->nullable();
+            // $table->string('birth_place')->nullable();
+            // $table->date('birth_date')->nullable();
+            // $table->string('gend')->nullable(); // GENDER
+            // $table->string('reli')->nullable(); // RELIGION
+            // // DATA KONTAK DARURAT
+            // $table->string('contact_name_1')->nullable();
+            // $table->string('contact_name_2')->nullable();
+            // $table->string('contact_phone_1')->nullable();
+            // $table->string('contact_phone_2')->nullable();
+            // // DATA AKUN
+            // $table->string('user');
+            // $table->timestamp('email_verified_at')->nullable();
+            // $table->rememberToken();
+            // // VERIFIED TOKEN
+            // $table->tinyInteger('status')->default(0);
+            // $table->string('verify_token')->nullable();
+            // $table->timestamp('token_created_at')->nullable();
 
         });
     }

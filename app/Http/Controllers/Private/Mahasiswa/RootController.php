@@ -123,6 +123,7 @@ class RootController extends Controller
             }
 
             $mahasiswa = Auth::guard('mahasiswa')->user();
+            $data = $validator->validated();
 
             // Handle photo upload
             if ($request->hasFile('photo')) {
@@ -138,7 +139,7 @@ class RootController extends Controller
             }
 
             // Update mahasiswa information
-            $mahasiswa->update($validator->validated());
+            $mahasiswa->update($data);
 
             return redirect()->back()->with('success', 'Profile updated successfully');
         } catch (\Exception $e) {

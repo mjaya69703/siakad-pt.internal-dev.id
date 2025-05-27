@@ -49,7 +49,7 @@ class AuthController extends Controller
                 if(Auth::user()->prefix == Auth::user()->prefix){
 
                     Alert::toast('Kamu telah berhasil login sebagai ' . Auth::user()->name, 'success');
-                    return redirect()->route(Auth::user()->prefix . 'dashboard-index');
+                    return redirect()->route(Auth::user()->prefix . 'profile-render');
                 }
 
             }else{
@@ -64,7 +64,7 @@ class AuthController extends Controller
                 if(Auth::guard('dosen')->user()->prefix == "dosen."){
 
                     Alert::toast('Kamu telah berhasil login sebagai ' . Auth::guard('dosen')->user()->name, 'success');
-                    return redirect()->route(Auth::guard('dosen')->user()->prefix . 'dashboard-index');
+                    return redirect()->route(Auth::guard('dosen')->user()->prefix . 'profile-render');
                 }
             }else{
                 Alert::error('Error', 'Mohon Maaf, Username / Email atau password salah');
@@ -79,12 +79,12 @@ class AuthController extends Controller
                     // echo "Kamu berhasil login sebagai " . Auth::guard('mahasiswa')->user()->name;
 
                     Alert::toast('Kamu telah berhasil login sebagai ' . Auth::guard('mahasiswa')->user()->name, 'success');
-                    return redirect()->route(Auth::guard('mahasiswa')->user()->prefix . 'dashboard-index');
+                    return redirect()->route(Auth::guard('mahasiswa')->user()->prefix . 'profile-render');
                 } else if(Auth::guard('mahasiswa')->user()->type == "Mahasiswa Aktif"){
                     // echo "Kamu berhasil login sebagai " . Auth::guard('mahasiswa')->user()->name;
 
                     Alert::toast('Kamu telah berhasil login sebagai ' . Auth::guard('mahasiswa')->user()->name, 'success');
-                    return redirect()->route(Auth::guard('mahasiswa')->user()->prefix . 'dashboard-index');
+                    return redirect()->route(Auth::guard('mahasiswa')->user()->prefix . 'profile-render');
                 }
 
             }else{

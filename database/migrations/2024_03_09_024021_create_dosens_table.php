@@ -109,24 +109,24 @@ return new class extends Migration
             
             
             // UNDER THIS WILL BE DELETED
-            // DATA PRIBADI
-            $table->integer('dsn_stat')->default(0);
-            $table->string('dsn_nidn')->unique();
-            $table->string('dsn_name');
-            $table->string('dsn_code');
-            $table->string('dsn_image')->default('default/default-profile.jpg');
-            $table->string('dsn_birthplace')->nullable();
-            $table->date('dsn_birthdate')->nullable();
-            $table->string('dsn_gend')->nullable();
+            // // DATA PRIBADI
+            // $table->integer('dsn_stat')->default(0);
+            // $table->string('dsn_nidn')->unique();
+            // $table->string('dsn_name');
+            // $table->string('dsn_code');
+            // $table->string('dsn_image')->default('default/default-profile.jpg');
+            // $table->string('dsn_birthplace')->nullable();
+            // $table->date('dsn_birthdate')->nullable();
+            // $table->string('dsn_gend')->nullable();
 
-            // DATA AKUN
-            $table->string('dsn_user')->unique();
-            $table->string('dsn_mail')->unique();
-            $table->string('dsn_phone')->unique();
+            // // DATA AKUN
+            // $table->string('dsn_user')->unique();
+            // $table->string('dsn_mail')->unique();
+            // $table->string('dsn_phone')->unique();
 
-            // VERIFIED TOKEN
-            $table->string('verify_token')->nullable();
-            $table->timestamp('token_created_at')->nullable(); // new column
+            // // VERIFIED TOKEN
+            // $table->string('verify_token')->nullable();
+            // $table->timestamp('token_created_at')->nullable(); // new column
 
         });
     }

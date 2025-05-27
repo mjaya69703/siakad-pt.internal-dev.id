@@ -189,7 +189,7 @@ class HomeController extends Controller
             $image->toPng()->save($destinationPath.'/'.$name);
 
             if ($user->mhs_image != 'default/default-profile.jpg') {
-                File::delete($destinationPaths.'/'.$user->mhs_image); // hapus gambar lama
+                File::delete($destinationPaths.'/'.$user->mhs_image); 
             }
             $user->mhs_image = "profile/".$name;
             $user->save();
