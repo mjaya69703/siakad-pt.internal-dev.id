@@ -104,19 +104,18 @@ class AuthController extends Controller
 
             Auth::logout();
             Alert::success('Berhasil!', 'Logout telah sukses!');
-            return redirect()->route('root.auth-signin');
-
+            return redirect()->route('auth.render-signin');
         } elseif (Auth::guard('dosen')->check()) {
 
             Auth::guard('dosen')->logout();
             Alert::success('Berhasil!', 'Logout telah sukses!');
-            return redirect()->route('root.auth-signin');
+            return redirect()->route('auth.render-signin');
 
         } elseif (Auth::guard('mahasiswa')->check()) {
 
             Auth::guard('mahasiswa')->logout();
             Alert::success('Berhasil!', 'Logout telah sukses!');
-            return redirect()->route('root.auth-signin');
+            return redirect()->route('auth.render-signin');
 
         } else {
 

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // HAK AKSES DEPARTEMENT ACADEMIC
-Route::group(['prefix' => 'admin', 'middleware' => ['user-access:Departement Admin'], 'as' => 'admin.'],function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['checkUser:Departement Admin'], 'as' => 'admin.'],function(){
 
     // GLOBAL ROUTE
     require __DIR__.'/../private-core.php';

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // LATEST DEVELOPMENT
-Route::get('/dev', [App\Http\Controllers\DevController::class, 'index'])->name('dev.home-index');
+Route::get('/', [App\Http\Controllers\RootController::class, 'renderHomePage'])->name('root.home-index');
 
 
 Route::get('/backpage', function () {
@@ -22,7 +22,7 @@ Route::get('/backpage', function () {
 });
 
 // HALAMAN UTAMA / FRONTEND
-Route::get('/', [App\Http\Controllers\Root\HomeController::class, 'index'])->name('root.home-index');
+// Route::get('/old', [App\Http\Controllers\Root\HomeController::class, 'index'])->name('root.home-index');
 Route::get('/post/view/{slug}', [App\Http\Controllers\Root\HomeController::class, 'postView'])->name('root.post-view');
 Route::get('/advice', [App\Http\Controllers\Root\HomeController::class, 'adviceIndex'])->name('root.home-advice');
 Route::get('/download', [App\Http\Controllers\Root\HomeController::class, 'downloadIndex'])->name('root.home-download');

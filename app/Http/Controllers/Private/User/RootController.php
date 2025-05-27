@@ -14,6 +14,17 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class RootController extends Controller
 {
+    public function renderDashboard()
+    {
+        $user = Auth::user();
+        $data['spref'] = $user ? $user->prefix : '';
+        $data['menus'] = "Detail";
+        $data['pages'] = "Profile";
+        $data['academy'] = "Siakad PT by Esec Academy";
+        
+        return view('central.back-content', $data, compact('user'));
+    }
+
     public function renderProfile()
     {
         $user = Auth::user();

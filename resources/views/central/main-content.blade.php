@@ -165,7 +165,7 @@
             <p class="lead fs-3 mb-5">Membentuk Pemimpin Digital untuk Era Transformasi Global</p>
             <div class="d-flex gap-3 justify-content-center">
                 <a href="#programs" class="btn btn-lg btn-primary">Program Studi</a>
-                <a href="/siakad" class="btn btn-lg btn-white">SIAKAD Portal</a>
+                <a href="{{ route('auth.render-signin') }}" class="btn btn-lg btn-white">SIAKAD Portal</a>
             </div>
         </div>
     </section>
