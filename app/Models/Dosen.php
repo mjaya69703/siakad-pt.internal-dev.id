@@ -24,7 +24,7 @@ class Dosen extends Authenticatable
 
     public function getPhotoAttribute($value)
     {
-        return $value == 'default.jpg' ? asset('storage/images/profile/default.jpg') : asset('storage/images/profile/users/' . $value);
+        return $value == 'default.jpg' ? asset('storage/images/profile/default.jpg') : asset('storage/images/profile/' . $value);
     }
 
 
