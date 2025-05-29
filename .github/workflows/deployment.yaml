@@ -36,6 +36,9 @@ jobs:
 
             echo "Resetting any local changes..."
             git reset --hard
+            
+            echo "Cleaning untracked files..."
+            git clean -fd
 
             echo "Fetching all branches..."
             git fetch origin
