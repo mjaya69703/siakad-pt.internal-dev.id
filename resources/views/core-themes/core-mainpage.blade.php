@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    @PwaHead
     <title>{{ (isset($menus) ? $menus . ' - ' : '') . $pages . ' - ' . $academy }}</title>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="{{ asset('dashboard') }}/dist/css/tabler.css" rel="stylesheet" />
@@ -87,6 +88,14 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+        .navbar {
+            width: 100vw !important;
+            margin-left: calc((100vw - 100%) / -2);
+            margin-right: calc((100vw - 100%) / -2);
+            left: 0;
+            right: 0;
+            border-radius: 0 !important;
         }
     </style>
 
@@ -951,7 +960,7 @@
     </footer>
     <!-- END FOOTER -->
 
-
+    @RegisterServiceWorkerScript
 
     <script>
         function toggleChatPopup() {

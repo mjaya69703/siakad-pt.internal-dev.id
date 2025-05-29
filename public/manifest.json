@@ -1,0 +1,16 @@
+{
+    "name": "Neco Siakad",
+    "short_name": "Neco Siakad",
+    "background_color": "#6777ef",
+    "display": "fullscreen",
+    "description": "Neco Siakad By ESEC Academy",
+    "theme_color": "#6777ef",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

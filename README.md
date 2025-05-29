@@ -1,7 +1,7 @@
 <p align="center"><a href="https://siakad-pt.idev-fun.org" target="_blank"><img src="https://siakad-pt.idev-fun.org/storage/images/website/site-logo.png" width="400" alt="Siakad PT Logo"></a></p>
 
 <p align="center">
-<a href="changelog.md">ESEC Academy - Siakad PT Open Source Project | v2.0 - Changelogs</a>
+<a href="changelog.md">Neco Siakad By Esec Academy | v2.0 - Changelogs</a>
 <br>
 <span>Latest Update: 29 Mei 2025</span>
 </p>
