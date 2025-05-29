@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    @PwaHead
+
     <title>{{ (isset($menus) ? $menus . ' - ' : '') . $pages . ' - ' . $academy }}</title>
     <!-- BEGIN PAGE LEVEL STYLES -->
     <link href="./libs/jsvectormap/dist/jsvectormap.css?1747482948" rel="stylesheet" />
@@ -21,9 +23,17 @@
     <link href="{{ asset('dashboard') }}/dist/css/tabler-themes.css?1747482948" rel="stylesheet" />
     <!-- END PLUGINS STYLES -->
     <!-- BEGIN DEMO STYLES -->
-    @yield('custom-css')
     <link href="./preview/css/demo.css?1747482948" rel="stylesheet" />
     <!-- END DEMO STYLES -->
+    @yield('custom-css')
+    <style>
+        .form-label, .form-control {
+            margin-top: 0 !important;
+        }
+
+    </style>
+
+
     <!-- BEGIN CUSTOM FONT -->
     <style>
         @import url("https://rsms.me/inter/inter.css");
@@ -967,6 +977,7 @@
         </form>
     </div>
     <!-- BEGIN PAGE LIBRARIES -->
+    @RegisterServiceWorkerScript
     <script src="{{ asset('dashboard') }}/libs/apexcharts/dist/apexcharts.min.js?1747482948" defer></script>
     <script src="{{ asset('dashboard') }}/libs/jsvectormap/dist/jsvectormap.min.js?1747482948" defer></script>
     <script src="{{ asset('dashboard') }}/libs/jsvectormap/dist/maps/world.js?1747482948" defer></script>

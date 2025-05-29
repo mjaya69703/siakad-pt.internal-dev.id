@@ -43,6 +43,7 @@
             border-radius: 50%;
             object-fit: cover;
         }
+ 
     </style>
 @endsection
 
@@ -107,7 +108,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row g-3 mt-2">
+                                <div class="row mt-2">
                                     <div class="col-md-4">
                                         <label class="form-label">Birth Place</label>
                                         <input type="text" class="form-control" name="bio_placebirth" value="{{ $user->bio_placebirth }}">
@@ -125,7 +126,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row g-3 mt-2">
+                                <div class="row mt-2">
                                     <div class="col-md-3">
                                         <label class="form-label">Religion</label>
                                         <input type="text" class="form-control" name="bio_religion" value="{{ $user->bio_religion }}">
@@ -144,7 +145,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row g-3 mt-2">
+                                <div class="row mt-2">
                                     <div class="col-md-3">
                                         <label class="form-label">Weight (kg)</label>
                                         <input type="number" class="form-control" name="bio_weight" value="{{ $user->bio_weight }}">
@@ -204,7 +205,7 @@
                                                 <input type="text" class="form-control" name="ktp_rw" value="{{ $user->ktp_rw }}">
                                             </div>
                                         </div>
-                                        <div class="row g-3 mt-2">
+                                        <div class="row mt-2">
                                             <div class="col-md-6">
                                                 <label class="form-label">Kelurahan</label>
                                                 <input type="text" class="form-control" name="ktp_village" value="{{ $user->ktp_village }}">
@@ -214,7 +215,7 @@
                                                 <input type="text" class="form-control" name="ktp_subdistrict" value="{{ $user->ktp_subdistrict }}">
                                             </div>
                                         </div>
-                                        <div class="row g-3 mt-2">
+                                        <div class="row mt-2">
                                             <div class="col-md-4">
                                                 <label class="form-label">Kota</label>
                                                 <input type="text" class="form-control" name="ktp_city" value="{{ $user->ktp_city }}">
@@ -254,7 +255,7 @@
                                                     <input type="text" class="form-control" name="domicile_rw" value="{{ $user->domicile_rw }}">
                                                 </div>
                                             </div>
-                                            <div class="row g-3 mt-2">
+                                            <div class="row mt-2">
                                                 <div class="col-md-6">
                                                     <label class="form-label">Kelurahan</label>
                                                     <input type="text" class="form-control" name="domicile_village" value="{{ $user->domicile_village }}">
@@ -264,7 +265,7 @@
                                                     <input type="text" class="form-control" name="domicile_subdistrict" value="{{ $user->domicile_subdistrict }}">
                                                 </div>
                                             </div>
-                                            <div class="row g-3 mt-2">
+                                            <div class="row mt-2">
                                                 <div class="col-md-4">
                                                     <label class="form-label">Kota</label>
                                                     <input type="text" class="form-control" name="domicile_city" value="{{ $user->domicile_city }}">

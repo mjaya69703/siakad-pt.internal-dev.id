@@ -22,6 +22,17 @@
       0 => 'Coderflex\\LaravelTurnstile\\LaravelTurnstileServiceProvider',
     ),
   ),
+  'erag/laravel-pwa' => 
+  array (
+    'aliases' => 
+    array (
+      'Pwa' => 'EragLaravelPwa\\Facades\\Pwa',
+    ),
+    'providers' => 
+    array (
+      0 => 'EragLaravelPwa\\EragLaravelPwaServiceProvider',
+    ),
+  ),
   'intervention/image-laravel' => 
   array (
     'aliases' => 

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check your internet connection</title>
+    <link href="/dashboard/dist/css/tabler.css" rel="stylesheet" />
+    <link href="/dashboard/dist/css/tabler-themes.css" rel="stylesheet" />
+    <style>
+        @import url("https://rsms.me/inter/inter.css");
+        
+        body {
+            background: var(--tblr-bg-surface) !important;
+            font-family: "Inter", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .offline-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .offline-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .offline-icon svg {
+            width: 100%;
+            height: 100%;
+            color: var(--tblr-primary);
+        }
+
+        .offline-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--tblr-body-color);
+            margin-bottom: 1rem;
+        }
+
+        .offline-message {
+            color: var(--tblr-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .offline-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--tblr-primary);
+            color: white;
+            border-radius: var(--tblr-border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .offline-button:hover {
+            background: var(--tblr-primary-dark);
+            color: white;
+        }
+
+        .offline-button svg {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wifi-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 18l.01 0"></path>
+                <path d="M9.172 15.172a4 4 0 0 1 5.656 0"></path>
+                <path d="M6.343 12.343a7.963 7.963 0 0 1 3.864 -2.14m4.163 .155a7.965 7.965 0 0 1 3.287 2"></path>
+                <path d="M3.515 9.515a12 12 0 0 1 3.544 -2.455m3.101 .92a12 12 0 0 1 10.325 3.374"></path>
+                <path d="M3 3l18 18"></path>
+            </svg>
+    </div>
+        <h1 class="offline-title">Tidak ada koneksi internet</h1>
+        <p class="offline-message">Mohon periksa koneksi internet Anda dan coba lagi.</p>
+        <a href="/" class="offline-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+            </svg>
+            Muat Ulang Halaman
+        </a>
+    </div>
+
+    <script src="/dashboard/dist/js/tabler.min.js" defer></script>
+</body>
+
+</html>

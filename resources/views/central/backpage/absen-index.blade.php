@@ -48,11 +48,16 @@
             background: #f8f9fa;
             border-radius: 0 8px 8px 0;
         }
+
+        /* .form-label, .form-control {
+            margin-top: 0 !important;
+        } */
+
     </style>
 @endsection
 
 @section('content')
-    <div class="">
+
         <!-- Welcome Section -->
         <div class="row mb-4">
             <div class="col-12">
@@ -156,7 +161,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Absensi History -->
         <div class="row">
             <div class="col-12">
@@ -278,7 +282,6 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 
 @section('custom-js')

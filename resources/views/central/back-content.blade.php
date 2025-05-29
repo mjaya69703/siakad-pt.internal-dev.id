@@ -34,8 +34,21 @@
         }
 
         .chart-container {
-            position: relative;
-            height: 300px;
+            margin: 0 !important;
+            padding: 0 !important;
+            height: auto !important;
+            min-height: 0 !important;
+        }
+
+        #studentDistributionChart {
+            display: block;
+            width: 100% !important;
+            height: 425px !important;
+            max-height: 400px;
+        }
+
+        .card-body .chart-container {
+            margin-bottom: 0 !important;
         }
     </style>
 @endsection
@@ -148,13 +161,16 @@
             </div>
         </div>
 
-        <!-- Charts and Activities -->
+
+
+
+                        <!-- Charts and Activities -->
         <div class="row">
             <!-- Student Distribution Chart -->
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Student Distribution</h5>
+                        <h5 class="">Student Distribution</h5>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
@@ -204,6 +220,7 @@
             </div>
         </div>
 
+
         <!-- Quick Actions -->
         <div class="row mt-4">
             <div class="col-12">
@@ -212,7 +229,7 @@
                         <h5 class="card-title">Quick Actions</h5>
                     </div>
                     <div class="card-body">
-                        <div class="row g-3">
+                        <div class="row ">
                             <div class="col-md-3">
                                 <a href="#" class="btn btn-outline-primary w-100">
                                     <i class="fas fa-user-plus me-2"></i> Add New Student
