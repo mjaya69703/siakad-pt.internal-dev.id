@@ -63,6 +63,9 @@ class Dosen extends Authenticatable
         return isset($dsnstats[$value]) ? $dsnstats[$value] : 'Unknown';
     }
 
+
+
+    // WILL BE DELETED
     public function getRawDsnStatAttribute()
     {
         return $this->attributes['dsn_stat'];

@@ -95,7 +95,9 @@
                                     <option value="2">Absen Sakit</option>
                                     <option value="3">Keperluan Berobat</option>
                                     <option value="4">Masuk Telat</option>
+                                    <option value="5">Pulang Awal</option>
                                     <option value="6">Keperluan Pribadi</option>
+                                    <option value="7">Cuti Tahunan</option>
                                 </select>
                             </div>
                             <div class="mb-3">

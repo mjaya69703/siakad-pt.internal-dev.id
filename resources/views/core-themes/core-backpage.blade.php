@@ -220,6 +220,8 @@
                                 </span>
                                 <span class="nav-link-title"> Homes </span>
                             </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ Route::is($spref . 'profile-render', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'profile-render') }}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-edit">
@@ -231,6 +233,8 @@
                                 </span>
                                 <span class="nav-link-title"> Profile </span>
                             </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ Route::is($spref . 'absensi-render', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'absensi-render') }}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-check">
@@ -243,6 +247,39 @@
                                 <span class="nav-link-title"> Absensi </span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <span class="nav-link" href="">
+                                <span class="nav-link-title"> Data Master </span>
+                            </span>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link {{ Route::is($spref . 'akademik.*', request()->path()) ? 'active' : '' }} dropdown-toggle" href="#navbar-form" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-check">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                                        <path d="M15 19l2 2l4 -4" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title"> Master Akademik </span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.taka-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'akademik.taka-render') }}"> 
+                                    Tahun Akademik
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span> 
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.fakultas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'akademik.fakultas-render') }}">
+                                    Fakultas
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.prodi-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'akademik.prodi-render') }}">
+                                    Program Studi
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                            </div>
+                        </li>
+
                     </ul>
                     <!-- END NAVBAR MENU -->
                 </div>

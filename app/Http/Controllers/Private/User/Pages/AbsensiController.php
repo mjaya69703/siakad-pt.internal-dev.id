@@ -32,7 +32,8 @@ class AbsensiController extends Controller
                 ->whereDate('date', $request->date)
                 ->first();
 
-            if ($existingAbsensi) {
+            // Allow multiple attendance only for overtime (type 1)
+            if ($existingAbsensi && $request->type != 1) {
                 Alert::error('Error', 'Anda sudah melakukan absensi untuk tanggal ini');
                 return redirect()->back()->withInput();
             }
@@ -58,7 +59,12 @@ class AbsensiController extends Controller
             // Generate unique code for absensi
             $data['code'] = 'ABS-' . date('Ymd') . '-' . $user->code . '-' . uniqid();
             $data['user_id'] = $user->id;
-            $data['status'] = 0; // Auto Approve
+            
+            // Set status based on type
+            // Only Cuti Tahunan (7) and Pulang Awal (5) need approval
+            $typesNeedingApproval = [1, 5, 7];
+            $data['status'] = in_array($data['type'], $typesNeedingApproval) ? 1 : 0; // 1 = Pending, 0 = Auto Approve
+            
             $data['created_by'] = $user->id;
 
             // Handle photo upload

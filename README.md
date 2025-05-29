@@ -3,7 +3,7 @@
 <p align="center">
 <a href="changelog.md">ESEC Academy - Siakad PT Open Source Project | v2.0 - Changelogs</a>
 <br>
-<span>Latest Update: 27 Mei 2025</span>
+<span>Latest Update: 29 Mei 2025</span>
 </p>
 
 <p align="center">
@@ -14,10 +14,11 @@
 </p>
 
 ## Status Pengembangan
-> **Catatan Penting**: Proyek ini sedang dalam proses re-adaptasi total dan migrasi ke source code baru. Saat ini, hanya fitur-fitur berikut yang sudah berfungsi penuh:
+> **Catatan Penting**: Proyek ini sedang dalam proses re-adaptasi total dan migrasi ke source code baru. Saat ini, fitur-fitur berikut yang sudah berfungsi penuh:
 > - Dashboard/Home
 > - Manajemen Profil
 > - Sistem Absensi
+> - Manajemen Akademik (Fakultas, Program Studi)
 >
 > Fitur-fitur lainnya masih dalam tahap pengembangan dan akan diimplementasikan secara bertahap.
 
@@ -49,20 +50,25 @@ Siakad PT adalah Sistem Informasi Akademik modern yang dirancang khusus untuk pe
 
 3. **Menu Rutinitas**
    - Absensi harian (Check-in/Check-out) ✅
-   - Manajemen izin dan cuti 🔄
+   - Manajemen izin dan cuti ✅
    - Support ticket online 🔄
 
-4. **Menu Publikasi** 🔄
+4. **Menu Akademik** ✅
+   - Manajemen Fakultas
+   - Manajemen Program Studi
+   - Manajemen Tahun Akademik
+
+5. **Menu Publikasi** 🔄
    - Pengumuman
    - Manajemen berita
    - Galeri foto
 
-5. **Menu Finansial** 🔄
+6. **Menu Finansial** 🔄
    - Tagihan online
    - Pembayaran digital
    - Approval absensi
 
-6. **Menu Pusat Informasi** 🔄
+7. **Menu Pusat Informasi** 🔄
    - Manajemen pengguna
    - Data akademik
    - PMB online

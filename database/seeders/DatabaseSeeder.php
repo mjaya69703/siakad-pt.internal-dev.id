@@ -21,43 +21,44 @@ class DatabaseSeeder extends Seeder
     {
 
         // SEEDER KHUSUS DATA MASTER AKADEMIK
-        \App\Models\Fakultas::create([
-            'name'       => 'Fakultas Ilmu Komputer',
-            'code'       => 'FIK',
-            'head_id'    => '1',
-        ]);
-        \App\Models\ProgramStudi::create([
-            'name'       => 'Teknik Informatika',
-            'code'       => 'TI',
-            'cnim'       => '4210',
-            'title'      => ', S.Kom',
-            'level'      => 'S1',
-            'slug'       => Str::slug('Teknik Informatika'),
-            'head_id'    => '1',
-            'faku_id'    => '1',
-        ]);
-        \App\Models\ProgramStudi::create([
-            'name'       => 'Sistem Informasi',
-            'code'       => 'SI',
-            'cnim'       => '4211',
-            'title'      => ', S.Kom',
-            'level'      => 'S1',
-            'slug'       => Str::slug('Sistem Informasi'),
-            'head_id'    => '1',
-            'faku_id'    => '1',
-        ]);
-        \App\Models\TahunAkademik::create([
-            'name'       => 'TA. 2023/2024',
-            'code'       => '012023',
-            'semester'   => '1',
-            'year_start' => '2023',
-        ]);
-        \App\Models\TahunAkademik::create([
-            'name'       => 'TA. 2023/2024',
-            'code'       => '022023',
-            'semester'   => '2',
-            'year_start' => '2023',
-        ]);
+        // \App\Models\TahunAkademik::create([
+        //     'name'       => 'TA. 2023/2024',
+        //     'code'       => '012023',
+        //     'semester'   => '1',
+        //     'year_start' => '2023',
+        // ]);
+        // \App\Models\TahunAkademik::create([
+        //     'name'       => 'TA. 2023/2024',
+        //     'code'       => '022023',
+        //     'semester'   => '2',
+        //     'year_start' => '2023',
+        // ]);
+        // \App\Models\Fakultas::create([
+        //     'name'       => 'Fakultas Ilmu Komputer',
+        //     'code'       => 'FIK',
+        //     'head_id'    => '1',
+        // ]);
+        // \App\Models\ProgramStudi::create([
+        //     'name'       => 'Teknik Informatika',
+        //     'code'       => 'TI',
+        //     'cnim'       => '4210',
+        //     'title'      => ', S.Kom',
+        //     'level'      => 'S1',
+        //     'slug'       => Str::slug('Teknik Informatika'),
+        //     'head_id'    => '1',
+        //     'faku_id'    => '1',
+        // ]);
+        // \App\Models\ProgramStudi::create([
+        //     'name'       => 'Sistem Informasi',
+        //     'code'       => 'SI',
+        //     'cnim'       => '4211',
+        //     'title'      => ', S.Kom',
+        //     'level'      => 'S1',
+        //     'slug'       => Str::slug('Sistem Informasi'),
+        //     'head_id'    => '1',
+        //     'faku_id'    => '1',
+        // ]);
+
         \App\Models\ProgramKuliah::create([
             'name'       => 'Regular Pagi',
             'code'       => 'G1RP-2023',

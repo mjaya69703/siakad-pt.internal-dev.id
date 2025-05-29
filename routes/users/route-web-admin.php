@@ -10,10 +10,12 @@ Route::group(['prefix' => 'web-admin', 'middleware' => ['checkUser:Web Administr
     require __DIR__.'/../private-core.php';
 
 
+    // ADMIN AUTHORITY
+    require __DIR__.'/../master-core.php';
+    
     // STATUS ACTIVE BOLEH AKSES INI
     Route::middleware(['is-active:1'])->group(function () {
 
-        // ADMIN AUTHORITY
 
         // MENU KHUSUS DATA PENGGUNA => DATA ADMIN
         Route::get('/workers/data-admin',[App\Http\Controllers\Admin\Pages\WorkersController::class, 'indexAdmin'])->name('workers.admin-index');

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('web_settings', function (Blueprint $table) {
             $table->id();
 
+            // RELASI INTI
+            $table->integer('taka_now')->nullable();         // TAHUN AKADEMIK SEKARANG
+
             // IDENTITY KAMPUS
             $table->string('school_apps');      // NAMA APLIKASI
             $table->string('school_name');      // NAMA KAMPUS

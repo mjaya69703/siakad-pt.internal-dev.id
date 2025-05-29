@@ -97,6 +97,9 @@ require __DIR__.'/lectures/route-dosen.php';
 // HAK AKSES MAHASISWA
 require __DIR__.'/students/route-mahasiswa.php';
 
+// Include Master Core Routes
+require __DIR__.'/master-core.php';
+
 
 
 

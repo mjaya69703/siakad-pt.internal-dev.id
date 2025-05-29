@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Models\Kepegawaian;
+namespace App\Models\Akademik;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Absensi extends Model
+class TahunAkademik extends Model
 {
     use SoftDeletes;
-    
-    protected $table = 'absensis';
+
+    protected $table = 'tahun_akademiks';
     protected $guarded = [];
 }
