@@ -1,9 +1,9 @@
-<p align="center"><a href="https://siakad-pt.idev-fun.org" target="_blank"><img src="https://siakad-pt.idev-fun.org/storage/images/website/site-logo.png" width="400" alt="Siakad PT Logo"></a></p>
+<p align="center"><a href="https://siakad-pt.idev-fun.org" target="_blank"><img src="./public/logo.png" width="400" alt="Neco Siakad"></a></p>
 
 <p align="center">
 <a href="changelog.md">Neco Siakad By Esec Academy | v2.0 - Changelogs</a>
 <br>
-<span>Latest Update: 29 Mei 2025</span>
+<span>Latest Update: 30 Mei 2025</span>
 </p>
 
 <p align="center">
@@ -22,12 +22,6 @@
 </a>
 </p>
 
-## Tentang Neco Siakad
-Neco Siakad — singkatan dari New Ecosystem — lahir dari sebuah visi untuk menyatukan semua aplikasi dan layanan penting kampus yang selama ini terpisah-pisah ke dalam satu platform digital yang terintegrasi dan mudah digunakan. Bayangkan kemudahan mengelola pendataan infrastruktur, pembayaran kuliah, absensi dosen dan mahasiswa, e-learning, serta layanan akademik lainnya secara terpusat dalam satu sistem: itulah ekosistem baru yang kami hadirkan.
-
-Kami memahami bahwa banyak perguruan tinggi mengalami kesulitan karena sistem yang tersebar dan biaya tinggi untuk berbagai vendor berbeda. Dengan Neco Siakad, kami ingin memberikan solusi yang tidak hanya efisien dan lancar, tapi juga berkualitas tinggi dan lebih terjangkau. Semua ini dibangun di atas teknologi modern Laravel 12 yang handal, dengan fokus pada keamanan, skalabilitas, dan kemudahan penggunaan untuk seluruh civitas akademika.
-
-Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaboratif. Kami mengajak developer, pendidik, dan pengguna untuk bersama-sama mengembangkan sistem ini menjadi standar baru kampus digital di Indonesia. Bersama, kita bisa menciptakan pengalaman akademik yang lebih mudah, efisien, dan berdampak positif bagi seluruh komunitas pendidikan.
 
 ## Status Pengembangan
 > **Catatan Penting**: Proyek ini sedang dalam proses re-adaptasi total dan migrasi ke source code baru. Saat ini, fitur-fitur berikut yang sudah berfungsi penuh:
@@ -49,6 +43,14 @@ Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaborat
 <hr>
 <img src="./storage/demo/demo-profile.png" style="width: 100%;" align="center">
 <p align="center">Halaman Profile User</p>
+
+## Tentang Neco Siakad
+Neco Siakad — singkatan dari New Ecosystem — lahir dari sebuah visi untuk menyatukan semua aplikasi dan layanan penting kampus yang selama ini terpisah-pisah ke dalam satu platform digital yang terintegrasi dan mudah digunakan. Bayangkan kemudahan mengelola pendataan infrastruktur, pembayaran kuliah, absensi dosen dan mahasiswa, e-learning, serta layanan akademik lainnya secara terpusat dalam satu sistem: itulah ekosistem baru yang kami hadirkan.
+
+Kami memahami bahwa banyak perguruan tinggi mengalami kesulitan karena sistem yang tersebar dan biaya tinggi untuk berbagai vendor berbeda. Dengan Neco Siakad, kami ingin memberikan solusi yang tidak hanya efisien dan lancar, tapi juga berkualitas tinggi dan lebih terjangkau. Semua ini dibangun di atas teknologi modern Laravel 12 yang handal, dengan fokus pada keamanan, skalabilitas, dan kemudahan penggunaan untuk seluruh civitas akademika.
+
+Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaboratif. Kami mengajak developer, pendidik, dan pengguna untuk bersama-sama mengembangkan sistem ini menjadi standar baru kampus digital di Indonesia. Bersama, kita bisa menciptakan pengalaman akademik yang lebih mudah, efisien, dan berdampak positif bagi seluruh komunitas pendidikan.
+
 
 ## Fitur yang Sudah Tersedia
 
