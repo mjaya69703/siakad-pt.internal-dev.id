@@ -277,14 +277,18 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.taka-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'akademik.taka-render') }}"> 
                                     Tahun Akademik
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span> 
+
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.fakultas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'akademik.fakultas-render') }}">
                                     Fakultas
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.prodi-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'akademik.prodi-render') }}">
                                     Program Studi
+
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.kurikulum-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'akademik.kurikulum-render') }}">
+                                    Kurikulum
                                     <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
                             </div>

@@ -13,12 +13,30 @@
 <a href="mailto:mjaya69703@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"></a>
 </p>
 
+<p align="center">
+<a href="https://github.com/mjaya69703/siakad-pt.internal-dev.id/fork">
+<img src="https://img.shields.io/badge/Contribute-Fork%20Project-blue?style=for-the-badge&logo=github" alt="Fork Project">
+</a>
+<a href="https://github.com/mjaya69703/siakad-pt.internal-dev.id/issues">
+<img src="https://img.shields.io/badge/Report%20Issue-GitHub%20Issues-red?style=for-the-badge&logo=github" alt="Report Issue">
+</a>
+</p>
+
+## Tentang Neco Siakad
+Neco Siakad — singkatan dari New Ecosystem — lahir dari sebuah visi untuk menyatukan semua aplikasi dan layanan penting kampus yang selama ini terpisah-pisah ke dalam satu platform digital yang terintegrasi dan mudah digunakan. Bayangkan kemudahan mengelola pendataan infrastruktur, pembayaran kuliah, absensi dosen dan mahasiswa, e-learning, serta layanan akademik lainnya secara terpusat dalam satu sistem: itulah ekosistem baru yang kami hadirkan.
+
+Kami memahami bahwa banyak perguruan tinggi mengalami kesulitan karena sistem yang tersebar dan biaya tinggi untuk berbagai vendor berbeda. Dengan Neco Siakad, kami ingin memberikan solusi yang tidak hanya efisien dan lancar, tapi juga berkualitas tinggi dan lebih terjangkau. Semua ini dibangun di atas teknologi modern Laravel 12 yang handal, dengan fokus pada keamanan, skalabilitas, dan kemudahan penggunaan untuk seluruh civitas akademika.
+
+Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaboratif. Kami mengajak developer, pendidik, dan pengguna untuk bersama-sama mengembangkan sistem ini menjadi standar baru kampus digital di Indonesia. Bersama, kita bisa menciptakan pengalaman akademik yang lebih mudah, efisien, dan berdampak positif bagi seluruh komunitas pendidikan.
+
 ## Status Pengembangan
 > **Catatan Penting**: Proyek ini sedang dalam proses re-adaptasi total dan migrasi ke source code baru. Saat ini, fitur-fitur berikut yang sudah berfungsi penuh:
 > - Dashboard/Home
 > - Manajemen Profil
 > - Sistem Absensi
 > - Manajemen Akademik (Fakultas, Program Studi)
+> - Manajemen Tahun Akademik
+> - Manajemen Kurikulum
 >
 > Fitur-fitur lainnya masih dalam tahap pengembangan dan akan diimplementasikan secara bertahap.
 
@@ -31,9 +49,6 @@
 <hr>
 <img src="./storage/demo/demo-profile.png" style="width: 100%;" align="center">
 <p align="center">Halaman Profile User</p>
-
-## About Project
-Siakad PT adalah Sistem Informasi Akademik modern yang dirancang khusus untuk perguruan tinggi. Dibangun dengan Laravel 12, sistem ini menyediakan solusi komprehensif untuk manajemen akademik, mulai dari absensi, manajemen dosen dan mahasiswa, hingga pengelolaan kurikulum dan penjadwalan.
 
 ## Fitur yang Sudah Tersedia
 
@@ -57,6 +72,7 @@ Siakad PT adalah Sistem Informasi Akademik modern yang dirancang khusus untuk pe
    - Manajemen Fakultas
    - Manajemen Program Studi
    - Manajemen Tahun Akademik
+   - Manajemen Kurikulum
 
 5. **Menu Publikasi** 🔄
    - Pengumuman
@@ -168,6 +184,9 @@ Pass: Mahasiswa123
 - PHP v8.2+
 - MariaDB v10.5+ / MySQL v8.0+
 - Docker v27.0+ (Opsional)
+- Composer v2.6+
+- Node.js v20.0+
+- NPM v10.0+
 
 ## Instalasi
 
@@ -264,9 +283,24 @@ setup.bat
 - Enkripsi password
 - Rate limiting
 - CSRF protection
+- XSS protection
+- SQL injection prevention
+
+## Kontribusi
+Kami sangat menghargai kontribusi dari komunitas untuk pengembangan Neco Siakad. Jika Anda ingin berkontribusi:
+
+1. Fork repositori ini
+2. Buat branch fitur baru (`git checkout -b fitur-baru`)
+3. Commit perubahan Anda (`git commit -m 'Menambahkan fitur baru'`)
+4. Push ke branch (`git push origin fitur-baru`)
+5. Buat Pull Request
+
+Jika Anda menemukan bug atau memiliki saran untuk peningkatan, silakan buat issue di [GitHub Issues](https://github.com/mjaya69703/siakad-pt.internal-dev.id/issues).
+
+Untuk melihat source code versi lama dari proyek ini, Anda dapat mengakses [branch oldest](https://github.com/mjaya69703/siakad-pt.internal-dev.id/tree/oldest).
 
 ## Credits
-- Framework: [Laravel 11](https://laravel.com)
+- Framework: [Laravel 12](https://laravel.com)
 - UI/UX: 
   - [Argon Dashboard 2](https://www.creative-tim.com/product/argon-dashboard)
   - [Mazer Dashboard](https://github.com/zuramai/mazer)

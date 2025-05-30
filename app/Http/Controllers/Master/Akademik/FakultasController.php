@@ -22,8 +22,8 @@ class FakultasController extends Controller
         $data['menus'] = "Master";
         $data['pages'] = "Fakultas";
         $data['academy'] = "Siakad PT by Esec Academy";
-        $data['fakultas'] = Fakultas::all(); // Fetch all Fakultas with head relationship
-        $data['dosens'] = Dosen::all(); // Fetch all Dosen
+        $data['fakultas'] = Fakultas::all(); 
+        $data['dosens'] = Dosen::all(); 
         
         return view('master.akademik.fakultas-index', $data, compact('user'));
     }
@@ -36,11 +36,11 @@ class FakultasController extends Controller
             $request->validate([
                 'name' => 'required|string|max:255',
                 'desc' => 'nullable|string',
-                'dekan_id' => 'nullable|integer', // Assuming dekan_id is an integer foreign key
+                'dekan_id' => 'nullable|integer',
             ]);
 
             // Generate unique code
-            $code = 'FAK-' . Str::random(8); // Shorter code for Fakultas
+            $code = 'FAK-' . Str::random(8); 
             
             // Create new Fakultas
             Fakultas::create([
@@ -48,8 +48,8 @@ class FakultasController extends Controller
                 'code' => $code,
                 'slug' => Str::slug($request->name),
                 'desc' => $request->desc,
-                'dekan_id' => $request->dekan_id, // Store dekan_id
-                'status' => 'Aktif', // Default status
+                'dekan_id' => $request->dekan_id, 
+                'status' => 'Aktif', 
                 'created_by' => Auth::id(),
             ]);
 
@@ -72,7 +72,7 @@ class FakultasController extends Controller
             $request->validate([
                 'name' => 'required|string|max:255',
                 'desc' => 'nullable|string',
-                'dekan_id' => 'nullable|integer', // Assuming dekan_id is an integer foreign key
+                'dekan_id' => 'nullable|integer', 
                 'status' => 'required|in:Aktif,Tidak Aktif',
             ]);
 
@@ -113,7 +113,7 @@ class FakultasController extends Controller
             $fakultas->update([
                 'deleted_by' => Auth::id()
             ]);
-            $fakultas->delete(); // Soft delete
+            $fakultas->delete(); 
 
             DB::commit();
             return redirect()->back()->with('success', 'Fakultas berhasil dihapus');

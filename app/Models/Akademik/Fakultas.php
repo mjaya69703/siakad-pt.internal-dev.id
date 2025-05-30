@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Models\Akademik;
+// USE SYSTEM
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 use Illuminate\Database\Eloquent\Model;
+// USE MODELS
 use App\Models\Dosen;
+
 class Fakultas extends Model
 {
     use SoftDeletes;

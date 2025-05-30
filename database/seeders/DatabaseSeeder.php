@@ -20,59 +20,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        // SEEDER KHUSUS DATA MASTER AKADEMIK
-        // \App\Models\TahunAkademik::create([
-        //     'name'       => 'TA. 2023/2024',
-        //     'code'       => '012023',
-        //     'semester'   => '1',
-        //     'year_start' => '2023',
-        // ]);
-        // \App\Models\TahunAkademik::create([
-        //     'name'       => 'TA. 2023/2024',
-        //     'code'       => '022023',
-        //     'semester'   => '2',
-        //     'year_start' => '2023',
-        // ]);
-        // \App\Models\Fakultas::create([
-        //     'name'       => 'Fakultas Ilmu Komputer',
-        //     'code'       => 'FIK',
-        //     'head_id'    => '1',
-        // ]);
-        // \App\Models\ProgramStudi::create([
-        //     'name'       => 'Teknik Informatika',
-        //     'code'       => 'TI',
-        //     'cnim'       => '4210',
-        //     'title'      => ', S.Kom',
-        //     'level'      => 'S1',
-        //     'slug'       => Str::slug('Teknik Informatika'),
-        //     'head_id'    => '1',
-        //     'faku_id'    => '1',
-        // ]);
-        // \App\Models\ProgramStudi::create([
-        //     'name'       => 'Sistem Informasi',
-        //     'code'       => 'SI',
-        //     'cnim'       => '4211',
-        //     'title'      => ', S.Kom',
-        //     'level'      => 'S1',
-        //     'slug'       => Str::slug('Sistem Informasi'),
-        //     'head_id'    => '1',
-        //     'faku_id'    => '1',
-        // ]);
-
-        \App\Models\ProgramKuliah::create([
-            'name'       => 'Regular Pagi',
-            'code'       => 'G1RP-2023',
-            'wave'       => 'Gelombang I',
-            'taka_id'    => '1',
-            'pstudi_id'  => '1',
-        ]);
-        \App\Models\Kurikulum::create([
-            'name'       => 'Kurikulum 2020',
-            'code'       => 'K20',
-            'desc'       => 'Kurikulum 2020 adalah kurikulum dirancang 25 Tahun',
-            'year_start' => '2019',
-            'year_ended' => '2024',
-        ]);
         \App\Models\MataKuliah::create([
             'name'       => 'Jaringan Komputer Dasar',
             'code'       => 'JKD',
@@ -334,6 +281,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             GalleryAlbumSeeder::class,
             UserSeeder::class,
+            \Database\Seeders\Master\AkademikSeeder::class,
         ]);
 
     }

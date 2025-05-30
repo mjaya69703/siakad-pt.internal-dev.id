@@ -330,7 +330,7 @@
                             <tbody>
                                 @foreach ($prodi as $key => $item)
                                     <tr>
-                                        <td data-label="No" class="text-center">{{ ++$key }}</td>
+                                        <td data-label="No">{{ ++$key }}</td>
                                         <td data-label="Nama Program Studi">
                                             <div class="d-flex flex-column">
                                                 <span class="fw-bold">{{ $item->name }}</span>
@@ -347,7 +347,7 @@
                                                 {{ $item->status }}
                                             </span>
                                         </td>
-                                        <td data-label="Aksi" class="text-center">
+                                        <td>
                                             <div class="btn-group" role="group">
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#editData{{ $item->code }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit Program Studi">
                                                     <i class="fas fa-edit"></i>

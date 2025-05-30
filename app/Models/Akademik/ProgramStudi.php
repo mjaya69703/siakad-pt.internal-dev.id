@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Models\Akademik;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
+// USE SYSTEM
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Akademik\Fakultas;
+// USE MODELS
 use App\Models\Dosen;
 
 class ProgramStudi extends Model
