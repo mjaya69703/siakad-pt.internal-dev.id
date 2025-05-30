@@ -1,9 +1,9 @@
 {
-    "name": "Neco Siakad",
-    "short_name": "Neco Siakad",
+    "name": "Laravel",
+    "short_name": "Laravel",
     "background_color": "#6777ef",
     "display": "fullscreen",
-    "description": "Neco Siakad By ESEC Academy",
+    "description": null,
     "theme_color": "#6777ef",
     "start_url": "/",
     "icons": [
