@@ -3,7 +3,7 @@
 <p align="center">
 <a href="changelog.md">Neco Siakad By Esec Academy | v2.0 - Changelogs</a>
 <br>
-<span>Latest Update: 1 Juni 2025</span>
+<span>Latest Update: 2 Juni 2025</span>
 </p>
 
 <p align="center">
@@ -30,7 +30,7 @@
 > - Sistem Absensi
 > - Manajemen Akademik (Tahun Akademik, Fakultas, Program Studi dan Kurikulum)
 > - Manajemen Pengguna (Staff, Dosen, Mahasiswa)
-
+> - Manajemen Publikasi (Kategori, Berita, Galeri Foto, Pengumuman)
 >
 > Fitur-fitur lainnya masih dalam tahap pengembangan dan akan diimplementasikan secara bertahap.
 
@@ -77,10 +77,11 @@ Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaborat
    - Manajemen Tahun Akademik
    - Manajemen Kurikulum
 
-5. **Menu Publikasi** 🔄
-   - Pengumuman
-   - Manajemen berita
-   - Galeri foto
+5. **Menu Publikasi** ✅
+   - Manajemen Kategori
+   - Manajemen Berita
+   - Manajemen Pengumuman
+   - Manajemen Galeri Foto
 
 6. **Menu Finansial** 🔄
    - Tagihan online

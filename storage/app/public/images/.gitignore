@@ -1,7 +1,10 @@
 !gitignore
 absensi/*
+berita/*
+galeri/*
+pengumuman/*
 presensi/*
-document/*.*
+document/*
 profile/*.jpg
 profile/absen/*
 website/logo-*.*

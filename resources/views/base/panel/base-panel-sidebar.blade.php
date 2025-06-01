@@ -3,27 +3,6 @@
         <!-- Bagian menu ini akan disembunyikan ketika pengguna adalah "guest" -->
     @else
         @include('user.sidebar-index')
-        @if (Auth::user()->raw_type === 0)
-            {{-- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
-            @include('user.admin.admin-sidebar-index')
-            {{-- END -- MENU KHUSUS UNTUK WEB ADMINISTRATOR --}}
-        @elseif(Auth::user()->raw_type === 1)
-            {{-- MENU KHUSUS UNTUK DEPARTEMENT FINANCE --}}
-            @include('user.finance.home-sidebar')
-            {{-- END -- MENU KHUSUS UNTUK DEPARTEMENT FINANCE --}}
-        @elseif(Auth::user()->raw_type === 2)
-            {{-- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
-            @include('user.officer.home-sidebar')
-            {{-- END -- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
-        @elseif(Auth::user()->raw_type === 3)
-            {{-- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
-            @include('user.academic.home-sidebar')
-            {{-- END -- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
-        @elseif(Auth::user()->raw_type === 5)
-            {{-- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
-            @include('user.support.home-sidebar')
-            {{-- END -- MENU KHUSUS UNTUK DEPARTEMENT OFFICER --}}
-        @endif
     @endguest
 
     <!-- Menu untuk mahasiswa -->

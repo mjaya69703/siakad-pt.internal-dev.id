@@ -8,6 +8,7 @@
 /vendor
 /storage/framework/views
 *.zip
+*.txt
 .env
 .env.backup
 .env.production

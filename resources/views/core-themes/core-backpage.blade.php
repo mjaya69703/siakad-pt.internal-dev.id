@@ -41,7 +41,7 @@
     <!-- END CUSTOM FONT -->
 </head>
 
-<body>
+<body class="layout-fluid">
     <!-- BEGIN GLOBAL THEME SCRIPT -->
     <script src="{{ asset('dashboard') }}/dist/js/tabler-theme.min.js?1747482948"></script>
     <!-- END GLOBAL THEME SCRIPT -->
@@ -205,11 +205,11 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <a href="#" class="dropdown-item">Status</a>
-                            <a href="./profile.html" class="dropdown-item">Profile</a>
+                            <a href="{{ route($spref . 'profile-render') }}" class="dropdown-item">Profile</a>
                             <a href="#" class="dropdown-item">Feedback</a>
                             <div class="dropdown-divider"></div>
                             <a href="./settings.html" class="dropdown-item">Settings</a>
-                            <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                            <a href="{{ route($spref . 'handle-logout') }}" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -269,18 +269,38 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item {{ Route::is($spref . 'pengguna.users-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'pengguna.users-render') }}"> 
                                     Staff
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'pengguna.dosen-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'pengguna.dosen-render') }}">
                                     Dosen
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'pengguna.mahasiswa-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'pengguna.mahasiswa-render') }}">
                                     Mahasiswa
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
 
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link {{ Route::is($spref . 'publikasi.*', request()->path()) ? 'active' : '' }} dropdown-toggle" href="#navbar-form" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
+<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-news"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" /><path d="M8 8l4 0" /><path d="M8 12l4 0" /><path d="M8 16l4 0" /></svg>                                </span>
+                                <span class="nav-link-title"> Master Publikasi </span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item {{ Route::is($spref . 'publikasi.kategori-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'publikasi.kategori-render') }}"> 
+                                    Kategori
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'publikasi.berita-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'publikasi.berita-render') }}">
+                                    Berita
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'publikasi.pengumuman-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'publikasi.pengumuman-render') }}">
+                                    Pengumuman
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'publikasi.galeri-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'publikasi.galeri-render') }}">
+                                    Galeri
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
 
                             </div>
@@ -549,7 +569,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <a href="#" class="dropdown-item">Status</a>
-                            <a href="{{ route($spref . 'handle-logout') }}" class="dropdown-item">Profile</a>
+                            <a href="{{ route($spref . 'profile-render') }}" class="dropdown-item">Profile</a>
                             <a href="#" class="dropdown-item">Feedback</a>
                             <div class="dropdown-divider"></div>
                             <a href="./settings.html" class="dropdown-item">Settings</a>

@@ -282,6 +282,7 @@ class DatabaseSeeder extends Seeder
             GalleryAlbumSeeder::class,
             UserSeeder::class,
             \Database\Seeders\Master\AkademikSeeder::class,
+            \Database\Seeders\Master\PublikasiSeeder::class,
         ]);
 
     }

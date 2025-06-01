@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Models\Kepegawaian;
-
-use Illuminate\Database\Eloquent\Model;
+// USE SYSTEM
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
+// USE MODELS
 
 class Absensi extends Model
 {
