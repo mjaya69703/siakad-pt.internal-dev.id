@@ -4,10 +4,10 @@ namespace Database\Seeders\Master;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\TahunAkademik;
-use App\Models\Fakultas;
-use App\Models\ProgramStudi;
-use App\Models\Kurikulum;
+use App\Models\Akademik\TahunAkademik;
+use App\Models\Akademik\Fakultas;
+use App\Models\Akademik\ProgramStudi;
+use App\Models\Akademik\Kurikulum;
 use Carbon\Carbon;
 
 class AkademikSeeder extends Seeder
