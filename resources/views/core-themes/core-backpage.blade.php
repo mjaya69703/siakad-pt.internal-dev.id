@@ -260,14 +260,35 @@
                             </span>
                         </li>
                         <li class="nav-item dropdown">
+                            <a class="nav-link {{ Route::is($spref . 'pengguna.*', request()->path()) ? 'active' : '' }} dropdown-toggle" href="#navbar-form" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
+                                </span>
+                                <span class="nav-link-title"> Master Pengguna </span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item {{ Route::is($spref . 'pengguna.users-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'pengguna.users-render') }}"> 
+                                    Staff
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'pengguna.dosen-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'pengguna.dosen-render') }}">
+                                    Dosen
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'pengguna.mahasiswa-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'pengguna.mahasiswa-render') }}">
+                                    Mahasiswa
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+
+                                </a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link {{ Route::is($spref . 'akademik.*', request()->path()) ? 'active' : '' }} dropdown-toggle" href="#navbar-form" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-check">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
-                                        <path d="M15 19l2 2l4 -4" />
-                                    </svg>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-school"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
                                 </span>
                                 <span class="nav-link-title"> Master Akademik </span>
                             </a>
@@ -286,7 +307,6 @@
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.kurikulum-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref.'akademik.kurikulum-render') }}">
                                     Kurikulum
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
                             </div>
                         </li>

@@ -48,19 +48,18 @@
             border-bottom: 2px solid rgba(0,0,0,0.05);
             font-weight: 600;
             color: #6c757d;
-            padding-top: 1rem;    /* Added padding top */
+            padding-top: 1rem;
             padding-bottom: 0.75rem;
-            text-align: left;     /* Default left align for headers */
+            text-align: left;
         }
 
         .table td {
             vertical-align: middle;
             padding-top: 0.75rem;
             padding-bottom: 0.75rem;
-            text-align: left; /* Default left align for cells */
+            text-align: left;
         }
 
-        /* Specific text alignment for certain columns */
         .table th.text-center, .table td.text-center {
             text-align: center !important;
         }
@@ -131,7 +130,7 @@
             .table-responsive td {
                 position: relative;
                 padding-left: 50%;
-                text-align: left !important; /* Ensure left alignment in mobile view */
+                text-align: left !important;
                 border: none;
                 border-bottom: 1px solid #eee;
             }
@@ -158,7 +157,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">{{ $pages }}</h5>
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-                        <i class="fas fa-plus-circle me-2"></i>Tambah Fakultas
+                        <i class="fas fa-plus-circle me-2"></i>Tambah Pengguna
                     </button>
                 </div>
                 <div class="card-body">
@@ -166,14 +165,14 @@
                     <div class="row mb-4">
                         <div class="col-md-6 mb-2">
                             <div class="p-3 bg-light-primary rounded">
-                                <h6 class="mb-2">Total Fakultas</h6>
-                                <h3 class="mb-0">{{ count($fakultas) }}</h3>
+                                <h6 class="mb-2">Total Pengguna</h6>
+                                <h3 class="mb-0">{{ $dosen ? count($dosen) : 0 }}</h3>
                             </div>
                         </div>
                         <div class="col-md-6 mb-2">
                             <div class="p-3 bg-light-success rounded">
-                                <h6 class="mb-2">Fakultas Aktif</h6>
-                                <h3 class="mb-0">{{ $fakultas->where('status', 'Aktif')->count() }}</h3>
+                                <h6 class="mb-2">Pengguna Aktif</h6>
+                                <h3 class="mb-0">{{ $dosen ? $dosen->where('status', 'Aktif')->count() : 0 }}</h3>
                             </div>
                         </div>
                     </div>
@@ -181,34 +180,46 @@
                     <!-- Collapsible Form -->
                     <div class="collapse" id="collapseForm">
                         <div class="card card-body border">
-                            <h5 class="card-title mb-3">Tambah Fakultas Baru</h5>
-                            <form action="{{ route($spref . 'akademik.fakultas-handle') }}" method="post">
+                            <h5 class="card-title mb-3">Tambah Pengguna Baru</h5>
+                            <form action="{{ route($spref . 'pengguna.dosen-handle') }}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="name" class="form-label">Nama Fakultas</label>
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="Contoh: Fakultas Teknik">
+                                        <label for="name" class="form-label">Nama Lengkap</label>
+                                        <input type="text" class="form-control" name="name" id="name" required>
                                         @error('name')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-                                     <div class="col-md-6 mb-3">
-                                        <label for="dekan_id" class="form-label">Dekan (Opsional)</label>
-                                        <select class="form-select" name="dekan_id" id="dekan_id">
-                                             <option value="">Pilih Dekan</option>
-                                            {{-- Options will be dynamically loaded --}}
-                                            @foreach ($dosens as $dosen)
-                                                <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('dekan_id')
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" name="email" id="email" required>
+                                        @error('email')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="desc" class="form-label">Deskripsi (Opsional)</label>
-                                        <textarea name="desc" id="desc" class="form-control" rows="3" placeholder="Deskripsi singkat fakultas"></textarea>
-                                        @error('desc')
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Nomor Telepon</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" required>
+                                        @error('phone')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" name="password" id="password" required>
+                                        @error('password')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="type" class="form-label">Departemen</label>
+                                        <select class="form-select" name="type" id="type" required>
+                                            <option value="">Pilih Departemen</option>
+                                            <option value="0">Dosen Non-Aktif</option>
+                                            <option value="1">Dosen Aktif</option>
+                                        </select>
+                                        @error('type')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -228,41 +239,33 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th>Nama Fakultas</th>
-                                    <th>Kode</th>
-                                    <th>Dekan</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Telepon</th>
                                     <th>Status</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($fakultas as $key => $item)
+                                @foreach ($dosen as $key => $item)
                                     <tr>
                                         <td data-label="No">{{ ++$key }}</td>
-                                        <td data-label="Nama Fakultas">
-                                            <div class="d-flex flex-column">
-                                                <span class="fw-bold">{{ $item->name }}</span>
-                                                @if($item->desc)
-                                                    <small class="text-muted">{{ Str::limit($item->desc, 50) }}</small>
-                                                @endif
-                                            </div>
-                                        </td>
-                                        <td data-label="Kode">{{ $item->code }}</td>
-                                        <td data-label="Dekan">{{ $item->dekan ? $item->dekan->name : '-' }}</td>
-                                        <td data-label="Status">
-                                            <span class="badge {{ $item->status == 'Aktif' ? 'bg-light-success text-success' : 'bg-light-warning text-warning' }}">
-                                                {{ $item->status }}
-                                            </span>
-                                        </td>
+                                        <td data-label="Nama">{{ $item->name }}</td>
+                                        <td data-label="Email">{{ $item->email }}</td>
+                                        <td data-label="Telepon">{{ $item->phone }}</td>
+                                        <td data-label="Status">{{ $item->type }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#editData{{ $item->code }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit Fakultas">
+                                                <a href="{{ route($spref.'pengguna.dosen-views', $item->code) }}" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Lihat Pengguna">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#editData{{ $item->code }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit Pengguna">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route($spref . 'akademik.fakultas-delete', $item->code) }}" method="POST" class="d-inline" id="delete-form-{{ $item->code }}">
+                                                <form action="{{ route($spref . 'pengguna.dosen-delete', $item->code) }}" method="POST" class="d-inline" id="delete-form-{{ $item->code }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-sm btn-danger" data-confirm-delete="true" data-bs-toggle="tooltip" title="Hapus Fakultas" onclick="confirmDelete('{{ $item->code }}')">
+                                                    <button type="button" class="btn btn-sm btn-danger" data-confirm-delete="true" data-bs-toggle="tooltip" title="Hapus Pengguna" onclick="confirmDelete('{{ $item->code }}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
@@ -281,33 +284,32 @@
         <div class="col-lg-4 col-12 mb-2">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Informasi Fakultas</h5>
+                    <h5 class="card-title">Informasi Pengguna</h5>
                 </div>
                 <div class="card-body">
-                    <p>Bagian ini menampilkan informasi umum dan petunjuk terkait pengelolaan Fakultas.</p>
+                    <p>Bagian ini menampilkan informasi umum dan petunjuk terkait pengelolaan Pengguna.</p>
                     
                     <div class="alert alert-light-success">
                         <h6 class="">Petunjuk Penggunaan:</h6>
                         <ul class="mb-0">
-                            <li>Klik tombol "Tambah Fakultas" untuk menambahkan fakultas baru</li>
-                            <li>Klik ikon <i class="fas fa-edit"></i> untuk mengedit data fakultas</li>
-                            <li>Klik ikon <i class="fas fa-trash"></i> untuk menghapus fakultas</li>
+                            <li>Klik tombol "Tambah Pengguna" untuk menambahkan pengguna baru</li>
+                            <li>Klik ikon <i class="fas fa-edit"></i> untuk mengedit data pengguna</li>
+                            <li>Klik ikon <i class="fas fa-trash"></i> untuk menghapus pengguna</li>
                         </ul>
                     </div>
-                    
-                    @if(count($fakultas) > 0)
+
+                    @if(count($dosen) > 0)
                         <div class="mt-4">
-                            <h6>Fakultas Aktif</h6>
+                            <h6>Pengguna Terbaru</h6>
                             <div class="list-group">
-                                {{-- Loop through active fakultas (requires relationship loading for dekan name) --}}
-                                @foreach($fakultas->where('status', 'Aktif')->take(5) as $active)
+                                @foreach($dosen->sortByDesc('created_at')->take(3) as $user)
                                     <div class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-1">{{ $active->name }}</h6>
-                                             {{-- Display Dekan name here (requires relationship loading) --}}
-                                             <small class="text-muted">{{ $active->head ? $active->head->name : 'Belum ada Dekan' }}</small>
+                                            <h6 class="mb-1">{{ $user->name }}</h6>
+                                            <small class="text-muted">{{ $user->created_at->diffForHumans() }}</small>
                                         </div>
-                                        <p class="mb-1">{{ Str::limit($active->desc, 50) }}</p>
+                                        <p class="mb-1">{{ $user->email }}</p>
+                                        <small class="text-muted">{{ $user->phone }}</small>
                                     </div>
                                 @endforeach
                             </div>
@@ -319,58 +321,60 @@
     </div>
 
     <!-- Edit Modals -->
-    @foreach ($fakultas as $item)
+    @foreach ($dosen as $item)
         <div class="modal fade" id="editData{{ $item->code }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ $item->code }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document"> {{-- Added modal-lg for wider modal --}}
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="{{ route($spref . 'akademik.fakultas-update', $item->code) }}" method="POST">
+                    <form action="{{ route($spref . 'pengguna.dosen-update', $item->code) }}" method="POST">
                         @method('patch')
                         @csrf
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $item->code }}">Edit Fakultas - {{ $item->name }}</h5>
+                            <h5 class="modal-title" id="editModalLabel{{ $item->code }}">Edit Pengguna - {{ $item->name }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_name{{ $item->code }}" class="form-label">Nama Fakultas</label>
-                                    <input type="text" class="form-control" name="name" id="edit_name{{ $item->code }}" value="{{ $item->name }}" placeholder="Contoh: Fakultas Teknik">
+                                    <label for="edit_name{{ $item->code }}" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" name="name" id="edit_name{{ $item->code }}" value="{{ $item->name }}" required>
                                     @error('name')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_dekan_id{{ $item->code }}" class="form-label">Dekan (Opsional)</label>
-                                    <select class="form-select" name="dekan_id" id="edit_dekan_id{{ $item->code }}">
-                                         <option value="">Pilih Dekan</option>
-                                        {{-- Options will be dynamically loaded --}}
-                                        @foreach ($dosens as $dosen)
-                                            <option value="{{ $dosen->id }}" {{ $item->dekan_id == $dosen->id ? 'selected' : '' }}>{{ $dosen->name }}</option>
-                                        @endforeach
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_email{{ $item->code }}" class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" id="edit_email{{ $item->code }}" value="{{ $item->email }}" required>
+                                    @error('email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_phone{{ $item->code }}" class="form-label">Nomor Telepon</label>
+                                    <input type="text" class="form-control" name="phone" id="edit_phone{{ $item->code }}" value="{{ $item->phone }}" required>
+                                    @error('phone')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_password{{ $item->code }}" class="form-label">Password Baru (Kosongkan jika tidak ingin mengubah)</label>
+                                    <input type="password" class="form-control" name="password" id="edit_password{{ $item->code }}">
+                                    @error('password')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_type{{ $item->code }}" class="form-label">Departemen</label>
+                                    <select class="form-select" name="type" id="edit_type{{ $item->code }}" required>
+                                        <option value="">Pilih Departemen</option>
+                                        <option value="0" {{ $item->raw_type == 0 ? 'selected' : '' }}>Dosen Non-Aktif</option>
+                                        <option value="1" {{ $item->raw_type == 1 ? 'selected' : '' }}>Dosen Aktif</option>
                                     </select>
-                                    @error('dekan_id')
+                                    @error('type')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-12 mb-3">
-                                    <label for="edit_desc{{ $item->code }}" class="form-label">Deskripsi (Opsional)</label>
-                                    <textarea name="desc" id="edit_desc{{ $item->code }}" class="form-control" rows="3" placeholder="Deskripsi singkat fakultas">{{ $item->desc }}</textarea>
-                                    @error('desc')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <label for="edit_status{{ $item->code }}" class="form-label">Status</label>
-                                    <select class="form-select" name="status" id="edit_status{{ $item->code }}">
-                                        <option value="Aktif" {{ $item->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                                        <option value="Tidak Aktif" {{ $item->status == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
-                                    </select>
-                                    @error('status')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                             </div> {{-- End row --}}
-                        </div> {{-- End modal-body --}}
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary">
@@ -410,11 +414,7 @@
                 },
                 responsive: true,
                 pageLength: 10,
-                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Semua"]],
-                order: [[0, 'asc']],
-                columnDefs: [
-                    { orderable: false, targets: -1 }
-                ]
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Semua"]]
             });
         });
 
@@ -422,7 +422,7 @@
         function confirmDelete(code) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
-                text: "Data fakultas yang dihapus tidak dapat dikembalikan!",
+                text: "Data pengguna yang dihapus tidak dapat dikembalikan!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

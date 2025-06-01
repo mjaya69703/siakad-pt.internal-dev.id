@@ -2,6 +2,7 @@
 
 @section('custom-css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <style>
         /* Stats cards */
         .bg-light-primary {
@@ -563,9 +564,36 @@
 @section('custom-js')
     <script src="{{ asset('dist') }}/assets/extensions/jquery/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
-
+        // Initialize DataTable
+        $(document).ready(function() {
+            $('.table').DataTable({
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    zeroRecords: "Data tidak ditemukan",
+                    info: "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    infoEmpty: "Tidak ada data yang tersedia",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Selanjutnya",
+                        previous: "Sebelumnya"
+                    }
+                },
+                responsive: true,
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Semua"]],
+                order: [[0, 'asc']],
+                columnDefs: [
+                    { orderable: false, targets: -1 }
+                ]
+            });
+        });
 
         // Konfirmasi delete dengan SweetAlert
         function confirmDelete(code) {
