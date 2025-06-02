@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Akademik\ProgramStudi;
 use App\Models\Akademik\Fakultas;
 use App\Models\Dosen;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 class ProgramStudiController extends Controller
@@ -19,10 +20,11 @@ class ProgramStudiController extends Controller
     public function renderProdi()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Program Studi";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['prodi'] = ProgramStudi::with(['fakultas', 'kaprodi'])->get(); // Fetch all Program Studi with relationships
         $data['fakultas'] = Fakultas::where('status', 'Aktif')->get(); // Fetch active Fakultas
         $data['dosens'] = Dosen::where('type', 1)->get(); // Fetch active Dosen for Kaprodi

@@ -123,7 +123,7 @@
                 <!-- BEGIN NAVBAR LOGO -->
                 <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                     <a href="." aria-label="Tabler">
-                        <img src="{{ asset('storage/images/default/logo-horizontal.png') }}" style="height: 32px;" alt="Neco Siakad Logo">
+                        <img src="{{ $webs->school_logo_hori }}" style="height: 32px;" alt="Neco Siakad Logo">
                     </a>
                 </div>
                 <!-- END NAVBAR LOGO -->
@@ -859,8 +859,8 @@
         <div class="container pb-5">
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <h3 class="h4 mb-4">Universitas</h3>
-                    <p class="text-muted">Mencetak generasi unggul yang berdaya saing global dengan keunggulan akademik dan karakter yang kuat.</p>
+                    <h3 class="h4 mb-4">{{ $webs->school_name }}</h3>
+                    <p class="text-muted">{{ $webs->school_desc }}</p>
                     <div class="social-links mt-4 d-flex gap-2">
                         <a href="#" class="btn btn-icon btn-sm btn-ghost-secondary rounded-circle">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
@@ -917,14 +917,14 @@
                                 <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
                                 <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
                             </svg>
-                            <span class="text-muted">Jl. Pendidikan No. 123, Kota Universitas 12345</span>
+                            <span class="text-muted">{{ $webs->school_address }}</span>
                         </li>
                         <li class="mb-3 d-flex gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
                             </svg>
-                            <span class="text-muted">(021) 123-4567</span>
+                            <span class="text-muted">{{ $webs->school_phone }}</span>
                         </li>
                         <li class="mb-3 d-flex gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
@@ -932,7 +932,7 @@
                                 <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
                                 <path d="M3 7l9 6l9 -6"></path>
                             </svg>
-                            <span class="text-muted">info@universitas.ac.id</span>
+                            <span class="text-muted">{{ $webs->school_email }}</span>
                         </li>
                     </ul>
                 </div>
@@ -943,13 +943,13 @@
                 <div class="row align-items-center">
                     <div class="col-lg-8 text-lg-start text-center">
                         <ul class="list-inline list-inline-dots mb-0">
-                            <li class="list-inline-item">Copyright © 2024 <a href="." class="link-secondary">Universitas</a>. All rights reserved.</li>
+                            <li class="list-inline-item">Copyright © {{ \Carbon\Carbon::now()->translatedFormat('F Y') }} <a href="." class="link-secondary">{{ $webs->school_apps }} - {{ $webs->school_name }} </a>. All rights reserved.</li>
                             <li class="list-inline-item"><a href="#" class="link-secondary">Kebijakan Privasi</a></li>
                             <li class="list-inline-item"><a href="#" class="link-secondary">Syarat & Ketentuan</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 mt-3 mt-lg-0 text-lg-end text-center">
-                        <img src="{{ asset('storage/images/default/logo-horizontal.png') }}" style="max-width: 200px; max-height: 128px" alt="Logo" class="h-8">
+                        <img src="{{ $webs->school_logo_hori }}" style="max-width: 200px; max-height: 128px" alt="Logo" class="h-8">
                     </div>
                 </div>
             </div>

@@ -10,16 +10,18 @@ use Illuminate\Support\Facades\DB;
 // USE MODELS
 use App\Models\Akademik\Kurikulum;
 use App\Models\Akademik\ProgramStudi;
+use App\Models\Pengaturan\WebSetting;
 
 class KurikulumController extends Controller
 {
     public function renderKurikulum()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Kurikulum";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['prodi'] = ProgramStudi::all();
         $data['kurikulum'] = Kurikulum::all();
 

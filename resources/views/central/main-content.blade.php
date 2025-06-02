@@ -162,7 +162,7 @@
     <section class="hero-section text-center text-white">
         <div class="container hero-content">
             <h1 class="display-1 fw-bold mb-4">Universitas Masa Depan</h1>
-            <p class="lead fs-3 mb-5">Membentuk Pemimpin Digital untuk Era Transformasi Global</p>
+            <p class="text-white fs-3 mb-5">Membentuk Pemimpin Digital untuk Era Transformasi Global</p>
             <div class="d-flex gap-3 justify-content-center">
                 <a href="#programs" class="btn btn-lg btn-primary">Program Studi</a>
                 <a href="{{ route('auth.render-signin') }}" class="btn btn-lg btn-white">SIAKAD Portal</a>
@@ -593,7 +593,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-8 text-lg-start text-center">
                     <h2 class="mb-3">Siap Bergabung dengan Kami?</h2>
-                    <p class="lead mb-0">Daftar sekarang dan mulai perjalanan akademik Anda bersama kami.</p>
+                    <p class="text-white mb-0">Daftar sekarang dan mulai perjalanan akademik Anda bersama kami.</p>
                 </div>
                 <div class="col-lg-4 text-lg-end text-center mt-4 mt-lg-0">
                     <a href="#" class="btn btn-primary btn-lg">Daftar Sekarang</a>

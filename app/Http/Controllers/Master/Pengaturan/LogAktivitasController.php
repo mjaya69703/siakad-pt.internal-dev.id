@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 // Use Models
 use App\Models\Pengaturan\LogAktivitas;
+use App\Models\Pengaturan\WebSetting;
 use App\Models\User;
 use App\Models\Mahasiswa;
 use App\Models\Dosen;
@@ -19,11 +20,12 @@ class LogAktivitasController extends Controller
     public function renderLogAktivitas()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Log Aktivitas";
-        $data['academy'] = "Siakad PT by Esec Academy";
-        
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
+
         // Get all logs with relationships
         $data['logs'] = LogAktivitas::with('user')
             ->latest()
@@ -41,6 +43,7 @@ class LogAktivitasController extends Controller
     public function viewLogAktivitas($id)
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Detail Log Aktivitas";
@@ -65,6 +68,7 @@ class LogAktivitasController extends Controller
     {
         try {
             $user = Auth::user();
+            $data['webs'] = WebSetting::first();
             $data['spref'] = $user ? $user->prefix : '';
             $data['menus'] = "Master";
             $data['pages'] = "Log Aktivitas";

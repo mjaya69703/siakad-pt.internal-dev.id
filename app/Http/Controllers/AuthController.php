@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use App\Models\Pengaturan\WebSetting;
 // Auth
 use Illuminate\Support\Facades\Auth;
 // Plugins
@@ -17,10 +18,11 @@ class AuthController extends Controller
     public function renderSignin()
     {
         $user = Auth::user() ?: Auth::guard('dosen')->user() ?: Auth::guard('mahasiswa')->user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Login";
         $data['pages'] = "Authentication";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
 
         return view('central.auth.signin-content', $data, compact('user'));
     }

@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 // Use Models
 use App\Models\Publikasi\Kategori;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 class KategoriController extends Controller
@@ -17,10 +18,11 @@ class KategoriController extends Controller
     public function renderKategori()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Kategori";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['kategori'] = Kategori::latest()->get();
         
         return view('master.publikasi.kategori-index', $data, compact('user'));

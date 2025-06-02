@@ -4,21 +4,28 @@ namespace App\Http\Controllers\Private\User\Pages;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+// USE SYSTEM
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+// USE MODELS
 use App\Models\Kepegawaian\Absensi;
+use App\Models\Pengaturan\WebSetting;
+// USE PLUGINS
 use Alert;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class AbsensiController extends Controller
 {
     public function renderAbsensi()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Daftar";
         $data['pages'] = "Absensi";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['absensi'] = Absensi::where('user_id', $user->id)->latest()->get();
         
         return view('central.backpage.absen-index', $data, compact('user'));
@@ -43,7 +50,7 @@ class AbsensiController extends Controller
                 'type' => 'required|integer|in:0,1,2,3,4,5,6,7',
                 'date' => 'required|date',
                 'time_in' => 'required|date_format:H:i',
-                'photo_in' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'photo_in' => 'required|image|mimes:jpeg,png,jpg|max:8192',
                 'desc' => 'nullable|string',
             ]);
 
@@ -69,9 +76,19 @@ class AbsensiController extends Controller
 
             // Handle photo upload
             if ($request->hasFile('photo_in')) {
-                // Simpan foto absensi masuk
-                $photoName = 'absensi_in_' . $user->id . '-' . time() . '-' . uniqid() . '.' . $request->photo_in->getClientOriginalExtension();
-                $request->photo_in->storeAs('images/absensi', $photoName, 'public');
+                // Kompres dan simpan foto absensi masuk
+                $photoName = 'absensi_in_' . $user->id . '-' . time() . '-' . uniqid() . '.jpg';
+                
+                // Buat instance ImageManager dengan driver GD
+                $manager = new ImageManager(new Driver());
+                
+                // Baca dan kompres gambar
+                $image = $manager->read($request->photo_in->getRealPath());
+                $image->scaleDown(height: 800);
+                
+                // Simpan ke storage
+                Storage::disk('public')->put('images/absensi/' . $photoName, $image->toJpeg(80));
+                
                 $data['photo_in'] = $photoName;
             }
 
@@ -100,7 +117,7 @@ class AbsensiController extends Controller
             // Validate the request
             $validator = Validator::make($request->all(), [
                 'time_out' => 'required|date_format:H:i',
-                'photo_out' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'photo_out' => 'required|image|mimes:jpeg,png,jpg|max:8192',
                 'desc' => 'nullable|string',
             ]);
 
@@ -123,9 +140,19 @@ class AbsensiController extends Controller
                 // Get user code from the absensi record
                 $userCode = $absensi->user_id . '-' . time();
 
-                // Save new photo
-                $photoName = 'absensi_out_' . $userCode . '_' . uniqid() . '.' . $request->photo_out->getClientOriginalExtension();
-                $request->photo_out->storeAs('images/absensi', $photoName, 'public');
+                // Kompres dan simpan foto absensi pulang
+                $photoName = 'absensi_out_' . $userCode . '_' . uniqid() . '.jpg';
+                
+                // Buat instance ImageManager dengan driver GD
+                $manager = new ImageManager(new Driver());
+                
+                // Baca dan kompres gambar
+                $image = $manager->read($request->photo_out->getRealPath());
+                $image->scaleDown(height: 800); // Scale down jika tinggi lebih dari 800px
+                
+                // Simpan ke storage
+                Storage::disk('public')->put('images/absensi/' . $photoName, $image->toJpeg(80));
+                
                 $data['photo_out'] = $photoName;
             }
 

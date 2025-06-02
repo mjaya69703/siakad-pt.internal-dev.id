@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 // Use Models
 use App\Models\Dosen;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 class DosenController extends Controller
@@ -19,10 +20,11 @@ class DosenController extends Controller
     public function renderDosen()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Dosen";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['dosen'] = Dosen::latest()->get();
         
         return view('master.pengguna.dosen-index', $data, compact('user'));
@@ -31,10 +33,11 @@ class DosenController extends Controller
     public function viewDosen($code)
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Dosen";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['dosen'] = Dosen::where('code', $code)->first();
         
         return view('master.pengguna.dosen-views', $data, compact('user'));

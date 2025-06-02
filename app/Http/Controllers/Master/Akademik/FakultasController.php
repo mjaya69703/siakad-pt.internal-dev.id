@@ -10,7 +10,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 // Use Models
 use App\Models\Akademik\Fakultas;
-use App\Models\Dosen; // Import Dosen model
+use App\Models\Dosen;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 class FakultasController extends Controller
@@ -18,10 +19,11 @@ class FakultasController extends Controller
     public function renderFakultas()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Fakultas";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['fakultas'] = Fakultas::all(); 
         $data['dosens'] = Dosen::all(); 
         

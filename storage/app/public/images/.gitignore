@@ -1,4 +1,6 @@
 !gitignore
+logo/logo-vert-*
+logo/logo-hori-*
 absensi/*
 berita/*
 galeri/*

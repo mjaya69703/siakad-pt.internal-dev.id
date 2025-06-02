@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Publikasi\Galeri;
 use App\Models\Publikasi\GaleriFoto;
 use App\Models\Publikasi\Kategori;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 class GaleriController extends Controller
@@ -20,10 +21,11 @@ class GaleriController extends Controller
     public function renderGaleri()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Galeri";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['galeri'] = Galeri::latest()->get();
         $data['kategori'] = Kategori::all();
         
@@ -36,7 +38,7 @@ class GaleriController extends Controller
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Galeri";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['galeri'] = Galeri::where('code', $code)->firstOrFail();
         
         return view('master.publikasi.galeri-view', $data, compact('user'));

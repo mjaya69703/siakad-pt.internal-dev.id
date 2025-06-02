@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Private\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+// USE SYSTEM
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
+// USE MODELS
+use App\Models\Pengaturan\WebSetting;
+// USE PLUGINS
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RootController extends Controller
@@ -17,10 +21,11 @@ class RootController extends Controller
     public function renderDashboard()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Detail";
         $data['pages'] = "Profile";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         
         return view('central.back-content', $data, compact('user'));
     }
@@ -28,10 +33,11 @@ class RootController extends Controller
     public function renderProfile()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Detail";
         $data['pages'] = "Profile";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         
         return view('central.backpage.profile-index', $data, compact('user'));
     }
@@ -45,7 +51,7 @@ class RootController extends Controller
                 'name' => 'required|string|max:255',
                 'title_front' => 'nullable|string|max:50',
                 'title_behind' => 'nullable|string|max:50',
-                'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:8192',
                 'bio_placebirth' => 'nullable|string|max:100',
                 'bio_datebirth' => 'nullable|date',
                 'bio_gender' => 'nullable|in:Laki-laki,Perempuan',
@@ -122,16 +128,29 @@ class RootController extends Controller
                     Storage::disk('public')->delete('images/profile/' . $user->photo);
                 }
             
-                // Simpan foto baru
-                $photoName = time() . '-' . $user->code . '-' . uniqid() .'.' . $request->photo->getClientOriginalExtension();
-                $request->photo->storeAs('images/profile', $photoName, 'public');
+                // Kompres dan simpan foto profil
+                $photoName = time() . '-' . $user->code . '-' . uniqid() . '.jpg';
+                
+                // Buat instance ImageManager dengan driver GD
+                $manager = new ImageManager(new Driver());
+                
+                // Baca dan kompres gambar
+                $image = $manager->read($request->photo->getRealPath());
+                
+                // Resize dengan ukuran yang lebih besar untuk foto profil
+                if ($image->height() > 1200) {
+                    $image->scaleDown(height: 1200); 
+                }
+                
+                // Simpan dengan kualitas tinggi (90%)
+                Storage::disk('public')->put('images/profile/' . $photoName, $image->toJpeg(90));
+                
                 $data['photo'] = $photoName;
             }
 
             $user->update($data);
 
-            Alert::success('Success', 'Profile updated successfully');
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Profile updated successfully');
         } catch (\Exception $e) {
             Alert::error('Error', 'Failed to update profile: ' . $e->getMessage());
             return redirect()->back()->withInput();

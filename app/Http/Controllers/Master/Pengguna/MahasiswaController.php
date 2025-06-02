@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 // Use Models
 use App\Models\Mahasiswa;
 use App\Models\Akademik\ProgramStudi;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 class MahasiswaController extends Controller
@@ -20,10 +21,11 @@ class MahasiswaController extends Controller
     public function renderMahasiswa()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Mahasiswa";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['mahasiswa'] = Mahasiswa::latest()->get();
         $data['prodi'] = ProgramStudi::all();
         
@@ -33,10 +35,11 @@ class MahasiswaController extends Controller
     public function viewMahasiswa($code)
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Mahasiswa";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['mahasiswa'] = Mahasiswa::where('code', $code)->first();
         
         return view('master.pengguna.mahasiswa-views', $data, compact('user'));

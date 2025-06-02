@@ -57,7 +57,7 @@
                 <!-- BEGIN NAVBAR LOGO -->
                 <div class="navbar-brand navbar-brand-autodark">
                     <a href="{{ route('root.home-index') }}" aria-label="Tabler">
-                        <img src="{{ asset('storage/images/default/logo-horizontal.png') }}" style="height: 64px; width:200px;" alt="Neco Siakad Logo">
+                        <img src="{{ $webs->school_logo_hori }}" style="height: 64px; width:200px;" alt="Neco Siakad Logo">
                     </a>
                 </div>
                 <!-- END NAVBAR LOGO -->
@@ -361,6 +361,11 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item {{ Route::is($spref . 'pengaturan.log-aktivitas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pengaturan.log-aktivitas-render') }}">
                                     Log Aktivitas
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'pengaturan.web-settings-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pengaturan.web-settings-render') }}">
+                                    Pengaturan Web
                                     <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
 
                                 </a>
@@ -703,7 +708,7 @@
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item">
-                                    Copyright &copy; 2025
+                                    Copyright &copy; {{ \Carbon\Carbon::now()->translatedFormat('F Y') }}
                                     <a href="." class="link-secondary">{{ $academy }}</a>. All rights reserved.
                                 </li>
                                 <li class="list-inline-item">

@@ -209,14 +209,17 @@ class DatabaseSeeder extends Seeder
 
 
 
-        \App\Models\Settings\webSettings::create([
-            'school_apps' => 'ESEC Apps v1.0 ',
+        \App\Models\Pengaturan\WebSetting::create([
+            'school_apps' => 'Neco Siakad',
             'school_name' => 'ESEC Academy',
             'school_head' => 'Dr. Mulawarman Frietz, M.Kom',
-            'school_desc' => 'Salam sejahtera bagi seluruh mahasiswa dan dosen! Saya sebagai Rektor ESEC Academy dengan bangga menyambut Anda di portal Siakad kami. Platform ini adalah jembatan digital yang memudahkan akses dan meningkatkan efisiensi dalam proses akademik dan kemahasiswaan. Mari bersama-sama kita manfaatkan Siakad untuk menciptakan pengalaman belajar yang lebih baik dan membangun masa depan yang cerah bagi pendidikan kita.',
+            'school_desc' => 'Membentuk Pemimpin Digital untuk Era Transformasi Global',
             'school_link' => 'https://instagram.com/mjaya69703',
-            'school_email' => 'jaya.kusuma@internal-dev.id',
-            'school_phone' => '+6287848799145',
+            'school_email' => 'mjaya69703@gmail.com',
+            'school_phone' => '+6281234567895',
+            'school_address' => 'Jl. Raya Kedungjaya No. 1, Kedungjaya, Kec. Kedungjaya, Kabupaten Kedungjaya, Jawa Tengah 56271',
+            'school_longitude' => '-7.266670',
+            'school_latitude' => '110.416670',
             'social_ig' => 'https://instagram.com/mjaya69703',
             'social_fb' => 'https://facebook.com/kyouma052',
             'social_in' => 'https://id.linkedin.com/in/mjaya69703',

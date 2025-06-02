@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 // Use Models
 use App\Models\Akademik\TahunAkademik;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 
@@ -18,10 +19,11 @@ class TahunAkademikController extends Controller
     public function renderTaka()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Tahun Akademik";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['taka'] = TahunAkademik::all();
         
         return view('master.akademik.taka-index', $data, compact('user'));

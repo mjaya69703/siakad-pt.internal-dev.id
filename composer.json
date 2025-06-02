@@ -14,7 +14,7 @@
         "czproject/git-php": "^4.2",
         "erag/laravel-pwa": "^1.7",
         "guzzlehttp/guzzle": "^7.8",
-        "intervention/image": "^3.5",
+        "intervention/image": "^3.11",
         "intervention/image-laravel": "^1.2",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",

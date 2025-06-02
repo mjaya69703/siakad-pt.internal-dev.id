@@ -4,19 +4,25 @@ namespace App\Http\Controllers\Private\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+// USE SYSTEM
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+// USE MODELS
+use App\Models\Pengaturan\WebSetting;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class RootController extends Controller
 {
     public function renderProfile()
     {
         $mahasiswa = Auth::guard('mahasiswa')->user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $mahasiswa ? $mahasiswa->prefix : '';
         $data['menus'] = "Detail";
         $data['pages'] = "Profile Mahasiswa";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         
         return view('central.backpage.profile-mahasiswa', $data, compact('mahasiswa'));
     }
@@ -132,13 +138,25 @@ class RootController extends Controller
                     Storage::disk('public')->delete('images/profile/' . $mahasiswa->photo);
                 }
 
-                // Store new photo
-                $photoName = time() . '-' . $mahasiswa->code . '-' . uniqid() . '-' . uniqid() .'.' . $request->photo->getClientOriginalExtension();
-                $request->photo->storeAs('images/profile', $photoName, 'public');
+                // Kompres dan simpan foto profil
+                $photoName = time() . '-' . $mahasiswa->code . '-' . uniqid() . '-' . uniqid() . '.jpg';
+                
+                // Buat instance ImageManager dengan driver GD
+                $manager = new ImageManager(new Driver());
+                
+                // Baca dan kompres gambar
+                $image = $manager->read($request->photo->getRealPath());
+                
+                // Resize dengan ukuran yang lebih besar untuk foto profil
+                if ($image->height() > 1200) {
+                    $image->scaleDown(height: 1200); 
+                }
+                
+                // Simpan dengan kualitas tinggi (90%)
+                Storage::disk('public')->put('images/profile/' . $photoName, $image->toJpeg(90));
+                
                 $data['photo'] = $photoName;
             }
-
-
 
             // Update mahasiswa information
             $mahasiswa->update($data);

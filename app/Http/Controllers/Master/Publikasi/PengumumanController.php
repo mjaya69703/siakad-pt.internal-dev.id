@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 // Use Models
 use App\Models\Publikasi\Pengumuman;
 use App\Models\Publikasi\Kategori;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 class PengumumanController extends Controller
@@ -19,10 +20,11 @@ class PengumumanController extends Controller
     public function renderPengumuman()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Pengumuman";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['pengumuman'] = Pengumuman::latest()->get();
         $data['kategori'] = Kategori::all();
         
@@ -32,10 +34,11 @@ class PengumumanController extends Controller
     public function viewPengumuman($code)
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Pengumuman";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['pengumuman'] = Pengumuman::where('code', $code)->firstOrFail();
         
         return view('master.publikasi.pengumuman-view', $data, compact('user'));

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 // Use Models
 use App\Models\Publikasi\Berita;
 use App\Models\Publikasi\Kategori;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 class BeritaController extends Controller
@@ -19,10 +20,11 @@ class BeritaController extends Controller
     public function renderBerita()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Berita";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['berita'] = Berita::latest()->get();
         $data['kategori'] = Kategori::all();
         
@@ -35,7 +37,7 @@ class BeritaController extends Controller
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Berita";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['berita'] = Berita::where('code', $code)->firstOrFail();
         
         return view('master.publikasi.berita-view', $data, compact('user'));

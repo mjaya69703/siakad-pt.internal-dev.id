@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 // Use Models
 use App\Models\User;
+use App\Models\Pengaturan\WebSetting;
 // Use Plugins
 
 class UsersController extends Controller
@@ -19,10 +20,11 @@ class UsersController extends Controller
     public function renderUsers()
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Pengguna";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['users'] = User::latest()->get();
         
         return view('master.pengguna.users-index', $data, compact('user'));
@@ -31,10 +33,11 @@ class UsersController extends Controller
     public function viewUsers($code)
     {
         $user = Auth::user();
+        $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Master";
         $data['pages'] = "Pengguna";
-        $data['academy'] = "Siakad PT by Esec Academy";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['users'] = User::where('code', $code)->first();
         
         return view('master.pengguna.users-views', $data, compact('user'));
