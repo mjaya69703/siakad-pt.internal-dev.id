@@ -158,7 +158,7 @@ class UsersController extends Controller
 
             DB::commit();
             $spref = Auth::user() ? Auth::user()->prefix : '';
-            return redirect()->route($spref . 'master.users-views', $code)->with('success', 'Profile berhasil diperbarui');
+            return redirect()->route($spref . 'pengguna.users-views', $code)->with('success', 'Profile berhasil diperbarui');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
@@ -192,7 +192,7 @@ class UsersController extends Controller
 
             DB::commit();
             $spref = Auth::user() ? Auth::user()->prefix : '';
-            return redirect()->route($spref . 'master.users-render')->with('success', 'Pengguna berhasil ditambahkan');
+            return redirect()->route($spref . 'pengguna.users-render')->with('success', 'Pengguna berhasil ditambahkan');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
@@ -230,7 +230,7 @@ class UsersController extends Controller
 
             DB::commit();
             $spref = Auth::user() ? Auth::user()->prefix : '';
-            return redirect()->route($spref . 'master.users-render')->with('success', 'Data pengguna berhasil diperbarui');
+            return redirect()->route($spref . 'pengguna.users-render')->with('success', 'Data pengguna berhasil diperbarui');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();

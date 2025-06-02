@@ -152,7 +152,7 @@ class DosenController extends Controller
 
             DB::commit();
             $spref = Auth::user() ? Auth::user()->prefix : '';
-            return redirect()->route($spref . 'master.dosen-views', $code)->with('success', 'Profile berhasil diperbarui');
+            return redirect()->route($spref . 'pengguna.dosen-views', $code)->with('success', 'Profile berhasil diperbarui');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
@@ -186,7 +186,7 @@ class DosenController extends Controller
 
             DB::commit();
             $spref = Auth::user() ? Auth::user()->prefix : '';
-            return redirect()->route($spref . 'master.dosen-render')->with('success', 'Dosen berhasil ditambahkan');
+            return redirect()->route($spref . 'pengguna.dosen-render')->with('success', 'Dosen berhasil ditambahkan');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
@@ -224,7 +224,7 @@ class DosenController extends Controller
 
             DB::commit();
             $spref = Auth::user() ? Auth::user()->prefix : '';
-            return redirect()->route($spref . 'master.dosen-render')->with('success', 'Data dosen berhasil diperbarui');
+            return redirect()->route($spref . 'pengguna.dosen-render')->with('success', 'Data dosen berhasil diperbarui');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();

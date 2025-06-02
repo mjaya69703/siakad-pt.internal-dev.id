@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 // Use Models
 use App\Models\Mahasiswa;
+use App\Models\Akademik\ProgramStudi;
 // Use Plugins
 
 class MahasiswaController extends Controller
@@ -24,7 +25,7 @@ class MahasiswaController extends Controller
         $data['pages'] = "Mahasiswa";
         $data['academy'] = "Siakad PT by Esec Academy";
         $data['mahasiswa'] = Mahasiswa::latest()->get();
-        $data['prodi'] = \App\Models\ProgramStudi::all();
+        $data['prodi'] = ProgramStudi::all();
         
         return view('master.pengguna.mahasiswa-index', $data, compact('user'));
     }
@@ -178,7 +179,7 @@ class MahasiswaController extends Controller
 
             DB::commit();
             $spref = Auth::user() ? Auth::user()->prefix : '';
-            return redirect()->route($spref . 'master.mahasiswa-views', $code)->with('success', 'Profile berhasil diperbarui');
+            return redirect()->route($spref . 'pengguna.mahasiswa-views', $code)->with('success', 'Profile berhasil diperbarui');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
@@ -218,7 +219,7 @@ class MahasiswaController extends Controller
 
             DB::commit();
             $spref = Auth::user() ? Auth::user()->prefix : '';
-            return redirect()->route($spref . 'master.mahasiswa-render')->with('success', 'Mahasiswa berhasil ditambahkan');
+            return redirect()->route($spref . 'pengguna.mahasiswa-render')->with('success', 'Mahasiswa berhasil ditambahkan');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
@@ -262,7 +263,7 @@ class MahasiswaController extends Controller
 
             DB::commit();
             $spref = Auth::user() ? Auth::user()->prefix : '';
-            return redirect()->route($spref . 'master.mahasiswa-render')->with('success', 'Data mahasiswa berhasil diperbarui');
+            return redirect()->route($spref . 'pengguna.mahasiswa-render')->with('success', 'Data mahasiswa berhasil diperbarui');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();

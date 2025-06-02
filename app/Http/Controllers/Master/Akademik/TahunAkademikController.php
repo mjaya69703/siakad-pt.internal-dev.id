@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // Use System
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 // Use Models
 use App\Models\Akademik\TahunAkademik;
 // Use Plugins
-use Illuminate\Support\Facades\DB;
+
 
 class TahunAkademikController extends Controller
 {

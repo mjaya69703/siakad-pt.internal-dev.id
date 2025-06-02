@@ -3,7 +3,7 @@
 <p align="center">
 <a href="changelog.md">Neco Siakad By Esec Academy | v2.0 - Changelogs</a>
 <br>
-<span>Latest Update: 2 Juni 2025</span>
+<span>Latest Update: 3 Juni 2025</span>
 </p>
 
 <p align="center">
@@ -100,6 +100,12 @@ Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaborat
    - Manajemen Mahasiswa
    - Manajemen Dosen
 
+9. **Sistem Log Aktivitas** ✅
+    - Pencatatan otomatis aksi Create, Update, Delete pada model yang diaktifkan.
+    - Pelacakan detail perubahan data (nilai lama dan baru).
+    - Penyimpanan log yang efisien menggunakan Queue.
+    - Antarmuka untuk melihat, memfilter, dan menghapus log aktivitas.
+
 
 ### Dosen 🔄
 1. **Dashboard Dosen**
@@ -148,6 +154,65 @@ Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaborat
 > - ✅ Fitur sudah tersedia dan berfungsi penuh
 > - 🔄 Fitur dalam tahap pengembangan
 > - ⏳ Fitur akan segera diimplementasikan
+
+## Sistem Log Aktivitas
+
+Sistem log aktivitas di Neco Siakad dirancang untuk mencatat dan melacak perubahan penting yang terjadi pada data dalam aplikasi. Ini membantu dalam audit, pemecahan masalah, dan memahami aktivitas pengguna.
+
+**Cara Kerja:**
+
+Sistem ini menggunakan PHP Trait `HasLogAktivitas` yang ditambahkan ke model Eloquent. Ketika sebuah model yang menggunakan trait ini dibuat, diperbarui, atau dihapus, event terkait (Eloquent events) akan memicu proses logging secara otomatis.
+
+Untuk model dengan banyak kolom atau data besar, proses logging dilakukan secara asinkron melalui **Queue** untuk menghindari beban berlebih pada request HTTP dan mencegah error memori.
+
+**Data yang Dicatat:**
+
+Setiap entri log aktivitas mencatat informasi berikut:
+
+*   **User:** Pengguna yang melakukan tindakan (Administrator, Mahasiswa, atau Dosen), beserta tipe dan ID-nya.
+*   **Aksi:** Jenis tindakan yang dilakukan (Membuat, Mengubah, Menghapus).
+*   **Model:** Model Eloquent yang terpengaruh oleh aksi (misalnya, `App\Models\Akademik\Fakultas`, `App\Models\User`, dll.), beserta ID objek model tersebut.
+*   **Perubahan Data:** Untuk aksi 'Mengubah', sistem mencatat detail setiap field yang berubah, menampilkan nilai lama dan nilai baru. Untuk aksi 'Membuat', mencatat nilai baru field yang diisi. Untuk aksi 'Menghapus', mencatat nilai lama objek sebelum dihapus.
+*   **Deskripsi:** Ringkasan tindakan yang dilakukan (misalnya, "Mengubah data Fakultas").
+*   **Waktu:** Timestamp kapan aksi dilakukan.
+*   **IP Address:** Alamat IP pengguna yang melakukan aksi.
+*   **User Agent:** Informasi browser atau aplikasi yang digunakan pengguna.
+
+**Penggunaan:**
+
+Untuk mengaktifkan logging pada model Eloquent, cukup tambahkan trait `App\Traits\HasLogAktivitas` ke definisi class model tersebut:
+
+```php
+<?php
+
+namespace App\Models\YourModule;
+
+use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasLogAktivitas;
+
+class YourModel extends Model
+{
+    use HasLogAktivitas;
+
+    // ... other model properties and methods
+}
+```
+
+Pastikan model Anda memiliki properti `$fillable` yang mendefinisikan kolom mana yang aman untuk mass assignment, atau gunakan `$guarded = []` jika semua kolom (kecuali yang dijaga secara internal oleh Laravel) boleh diisi. Sistem log akan menggunakan informasi ini untuk menentukan detail perubahan yang relevan.
+
+**Melihat Log Aktivitas:**
+
+Log aktivitas dapat dilihat melalui antarmuka pengguna di bagian Pengaturan > Log Aktivitas (URL: `/pengaturan/log-aktivitas`). Halaman ini menyediakan daftar semua log, filter berdasarkan tipe user, aksi, dan rentang tanggal, serta tampilan detail untuk setiap entri log yang menampilkan semua informasi yang dicatat, termasuk perubahan data secara rinci.
+
+Anda juga bisa mengakses log terkait model tertentu melalui relasi `activityLogs()` atau mendapatkan aktivitas terbaru yang dilakukan oleh user melalui method `recentActivity()` jika model tersebut menggunakan trait tersebut dan merupakan model User/Mahasiswa/Dosen.
+
+```php
+// Mengambil semua log terkait model tertentu
+$model->activityLogs;
+
+// Mengambil aktivitas terbaru yang dilakukan oleh user ini
+$user->recentActivity(10);
+```
 
 ## Demo
 ```
@@ -247,12 +312,84 @@ MIDTRANS_IS_3DS=true
 
 # Security
 SIAKAD_SECRET_KEY=xxxxxxxx
+
+# Queue Configuration (for Activity Logging)
+QUEUE_CONNECTION=database # Or redis, sqs, etc.
 ```
 
-4. Jalankan Aplikasi
+Pastikan untuk mengisi detail koneksi database dan email/lainnya sesuai kebutuhan Anda. Untuk fitur Log Aktivitas, **penting** untuk mengatur `QUEUE_CONNECTION` ke selain `sync` (disarankan `database` atau `redis`) agar proses logging model yang besar dapat berjalan di background dan tidak membebani request HTTP.
+
+4. Jalankan Migrasi Database
+
+Jalankan migrasi untuk membuat tabel yang diperlukan, termasuk tabel log aktivitas dan tabel queue (jika menggunakan driver `database`):
+
+```bash
+# Jika menggunakan driver database untuk queue, jalankan migrasi tabel queue:
+php artisan queue:table
+php artisan migrate
+```
+
+5. Jalankan Aplikasi dan Worker Queue
+
+Jalankan aplikasi Laravel Anda:
+
 ```bash
 php artisan serve
 ```
+
+Untuk memproses log aktivitas yang dikirim ke queue, Anda perlu menjalankan worker queue. Buka **terminal baru** di root proyek Anda dan jalankan:
+
+```bash
+php artisan queue:work
+```
+
+**Penting:** Biarkan terminal worker queue ini tetap berjalan di background (atau gunakan tools seperti Supervisor di produksi) agar log aktivitas dapat diproses dan tersimpan di database secara otomatis.
+
+**Deploying Queue Worker with Supervisor (Produksi)**
+
+Untuk menjalankan worker queue secara persistent di server produksi, disarankan menggunakan process monitor seperti [Supervisor](http://supervisord.org/). Supervisor akan memastikan worker queue Anda terus berjalan dan me-restart-nya secara otomatis jika terjadi kegagalan.
+
+Langkah-langkah umum menggunakan Supervisor:
+
+1.  **Instal Supervisor:** Instal Supervisor di server Linux Anda. Instruksi instalasi bervariasi tergantung distribusi Linux (misalnya, `sudo apt-get install supervisor` di Ubuntu).
+
+2.  **Buat File Konfigurasi:** Buat file konfigurasi baru untuk worker queue Laravel Anda di direktori konfigurasi Supervisor (biasanya `/etc/supervisor/conf.d/`). Beri nama file yang deskriptif, misalnya `laravel-worker.conf`.
+
+3.  **Isi File Konfigurasi:** Tambahkan konfigurasi berikut. Sesuaikan `directory`, `command`, `user`, dan `numprocs` sesuai dengan setup server dan kebutuhan Anda:
+
+    ```ini
+    [program:laravel-worker]
+    process_name=%(program_name)s_%(process_num)02d
+    command=php /path/to/your/laravel/project/artisan queue:work database --sleep=3 --tries=3 --max-time=3600
+    autostart=true
+    autorestart=true
+    stopafterwait=5
+    redirect_stderr=true
+    stdout_logfile=/path/to/your/laravel/project/storage/logs/worker.log
+    numprocs=1
+    user=your_server_user
+    directory=/path/to/your/laravel/project
+    environment=ASUSER="your_server_user"
+    ```
+
+    *   Ganti `/path/to/your/laravel/project` dengan path absolut ke root proyek Laravel Anda.
+    *   Ganti `your_server_user` dengan user sistem yang Anda gunakan untuk menjalankan aplikasi (misalnya `www-data` atau `forge`).
+    *   `queue:work database`: Ganti `database` jika Anda menggunakan driver queue lain (misalnya `redis`).
+    *   `--sleep=3`: Berapa detik worker akan tidur jika tidak ada Job baru.
+    *   `--tries=3`: Berapa kali Job akan dicoba sebelum dianggap gagal permanen.
+    *   `--max-time=3600`: Worker akan restart setelah 3600 detik (1 jam) untuk menghindari akumulasi memori atau masalah lainnya.
+    *   `numprocs=1`: Jumlah worker yang ingin dijalankan. Tingkatkan jika perlu memproses banyak Job secara paralel.
+
+4.  **Perbarui dan Jalankan Supervisor:** Beri tahu Supervisor untuk membaca konfigurasi baru dan mulai menjalankan worker:
+
+    ```bash
+    sudo supervisorctl reread
+    sudo supervisorctl update
+    sudo supervisorctl start laravel-worker:*
+    ```
+
+Worker queue sekarang akan berjalan di background, dipantau dan dikelola oleh Supervisor.
+
 
 ## Shortcut Commands
 

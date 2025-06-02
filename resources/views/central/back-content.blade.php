@@ -187,34 +187,25 @@
                         <h5 class="card-title">Recent Activities</h5>
                     </div>
                     <div class="card-body recent-activity">
-                        <div class="activity-item">
-                            <div class="d-flex justify-content-between">
-                                <h6 class="mb-1">New Student Registration</h6>
-                                <small class="text-muted">2 mins ago</small>
-                            </div>
-                            <p class="mb-0">John Doe registered for Computer Science</p>
-                        </div>
-                        <div class="activity-item">
-                            <div class="d-flex justify-content-between">
-                                <h6 class="mb-1">Course Update</h6>
-                                <small class="text-muted">1 hour ago</small>
-                            </div>
-                            <p class="mb-0">Advanced Mathematics syllabus updated</p>
-                        </div>
-                        <div class="activity-item">
-                            <div class="d-flex justify-content-between">
-                                <h6 class="mb-1">New Faculty Member</h6>
-                                <small class="text-muted">3 hours ago</small>
-                            </div>
-                            <p class="mb-0">Dr. Sarah Smith joined the Physics department</p>
-                        </div>
-                        <div class="activity-item">
-                            <div class="d-flex justify-content-between">
-                                <h6 class="mb-1">Event Announcement</h6>
-                                <small class="text-muted">5 hours ago</small>
-                            </div>
-                            <p class="mb-0">Annual Science Fair scheduled for next month</p>
-                        </div>
+                        {{-- Check if user is logged in and has recent activities --}}
+                        @if(isset($user) && $user && $user->recentActivity()->count() > 0)
+                            @foreach($user->recentActivity(10) as $activity)
+                                <div class="activity-item">
+                                    <div class="d-flex justify-content-between">
+                                        {{-- Display action description or model type --}}
+                                        <h6 class="mb-1">{{ $activity->actionDescription ?? class_basename($activity->model_type) }}</h6>
+                                        {{-- Display time using Carbon's diffForHumans --}}
+                                        <small class="text-muted">{{ $activity->created_at->diffForHumans() }}</small>
+                                    </div>
+                                    {{-- Display log description --}}
+                                    <p class="mb-0">{{ $activity->description }}</p>
+                                    {{-- Optional: Link to detailed view --}}
+                                    {{-- <a href="{{ route($spref . 'pengaturan.log-aktivitas-view', $activity->id) }}" class="text-decoration-none"><small>View Details</small></a> --}}
+                                </div>
+                            @endforeach
+                        @else
+                            <p class="text-muted">Tidak ada aktivitas terbaru.</p>
+                        @endif
                     </div>
                 </div>
             </div>

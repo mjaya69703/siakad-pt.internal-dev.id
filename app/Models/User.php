@@ -10,10 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\User\Mahasiswa;
 use App\Models\User\Dosen;
 use App\Models\User\Staff;
+use App\Traits\HasLogAktivitas;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasLogAktivitas;
 
 
     protected $table = 'users';
