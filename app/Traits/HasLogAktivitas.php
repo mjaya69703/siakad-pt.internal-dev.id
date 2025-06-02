@@ -28,6 +28,23 @@ trait HasLogAktivitas
         });
     }
 
+    protected static function getClientIp()
+    {
+        $ip = null;
+        
+        if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+            $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+        } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } elseif (isset($_SERVER['HTTP_X_REAL_IP'])) {
+            $ip = $_SERVER['HTTP_X_REAL_IP'];
+        } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        return $ip;
+    }
+
     protected static function logAktivitas($model, $action)
     {
         $authenticatedUser = null;
@@ -151,7 +168,7 @@ trait HasLogAktivitas
                 get_class($model),
                 $model->id,
                 $changesToLog,
-                Request::ip(),
+                static::getClientIp(),
                 Request::userAgent(),
                 static::getLogDescription($model, $action)
             );
