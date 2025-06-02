@@ -61,7 +61,6 @@ jobs:
             php artisan view:cache
 
             echo "Running migrations with fresh database..."
-            php artisan queue:table
             php artisan migrate:fresh --seed --force
 
             echo "Deployment finished!"
