@@ -263,43 +263,84 @@ class WebSettingController extends Controller
     public function importDatabase(Request $request)
     {
         try {
+            // More permissive validation
             $request->validate([
-                'database_file' => 'required|file|mimes:sql|max:10240' // Max 10MB
+                'database_file' => 'required|file|max:10240' // Only check if it's a file and size limit
             ]);
-
-            // Get database configuration
-            $host = env('DB_HOST');
-            $database = env('DB_DATABASE');
-            $username = env('DB_USERNAME');
-            $password = env('DB_PASSWORD');
 
             // Store uploaded file
             $file = $request->file('database_file');
-            $filePath = $file->getRealPath();
+            
+            // Debug information
+            \Log::info('File details:', [
+                'original_name' => $file->getClientOriginalName(),
+                'mime_type' => $file->getMimeType(),
+                'extension' => $file->getClientOriginalExtension(),
+                'size' => $file->getSize()
+            ]);
 
-            // Import database using mysql command
-            $command = sprintf(
-                'mysql --host=%s --user=%s --password=%s %s < %s',
-                $host,
-                $username,
-                $password,
-                $database,
-                $filePath
-            );
+            // Read the SQL file
+            $sql = file_get_contents($file->getRealPath());
+            
+            // Get a fresh database connection
+            $connection = DB::connection();
+            
+            try {
+                // Disable foreign key checks
+                $connection->statement('SET FOREIGN_KEY_CHECKS=0');
+                
+                // Process the SQL file
+                $queries = [];
+                $currentQuery = '';
+                
+                // Split the file into lines
+                $lines = explode("\n", $sql);
+                
+                foreach ($lines as $line) {
+                    // Skip comments and empty lines
+                    if (empty(trim($line)) || strpos(trim($line), '--') === 0) {
+                        continue;
+                    }
+                    
+                    $currentQuery .= $line;
+                    
+                    // If the line ends with a semicolon, it's the end of a query
+                    if (substr(trim($line), -1) === ';') {
+                        $queries[] = $currentQuery;
+                        $currentQuery = '';
+                    }
+                }
+                
+                // Execute each query
+                foreach ($queries as $query) {
+                    if (!empty(trim($query))) {
+                        try {
+                            $connection->unprepared($query);
+                        } catch (\Exception $e) {
+                            \Log::error('Query failed: ' . $query);
+                            \Log::error('Error: ' . $e->getMessage());
+                            throw $e;
+                        }
+                    }
+                }
+                
+                // Re-enable foreign key checks
+                $connection->statement('SET FOREIGN_KEY_CHECKS=1');
+                
+                // Clear cache after import
+                Artisan::call('cache:clear');
+                Artisan::call('config:clear');
+                Artisan::call('view:clear');
 
-            exec($command, $output, $returnVar);
-
-            if ($returnVar !== 0) {
-                throw new \Exception('Failed to import database');
+                Alert::success('Success', 'Database imported successfully');
+                return redirect()->back();
+                
+            } catch (\Exception $e) {
+                // Re-enable foreign key checks in case of error
+                $connection->statement('SET FOREIGN_KEY_CHECKS=1');
+                throw new \Exception('Failed to import database: ' . $e->getMessage());
             }
 
-            // Clear cache after import
-            Artisan::call('cache:clear');
-            Artisan::call('config:clear');
-            Artisan::call('view:clear');
-
-            Alert::success('Success', 'Database imported successfully');
-            return redirect()->back();
         } catch (\Exception $e) {
             Alert::error('Error', 'Failed to import database: ' . $e->getMessage());
             return redirect()->back();
