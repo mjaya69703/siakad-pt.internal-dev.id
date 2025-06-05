@@ -57,6 +57,42 @@ use Illuminate\Support\Facades\Route;
     Route::patch('/akademik/waktu-kuliah/{code}',[App\Http\Controllers\Master\Akademik\WaktuKuliahController::class, 'updateWaktuKuliah'])->name('akademik.waktu-kuliah-update');
     Route::delete('/akademik/waktu-kuliah/{code}',[App\Http\Controllers\Master\Akademik\WaktuKuliahController::class, 'deleteWaktuKuliah'])->name('akademik.waktu-kuliah-delete');
 
+    // MASTER PMB => PERIODE PENDAFTARAN
+    Route::get('/pmb/periode',[App\Http\Controllers\Master\PMB\PeriodePendaftaranController::class, 'renderPeriode'])->name('pmb.periode-render');
+    Route::post('/pmb/periode',[App\Http\Controllers\Master\PMB\PeriodePendaftaranController::class, 'handlePeriode'])->name('pmb.periode-handle');
+    Route::patch('/pmb/periode/{code}',[App\Http\Controllers\Master\PMB\PeriodePendaftaranController::class, 'updatePeriode'])->name('pmb.periode-update');
+    Route::delete('/pmb/periode/{code}',[App\Http\Controllers\Master\PMB\PeriodePendaftaranController::class, 'deletePeriode'])->name('pmb.periode-delete');
+
+    // MASTER PMB => JALUR PENDAFTARAN
+    Route::get('/pmb/jalur',[App\Http\Controllers\Master\PMB\JalurPendaftaranController::class, 'renderJalur'])->name('pmb.jalur-render');
+    Route::post('/pmb/jalur',[App\Http\Controllers\Master\PMB\JalurPendaftaranController::class, 'handleJalur'])->name('pmb.jalur-handle');
+    Route::patch('/pmb/jalur/{code}',[App\Http\Controllers\Master\PMB\JalurPendaftaranController::class, 'updateJalur'])->name('pmb.jalur-update');
+    Route::delete('/pmb/jalur/{code}',[App\Http\Controllers\Master\PMB\JalurPendaftaranController::class, 'deleteJalur'])->name('pmb.jalur-delete');
+    
+    // MASTER PMB => BIAYA PENDAFTARAN
+    Route::get('/pmb/biaya',[App\Http\Controllers\Master\PMB\BiayaPendaftaranController::class, 'renderBiaya'])->name('pmb.biaya-render');
+    Route::post('/pmb/biaya',[App\Http\Controllers\Master\PMB\BiayaPendaftaranController::class, 'handleBiaya'])->name('pmb.biaya-handle');
+    Route::patch('/pmb/biaya/{code}',[App\Http\Controllers\Master\PMB\BiayaPendaftaranController::class, 'updateBiaya'])->name('pmb.biaya-update');
+    Route::delete('/pmb/biaya/{code}',[App\Http\Controllers\Master\PMB\BiayaPendaftaranController::class, 'deleteBiaya'])->name('pmb.biaya-delete');
+    
+    // MASTER PMB => SYARAT PENDAFTARAN
+    Route::get('/pmb/syarat',[App\Http\Controllers\Master\PMB\SyaratPendaftaranController::class, 'renderSyarat'])->name('pmb.syarat-render');
+    Route::post('/pmb/syarat',[App\Http\Controllers\Master\PMB\SyaratPendaftaranController::class, 'handleSyarat'])->name('pmb.syarat-handle');
+    Route::patch('/pmb/syarat/{code}',[App\Http\Controllers\Master\PMB\SyaratPendaftaranController::class, 'updateSyarat'])->name('pmb.syarat-update');
+    Route::delete('/pmb/syarat/{code}',[App\Http\Controllers\Master\PMB\SyaratPendaftaranController::class, 'deleteSyarat'])->name('pmb.syarat-delete');
+    
+    // MASTER PMB => GELOMBANG PENDAFTARAN
+    Route::get('/pmb/gelombang',[App\Http\Controllers\Master\PMB\GelombangPendaftaranController::class, 'renderGelombang'])->name('pmb.gelombang-render');
+    Route::post('/pmb/gelombang',[App\Http\Controllers\Master\PMB\GelombangPendaftaranController::class, 'handleGelombang'])->name('pmb.gelombang-handle');
+    Route::patch('/pmb/gelombang/{code}',[App\Http\Controllers\Master\PMB\GelombangPendaftaranController::class, 'updateGelombang'])->name('pmb.gelombang-update');
+    Route::delete('/pmb/gelombang/{code}',[App\Http\Controllers\Master\PMB\GelombangPendaftaranController::class, 'deleteGelombang'])->name('pmb.gelombang-delete');
+    
+    // MASTER PMB => JADWAL PMB
+    Route::get('/pmb/jadwal',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'renderJadwal'])->name('pmb.jadwal-render');
+    Route::post('/pmb/jadwal',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'handleJadwal'])->name('pmb.jadwal-handle');
+    Route::patch('/pmb/jadwal/{code}',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'updateJadwal'])->name('pmb.jadwal-update');
+    Route::delete('/pmb/jadwal/{code}',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'deleteJadwal'])->name('pmb.jadwal-delete');
+
     // MASTER PENGGUNA => USERS 
     Route::get('/pengguna/users',[App\Http\Controllers\Master\Pengguna\UsersController::class, 'renderUsers'])->name('pengguna.users-render');
     Route::get('/pengguna/users/{code}/views',[App\Http\Controllers\Master\Pengguna\UsersController::class, 'viewUsers'])->name('pengguna.users-views');

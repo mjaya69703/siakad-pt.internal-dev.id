@@ -327,41 +327,68 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.taka-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.taka-render') }}">
                                     Tahun Akademik
-
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.fakultas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.fakultas-render') }}">
                                     Fakultas
-
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.prodi-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.prodi-render') }}">
                                     Program Studi
-
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.kurikulum-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.kurikulum-render') }}">
                                     Kurikulum
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.mata-kuliah-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.mata-kuliah-render') }}">
                                     Mata Kuliah
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.jenis-kelas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.jenis-kelas-render') }}">
                                     Jenis Kelas
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.kelas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.kelas-render') }}">
                                     Kelas
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.waktu-kuliah-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.waktu-kuliah-render') }}">
                                     Waktu Kuliah
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.jadwal-kuliah-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.jadwal-kuliah-render') }}">
                                     Jadwal Kuliah
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link {{ Route::is($spref . 'pmb.*', request()->path()) ? 'active' : '' }} dropdown-toggle" href="#navbar-form" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-settings-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12.483 20.935c-.862 .239 -1.898 -.178 -2.158 -1.252a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.08 .262 1.496 1.308 1.247 2.173" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>
+                                </span>
+                                <span class="nav-link-title"> Master PMB </span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item {{ Route::is($spref . 'pmb.periode-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pmb.periode-render') }}">
+                                    Periode Pendaftaran
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'pmb.jalur-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pmb.jalur-render') }}">
+                                    Jalur Pendaftaran
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'pmb.biaya-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pmb.biaya-render') }}">
+                                    Biaya Pendaftaran
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'pmb.syarat-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pmb.syarat-render') }}">
+                                    Syarat Pendaftaran
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'pmb.gelombang-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pmb.gelombang-render') }}">
+                                    Gelombang
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'pmb.jadwal-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pmb.jadwal-render') }}">
+                                    Jadwal PMB
                                     <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
                             </div>
                         </li>
+
                         <li class="nav-item">
                             <span class="nav-link" href="">
                                 <span class="nav-link-title"> Pengaturan </span>
@@ -381,12 +408,9 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item {{ Route::is($spref . 'pengaturan.log-aktivitas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pengaturan.log-aktivitas-render') }}">
                                     Log Aktivitas
-
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'pengaturan.web-settings-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pengaturan.web-settings-render') }}">
                                     Pengaturan Web
-
-
                                 </a>
 
                             </div>

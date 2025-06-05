@@ -55,59 +55,6 @@ class DatabaseSeeder extends Seeder
             'code'       => 'C-103',
         ]);
 
-        // TAGIHAN KULIAH
-        \App\Models\TagihanKuliah::create([
-            'users_id'    => '1',
-            'name'    => 'UKT Semester 1',
-            'code'    => 'UKT-'.Str::random(8),
-            'price'    => '2400000',
-        ]);
-        // TAGIHAN KULIAH
-        \App\Models\TagihanKuliah::create([
-            'proku_id'    => '1',
-            'name'    => 'UKT Semester 2',
-            'code'    => 'UKT-'.Str::random(8),
-            'price'    => '2200000',
-        ]);
-        // DEFAULT TUGAS SEEDER
-        \App\Models\studentTask::create([
-            'dosen_id'    => '1',
-            'jadkul_id'    => '1',
-            'code'    => Str::random(8),
-            'title'    => 'First Task',
-            'detail_task'    => 'First Task Deskription',
-            'exp_date'  => Carbon::now()->addDays(7),
-            'exp_time'  => Carbon::now()->addHours(12),
-        ]);
-        \App\Models\studentTask::create([
-            'dosen_id'    => '1',
-            'jadkul_id'    => '2',
-            'code'    => Str::random(8),
-            'title'    => 'First Task',
-            'detail_task'    => 'First Task Deskription',
-            'exp_date'  => Carbon::now()->addDays(7),
-            'exp_time'  => Carbon::now()->addHours(12),
-        ]);
-        \App\Models\studentTask::create([
-            'dosen_id'    => '1',
-            'jadkul_id'    => '3',
-            'code'    => Str::random(8),
-            'title'    => 'Second Task',
-            'detail_task'    => 'Second Task Deskription',
-            'exp_date'  => Carbon::now()->addDays(7),
-            'exp_time'  => Carbon::now()->addHours(12),
-        ]);
-        \App\Models\studentTask::create([
-            'dosen_id'    => '1',
-            'jadkul_id'    => '4',
-            'code'    => Str::random(8),
-            'title'    => 'Second Task',
-            'detail_task'    => 'Second Task Deskription',
-            'exp_date'  => Carbon::now()->addDays(7),
-            'exp_time'  => Carbon::now()->addHours(12),
-        ]);
-
-
 
         \App\Models\Pengaturan\WebSetting::create([
             'school_apps' => 'Neco Siakad',
@@ -130,6 +77,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             \Database\Seeders\Master\AkademikSeeder::class,
             \Database\Seeders\Master\PublikasiSeeder::class,
+            \Database\Seeders\Master\PMBSeeder::class,
         ]);
 
     }

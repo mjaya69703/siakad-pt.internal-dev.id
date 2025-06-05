@@ -41,68 +41,7 @@ class JadwalKuliahController extends Controller
         
         return view('master.akademik.jadwal-kuliah-index', $data, compact('user'));
     }
-
-    public function getWaktuKuliahByJenisKelas($jenis_kelas_id)
-    {
-        try {
-            // Debug log the incoming request
-            \Log::info('getWaktuKuliahByJenisKelas called with ID:', ['jenis_kelas_id' => $jenis_kelas_id]);
-
-            // Check if jenis kelas exists
-            $jenisKelas = JenisKelas::find($jenis_kelas_id);
-            if (!$jenisKelas) {
-                \Log::warning('Jenis Kelas not found:', ['jenis_kelas_id' => $jenis_kelas_id]);
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Jenis kelas tidak ditemukan'
-                ], 404);
-            }
-            
-            // Get waktu kuliah directly from the database
-            $waktuKuliah = WaktuKuliah::where('jenis_kelas_id', $jenis_kelas_id)
-                ->whereNull('deleted_at')
-                ->get();
-            
-            \Log::info('Waktu Kuliah Query Result:', [
-                'count' => $waktuKuliah->count(),
-                'data' => $waktuKuliah->toArray()
-            ]);
-
-            if ($waktuKuliah->isEmpty()) {
-                \Log::info('No waktu kuliah found for jenis kelas');
-                return response()->json([
-                    'status' => 'success',
-                    'data' => [],
-                    'message' => 'Tidak ada waktu kuliah yang tersedia untuk jenis kelas ini'
-                ]);
-            }
-
-            // Format the waktu kuliah data
-            $formattedData = $waktuKuliah->map(function($wk) {
-                return [
-                    'id' => $wk->id,
-                    'name' => $wk->name,
-                    'time_start' => $wk->time_start,
-                    'time_ended' => $wk->time_ended
-                ];
-            })->values();
-
-            return response()->json([
-                'status' => 'success',
-                'data' => $formattedData
-            ]);
-        } catch (\Exception $e) {
-            \Log::error('Error in getWaktuKuliahByJenisKelas:', [
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
-            ]);
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Gagal mengambil data waktu kuliah: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-
+    
     public function handleJadwalKuliah(Request $request)
     {
         try {

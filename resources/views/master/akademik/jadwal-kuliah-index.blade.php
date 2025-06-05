@@ -357,7 +357,7 @@
                                             </div>
                                         </td>
                                         <td data-label="Dosen">{{ $item->dosen->name }}</td>
-                                        <td data-label="Ruang">{{ $item->ruang->name }}</td>
+                                        <td data-label="Ruang">{{ $item->ruang_id == 0 ? 'Teleconference' : $item->ruang->name }}</td>
                                         <td data-label="Hari">{{ $item->hari }}</td>
                                         <td data-label="Waktu">{{ $item->waktuKuliah->name }}</td>
                                         <td data-label="Metode">

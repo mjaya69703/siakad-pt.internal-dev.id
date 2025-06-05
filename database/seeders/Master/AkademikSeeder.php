@@ -386,7 +386,7 @@ class AkademikSeeder extends Seeder
             ],
             [
                 'dosen_id' => 2,
-                'ruang_id' => 0,
+                'ruang_id' => 2,
                 'matkul_id' => 3,
                 'jenis_kelas_id' => 2,
                 'waktu_kuliah_id' => 8,

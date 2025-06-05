@@ -3,7 +3,7 @@
 <p align="center">
 <a href="changelog.md">Neco Siakad By Esec Academy | v2.0 - Changelogs</a>
 <br>
-<span>Latest Update: 3 Juni 2025</span>
+<span>Latest Update: 6 Juni 2025</span>
 </p>
 
 <p align="center">
@@ -28,11 +28,12 @@
 > - Dashboard/Home
 > - Manajemen Profil
 > - Sistem Absensi
-> - Manajemen Akademik ( Done )
-> - Manajemen Pengguna ( Done )
-> - Manajemen Publikasi ( Done )
-> - Manajemen PMB ( Progress )
-> - Manajemen Infrastruktur ( Progress )
+> - Manajemen Data Master Akademik ( Done )
+> - Manajemen Data Master Pengguna ( Done )
+> - Manajemen Data Master Publikasi ( Done )
+> - Manajemen Data Master PMB ( Done )
+> - Manajemen Data Master Pendaftaran ( Progress )
+> - Manajemen Data Master Infrastruktur ( Progress )
 >
 > Fitur-fitur lainnya masih dalam tahap pengembangan dan akan diimplementasikan secara bertahap.
 
@@ -84,23 +85,24 @@ Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaborat
    - Manajemen Waktu Kuliah
    - Manajemen Jadwal Kuliah
 
-5. **Menu Publikasi** ✅
+5. **Menu PMB** ✅
+   - Manajemen Periode Pendaftaran
+   - Manajemen Jalur Pendaftaran
+   - Manajemen Biaya Pendaftaran
+   - Manajemen Syarat Pendaftaran
+   - Manajemen Gelombang Pendaftaran
+   - Manajemen Jadwal PMB
+
+6. **Menu Publikasi** ✅
    - Manajemen Kategori
    - Manajemen Berita
    - Manajemen Pengumuman
    - Manajemen Galeri Foto
 
-6. **Menu Finansial** 🔄
+7. **Menu Finansial** 🔄
    - Tagihan online
    - Pembayaran digital
    - Approval absensi
-
-7. **Menu Pusat Informasi** 🔄
-   - Manajemen pengguna
-   - Data akademik
-   - PMB online
-   - KBM digital
-   - Inventaris
 
 8. **Menu Pengguna** ✅
    - Manajemen Staff
