@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\HasLogAktivitas;
 // USE MODELS
 use App\Models\Akademik\ProgramStudi;
+use App\Models\Akademik\TahunAkademik;
 
 class Kurikulum extends Model
 {
@@ -23,4 +24,14 @@ class Kurikulum extends Model
     // {
     //     return $this->belongsTo(Dosen::class);
     // }
+
+    public function tahunAkademikStart()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'taka_start');
+    }
+
+    public function tahunAkademikEnded()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'taka_ended');
+    }
 }

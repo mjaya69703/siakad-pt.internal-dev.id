@@ -8,7 +8,14 @@ use App\Models\Akademik\TahunAkademik;
 use App\Models\Akademik\Fakultas;
 use App\Models\Akademik\ProgramStudi;
 use App\Models\Akademik\Kurikulum;
+use App\Models\Akademik\WaktuKuliah;
+use App\Models\Akademik\JenisKelas;
+use App\Models\Akademik\Kelas;
+use App\Models\Akademik\MataKuliah;
+use App\Models\Akademik\JadwalKuliah;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class AkademikSeeder extends Seeder
 {
@@ -17,6 +24,27 @@ class AkademikSeeder extends Seeder
      */
     public function run(): void
     {
+        $jenisKelas = [
+            [
+                'name' => 'Regular',
+                'code' => 'REG',
+                'desc' => 'Kelas reguler dengan jadwal pagi',
+                'status' => 'Aktif',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Karyawan',
+                'code' => 'KAR',
+                'desc' => 'Kelas khusus karyawan dengan jadwal malam',
+                'status' => 'Aktif',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        ];
+
+        JenisKelas::insert($jenisKelas);
+
         // Seed Tahun Akademik
         $tahunAkademik = [
             [
@@ -146,5 +174,249 @@ class AkademikSeeder extends Seeder
         ];
 
         Kurikulum::insert($kurikulum);
+
+        // Seed Waktu Kuliah
+        $waktuKuliah = [
+            [
+                'jenis_kelas_id' => 1,
+                'name' => 'Jam Kuliah ke 1',
+                'code' => 'JK-01',
+                'time_start' => '08:00',
+                'time_ended' => '08:50',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'jenis_kelas_id' => 1,
+                'name' => 'Jam Kuliah ke 2',
+                'code' => 'JK-02',
+                'time_start' => '09:00',
+                'time_ended' => '09:50',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'jenis_kelas_id' => 1,
+                'name' => 'Jam Kuliah ke 3',
+                'code' => 'JK-03',
+                'time_start' => '10:00',
+                'time_ended' => '10:50',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'jenis_kelas_id' => 1,
+                'name' => 'Jam Kuliah ke 4',
+                'code' => 'JK-04',
+                'time_start' => '11:00',
+                'time_ended' => '11:50',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'jenis_kelas_id' => 1,
+                'name' => 'Jam Kuliah ke 5',
+                'code' => 'JK-05',
+                'time_start' => '13:00',
+                'time_ended' => '13:50',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'jenis_kelas_id' => 1,
+                'name' => 'Jam Kuliah ke 6',
+                'code' => 'JK-06',
+                'time_start' => '14:00',
+                'time_ended' => '14:50',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'jenis_kelas_id' => 1,
+                'name' => 'Jam Kuliah ke 7',
+                'code' => 'JK-07',
+                'time_start' => '15:00',
+                'time_ended' => '15:50',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'jenis_kelas_id' => 1,
+                'name' => 'Jam Kuliah ke 8',
+                'code' => 'JK-08',
+                'time_start' => '16:00',
+                'time_ended' => '16:50',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        ];
+
+        WaktuKuliah::insert($waktuKuliah);
+
+        // Seed Kelas (referencing existing Program Studi, Tahun Akademik, Jenis Kelas)
+        $kelas = [
+            [
+                'taka_id' => 1,
+                'prodi_id' => 1,
+                'jenis_kelas_id' => 1,
+                'ketua_id' => null,
+                'capacity' => 50,
+                'name' => 'Kelas A',
+                'code' => 'A2024',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'taka_id' => 1,
+                'prodi_id' => 1,
+                'jenis_kelas_id' => 1,
+                'ketua_id' => null,
+                'capacity' => 45,
+                'name' => 'Kelas B',
+                'code' => 'B2024',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'taka_id' => 1,
+                'prodi_id' => 2,
+                'jenis_kelas_id' => 2,
+                'ketua_id' => null,
+                'capacity' => 30,
+                'name' => 'Kelas X Karyawan',
+                'code' => 'XK2024',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        ];
+
+        Kelas::insert($kelas);
+
+        // Seed Mata Kuliah (referencing existing Kurikulum, Program Studi, Dosen)
+        // Assuming Dosen with id 1 and 2 exist
+        $mataKuliah = [
+            [
+                'kurikulum_id' => 1,
+                'prodi_id' => 1,
+                'requi_id' => null,
+                'dosen1_id' => 1,
+                'dosen2_id' => null,
+                'dosen3_id' => null,
+                'semester' => 1,
+                'photo' => 'default.png',
+                'name' => 'Algoritma & Pemrograman',
+                'code' => 'A&P101',
+                'bsks' => '3',
+                'desc' => 'Mempelajari dasar algoritma dan pemrograman',
+                'docs_rps' => null,
+                'docs_kontrak_kuliah' => null,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'kurikulum_id' => 1,
+                'prodi_id' => 1,
+                'requi_id' => 1,
+                'dosen1_id' => 2,
+                'dosen2_id' => 1,
+                'dosen3_id' => null,
+                'semester' => 2,
+                'photo' => 'default.png',
+                'name' => 'Struktur Data',
+                'code' => 'SD201',
+                'bsks' => '3',
+                'desc' => 'Mempelajari berbagai struktur data',
+                'docs_rps' => null,
+                'docs_kontrak_kuliah' => null,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'kurikulum_id' => 2,
+                'prodi_id' => 2,
+                'requi_id' => null,
+                'dosen1_id' => 2,
+                'dosen2_id' => null,
+                'dosen3_id' => null,
+                'semester' => 1,
+                'photo' => 'default.png',
+                'name' => 'Pengantar Manajemen',
+                'code' => 'PM101',
+                'bsks' => '3',
+                'desc' => 'Konsep dasar manajemen',
+                'docs_rps' => null,
+                'docs_kontrak_kuliah' => null,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        ];
+
+        MataKuliah::insert($mataKuliah);
+
+        // Seed Jadwal Kuliah (referencing other models)
+        // Assuming Dosen with id 1 & 2, Ruang with id 1 & 2, MataKuliah with id 1, 2, 3, JenisKelas with id 1 & 2, WaktuKuliah with id 1-8 exist
+        $jadwalKuliahData = [
+            [
+                'dosen_id' => 1,
+                'ruang_id' => 1,
+                'matkul_id' => 1,
+                'jenis_kelas_id' => 1,
+                'waktu_kuliah_id' => 1,
+                'bsks' => 3,
+                'pertemuan' => 16,
+                'hari' => 'Senin',
+                'metode' => 'Tatap Muka',
+                'tanggal' => '2025-01-13',
+                'link' => null,
+                'code' => 'JDW-' . Str::random(8),
+            ],
+            [
+                'dosen_id' => 2,
+                'ruang_id' => 2,
+                'matkul_id' => 2,
+                'jenis_kelas_id' => 1,
+                'waktu_kuliah_id' => 3,
+                'bsks' => 3,
+                'pertemuan' => 16,
+                'hari' => 'Selasa',
+                'metode' => 'Tatap Muka',
+                'tanggal' => '2025-01-14',
+                'link' => null,
+                'code' => 'JDW-' . Str::random(8),
+            ],
+            [
+                'dosen_id' => 2,
+                'ruang_id' => 0,
+                'matkul_id' => 3,
+                'jenis_kelas_id' => 2,
+                'waktu_kuliah_id' => 8,
+                'bsks' => 3,
+                'pertemuan' => 16,
+                'hari' => 'Rabu',
+                'metode' => 'Teleconference',
+                'tanggal' => '2025-01-15',
+                'link' => 'https://meet.google.com/abc-def-ghi',
+                'code' => 'JDW-' . Str::random(8),
+            ]
+        ];
+
+        // Retrieve the seeded kelas to get their IDs
+        $kelasA = Kelas::where('code', 'A2024')->first();
+        $kelasB = Kelas::where('code', 'B2024')->first();
+        $kelasXK = Kelas::where('code', 'XK2024')->first();
+
+        // Create JadwalKuliah and attach classes
+        foreach ($jadwalKuliahData as $data) {
+            $jadwalKuliah = JadwalKuliah::create($data);
+
+            // Attach classes based on matkul_id
+            if ($jadwalKuliah->matkul_id === 1 && $kelasA && $kelasB) {
+                $jadwalKuliah->kelas()->attach([$kelasA->id, $kelasB->id]);
+            } elseif ($jadwalKuliah->matkul_id === 2 && $kelasA) {
+                $jadwalKuliah->kelas()->attach([$kelasA->id]);
+            } elseif ($jadwalKuliah->matkul_id === 3 && $kelasXK) {
+                $jadwalKuliah->kelas()->attach([$kelasXK->id]);
+            }
+        }
     }
 }

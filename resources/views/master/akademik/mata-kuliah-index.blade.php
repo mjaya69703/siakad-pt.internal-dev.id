@@ -158,7 +158,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">{{ $pages }}</h5>
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-                        <i class="fas fa-plus-circle me-2"></i>Tambah Program Studi
+                        <i class="fas fa-plus-circle me-2"></i>Tambah Mata Kuliah
                     </button>
                 </div>
                 <div class="card-body">
@@ -166,20 +166,20 @@
                     <div class="row mb-4">
                         <div class="col-md-4 mb-2">
                             <div class="p-3 bg-light-primary rounded">
-                                <h6 class="mb-2">Total Program Studi</h6>
-                                <h3 class="mb-0">{{ count($prodi) }}</h3>
+                                <h6 class="mb-2">Total Mata Kuliah</h6>
+                                <h3 class="mb-0">{{ count($mata_kuliah) }}</h3>
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
                             <div class="p-3 bg-light-success rounded">
-                                <h6 class="mb-2">Program Studi Aktif</h6>
-                                <h3 class="mb-0">{{ $prodi->where('status', 'Aktif')->count() }}</h3>
+                                <h6 class="mb-2">Mata Kuliah Aktif</h6>
+                                <h3 class="mb-0">{{ $mata_kuliah->where('status', 'Aktif')->count() }}</h3>
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
                             <div class="p-3 bg-light-warning rounded">
-                                <h6 class="mb-2">Program Studi Tidak Aktif</h6>
-                                <h3 class="mb-0">{{ $prodi->where('status', 'Tidak Aktif')->count() }}</h3>
+                                <h6 class="mb-2">Mata Kuliah Tidak Aktif</h6>
+                                <h3 class="mb-0">{{ $mata_kuliah->where('status', 'Tidak Aktif')->count() }}</h3>
                             </div>
                         </div>
                     </div>
@@ -187,120 +187,128 @@
                     <!-- Collapsible Form -->
                     <div class="collapse" id="collapseForm">
                         <div class="card card-body border">
-                            <h5 class="card-title mb-3">Tambah Program Studi Baru</h5>
-                            <form action="{{ route($spref . 'akademik.prodi-handle') }}" method="post">
+                            <h5 class="card-title mb-3">Tambah Mata Kuliah Baru</h5>
+                            <form action="{{ route($spref . 'akademik.mata-kuliah-handle') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="fakultas_id" class="form-label">Fakultas</label>
-                                        <select class="form-select" name="fakultas_id" id="fakultas_id">
-                                            <option value="">Pilih Fakultas</option>
-                                            @foreach ($fakultas as $f)
-                                                <option value="{{ $f->id }}">{{ $f->name }}</option>
+                                        <label for="kurikulum_id" class="form-label">Kurikulum</label>
+                                        <select class="form-select" name="kurikulum_id" id="kurikulum_id">
+                                            <option value="">Pilih Kurikulum</option>
+                                            @foreach ($kurikulum as $k)
+                                                <option value="{{ $k->id }}">{{ $k->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('fakultas_id')
+                                        @error('kurikulum_id')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="kaprodi_id" class="form-label">Kaprodi</label>
-                                        <select class="form-select" name="kaprodi_id" id="kaprodi_id">
-                                            <option value="">Pilih Kaprodi</option>
+                                        <label for="prodi_id" class="form-label">Program Studi</label>
+                                        <select class="form-select" name="prodi_id" id="prodi_id">
+                                            <option value="">Pilih Program Studi</option>
+                                            @foreach ($program_studi as $p)
+                                                <option value="{{ $p->id }}">{{ $p->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('prodi_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="requi_id" class="form-label">Prasyarat (Opsional)</label>
+                                        <select class="form-select" name="requi_id" id="requi_id">
+                                            <option value="">Pilih Mata Kuliah Prasyarat</option>
+                                            @foreach ($mata_kuliah as $mk)
+                                                <option value="{{ $mk->id }}">{{ $mk->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('requi_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="dosen1_id" class="form-label">Dosen 1</label>
+                                        <select class="form-select" name="dosen1_id" id="dosen1_id">
+                                            <option value="">Pilih Dosen 1</option>
                                             @foreach ($dosens as $dosen)
                                                 <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('kaprodi_id')
+                                        @error('dosen1_id')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="name" class="form-label">Nama Program Studi</label>
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="Contoh: Teknik Informatika">
+                                        <label for="dosen2_id" class="form-label">Dosen 2 (Opsional)</label>
+                                        <select class="form-select" name="dosen2_id" id="dosen2_id">
+                                            <option value="">Pilih Dosen 2</option>
+                                            @foreach ($dosens as $dosen)
+                                                <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('dosen2_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="dosen3_id" class="form-label">Dosen 3 (Opsional)</label>
+                                        <select class="form-select" name="dosen3_id" id="dosen3_id">
+                                            <option value="">Pilih Dosen 3</option>
+                                            @foreach ($dosens as $dosen)
+                                                <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('dosen3_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="semester" class="form-label">Semester</label>
+                                        <input type="number" class="form-control" name="semester" id="semester" min="1" max="14" placeholder="Contoh: 1">
+                                        @error('semester')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="bsks" class="form-label">Beban SKS</label>
+                                        <input type="text" class="form-control" name="bsks" id="bsks" placeholder="Contoh: 3">
+                                        @error('bsks')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">Nama Mata Kuliah</label>
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Contoh: Pemrograman Web">
                                         @error('name')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-                                     <div class="col-md-6 mb-3">
-                                        <label for="code" class="form-label">Kode Program Studi</label>
-                                        <input type="text" class="form-control" name="code" id="code" placeholder="Contoh: TI" disabled>
-                                        @error('code')
+                                    <div class="col-md-6 mb-3">
+                                        <label for="photo" class="form-label">Foto (Opsional)</label>
+                                        <input type="file" class="form-control" name="photo" id="photo" accept="image/*">
+                                        @error('photo')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="level" class="form-label">Jenjang Pendidikan</label>
-                                        <select class="form-select" name="level" id="level">
-                                            <option value="">Pilih Jenjang</option>
-                                            <option value="Diploma">Diploma</option>
-                                            <option value="Sarjana">Sarjana</option>
-                                            <option value="Magister">Magister</option>
-                                            <option value="Doktoral">Doktoral</option>
-                                        </select>
-                                        @error('level')
+                                        <label for="docs_rps" class="form-label">Dokumen RPS (Opsional)</label>
+                                        <input type="file" class="form-control" name="docs_rps" id="docs_rps" accept=".pdf">
+                                        @error('docs_rps')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-                                     <div class="col-md-6 mb-3">
-                                        <label for="title" class="form-label">Gelar</label>
-                                        <select class="form-select" name="title" id="title">
-                                             <option value="">Pilih Gelar</option>
-                                            <option value="D3">D3</option>
-                                            <option value="S1">S1</option>
-                                            <option value="S2">S2</option>
-                                            <option value="S3">S3</option>
-                                        </select>
-                                        @error('title')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                     <div class="col-md-6 mb-3">
-                                        <label for="title_start" class="form-label">Gelar Awal (Opsional)</label>
-                                        <input type="text" class="form-control" name="title_start" id="title_start" placeholder="Contoh: A.Md.">
-                                        @error('title_start')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                     <div class="col-md-6 mb-3">
-                                        <label for="title_ended" class="form-label">Gelar Akhir (Opsional)</label>
-                                        <input type="text" class="form-control" name="title_ended" id="title_ended" placeholder="Contoh: S.Kom.">
-                                        @error('title_ended')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                     <div class="col-md-6 mb-3">
-                                        <label for="accreditation" class="form-label">Akreditasi (Opsional)</label>
-                                        <input type="text" class="form-control" name="accreditation" id="accreditation" placeholder="Contoh: A">
-                                        @error('accreditation')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                     <div class="col-md-6 mb-3">
-                                        <label for="duration" class="form-label">Durasi (Tahun, Opsional)</label>
-                                        <input type="number" class="form-control" name="duration" id="duration" placeholder="Contoh: 4">
-                                        @error('duration')
+                                    <div class="col-md-6 mb-3">
+                                        <label for="docs_kontrak_kuliah" class="form-label">Dokumen Kontrak Kuliah (Opsional)</label>
+                                        <input type="file" class="form-control" name="docs_kontrak_kuliah" id="docs_kontrak_kuliah" accept=".pdf">
+                                        @error('docs_kontrak_kuliah')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <label for="desc" class="form-label">Deskripsi (Opsional)</label>
-                                        <textarea name="desc" id="desc" class="form-control" rows="3" placeholder="Deskripsi singkat program studi"></textarea>
+                                        <label for="desc" class="form-label">Deskripsi</label>
+                                        <textarea name="desc" id="desc" class="form-control" rows="3" placeholder="Deskripsi mata kuliah"></textarea>
                                         @error('desc')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                     <div class="col-12 mb-3">
-                                        <label for="objectives" class="form-label">Tujuan (Opsional)</label>
-                                        <textarea name="objectives" id="objectives" class="form-control" rows="3" placeholder="Tujuan program studi"></textarea>
-                                        @error('objectives')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                     <div class="col-12 mb-3">
-                                        <label for="careers" class="form-label">Prospek Karir (Opsional)</label>
-                                        <textarea name="careers" id="careers" class="form-control" rows="3" placeholder="Prospek karir lulusan"></textarea>
-                                        @error('careers')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -320,43 +328,37 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th>Nama Program Studi</th>
+                                    <th>Nama Mata Kuliah</th>
                                     <th>Kode</th>
-                                    <th>Jenjang</th>
-                                    <th>Gelar</th>
-                                    <th>Status</th>
+                                    <th>Program Studi</th>
+                                    <th>Semester</th>
+                                    <th>SKS</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($prodi as $key => $item)
+                                @foreach ($mata_kuliah as $key => $item)
                                     <tr>
                                         <td data-label="No">{{ ++$key }}</td>
-                                        <td data-label="Nama Program Studi">
+                                        <td data-label="Nama Mata Kuliah">
                                             <div class="d-flex flex-column">
                                                 <span class="fw-bold">{{ $item->name }}</span>
-                                                @if($item->slug)
-                                                    <small class="text-muted">{{ $item->slug }}</small>
-                                                @endif
+                                                <small class="text-muted">{{ $item->programStudi->name }}</small>
                                             </div>
                                         </td>
                                         <td data-label="Kode">{{ $item->code }}</td>
-                                        <td data-label="Jenjang">{{ $item->level }}</td>
-                                        <td data-label="Gelar">{{ $item->title }}</td>
-                                        <td data-label="Status">
-                                            <span class="badge {{ $item->status == 'Aktif' ? 'bg-light-success text-success' : 'bg-light-warning text-warning' }}">
-                                                {{ $item->status }}
-                                            </span>
-                                        </td>
+                                        <td data-label="Program Studi">{{ $item->programStudi->name }}</td>
+                                        <td data-label="Semester">{{ $item->semester }}</td>
+                                        <td data-label="SKS">{{ $item->bsks }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#editData{{ $item->code }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit Program Studi">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#editData{{ $item->code }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit Mata Kuliah">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route($spref . 'akademik.prodi-delete', $item->code) }}" method="POST" class="d-inline" id="delete-form-{{ $item->code }}">
+                                                <form action="{{ route($spref . 'akademik.mata-kuliah-delete', $item->code) }}" method="POST" class="d-inline" id="delete-form-{{ $item->code }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-sm btn-danger" data-confirm-delete="true" data-bs-toggle="tooltip" title="Hapus Program Studi" onclick="confirmDelete('{{ $item->code }}')">
+                                                    <button type="button" class="btn btn-sm btn-danger" data-confirm-delete="true" data-bs-toggle="tooltip" title="Hapus Mata Kuliah" onclick="confirmDelete('{{ $item->code }}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
@@ -375,32 +377,32 @@
         <div class="col-lg-4 col-12 mb-2">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Informasi Program Studi</h5>
+                    <h5 class="card-title">Informasi Mata Kuliah</h5>
                 </div>
                 <div class="card-body">
-                    <p>Bagian ini menampilkan informasi umum dan petunjuk terkait pengelolaan Program Studi.</p>
+                    <p>Bagian ini menampilkan informasi umum dan petunjuk terkait pengelolaan Mata Kuliah.</p>
                     
                     <div class="alert alert-light-success">
                         <h6 class="">Petunjuk Penggunaan:</h6>
                         <ul class="mb-0">
-                            <li>Klik tombol "Tambah Program Studi" untuk menambahkan program studi baru</li>
-                            <li>Klik ikon <i class="fas fa-edit"></i> untuk mengedit data program studi</li>
-                            <li>Klik ikon <i class="fas fa-trash"></i> untuk menghapus program studi</li>
+                            <li>Klik tombol "Tambah Mata Kuliah" untuk menambahkan mata kuliah baru</li>
+                            <li>Klik ikon <i class="fas fa-edit"></i> untuk mengedit data mata kuliah</li>
+                            <li>Klik ikon <i class="fas fa-trash"></i> untuk menghapus mata kuliah</li>
                         </ul>
                     </div>
                     
-                    @if(count($prodi) > 0)
+                    @if(count($mata_kuliah) > 0)
                         <div class="mt-4">
-                            <h6>Program Studi Aktif</h6>
+                            <h6>Mata Kuliah Terbaru</h6>
                             <div class="list-group">
-                                @foreach($prodi->where('status', 'Aktif')->take(5) as $active)
+                                @foreach($mata_kuliah->take(5) as $mk)
                                     <div class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-1">{{ $active->name }} ({{ $active->title }})</h6>
-                                            <small class="text-muted">{{ $active->level }}</small>
+                                            <h6 class="mb-1">{{ $mk->name }}</h6>
+                                            <small class="text-muted">{{ $mk->bsks }} SKS</small>
                                         </div>
-                                        <p class="mb-1">{{ Str::limit($active->desc, 50) }}</p>
-                                         <small>Akreditasi: {{ $active->accreditation ?? '-' }}</small>
+                                        <p class="mb-1">{{ Str::limit($mk->desc, 50) }}</p>
+                                        <small>Semester: {{ $mk->semester }}</small>
                                     </div>
                                 @endforeach
                             </div>
@@ -412,142 +414,142 @@
     </div>
 
     <!-- Edit Modals -->
-    @foreach ($prodi as $item)
+    @foreach ($mata_kuliah as $item)
         <div class="modal fade" id="editData{{ $item->code }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ $item->code }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document"> {{-- Added modal-lg for wider modal --}}
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="{{ route($spref . 'akademik.prodi-update', $item->code) }}" method="POST">
+                    <form action="{{ route($spref . 'akademik.mata-kuliah-update', $item->code) }}" method="POST" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $item->code }}">Edit Program Studi - {{ $item->name }}</h5>
+                            <h5 class="modal-title" id="editModalLabel{{ $item->code }}">Edit Mata Kuliah - {{ $item->name }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_fakultas_id{{ $item->code }}" class="form-label">Fakultas</label>
-                                    <select class="form-select" name="fakultas_id" id="edit_fakultas_id{{ $item->code }}">
-                                        <option value="">Pilih Fakultas</option>
-                                        @foreach ($fakultas as $f)
-                                            <option value="{{ $f->id }}" {{ $item->fakultas_id == $f->id ? 'selected' : '' }}>{{ $f->name }}</option>
+                                    <label for="edit_kurikulum_id{{ $item->code }}" class="form-label">Kurikulum</label>
+                                    <select class="form-select" name="kurikulum_id" id="edit_kurikulum_id{{ $item->code }}">
+                                        <option value="">Pilih Kurikulum</option>
+                                        @foreach ($kurikulum as $k)
+                                            <option value="{{ $k->id }}" {{ $item->kurikulum_id == $k->id ? 'selected' : '' }}>{{ $k->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('fakultas_id')
+                                    @error('kurikulum_id')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_kaprodi_id{{ $item->code }}" class="form-label">Kaprodi</label>
-                                    <select class="form-select" name="kaprodi_id" id="edit_kaprodi_id{{ $item->code }}">
-                                        <option value="">Pilih Kaprodi</option>
+                                    <label for="edit_prodi_id{{ $item->code }}" class="form-label">Program Studi</label>
+                                    <select class="form-select" name="prodi_id" id="edit_prodi_id{{ $item->code }}">
+                                        <option value="">Pilih Program Studi</option>
+                                        @foreach ($program_studi as $p)
+                                            <option value="{{ $p->id }}" {{ $item->prodi_id == $p->id ? 'selected' : '' }}>{{ $p->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('prodi_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_requi_id{{ $item->code }}" class="form-label">Prasyarat (Opsional)</label>
+                                    <select class="form-select" name="requi_id" id="edit_requi_id{{ $item->code }}">
+                                        <option value="">Pilih Mata Kuliah Prasyarat</option>
+                                        @foreach ($mata_kuliah as $mk)
+                                            <option value="{{ $mk->id }}" {{ $item->requi_id == $mk->id ? 'selected' : '' }}>{{ $mk->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('requi_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_dosen1_id{{ $item->code }}" class="form-label">Dosen 1</label>
+                                    <select class="form-select" name="dosen1_id" id="edit_dosen1_id{{ $item->code }}">
+                                        <option value="">Pilih Dosen 1</option>
                                         @foreach ($dosens as $dosen)
-                                            <option value="{{ $dosen->id }}" {{ $item->kaprodi_id == $dosen->id ? 'selected' : '' }}>{{ $dosen->name }}</option>
+                                            <option value="{{ $dosen->id }}" {{ $item->dosen1_id == $dosen->id ? 'selected' : '' }}>{{ $dosen->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('kaprodi_id')
+                                    @error('dosen1_id')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_name{{ $item->code }}" class="form-label">Nama Program Studi</label>
-                                    <input type="text" class="form-control" name="name" id="edit_name{{ $item->code }}" value="{{ $item->name }}" placeholder="Contoh: Teknik Informatika">
+                                    <label for="edit_dosen2_id{{ $item->code }}" class="form-label">Dosen 2 (Opsional)</label>
+                                    <select class="form-select" name="dosen2_id" id="edit_dosen2_id{{ $item->code }}">
+                                        <option value="">Pilih Dosen 2</option>
+                                        @foreach ($dosens as $dosen)
+                                            <option value="{{ $dosen->id }}" {{ $item->dosen2_id == $dosen->id ? 'selected' : '' }}>{{ $dosen->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('dosen2_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_dosen3_id{{ $item->code }}" class="form-label">Dosen 3 (Opsional)</label>
+                                    <select class="form-select" name="dosen3_id" id="edit_dosen3_id{{ $item->code }}">
+                                        <option value="">Pilih Dosen 3</option>
+                                        @foreach ($dosens as $dosen)
+                                            <option value="{{ $dosen->id }}" {{ $item->dosen3_id == $dosen->id ? 'selected' : '' }}>{{ $dosen->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('dosen3_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_semester{{ $item->code }}" class="form-label">Semester</label>
+                                    <input type="number" class="form-control" name="semester" id="edit_semester{{ $item->code }}" min="1" max="14" value="{{ $item->semester }}">
+                                    @error('semester')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_bsks{{ $item->code }}" class="form-label">Beban SKS</label>
+                                    <input type="text" class="form-control" name="bsks" id="edit_bsks{{ $item->code }}" value="{{ $item->bsks }}">
+                                    @error('bsks')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_name{{ $item->code }}" class="form-label">Nama Mata Kuliah</label>
+                                    <input type="text" class="form-control" name="name" id="edit_name{{ $item->code }}" value="{{ $item->name }}">
                                     @error('name')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_code{{ $item->code }}" class="form-label">Kode Program Studi</label>
-                                    <input type="text" class="form-control" name="code" id="edit_code{{ $item->code }}" value="{{ $item->code }}" placeholder="Contoh: TI" disabled>
-                                    @error('code')
+                                    <label for="edit_photo{{ $item->code }}" class="form-label">Foto (Opsional)</label>
+                                    <input type="file" class="form-control" name="photo" id="edit_photo{{ $item->code }}" accept="image/*">
+                                    @error('photo')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_level{{ $item->code }}" class="form-label">Jenjang Pendidikan</label>
-                                    <select class="form-select" name="level" id="edit_level{{ $item->code }}">
-                                        <option value="Diploma" {{ $item->level == 'Diploma' ? 'selected' : '' }}>Diploma</option>
-                                        <option value="Sarjana" {{ $item->level == 'Sarjana' ? 'selected' : '' }}>Sarjana</option>
-                                        <option value="Magister" {{ $item->level == 'Magister' ? 'selected' : '' }}>Magister</option>
-                                        <option value="Doktoral" {{ $item->level == 'Doktoral' ? 'selected' : '' }}>Doktoral</option>
-                                    </select>
-                                    @error('level')
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_docs_rps{{ $item->code }}" class="form-label">Dokumen RPS (Opsional)</label>
+                                    <input type="file" class="form-control" name="docs_rps" id="edit_docs_rps{{ $item->code }}" accept=".pdf">
+                                    @error('docs_rps')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_title{{ $item->code }}" class="form-label">Gelar</label>
-                                    <select class="form-select" name="title" id="edit_title{{ $item->code }}">
-                                        <option value="D3" {{ $item->title == 'D3' ? 'selected' : '' }}>D3</option>
-                                        <option value="S1" {{ $item->title == 'S1' ? 'selected' : '' }}>S1</option>
-                                        <option value="S2" {{ $item->title == 'S2' ? 'selected' : '' }}>S2</option>
-                                        <option value="S3" {{ $item->title == 'S3' ? 'selected' : '' }}>S3</option>
-                                    </select>
-                                    @error('title')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_title_start{{ $item->code }}" class="form-label">Gelar Awal (Opsional)</label>
-                                    <input type="text" class="form-control" name="title_start" id="edit_title_start{{ $item->code }}" value="{{ $item->title_start }}" placeholder="Contoh: A.Md.">
-                                    @error('title_start')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_title_ended{{ $item->code }}" class="form-label">Gelar Akhir (Opsional)</label>
-                                    <input type="text" class="form-control" name="title_ended" id="edit_title_ended{{ $item->code }}" value="{{ $item->title_ended }}" placeholder="Contoh: S.Kom.">
-                                    @error('title_ended')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_accreditation{{ $item->code }}" class="form-label">Akreditasi (Opsional)</label>
-                                    <input type="text" class="form-control" name="accreditation" id="edit_accreditation{{ $item->code }}" value="{{ $item->accreditation }}" placeholder="Contoh: A">
-                                    @error('accreditation')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                 <div class="col-md-6 mb-3">
-                                    <label for="edit_duration{{ $item->code }}" class="form-label">Durasi (Tahun, Opsional)</label>
-                                    <input type="number" class="form-control" name="duration" id="edit_duration{{ $item->code }}" value="{{ $item->duration }}" placeholder="Contoh: 4">
-                                    @error('duration')
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_docs_kontrak_kuliah{{ $item->code }}" class="form-label">Dokumen Kontrak Kuliah (Opsional)</label>
+                                    <input type="file" class="form-control" name="docs_kontrak_kuliah" id="edit_docs_kontrak_kuliah{{ $item->code }}" accept=".pdf">
+                                    @error('docs_kontrak_kuliah')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <label for="edit_desc{{ $item->code }}" class="form-label">Deskripsi (Opsional)</label>
-                                    <textarea name="desc" id="edit_desc{{ $item->code }}" class="form-control" rows="3" placeholder="Deskripsi singkat program studi">{{ $item->desc }}</textarea>
+                                    <label for="edit_desc{{ $item->code }}" class="form-label">Deskripsi</label>
+                                    <textarea name="desc" id="edit_desc{{ $item->code }}" class="form-control" rows="3">{{ $item->desc }}</textarea>
                                     @error('desc')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                 <div class="col-12 mb-3">
-                                    <label for="edit_objectives{{ $item->code }}" class="form-label">Tujuan (Opsional)</label>
-                                    <textarea name="objectives" id="edit_objectives{{ $item->code }}" class="form-control" rows="3" placeholder="Tujuan program studi">{{ $item->objectives }}</textarea>
-                                    @error('objectives')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                 <div class="col-12 mb-3">
-                                    <label for="edit_careers{{ $item->code }}" class="form-label">Prospek Karir (Opsional)</label>
-                                    <textarea name="careers" id="edit_careers{{ $item->code }}" class="form-control" rows="3" placeholder="Prospek karir lulusan">{{ $item->careers }}</textarea>
-                                    @error('careers')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <label for="edit_status{{ $item->code }}" class="form-label">Status</label>
-                                    <select class="form-select" name="status" id="edit_status{{ $item->code }}">
-                                        <option value="Aktif" {{ $item->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                                        <option value="Tidak Aktif" {{ $item->status == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
-                                    </select>
-                                    @error('status')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                             </div> {{-- End row --}}
-                        </div> {{-- End modal-body --}}
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary">
@@ -599,7 +601,7 @@
         function confirmDelete(code) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
-                text: "Data program studi yang dihapus tidak dapat dikembalikan!",
+                text: "Data mata kuliah yang dihapus tidak dapat dikembalikan!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

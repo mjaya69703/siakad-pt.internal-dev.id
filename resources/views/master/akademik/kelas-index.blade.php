@@ -48,18 +48,19 @@
             border-bottom: 2px solid rgba(0,0,0,0.05);
             font-weight: 600;
             color: #6c757d;
-            padding-top: 1rem;
+            padding-top: 1rem;    /* Added padding top */
             padding-bottom: 0.75rem;
-            text-align: left;
+            text-align: left;     /* Default left align for headers */
         }
 
         .table td {
             vertical-align: middle;
             padding-top: 0.75rem;
             padding-bottom: 0.75rem;
-            text-align: left;
+            text-align: left; /* Default left align for cells */
         }
 
+        /* Specific text alignment for certain columns */
         .table th.text-center, .table td.text-center {
             text-align: center !important;
         }
@@ -101,13 +102,6 @@
             margin-top: 1rem;
         }
 
-        /* Image preview */
-        .image-preview {
-            max-width: 200px;
-            max-height: 200px;
-            margin-top: 10px;
-        }
-
         /* Responsive styling */
         @media screen and (max-width: 768px) {
             .table td[data-label] .d-flex.align-items-center,
@@ -137,7 +131,7 @@
             .table-responsive td {
                 position: relative;
                 padding-left: 50%;
-                text-align: left !important;
+                text-align: left !important; /* Ensure left alignment in mobile view */
                 border: none;
                 border-bottom: 1px solid #eee;
             }
@@ -164,7 +158,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">{{ $pages }}</h5>
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-                        <i class="fas fa-plus-circle me-2"></i>Tambah Pengumuman
+                        <i class="fas fa-plus-circle me-2"></i>Tambah Kelas
                     </button>
                 </div>
                 <div class="card-body">
@@ -172,20 +166,20 @@
                     <div class="row mb-4">
                         <div class="col-md-4 mb-2">
                             <div class="p-3 bg-light-primary rounded">
-                                <h6 class="mb-2">Total Pengumuman</h6>
-                                <h3 class="mb-0">{{ $pengumuman ? count($pengumuman) : 0 }}</h3>
+                                <h6 class="mb-2">Total Kelas</h6>
+                                <h3 class="mb-0">{{ count($kelas) }}</h3>
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
                             <div class="p-3 bg-light-success rounded">
-                                <h6 class="mb-2">Pengumuman Publish</h6>
-                                <h3 class="mb-0">{{ $pengumuman ? $pengumuman->where('status', 'Publish')->count() : 0 }}</h3>
+                                <h6 class="mb-2">Kelas Aktif</h6>
+                                <h3 class="mb-0">{{ $kelas->where('status', 'Aktif')->count() }}</h3>
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
                             <div class="p-3 bg-light-warning rounded">
-                                <h6 class="mb-2">Pengumuman Draft</h6>
-                                <h3 class="mb-0">{{ $pengumuman ? $pengumuman->where('status', 'Draft')->count() : 0 }}</h3>
+                                <h6 class="mb-2">Kelas Tidak Aktif</h6>
+                                <h3 class="mb-0">{{ $kelas->where('status', 'Tidak Aktif')->count() }}</h3>
                             </div>
                         </div>
                     </div>
@@ -193,52 +187,69 @@
                     <!-- Collapsible Form -->
                     <div class="collapse" id="collapseForm">
                         <div class="card card-body border">
-                            <h5 class="card-title mb-3">Tambah Pengumuman Baru</h5>
-                            <form action="{{ route($spref . 'publikasi.pengumuman-handle') }}" method="post" enctype="multipart/form-data">
+                            <h5 class="card-title mb-3">Tambah Kelas Baru</h5>
+                            <form action="{{ route($spref . 'akademik.kelas-handle') }}" method="post">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="kategori_id" class="form-label">Kategori</label>
-                                        <select class="form-select" name="kategori_id" id="kategori_id" required>
-                                            <option value="">Pilih Kategori</option>
-                                            @foreach($kategori as $kat)
-                                                <option value="{{ $kat->id }}">{{ $kat->name }}</option>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="taka_id" class="form-label">Tahun Akademik</label>
+                                        <select class="form-select" name="taka_id" id="taka_id" required>
+                                            <option value="">Pilih Tahun Akademik</option>
+                                            @foreach ($tahun_akademik as $ta)
+                                                <option value="{{ $ta->id }}">{{ $ta->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('kategori_id')
+                                        @error('taka_id')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="name" class="form-label">Judul Pengumuman</label>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="prodi_id" class="form-label">Program Studi</label>
+                                        <select class="form-select" name="prodi_id" id="prodi_id" required>
+                                            <option value="">Pilih Program Studi</option>
+                                            @foreach ($program_studi as $ps)
+                                                <option value="{{ $ps->id }}">{{ $ps->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('prodi_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jenis_kelas_id" class="form-label">Jenis Kelas</label>
+                                        <select class="form-select" name="jenis_kelas_id" id="jenis_kelas_id" required>
+                                            <option value="">Pilih Jenis Kelas</option>
+                                            @foreach ($jenis_kelas as $jk)
+                                                <option value="{{ $jk->id }}">{{ $jk->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('jenis_kelas_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="ketua_id" class="form-label">Ketua Kelas (Opsional)</label>
+                                        <select class="form-select" name="ketua_id" id="ketua_id">
+                                            <option value="">Pilih Ketua Kelas</option>
+                                            @foreach ($mahasiswa as $mhs)
+                                                <option value="{{ $mhs->id }}">{{ $mhs->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('ketua_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="capacity" class="form-label">Kapasitas</label>
+                                        <input type="number" class="form-control" name="capacity" id="capacity" min="1" required>
+                                        @error('capacity')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">Nama Kelas</label>
                                         <input type="text" class="form-control" name="name" id="name" required>
                                         @error('name')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="photo" class="form-label">Foto Pengumuman</label>
-                                        <input type="file" class="form-control" name="photo" id="photo" accept="image/*" required onchange="previewImage(this)">
-                                        <img id="preview" class="image-preview d-none">
-                                        @error('photo')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="content" class="form-label">Konten Pengumuman</label>
-                                        <textarea class="form-control" name="content" id="content" rows="5" required></textarea>
-                                        @error('content')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="status" class="form-label">Status</label>
-                                        <select class="form-select" name="status" id="status" required>
-                                            <option value="Draft">Draft</option>
-                                            <option value="Publish">Publish</option>
-                                            <option value="Archive">Archive</option>
-                                        </select>
-                                        @error('status')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -258,32 +269,39 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th>Judul</th>
-                                    <th>Kategori</th>
-                                    <th>Status</th>
+                                    <th>Nama Kelas</th>
+                                    <th>Kode</th>
+                                    <th>Program Studi</th>
+                                    <th>Tahun Akademik</th>
+                                    <th>Jenis Kelas</th>
+                                    <th>Kapasitas</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pengumuman as $key => $item)
+                                @foreach ($kelas as $key => $item)
                                     <tr>
                                         <td data-label="No">{{ ++$key }}</td>
-                                        <td data-label="Judul">{{ $item->name }}</td>
-                                        <td data-label="Kategori">{{ $item->kategori->name }}</td>
-                                        <td data-label="Status">
-                                            <span class="badge bg-{{ $item->status == 'Publish' ? 'success' : ($item->status == 'Draft' ? 'warning' : 'secondary') }}">
-                                                {{ $item->status }}
-                                            </span>
+                                        <td data-label="Nama Kelas">
+                                            <div class="d-flex flex-column">
+                                                <span class="fw-bold">{{ $item->name }}</span>
+                                                <small class="text-muted">{{ $item->programStudi->name }}</small>
+                                            </div>
                                         </td>
+                                        <td data-label="Kode">{{ $item->code }}</td>
+                                        <td data-label="Program Studi">{{ $item->programStudi->name }}</td>
+                                        <td data-label="Tahun Akademik">{{ $item->tahunAkademik->name }}</td>
+                                        <td data-label="Jenis Kelas">{{ $item->jenisKelas->name }}</td>
+                                        <td data-label="Kapasitas">{{ $item->capacity }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#editData{{ $item->code }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit Pengumuman">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#editData{{ $item->code }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit Kelas">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route($spref . 'publikasi.pengumuman-delete', $item->code) }}" method="POST" class="d-inline" id="delete-form-{{ $item->code }}">
+                                                <form action="{{ route($spref . 'akademik.kelas-delete', $item->code) }}" method="POST" class="d-inline" id="delete-form-{{ $item->code }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-sm btn-danger" data-confirm-delete="true" data-bs-toggle="tooltip" title="Hapus Pengumuman" onclick="confirmDelete('{{ $item->code }}')">
+                                                    <button type="button" class="btn btn-sm btn-danger" data-confirm-delete="true" data-bs-toggle="tooltip" title="Hapus Kelas" onclick="confirmDelete('{{ $item->code }}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
@@ -302,32 +320,32 @@
         <div class="col-lg-4 col-12 mb-2">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Informasi Pengumuman</h5>
+                    <h5 class="card-title">Informasi Kelas</h5>
                 </div>
                 <div class="card-body">
-                    <p>Bagian ini menampilkan informasi umum dan petunjuk terkait pengelolaan Pengumuman.</p>
+                    <p>Kelas adalah kelompok belajar yang terdiri dari mahasiswa dalam program studi tertentu pada tahun akademik tertentu.</p>
                     
                     <div class="alert alert-light-success">
                         <h6 class="">Petunjuk Penggunaan:</h6>
                         <ul class="mb-0">
-                            <li>Klik tombol "Tambah Pengumuman" untuk menambahkan pengumuman baru</li>
-                            <li>Klik ikon <i class="fas fa-edit"></i> untuk mengedit pengumuman</li>
-                            <li>Klik ikon <i class="fas fa-trash"></i> untuk menghapus pengumuman</li>
+                            <li>Klik tombol "Tambah Kelas" untuk menambahkan kelas baru</li>
+                            <li>Klik ikon <i class="fas fa-edit"></i> untuk mengedit data kelas</li>
+                            <li>Klik ikon <i class="fas fa-trash"></i> untuk menghapus kelas</li>
                         </ul>
                     </div>
-
-                    @if(count($pengumuman) > 0)
+                    
+                    @if(count($kelas) > 0)
                         <div class="mt-4">
-                            <h6>Pengumuman Terbaru</h6>
+                            <h6>Kelas Terbaru</h6>
                             <div class="list-group">
-                                @foreach($pengumuman->sortByDesc('created_at')->take(3) as $announcement)
+                                @foreach($kelas->take(5) as $k)
                                     <div class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-1">{{ $announcement->name }}</h6>
-                                            <small class="text-muted">{{ $announcement->created_at->diffForHumans() }}</small>
+                                            <h6 class="mb-1">{{ $k->name }}</h6>
+                                            <small class="text-muted">{{ $k->jenisKelas->name }}</small>
                                         </div>
-                                        <p class="mb-1">{{ Str::limit(strip_tags($announcement->content), 50) }}</p>
-                                        <small class="text-muted">{{ $announcement->kategori->name }}</small>
+                                        <p class="mb-1">{{ $k->programStudi->name }}</p>
+                                        <small>Kapasitas: {{ $k->capacity }} mahasiswa</small>
                                     </div>
                                 @endforeach
                             </div>
@@ -339,61 +357,78 @@
     </div>
 
     <!-- Edit Modals -->
-    @foreach ($pengumuman as $item)
+    @foreach ($kelas as $item)
         <div class="modal fade" id="editData{{ $item->code }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ $item->code }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="{{ route($spref . 'publikasi.pengumuman-update', $item->code) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route($spref . 'akademik.kelas-update', $item->code) }}" method="POST">
                         @method('patch')
                         @csrf
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $item->code }}">Edit Pengumuman - {{ $item->name }}</h5>
+                            <h5 class="modal-title" id="editModalLabel{{ $item->code }}">Edit Kelas - {{ $item->name }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <label for="edit_kategori_id{{ $item->code }}" class="form-label">Kategori</label>
-                                    <select class="form-select" name="kategori_id" id="edit_kategori_id{{ $item->code }}" required>
-                                        <option value="">Pilih Kategori</option>
-                                        @foreach($kategori as $kat)
-                                            <option value="{{ $kat->id }}" {{ $item->kategori_id == $kat->id ? 'selected' : '' }}>{{ $kat->name }}</option>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_taka_id{{ $item->code }}" class="form-label">Tahun Akademik</label>
+                                    <select class="form-select" name="taka_id" id="edit_taka_id{{ $item->code }}" required>
+                                        <option value="">Pilih Tahun Akademik</option>
+                                        @foreach ($tahun_akademik as $ta)
+                                            <option value="{{ $ta->id }}" {{ $item->taka_id == $ta->id ? 'selected' : '' }}>{{ $ta->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('kategori_id')
+                                    @error('taka_id')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="edit_name{{ $item->code }}" class="form-label">Judul Pengumuman</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_prodi_id{{ $item->code }}" class="form-label">Program Studi</label>
+                                    <select class="form-select" name="prodi_id" id="edit_prodi_id{{ $item->code }}" required>
+                                        <option value="">Pilih Program Studi</option>
+                                        @foreach ($program_studi as $ps)
+                                            <option value="{{ $ps->id }}" {{ $item->prodi_id == $ps->id ? 'selected' : '' }}>{{ $ps->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('prodi_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_jenis_kelas_id{{ $item->code }}" class="form-label">Jenis Kelas</label>
+                                    <select class="form-select" name="jenis_kelas_id" id="edit_jenis_kelas_id{{ $item->code }}" required>
+                                        <option value="">Pilih Jenis Kelas</option>
+                                        @foreach ($jenis_kelas as $jk)
+                                            <option value="{{ $jk->id }}" {{ $item->jenis_kelas_id == $jk->id ? 'selected' : '' }}>{{ $jk->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('jenis_kelas_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_ketua_id{{ $item->code }}" class="form-label">Ketua Kelas (Opsional)</label>
+                                    <select class="form-select" name="ketua_id" id="edit_ketua_id{{ $item->code }}">
+                                        <option value="">Pilih Ketua Kelas</option>
+                                        @foreach ($mahasiswa as $mhs)
+                                            <option value="{{ $mhs->id }}" {{ $item->ketua_id == $mhs->id ? 'selected' : '' }}>{{ $mhs->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('ketua_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_capacity{{ $item->code }}" class="form-label">Kapasitas</label>
+                                    <input type="number" class="form-control" name="capacity" id="edit_capacity{{ $item->code }}" min="1" value="{{ $item->capacity }}" required>
+                                    @error('capacity')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="edit_name{{ $item->code }}" class="form-label">Nama Kelas</label>
                                     <input type="text" class="form-control" name="name" id="edit_name{{ $item->code }}" value="{{ $item->name }}" required>
                                     @error('name')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="edit_photo{{ $item->code }}" class="form-label">Foto Pengumuman</label>
-                                    <input type="file" class="form-control" name="photo" id="edit_photo{{ $item->code }}" accept="image/*" onchange="previewImage(this, 'preview{{ $item->code }}')">
-                                    <img src="{{ asset('storage/images/pengumuman/' . $item->photo) }}" id="preview{{ $item->code }}" class="image-preview">
-                                    @error('photo')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="edit_content{{ $item->code }}" class="form-label">Konten Pengumuman</label>
-                                    <textarea class="form-control" name="content" id="edit_content{{ $item->code }}" rows="5" required>{{ $item->content }}</textarea>
-                                    @error('content')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="edit_status{{ $item->code }}" class="form-label">Status</label>
-                                    <select class="form-select" name="status" id="edit_status{{ $item->code }}" required>
-                                        <option value="Draft" {{ $item->status == 'Draft' ? 'selected' : '' }}>Draft</option>
-                                        <option value="Publish" {{ $item->status == 'Publish' ? 'selected' : '' }}>Publish</option>
-                                        <option value="Archive" {{ $item->status == 'Archive' ? 'selected' : '' }}>Archive</option>
-                                    </select>
-                                    @error('status')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -438,28 +473,19 @@
                 },
                 responsive: true,
                 pageLength: 10,
-                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Semua"]]
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Semua"]],
+                order: [[0, 'asc']],
+                columnDefs: [
+                    { orderable: false, targets: -1 }
+                ]
             });
         });
-
-        // Image preview
-        function previewImage(input, previewId = 'preview') {
-            const preview = document.getElementById(previewId);
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.classList.remove('d-none');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
 
         // Konfirmasi delete dengan SweetAlert
         function confirmDelete(code) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
-                text: "Data pengumuman yang dihapus tidak dapat dikembalikan!",
+                text: "Data kelas yang dihapus tidak dapat dikembalikan!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

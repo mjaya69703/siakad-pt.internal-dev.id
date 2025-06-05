@@ -28,9 +28,11 @@
 > - Dashboard/Home
 > - Manajemen Profil
 > - Sistem Absensi
-> - Manajemen Akademik (Tahun Akademik, Fakultas, Program Studi dan Kurikulum)
-> - Manajemen Pengguna (Staff, Dosen, Mahasiswa)
-> - Manajemen Publikasi (Kategori, Berita, Galeri Foto, Pengumuman)
+> - Manajemen Akademik ( Done )
+> - Manajemen Pengguna ( Done )
+> - Manajemen Publikasi ( Done )
+> - Manajemen PMB ( Progress )
+> - Manajemen Infrastruktur ( Progress )
 >
 > Fitur-fitur lainnya masih dalam tahap pengembangan dan akan diimplementasikan secara bertahap.
 
@@ -66,16 +68,21 @@ Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaborat
    - Upload dan update foto profil
    - Riwayat aktivitas
 
-3. **Menu Rutinitas**
+3. **Menu Rutinitas** 🔄
    - Absensi harian (Check-in/Check-out) ✅
    - Manajemen izin dan cuti ✅
    - Support ticket online 🔄
 
 4. **Menu Akademik** ✅
+   - Manajemen Tahun Akademik
    - Manajemen Fakultas
    - Manajemen Program Studi
-   - Manajemen Tahun Akademik
    - Manajemen Kurikulum
+   - Manajemen MataKuliah
+   - Manajemen Jenis Kelas
+   - Manajemen Kelas
+   - Manajemen Waktu Kuliah
+   - Manajemen Jadwal Kuliah
 
 5. **Menu Publikasi** ✅
    - Manajemen Kategori

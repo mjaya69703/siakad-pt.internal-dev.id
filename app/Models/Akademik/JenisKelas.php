@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\HasLogAktivitas;
 // USE MODELS
 use App\Models\Akademik\ProgramStudi;
+use App\Models\Akademik\WaktuKuliah;
 
 class JenisKelas extends Model
 {
@@ -19,4 +20,9 @@ class JenisKelas extends Model
     // {
     //     return $this->belongsTo(ProgramStudi::class);
     // }
+
+    public function waktuKuliah()
+    {
+        return $this->hasMany(WaktuKuliah::class, 'jenis_kelas_id');
+    }
 }

@@ -203,7 +203,7 @@
                     </div>
                     
                     <!-- Table -->
-                    <div class="table-responsive">
+                    <div class="table-responsive mt-3">
                         <table class="table">
                             <thead>
                                 <tr>

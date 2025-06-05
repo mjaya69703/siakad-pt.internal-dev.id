@@ -340,6 +340,26 @@
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.kurikulum-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.kurikulum-render') }}">
                                     Kurikulum
                                 </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.mata-kuliah-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.mata-kuliah-render') }}">
+                                    Mata Kuliah
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.jenis-kelas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.jenis-kelas-render') }}">
+                                    Jenis Kelas
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.kelas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.kelas-render') }}">
+                                    Kelas
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.waktu-kuliah-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.waktu-kuliah-render') }}">
+                                    Waktu Kuliah
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.jadwal-kuliah-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.jadwal-kuliah-render') }}">
+                                    Jadwal Kuliah
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -361,12 +381,11 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item {{ Route::is($spref . 'pengaturan.log-aktivitas-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pengaturan.log-aktivitas-render') }}">
                                     Log Aktivitas
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
 
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'pengaturan.web-settings-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pengaturan.web-settings-render') }}">
                                     Pengaturan Web
-                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+
 
                                 </a>
 
