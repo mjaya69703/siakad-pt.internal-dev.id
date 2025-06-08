@@ -154,9 +154,50 @@ use Illuminate\Support\Facades\Route;
     Route::get('/pengaturan/export-settings', [App\Http\Controllers\Master\Pengaturan\WebSettingController::class, 'exportDatabase'])->name('pengaturan.export-database');
     Route::post('/pengaturan/import-settings', [App\Http\Controllers\Master\Pengaturan\WebSettingController::class, 'importDatabase'])->name('pengaturan.import-database');
 
-
     // MASTER PENGATURAN => LOG AKTIVITAS
     Route::get('/pengaturan/log-aktivitas', [App\Http\Controllers\Master\Pengaturan\LogAktivitasController::class, 'renderLogAktivitas'])->name('pengaturan.log-aktivitas-render');
     Route::get('/pengaturan/log-aktivitas/{id}/view', [App\Http\Controllers\Master\Pengaturan\LogAktivitasController::class, 'viewLogAktivitas'])->name('pengaturan.log-aktivitas-view');
     Route::get('/pengaturan/log-aktivitas/filter', [App\Http\Controllers\Master\Pengaturan\LogAktivitasController::class, 'filterLogAktivitas'])->name('pengaturan.log-aktivitas-filter');
     Route::delete('/pengaturan/log-aktivitas/{id}', [App\Http\Controllers\Master\Pengaturan\LogAktivitasController::class, 'deleteLogAktivitas'])->name('pengaturan.log-aktivitas-delete');
+
+    // MASTER INFRASTRUKTUR => GEDUNG
+    Route::get('/infrastruktur/gedung', [App\Http\Controllers\Master\Infrastruktur\GedungController::class, 'renderGedung'])->name('infrastruktur.gedung-render');
+    Route::post('/infrastruktur/gedung', [App\Http\Controllers\Master\Infrastruktur\GedungController::class, 'handleGedung'])->name('infrastruktur.gedung-handle');
+    Route::patch('/infrastruktur/gedung/{code}', [App\Http\Controllers\Master\Infrastruktur\GedungController::class, 'updateGedung'])->name('infrastruktur.gedung-update');
+    Route::delete('/infrastruktur/gedung/{code}', [App\Http\Controllers\Master\Infrastruktur\GedungController::class, 'deleteGedung'])->name('infrastruktur.gedung-delete');
+
+    // MASTER INFRASTRUKTUR => RUANG
+    Route::get('/infrastruktur/ruang', [App\Http\Controllers\Master\Infrastruktur\RuangController::class, 'renderRuang'])->name('infrastruktur.ruang-render');
+    Route::post('/infrastruktur/ruang', [App\Http\Controllers\Master\Infrastruktur\RuangController::class, 'handleRuang'])->name('infrastruktur.ruang-handle');
+    Route::patch('/infrastruktur/ruang/{code}', [App\Http\Controllers\Master\Infrastruktur\RuangController::class, 'updateRuang'])->name('infrastruktur.ruang-update');
+    Route::delete('/infrastruktur/ruang/{code}', [App\Http\Controllers\Master\Infrastruktur\RuangController::class, 'deleteRuang'])->name('infrastruktur.ruang-delete');
+
+    // MASTER INFRASTRUKTUR => KATEGORI BARANG
+    Route::get('/infrastruktur/kategori-barang', [App\Http\Controllers\Master\Infrastruktur\KategoriBarangController::class, 'renderKategoriBarang'])->name('infrastruktur.kategori-barang-render');
+    Route::post('/infrastruktur/kategori-barang', [App\Http\Controllers\Master\Infrastruktur\KategoriBarangController::class, 'handleKategoriBarang'])->name('infrastruktur.kategori-barang-handle');
+    Route::patch('/infrastruktur/kategori-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\KategoriBarangController::class, 'updateKategoriBarang'])->name('infrastruktur.kategori-barang-update');
+    Route::delete('/infrastruktur/kategori-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\KategoriBarangController::class, 'deleteKategoriBarang'])->name('infrastruktur.kategori-barang-delete');
+
+    // MASTER INFRASTRUKTUR => BARANG
+    Route::get('/infrastruktur/barang', [App\Http\Controllers\Master\Infrastruktur\BarangController::class, 'renderBarang'])->name('infrastruktur.barang-render');
+    Route::post('/infrastruktur/barang', [App\Http\Controllers\Master\Infrastruktur\BarangController::class, 'handleBarang'])->name('infrastruktur.barang-handle');
+    Route::patch('/infrastruktur/barang/{code}', [App\Http\Controllers\Master\Infrastruktur\BarangController::class, 'updateBarang'])->name('infrastruktur.barang-update');
+    Route::delete('/infrastruktur/barang/{code}', [App\Http\Controllers\Master\Infrastruktur\BarangController::class, 'deleteBarang'])->name('infrastruktur.barang-delete');
+
+    // MASTER INFRASTRUKTUR => MUTASI BARANG
+    Route::get('/infrastruktur/mutasi-barang', [App\Http\Controllers\Master\Infrastruktur\MutasiBarangController::class, 'renderMutasiBarang'])->name('infrastruktur.mutasi-barang-render');
+    Route::post('/infrastruktur/mutasi-barang', [App\Http\Controllers\Master\Infrastruktur\MutasiBarangController::class, 'handleMutasiBarang'])->name('infrastruktur.mutasi-barang-handle');
+    Route::patch('/infrastruktur/mutasi-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\MutasiBarangController::class, 'updateMutasiBarang'])->name('infrastruktur.mutasi-barang-update');
+    Route::delete('/infrastruktur/mutasi-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\MutasiBarangController::class, 'deleteMutasiBarang'])->name('infrastruktur.mutasi-barang-delete');
+
+    // MASTER INFRASTRUKTUR => PENGADAAN BARANG
+    Route::get('/infrastruktur/pengadaan-barang', [App\Http\Controllers\Master\Infrastruktur\PengadaanBarangController::class, 'renderPengadaanBarang'])->name('infrastruktur.pengadaan-barang-render');
+    Route::post('/infrastruktur/pengadaan-barang', [App\Http\Controllers\Master\Infrastruktur\PengadaanBarangController::class, 'handlePengadaanBarang'])->name('infrastruktur.pengadaan-barang-handle');
+    Route::patch('/infrastruktur/pengadaan-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\PengadaanBarangController::class, 'updatePengadaanBarang'])->name('infrastruktur.pengadaan-barang-update');
+    Route::delete('/infrastruktur/pengadaan-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\PengadaanBarangController::class, 'deletePengadaanBarang'])->name('infrastruktur.pengadaan-barang-delete');
+
+    // MASTER INFRASTRUKTUR => INVENTARIS BARANG
+    Route::get('/infrastruktur/inventaris-barang', [App\Http\Controllers\Master\Infrastruktur\InventarisBarangController::class, 'renderInventarisBarang'])->name('infrastruktur.inventaris-barang-render');
+    Route::post('/infrastruktur/inventaris-barang', [App\Http\Controllers\Master\Infrastruktur\InventarisBarangController::class, 'handleInventarisBarang'])->name('infrastruktur.inventaris-barang-handle');
+    Route::patch('/infrastruktur/inventaris-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\InventarisBarangController::class, 'updateInventarisBarang'])->name('infrastruktur.inventaris-barang-update');
+    Route::delete('/infrastruktur/inventaris-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\InventarisBarangController::class, 'deleteInventarisBarang'])->name('infrastruktur.inventaris-barang-delete');

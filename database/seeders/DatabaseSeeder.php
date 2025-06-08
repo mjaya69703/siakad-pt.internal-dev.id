@@ -20,40 +20,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        // SEEDER KHUSUS DATA MASTER INVENTARIS
-        \App\Models\Gedung::create([
-            'name'       => 'Area Luar Kampus',
-            'code'       => 'ALK',
-        ]);
-        \App\Models\Gedung::create([
-            'name'       => 'Area Sekitar Gedung',
-            'code'       => 'ASG',
-        ]);
-        \App\Models\Gedung::create([
-            'name'       => 'Gedung A',
-            'code'       => 'GDA',
-        ]);
-        \App\Models\Ruang::create([
-            'gedu_id'    => '3',
-            'floor'      => '1',
-            'type'       => '1',
-            'name'       => 'Kelas 101',
-            'code'       => 'C-101',
-        ]);
-        \App\Models\Ruang::create([
-            'gedu_id'    => '3',
-            'floor'      => '1',
-            'type'       => '1',
-            'name'       => 'Kelas 102',
-            'code'       => 'C-102',
-        ]);
-        \App\Models\Ruang::create([
-            'gedu_id'    => '3',
-            'floor'      => '1',
-            'type'       => '1',
-            'name'       => 'Kelas 103',
-            'code'       => 'C-103',
-        ]);
 
 
         \App\Models\Pengaturan\WebSetting::create([
@@ -78,6 +44,7 @@ class DatabaseSeeder extends Seeder
             \Database\Seeders\Master\AkademikSeeder::class,
             \Database\Seeders\Master\PublikasiSeeder::class,
             \Database\Seeders\Master\PMBSeeder::class,
+            \Database\Seeders\Master\InfrastrukturSeeder::class,
         ]);
 
     }

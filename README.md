@@ -3,7 +3,7 @@
 <p align="center">
 <a href="changelog.md">Neco Siakad By Esec Academy | v2.0 - Changelogs</a>
 <br>
-<span>Latest Update: 6 Juni 2025</span>
+<span>Latest Update: 8 Juni 2025</span>
 </p>
 
 <p align="center">
@@ -32,8 +32,9 @@
 > - Manajemen Data Master Pengguna ( Done )
 > - Manajemen Data Master Publikasi ( Done )
 > - Manajemen Data Master PMB ( Done )
+> - Manajemen Data Master Infrastruktur ( Done )
+> - Manajemen Data Master Keuangan ( Progress )
 > - Manajemen Data Master Pendaftaran ( Progress )
-> - Manajemen Data Master Infrastruktur ( Progress )
 >
 > Fitur-fitur lainnya masih dalam tahap pengembangan dan akan diimplementasikan secara bertahap.
 
@@ -109,7 +110,16 @@ Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaborat
    - Manajemen Mahasiswa
    - Manajemen Dosen
 
-9. **Sistem Log Aktivitas** ✅
+9. **Menu Infrastruktur** ✅
+   - Manajemen Gedung
+   - Manajemen Ruang
+   - Manajemen Barang
+   - Manajemen Mutasi Barang
+   - Manajemen Kategori Barang
+   - Manajemen Pengadaan Barang
+   - Manajemen Inventaris Barang
+
+10. **Sistem Log Aktivitas** ✅
     - Pencatatan otomatis aksi Create, Update, Delete pada model yang diaktifkan.
     - Pelacakan detail perubahan data (nilai lama dan baru).
     - Penyimpanan log yang efisien menggunakan Queue.
@@ -233,7 +243,8 @@ Link: https://siakad-pt.idev-fun.org/signin
    User: admin
    Pass: Admin123
 
-2. Admin Staff
+<!-- Under This Coming Soon -->
+2. Admin Staff 
    User: admin2
    Pass: Admin123
 
@@ -265,7 +276,7 @@ Pass: Mahasiswa123
 ```
 
 ## Persyaratan Sistem
-- PHP v8.2+
+- PHP v8.3+
 - MariaDB v10.5+ / MySQL v8.0+
 - Docker v27.0+ (Opsional)
 - Composer v2.6+

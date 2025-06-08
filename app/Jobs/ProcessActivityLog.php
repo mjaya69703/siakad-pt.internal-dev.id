@@ -67,17 +67,28 @@ class ProcessActivityLog implements ShouldQueue
     public function handle(): void
     {
         try {
-             // Create the main log entry
+            Log::info('Starting ProcessActivityLog job', [
+                'job_id' => $this->job->getJobId() ?? 'N/A',
+                'model_type' => $this->modelType,
+                'model_id' => $this->modelId,
+                'action' => $this->action
+            ]);
+
+            // Create the main log entry
             $logEntry = LogAktivitas::create([
                 'user_id' => $this->userId,
                 'user_type' => $this->userType,
                 'action' => $this->action,
                 'model_type' => $this->modelType,
                 'model_id' => $this->modelId,
-                'changes' => null, // Column changes should be null
+                'changes' => null,
                 'ip_address' => $this->ipAddress,
                 'user_agent' => $this->userAgent,
                 'description' => $this->description,
+            ]);
+
+            Log::info('Created main log entry', [
+                'log_entry_id' => $logEntry->id ?? 'N/A'
             ]);
 
             // Create entries in the activity_log_changes table
@@ -85,36 +96,45 @@ class ProcessActivityLog implements ShouldQueue
                 // Prepare data for createMany
                 $changeDetailsData = [];
                 foreach ($this->changesToLog as $change) {
-                     $changeDetailsData[] = [
-                         'activity_log_id' => $logEntry->id,
-                         'field_name' => $change['field_name'],
-                         'old_value' => $change['old_value'] ?? null,
-                         'new_value' => $change['new_value'] ?? null,
-                         'created_at' => now(), // Manually add timestamps for createMany
-                         'updated_at' => now(),
-                     ];
-                 }
+                    $changeDetailsData[] = [
+                        'activity_log_id' => $logEntry->id,
+                        'field_name' => $change['field_name'],
+                        'old_value' => $change['old_value'] ?? null,
+                        'new_value' => $change['new_value'] ?? null,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
 
                 if (!empty($changeDetailsData)) {
-                     ActivityLogChange::insert($changeDetailsData); // Use insert for bulk insert
+                    ActivityLogChange::insert($changeDetailsData);
+                    Log::info('Created activity log changes', [
+                        'changes_count' => count($changeDetailsData)
+                    ]);
                 }
             }
+
+            Log::info('Successfully completed ProcessActivityLog job', [
+                'job_id' => $this->job->getJobId() ?? 'N/A'
+            ]);
+
         } catch (\Exception $e) {
             Log::error('Failed to process activity log job', [
                 'job_id' => $this->job->getJobId() ?? 'N/A',
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
-                'log_data' => [ // Log the data that caused the failure
-                     'user_id' => $this->userId,
-                     'user_type' => $this->userType,
-                     'action' => $this->action,
-                     'model_type' => $this->modelType,
-                     'model_id' => $this->modelId,
-                     'changes_count' => count($this->changesToLog),
-                 ]
+                'log_data' => [
+                    'user_id' => $this->userId,
+                    'user_type' => $this->userType,
+                    'action' => $this->action,
+                    'model_type' => $this->modelType,
+                    'model_id' => $this->modelId,
+                    'changes_count' => count($this->changesToLog),
+                ]
             ]);
-            // Depending on requirements, you might want to re-queue the job
-            // $this->release(60); // Release the job back to the queue in 60 seconds
+
+            // Re-throw the exception to mark the job as failed
+            throw $e;
         }
     }
 }
