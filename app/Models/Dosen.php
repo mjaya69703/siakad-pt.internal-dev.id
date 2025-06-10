@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\HasLogAktivitas;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dosen extends Authenticatable
 {
-    use HasFactory, HasLogAktivitas;
+    use HasFactory, SoftDeletes ,HasLogAktivitas;
     
     protected $guarded=[];
 

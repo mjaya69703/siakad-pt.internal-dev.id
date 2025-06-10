@@ -11,10 +11,11 @@ use App\Models\User\Mahasiswa;
 use App\Models\User\Dosen;
 use App\Models\User\Staff;
 use App\Traits\HasLogAktivitas;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasLogAktivitas;
+    use HasApiTokens, HasFactory,SoftDeletes, Notifiable, HasLogAktivitas;
 
 
     protected $table = 'users';

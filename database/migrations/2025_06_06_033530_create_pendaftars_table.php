@@ -18,11 +18,12 @@ return new class extends Migration
             $table->integer('jalur_id');        // ID JALUR PENDAFTARAN
             $table->integer('gelombang_id');    // ID GELOMBANG PENDAFTARAN
 
-            $table->string('phone')->unique();  // NO TELEPON MAHASISWA
-            $table->string('email')->unique();  // ALAMAT EMAIL MAHASISWA
-            $table->string('name');             // NAMA LENGKAP MAHASISWA
-            $table->string('code')->unique();   // KODE USER
-            $table->date('register_date');      // TANGGAL PENDAFTARAN
+            $table->string('phone')->unique();    // NO TELEPON MAHASISWA
+            $table->string('email')->unique();    // ALAMAT EMAIL MAHASISWA
+            $table->string('name');               // NAMA LENGKAP MAHASISWA
+            $table->string('code')->unique();     // KODE USER
+            $table->string('numb_reg')->unique(); // NOMOR REGISTRASI
+            $table->date('register_date');        // TANGGAL PENDAFTARAN
             $table->enum('status', ['Pending', 'Lulus', 'Gagal', 'Batal'])->default('Pending');   // STATUS PENDAFTARAN
 
             // AUDIT TRACKING
