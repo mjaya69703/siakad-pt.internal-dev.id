@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasLogAktivitas;
 // USE MODELS
 use App\Models\Pendaftaran\Pendaftar;
+use App\Models\PMB\SyaratPendaftaran;
 
 class DokumenPMB extends Model
 {
@@ -18,6 +19,11 @@ class DokumenPMB extends Model
     public function pendaftar()
     {
         return $this->belongsTo(Pendaftar::class, 'pendaftar_id');
+    }
+
+    public function syarat()
+    {
+        return $this->belongsTo(SyaratPendaftaran::class, 'syarat_id');
     }
 
     public static function jenisDokumenList()

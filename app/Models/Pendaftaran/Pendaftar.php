@@ -32,7 +32,7 @@ class Pendaftar extends Model
         return $this->belongsTo(GelombangPendaftaran::class, 'gelombang_id');
     }
 
-    public function dokumens()
+    public function dokumen()
     {
         return $this->hasMany(DokumenPMB::class, 'pendaftar_id');
     }

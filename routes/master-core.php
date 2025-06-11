@@ -92,6 +92,19 @@ use Illuminate\Support\Facades\Route;
     Route::post('/pmb/jadwal',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'handleJadwal'])->name('pmb.jadwal-handle');
     Route::patch('/pmb/jadwal/{code}',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'updateJadwal'])->name('pmb.jadwal-update');
     Route::delete('/pmb/jadwal/{code}',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'deleteJadwal'])->name('pmb.jadwal-delete');
+    
+    // MASTER PMB => PENDAFTAR
+    Route::get('/pmb/pendaftar', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'renderPendaftar'])->name('pmb.pendaftar-render');
+    Route::post('/pmb/pendaftar', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'handlePendaftar'])->name('pmb.pendaftar-handle');
+    Route::patch('/pmb/pendaftar/{code}', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'updatePendaftar'])->name('pmb.pendaftar-update');
+    Route::delete('/pmb/pendaftar/{code}', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'deletePendaftar'])->name('pmb.pendaftar-delete');
+    Route::get('/pmb/pendaftar/{code}', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'renderDetail'])->name('pmb.pendaftar-detail');
+    Route::post('/pmb/pendaftar/{code}/dokumen', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'handleDokumen'])->name('pmb.pendaftar-dokumen-handle');
+    Route::patch('/pmb/pendaftar/{code}/validasi', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'validasiDokumen'])->name('pmb.pendaftar-validasi');
+    Route::get('/pmb/pendaftar/export/excel', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'exportPendaftarExcel'])->name('pmb.pendaftar-export-excel');
+    Route::get('/pmb/pendaftar/export/pdf', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'exportPendaftarPDF'])->name('pmb.pendaftar-export-pdf');
+    Route::post('/pmb/pendaftar/batch/validasi', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'batchValidasiDokumen'])->name('pmb.pendaftar-batch-validasi');
+    Route::post('/pmb/pendaftar/batch/status', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'batchUpdateStatus'])->name('pmb.pendaftar-batch-status');
 
     // MASTER PENGGUNA => USERS 
     Route::get('/pengguna/users',[App\Http\Controllers\Master\Pengguna\UsersController::class, 'renderUsers'])->name('pengguna.users-render');

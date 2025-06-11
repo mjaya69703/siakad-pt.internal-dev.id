@@ -3,7 +3,7 @@
 <p align="center">
 <a href="changelog.md">Neco Siakad By Esec Academy | v2.0 - Changelogs</a>
 <br>
-<span>Latest Update: 8 Juni 2025</span>
+<span>Latest Update: 11 Juni 2025</span>
 </p>
 
 <p align="center">
@@ -34,7 +34,7 @@
 > - Manajemen Data Master PMB ( Done )
 > - Manajemen Data Master Infrastruktur ( Done )
 > - Manajemen Data Master Keuangan ( Progress )
-> - Manajemen Data Master Pendaftaran ( Progress )
+> - Manajemen Data Master Pendaftaran ( Done Merge with MASTER PMB )
 >
 > Fitur-fitur lainnya masih dalam tahap pengembangan dan akan diimplementasikan secara bertahap.
 
@@ -93,6 +93,7 @@ Yang membuat Neco Siakad istimewa adalah sifatnya yang open source dan kolaborat
    - Manajemen Syarat Pendaftaran
    - Manajemen Gelombang Pendaftaran
    - Manajemen Jadwal PMB
+   - Manajemen Calon Mahasiswa
 
 6. **Menu Publikasi** ✅
    - Manajemen Kategori

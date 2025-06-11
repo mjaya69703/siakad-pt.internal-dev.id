@@ -26,7 +26,7 @@ class MahasiswaController extends Controller
         $data['menus'] = "Master";
         $data['pages'] = "Mahasiswa";
         $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
-        $data['mahasiswa'] = Mahasiswa::latest()->get();
+        $data['mahasiswa'] = Mahasiswa::all();
         $data['prodi'] = ProgramStudi::all();
         
         return view('master.pengguna.mahasiswa-index', $data, compact('user'));

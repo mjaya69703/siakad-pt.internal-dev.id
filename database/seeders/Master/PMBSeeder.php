@@ -215,5 +215,121 @@ class PMBSeeder extends Seeder
         ];
 
         JadwalPMB::insert($jadwalPMB);
+
+        // Seed pendaftar
+        $pendaftars = [
+            [
+                'mahasiswa_id' => 1, // Mahasiswa A
+                'jalur_id' => 1, // Jalur Reguler
+                'gelombang_id' => 1, // Gelombang 1
+                'phone' => '081234567890',
+                'email' => 'mahasiswa.a@example.com',
+                'name' => 'Mahasiswa A',
+                'code' => Str::random(8),
+                'numb_reg' => 'REG-' . date('Ymd') . '-0001',
+                'register_date' => now(),
+                'status' => 'Lulus',
+                'created_by' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'mahasiswa_id' => 2, // Mahasiswa B
+                'jalur_id' => 1, // Jalur Reguler
+                'gelombang_id' => 2, // Gelombang 2
+                'phone' => '081234567891',
+                'email' => 'mahasiswa.b@example.com',
+                'name' => 'Mahasiswa B',
+                'code' => Str::random(8),
+                'numb_reg' => 'REG-' . date('Ymd') . '-0002',
+                'register_date' => now(),
+                'status' => 'Pending',
+                'created_by' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'mahasiswa_id' => 3, // Mahasiswa C
+                'jalur_id' => 2, // Jalur Beasiswa
+                'gelombang_id' => 1, // Gelombang 1
+                'phone' => '081234567892',
+                'email' => 'mahasiswa.c@example.com',
+                'name' => 'Mahasiswa C',
+                'code' => Str::random(8),
+                'numb_reg' => 'REG-' . date('Ymd') . '-0003',
+                'register_date' => now(),
+                'status' => 'Gagal',
+                'created_by' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'mahasiswa_id' => 4, // Mahasiswa D
+                'jalur_id' => 2, // Jalur Beasiswa
+                'gelombang_id' => 2, // Gelombang 2
+                'phone' => '081234567893',
+                'email' => 'mahasiswa.d@example.com',
+                'name' => 'Mahasiswa D',
+                'code' => Str::random(8),
+                'numb_reg' => 'REG-' . date('Ymd') . '-0004',
+                'register_date' => now(),
+                'status' => 'Batal',
+                'created_by' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        ];
+
+        foreach ($pendaftars as $pendaftar) {
+            $pendaftarModel = \App\Models\Pendaftaran\Pendaftar::create($pendaftar);
+
+            // Buat dokumen berdasarkan jalur pendaftaran
+            if ($pendaftar['jalur_id'] == 1) { // Jalur Reguler
+                // Ijazah SMA/SMK
+                \App\Models\Pendaftaran\DokumenPMB::create([
+                    'pendaftar_id' => $pendaftarModel->id,
+                    'syarat_id' => 1, // ID dari syarat Ijazah SMA/SMK
+                    'type' => 'Ijazah',
+                    'name' => 'Ijazah SMA/SMK',
+                    'path' => 'dokumen/pmb/' . $pendaftarModel->code . '/ijazah.pdf',
+                    'code' => Str::random(8),
+                    'status' => 'Pending', // Status dokumen selalu Pending saat pertama kali diupload
+                    'desc' => 'Menunggu validasi dokumen',
+                    'created_by' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+
+                // SKHUN
+                \App\Models\Pendaftaran\DokumenPMB::create([
+                    'pendaftar_id' => $pendaftarModel->id,
+                    'syarat_id' => 2, // ID dari syarat SKHUN
+                    'type' => 'Transkrip',
+                    'name' => 'SKHUN',
+                    'path' => 'dokumen/pmb/' . $pendaftarModel->code . '/skhun.pdf',
+                    'code' => Str::random(8),
+                    'status' => 'Pending', // Status dokumen selalu Pending saat pertama kali diupload
+                    'desc' => 'Menunggu validasi dokumen',
+                    'created_by' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            } else { // Jalur Beasiswa
+                // Sertifikat Prestasi
+                \App\Models\Pendaftaran\DokumenPMB::create([
+                    'pendaftar_id' => $pendaftarModel->id,
+                    'syarat_id' => 3, // ID dari syarat Sertifikat Prestasi
+                    'type' => 'Sertifikat',
+                    'name' => 'Sertifikat Prestasi',
+                    'path' => 'dokumen/pmb/' . $pendaftarModel->code . '/sertifikat.pdf',
+                    'code' => Str::random(8),
+                    'status' => 'Pending', // Status dokumen selalu Pending saat pertama kali diupload
+                    'desc' => 'Menunggu validasi dokumen',
+                    'created_by' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+        }
     }
 }
