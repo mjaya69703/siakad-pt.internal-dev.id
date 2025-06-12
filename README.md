@@ -3,7 +3,7 @@
 <p align="center">
 <a href="changelog.md">Neco Siakad By Esec Academy | v2.0 - Changelogs</a>
 <br>
-<span>Latest Update: 11 Juni 2025</span>
+<span>Latest Update: 12 Juni 2025</span>
 </p>
 
 <p align="center">
