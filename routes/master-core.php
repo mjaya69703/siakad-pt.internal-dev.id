@@ -214,3 +214,9 @@ use Illuminate\Support\Facades\Route;
     Route::post('/infrastruktur/inventaris-barang', [App\Http\Controllers\Master\Infrastruktur\InventarisBarangController::class, 'handleInventarisBarang'])->name('infrastruktur.inventaris-barang-handle');
     Route::patch('/infrastruktur/inventaris-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\InventarisBarangController::class, 'updateInventarisBarang'])->name('infrastruktur.inventaris-barang-update');
     Route::delete('/infrastruktur/inventaris-barang/{code}', [App\Http\Controllers\Master\Infrastruktur\InventarisBarangController::class, 'deleteInventarisBarang'])->name('infrastruktur.inventaris-barang-delete');
+
+    // MASTER KEUANGAN => SALDO
+    Route::get('/keuangan/saldo', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'renderSaldo'])->name('keuangan.saldo-render');
+    Route::post('/keuangan/saldo', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'handleSaldo'])->name('keuangan.saldo-handle');
+    Route::patch('/keuangan/saldo/{code}', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'updateSaldo'])->name('keuangan.saldo-update');
+    Route::delete('/keuangan/saldo/{code}', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'deleteSaldo'])->name('keuangan.saldo-delete');

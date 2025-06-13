@@ -382,8 +382,21 @@
                                 </a>
                                 <a class="dropdown-item {{ Route::is($spref . 'pmb.pendaftar-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'pmb.pendaftar-render') }}">
                                     Calon Mahasiswa
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link {{ Route::is($spref . 'keuangan.*', request()->path()) ? 'active' : '' }} dropdown-toggle" href="#navbar-form" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-adjustments-dollar"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M6 4v4" /><path d="M6 12v8" /><path d="M13.366 14.54a2 2 0 1 0 -.216 3.097" /><path d="M12 4v10" /><path d="M12 18v2" /><path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M18 4v1" /><path d="M18 9v1" /><path d="M21 15h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" /><path d="M19 21v1m0 -8v1" /></svg>                                </span>
+                                <span class="nav-link-title"> Master Keuangan </span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item {{ Route::is($spref . 'keuangan.saldo-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'keuangan.saldo-render') }}">
+                                    Saldo
                                     <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
+       
                             </div>
                         </li>
                         <li class="nav-item dropdown">

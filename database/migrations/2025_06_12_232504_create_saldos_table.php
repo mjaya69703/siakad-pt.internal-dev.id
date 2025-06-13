@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('saldos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tagihan_id')->nullable()->constrained('tagihan_kuliahs')->onDelete('set null');
+            $table->integer('tagihan_id')->nullable();                                   // ID TAGIHAN OPSIONAL
             
             $table->string('code')->unique();                                            // KODE UNIQUE
             $table->enum('type', ['Pemasukan', 'Pengeluaran']);                          // TIPE SALDO

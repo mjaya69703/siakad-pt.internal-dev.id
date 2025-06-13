@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('tagihan_kuliahs', function (Blueprint $table) {
             $table->id();
             $table->integer('taka_id');
+            $table->integer('biaya_id')->nullable();
+            $table->integer('biaya_pmb')->nullable();
             $table->integer('mahasiswa_id');
             
             $table->unsignedBigInteger('amount');
