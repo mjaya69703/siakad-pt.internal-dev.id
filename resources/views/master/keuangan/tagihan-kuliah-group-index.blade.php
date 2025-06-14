@@ -351,8 +351,16 @@
                                         <td>
                                             <div class="btn-group" role="group">
                                                 @if($group->status == 'Draft')
-                                                    <a href="{{ route($spref . 'keuangan.tagihan-kuliah-group-publish', $group->code) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" title="Publish Group">
-                                                        <i class="fas fa-check"></i>
+                                                    <form action="{{ route($spref . 'keuangan.tagihan-kuliah-group-publish', $group->code) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-success" data-bs-toggle="tooltip" title="Publish Group">
+                                                            <i class="fas fa-check"></i>
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                                @if($group->status == 'Published')
+                                                    <a href="{{ route($spref . 'keuangan.tagihan-kuliah-group-detail', $group->code) }}" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Lihat Detail Tagihan">
+                                                        <i class="fas fa-eye"></i>
                                                     </a>
                                                 @endif
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#editData{{ $group->code }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit Group">

@@ -228,3 +228,4 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/keuangan/tagihan-kuliah-group/{code}', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'deleteTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-delete');
     Route::post('/keuangan/tagihan-kuliah-group/{code}/publish', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'publishTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-publish');
     Route::post('/keuangan/tagihan-kuliah-group/{code}/archive', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'archiveTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-archive');
+    Route::get('/keuangan/tagihan-kuliah-group/{code}/detail', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'viewTagihanDetail'])->name('keuangan.tagihan-kuliah-group-detail');

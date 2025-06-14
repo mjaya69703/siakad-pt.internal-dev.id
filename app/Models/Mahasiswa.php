@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\HasLogAktivitas;
+use App\Models\Akademik\ProgramStudi;
+use App\Models\Akademik\Kelas;
+use App\Models\Akademik\TahunAkademik;
 
 class Mahasiswa extends Authenticatable
 {
@@ -110,9 +113,13 @@ class Mahasiswa extends Authenticatable
         return $value;
     }
 
+    public function prodi()
+    {
+        return $this->belongsTo(ProgramStudi::class, 'prodi_id');
+    }
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class, 'class_id');
+        return $this->belongsTo(Kelas::class, 'kelas_id');
     }
     public function taka()
     {

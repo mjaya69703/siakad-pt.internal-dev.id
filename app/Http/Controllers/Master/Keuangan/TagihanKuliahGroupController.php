@@ -211,6 +211,33 @@ class TagihanKuliahGroupController extends Controller
         }
     }
 
+    public function viewTagihanDetail($code)
+    {
+        try {
+            $user = Auth::user();
+            $data['webs'] = WebSetting::first();
+            $data['spref'] = $user ? $user->prefix : '';
+            $data['menus'] = "Master";
+            $data['pages'] = "Detail Tagihan Kuliah Group";
+            $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
+
+            $group = TagihanKuliahGroup::with(['prodi', 'kelas', 'gelombang', 'jalur', 'tahunAkademik'])
+                ->where('code', $code)
+                ->firstOrFail();
+
+            $data['group'] = $group;
+            $data['tagihans'] = TagihanKuliah::with(['mahasiswa'])
+                ->where('group_id', $group->id)
+                ->latest()
+                ->get();
+
+            return view('master.keuangan.tagihan-kuliah-group-detail', $data, compact('user'));
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal memuat detail tagihan: ' . $e->getMessage());
+        }
+    }
+
     /**
      * Helper method untuk membuat tagihan berdasarkan kriteria group
      */
@@ -227,16 +254,27 @@ class TagihanKuliahGroupController extends Controller
             $query->where('kelas_id', $group->kelas_id);
         }
 
-        if ($group->gelombang_id) {
-            $query->where('gelombang_id', $group->gelombang_id);
-        }
-
-        if ($group->jalur_id) {
-            $query->where('jalur_id', $group->jalur_id);
-        }
-
         if ($group->semester) {
             $query->where('semester', $group->semester);
+        }
+
+        // Handle gelombang_id and jalur_id through Pendaftar model
+        if ($group->gelombang_id || $group->jalur_id) {
+            $pendaftarQuery = \App\Models\Pendaftaran\Pendaftar::query();
+            
+            if ($group->gelombang_id) {
+                $pendaftarQuery->where('gelombang_id', $group->gelombang_id);
+            }
+            
+            if ($group->jalur_id) {
+                $pendaftarQuery->where('jalur_id', $group->jalur_id);
+            }
+            
+            // Get mahasiswa IDs from pendaftar
+            $mahasiswaIds = $pendaftarQuery->pluck('mahasiswa_id')->toArray();
+            
+            // Add to main query
+            $query->whereIn('id', $mahasiswaIds);
         }
 
         // Ambil semua mahasiswa yang memenuhi kriteria
@@ -251,6 +289,7 @@ class TagihanKuliahGroupController extends Controller
                 'amount' => $group->amount,
                 'due_date' => $group->due_date,
                 'status' => 'Pending',
+                'code' => $group->code,
                 'desc' => $group->desc,
                 'created_by' => Auth::id(),
             ]);
