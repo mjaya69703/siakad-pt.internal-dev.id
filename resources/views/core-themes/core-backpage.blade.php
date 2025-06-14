@@ -396,6 +396,10 @@
                                     Saldo
                                     <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'keuangan.tagihan-kuliah-group-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'keuangan.tagihan-kuliah-group-render') }}">
+                                    Tagihan Kuliah
+                                    <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                </a>
        
                             </div>
                         </li>

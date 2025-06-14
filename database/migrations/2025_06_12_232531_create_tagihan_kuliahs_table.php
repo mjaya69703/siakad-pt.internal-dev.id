@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('tagihan_kuliahs', function (Blueprint $table) {
             $table->id();
-            $table->integer('taka_id');
-            $table->integer('biaya_id')->nullable();
-            $table->integer('biaya_pmb')->nullable();
+            $table->integer('taka_id');                           // ID TAHUN AKADEMIK
+            $table->integer('biaya_id')->nullable();              // ID BIAYA KULIAH
+            $table->integer('biaya_pmb')->nullable();             // ID BIAYA PENDAFTARAN
             $table->integer('mahasiswa_id');
+            $table->integer('group_id')->nullable();              // ID GROUP TAGIHAN
             
             $table->unsignedBigInteger('amount');
             $table->date('due_date');
             $table->enum('status', ['Pending', 'Sukses', 'Gagal'])->default('Pending');
             $table->text('desc')->nullable();    
+            $table->string('code')->unique();    
             
             // AUDIT TRACKING
             $table->timestamps();

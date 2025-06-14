@@ -220,3 +220,11 @@ use Illuminate\Support\Facades\Route;
     Route::post('/keuangan/saldo', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'handleSaldo'])->name('keuangan.saldo-handle');
     Route::patch('/keuangan/saldo/{code}', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'updateSaldo'])->name('keuangan.saldo-update');
     Route::delete('/keuangan/saldo/{code}', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'deleteSaldo'])->name('keuangan.saldo-delete');
+    
+    // MASTER KEUANGAN => TAGIHAN KULIAH GROUP
+    Route::get('/keuangan/tagihan-kuliah-group', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'renderTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-render');
+    Route::post('/keuangan/tagihan-kuliah-group', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'handleTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-handle');
+    Route::patch('/keuangan/tagihan-kuliah-group/{code}', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'updateTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-update');
+    Route::delete('/keuangan/tagihan-kuliah-group/{code}', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'deleteTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-delete');
+    Route::post('/keuangan/tagihan-kuliah-group/{code}/publish', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'publishTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-publish');
+    Route::post('/keuangan/tagihan-kuliah-group/{code}/archive', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'archiveTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-archive');
