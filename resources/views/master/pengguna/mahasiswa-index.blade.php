@@ -289,7 +289,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td data-label="NIM">{{ $item->numb_nim }}</td>
+                                        <td data-label="NIM">{{ $item->numb_nim ?? '-' }}</td>
                                         <td data-label="Program Studi">{{ $item->prodi->name ?? '-' }}</td>
                                         <td data-label="Semester">{{ $item->semester }}</td>
                                         <td data-label="Status">

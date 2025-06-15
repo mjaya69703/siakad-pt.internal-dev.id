@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             // RELASI INTI
-            $table->tinyInteger('type')->default('0');
+            $table->tinyInteger('type')->default(0);
             $table->integer('semester')->default(0);
             $table->integer('taka_regist')->default(0);
             $table->integer('taka_active')->default(0);
+            $table->integer('prodi_id')->default(0);
+            $table->integer('kelas_id')->default(0);
 
             // PROFILE SINGKAT
             $table->string('name');
@@ -94,10 +96,6 @@ return new class extends Migration
             $table->string('edu3_major')->nullable();
             $table->string('edu3_average_score')->nullable();
             $table->string('edu3_graduate_year')->nullable();
-            
-            // RELASI DENGAN TABEL LAIN
-            $table->integer('prodi_id')->default(0);
-            $table->integer('kelas_id')->default(0);
 
             // DATA NOMOR IDENTITAS
             $table->string('numb_kk')->nullable()->unique();

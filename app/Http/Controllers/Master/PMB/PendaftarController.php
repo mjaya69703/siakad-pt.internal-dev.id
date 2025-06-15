@@ -16,6 +16,8 @@ use App\Models\Pendaftaran\DokumenPMB;
 use App\Models\PMB\SyaratPendaftaran;
 use App\Models\Pengaturan\WebSetting;
 use App\Models\Mahasiswa;
+use App\Models\Akademik\JenisKelas;
+use App\Models\Akademik\ProgramStudi;
 use App\Models\PMB\JalurPendaftaran;
 use App\Models\PMB\GelombangPendaftaran;
 // Use Plugins
@@ -34,6 +36,8 @@ class PendaftarController extends Controller
         $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         $data['pendaftars'] = Pendaftar::with(['dokumen.syarat', 'jalur', 'gelombang'])->get();
         $data['jalurs'] = JalurPendaftaran::all();
+        $data['jenisKelas'] = JenisKelas::all();
+        $data['prodis'] = ProgramStudi::all();
         $data['gelombangs'] = GelombangPendaftaran::all();
         
         return view('master.pmb.pendaftar-index', $data, compact('user'));
@@ -46,6 +50,9 @@ class PendaftarController extends Controller
 
             $request->validate([
                 'jalur_id' => 'required|integer',
+                'prodi_1' => 'required|integer',
+                'prodi_2' => 'required|integer',
+                'jenis_id' => 'required|integer',
                 'gelombang_id' => 'required|integer',
                 'phone' => 'required|string|unique:mahasiswas',
                 'email' => 'required|email|unique:mahasiswas',
@@ -103,6 +110,9 @@ class PendaftarController extends Controller
             $pendaftar = Pendaftar::create([
                 'mahasiswa_id' => $mahasiswa->id,
                 'jalur_id' => $request->jalur_id,
+                'jenis_id' => $request->jenis_id,
+                'prodi_1' => $request->prodi_1,
+                'prodi_2' => $request->prodi_2,
                 'gelombang_id' => $request->gelombang_id,
                 'phone' => $request->phone,
                 'email' => $request->email,

@@ -16,7 +16,12 @@ return new class extends Migration
             // RELASI INTI
             $table->integer('mahasiswa_id');    // ID AKUN MAHASISWA
             $table->integer('jalur_id');        // ID JALUR PENDAFTARAN
+            $table->integer('jenis_id');        // ID JENIS KELAS
             $table->integer('gelombang_id');    // ID GELOMBANG PENDAFTARAN
+            // PILIHAN PRODI
+            $table->integer('prodi_1');                // PILIHAN PRODI 1
+            $table->integer('prodi_2');                // PILIHAN PRODI 2
+            $table->integer('prodi_3')->nullable();    // PILIHAN PRODI 3
 
             $table->string('phone')->unique();    // NO TELEPON MAHASISWA
             $table->string('email')->unique();    // ALAMAT EMAIL MAHASISWA

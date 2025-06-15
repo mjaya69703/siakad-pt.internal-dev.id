@@ -9,6 +9,8 @@ use App\Traits\HasLogAktivitas;
 use App\Models\Mahasiswa;
 use App\Models\PMB\JalurPendaftaran;
 use App\Models\PMB\GelombangPendaftaran;
+use App\Models\Akademik\JenisKelas;
+use App\Models\Akademik\ProgramStudi;
 
 class Pendaftar extends Model
 {
@@ -25,6 +27,18 @@ class Pendaftar extends Model
     public function jalur()
     {
         return $this->belongsTo(JalurPendaftaran::class, 'jalur_id');
+    }
+    public function jenisKelas()
+    {
+        return $this->belongsTo(JenisKelas::class, 'jenis_id');
+    }
+    public function prodi1()
+    {
+        return $this->belongsTo(ProgramStudi::class, 'prodi_1');
+    }
+    public function prodi2()
+    {
+        return $this->belongsTo(ProgramStudi::class, 'prodi_2');
     }
 
     public function gelombang()

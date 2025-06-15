@@ -127,24 +127,32 @@ class UserSeeder extends Seeder
                 'username' => 'mahasiswa.a',
                 'email' => 'mahasiswa.a@example.com',
                 'phone' => '080012345670',
+                'type'  => 1,
+                'prodi_id' => 1,
+                'kelas_id' => 1,
             ],
             [
                 'name' => 'Mahasiswa B',
                 'username' => 'mahasiswa.b',
                 'email' => 'mahasiswa.b@example.com',
                 'phone' => '080012345671',
+                'type'  => 1,
+                'prodi_id' => 2,
+                'kelas_id' => 3,
             ],
             [
                 'name' => 'Mahasiswa C',
                 'username' => 'mahasiswa.c',
                 'email' => 'mahasiswa.c@example.com',
                 'phone' => '080012345672',
+                'type'  => 0,
             ],
             [
                 'name' => 'Mahasiswa D',
                 'username' => 'mahasiswa.d',
                 'email' => 'mahasiswa.d@example.com',
                 'phone' => '080012345673',
+                'type'  => 0,
             ],
         ];
 
@@ -155,6 +163,9 @@ class UserSeeder extends Seeder
                 'username' => $mahasiswa['username'],
                 'email' => $mahasiswa['email'],
                 'phone' => $mahasiswa['phone'],
+                'type' => $mahasiswa['type'],
+                'prodi_id' => $mahasiswa['prodi_id'] ?? 0,
+                'kelas_id' => $mahasiswa['kelas_id'] ?? 0,
                 'password' => Hash::make('Mahasiswa123'),
             ]);
         }

@@ -374,6 +374,42 @@
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jenis_id" class="form-label">Jenis Kelas</label>
+                                        <select class="form-select" name="jenis_id" id="jenis_id" required>
+                                            <option value="">Pilih Jenis Kelas</option>
+                                            @foreach($jenisKelas as $jenis)
+                                                <option value="{{ $jenis->id }}">{{ $jenis->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('jenis_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="prodi_1" class="form-label">Prodi Pilihan 1</label>
+                                        <select class="form-select" name="prodi_1" id="prodi_1" required>
+                                            <option value="">Pilih Prodi Pilihan 1</option>
+                                            @foreach($prodis as $prodi)
+                                                <option value="{{ $prodi->id }}">{{ $prodi->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('prodi_1')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="prodi_2" class="form-label">Prodi Pilihan 1</label>
+                                        <select class="form-select" name="prodi_2" id="prodi_2" required>
+                                            <option value="">Pilih Prodi Pilihan 2</option>
+                                            @foreach($prodis as $prodi)
+                                                <option value="{{ $prodi->id }}">{{ $prodi->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('prodi_2')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
 
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary">
@@ -393,6 +429,7 @@
                                     <th class="text-center">No</th>
                                     <th>Nama</th>
                                     <th>No. Registrasi</th>
+                                    <th>Prodi Pilihan</th>
                                     <th>Jalur</th>
                                     <th>Gelombang</th>
                                     <th>Status</th>
@@ -410,6 +447,16 @@
                                             </div>
                                         </td>
                                         <td data-label="No. Registrasi">{{ $item->numb_reg }}</td>
+
+                                        <td data-label="Prodi">
+                                            <div class="d-flex flex-column">
+                                                <span class="fw-bold">
+                                                   1. {{ $item->prodi1->name }} <br>
+                                                   2. {{ $item->prodi2->name }} 
+                                                </span>
+                                                <small class="text-muted">Kelas {{ $item->jenisKelas->name }}</small>
+                                            </div>
+                                        </td>
                                         <td data-label="Jalur">{{ $item->jalur->name }}</td>
                                         <td data-label="Gelombang">{{ $item->gelombang->name }}</td>
                                         <td data-label="Status">
