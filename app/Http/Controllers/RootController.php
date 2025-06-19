@@ -14,18 +14,8 @@ class RootController extends Controller
 
     public function renderWelcome()
     {
-        $webs = WebSetting::first();
 
         return view('welcome');
-
-        // JIKA INGIN DISABLE /WELCOME APABILA SUDAH DIKONFIGURASI
-        // if($webs == null){
-            
-        //     return view('welcome');
-        // } else {
-
-        //     return redirect()->route('root.home-index');
-        // }
     }
 
     public function renderHomePage()
