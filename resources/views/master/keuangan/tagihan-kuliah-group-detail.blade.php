@@ -125,8 +125,8 @@
                                 @foreach($tagihans as $key => $tagihan)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td>{{ $tagihan->mahasiswa->nim }}</td>
                                         <td>{{ $tagihan->mahasiswa->name }}</td>
+                                        <td>{{ $tagihan->mahasiswa->numb_nim }}</td>
                                         <td>{{ $tagihan->mahasiswa->prodi->name }}</td>
                                         <td>{{ $tagihan->mahasiswa->kelas->name }}</td>
                                         <td>

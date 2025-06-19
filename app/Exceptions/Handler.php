@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Database\QueryException;
+use PDOException;
 
 use Throwable;
 
@@ -33,6 +35,12 @@ class Handler extends ExceptionHandler
 
             return redirect()->route('error.notfound');
                 // return response()->view('errors.404', [], 404);
+        });
+        $this->renderable(function (QueryException $e, $request) {
+            return redirect()->route('root.welcome');
+        });
+        $this->renderable(function (PDOException $e, $request) {
+            return redirect()->route('root.welcome');
         });
     }
 }

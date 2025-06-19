@@ -332,7 +332,13 @@
                                                         {{ $group->prodi->name }}
                                                     @endif
                                                     @if($group->kelas)
-                                                        - {{ $group->kelas->name }}
+                                                        {{ $group->kelas->name }}
+                                                    @endif
+                                                    @if($group->gelombang)
+                                                        {{ $group->gelombang->name }}
+                                                    @endif
+                                                    @if($group->jalur)
+                                                        {{ $group->jalur->name }}
                                                     @endif
                                                 </small>
                                             </div>

@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [App\Http\Controllers\RootController::class, 'renderHomePage'])->name('root.home-index');
 Route::get('/welcome', [App\Http\Controllers\RootController::class, 'renderWelcome'])->name('root.welcome');
 Route::post('/api/setup', [App\Http\Controllers\SetupController::class, 'processSetup'])->name('setup.process');
 
 // LATEST DEVELOPMENT
 Route::middleware(['guest', 'first.setup'])->group(function () {
-    Route::get('/', [App\Http\Controllers\RootController::class, 'renderHomePage'])->name('root.home-index');
 
     // AUTH - SIGNIN
     Route::get('/signin', [App\Http\Controllers\AuthController::class, 'renderSignin'])->name('auth.render-signin');
