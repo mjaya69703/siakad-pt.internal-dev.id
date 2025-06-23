@@ -8,7 +8,7 @@ use App\Traits\HasLogAktivitas;
 // USE MODELS
 use App\Models\Akademik\ProgramStudi;
 use App\Models\Dosen;
-use App\Models\Ruang;
+use App\Models\Infrastruktur\Ruang;
 use App\Models\Akademik\MataKuliah;
 use App\Models\Akademik\JenisKelas;
 use App\Models\Akademik\WaktuKuliah;
