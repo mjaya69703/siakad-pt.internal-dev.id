@@ -289,7 +289,7 @@ class TagihanKuliahGroupController extends Controller
                 'amount' => $group->amount,
                 'due_date' => $group->due_date,
                 'status' => 'Pending',
-                'code' => $group->code,
+                'code' => uniqid(),
                 'desc' => $group->desc,
                 'created_by' => Auth::id(),
             ]);

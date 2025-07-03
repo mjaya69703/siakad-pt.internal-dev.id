@@ -17,6 +17,7 @@ use App\Models\PMB\SyaratPendaftaran;
 use App\Models\Pengaturan\WebSetting;
 use App\Models\Mahasiswa;
 use App\Models\Akademik\JenisKelas;
+use App\Models\Akademik\Kelas;
 use App\Models\Akademik\ProgramStudi;
 use App\Models\PMB\JalurPendaftaran;
 use App\Models\PMB\GelombangPendaftaran;
@@ -162,10 +163,42 @@ class PendaftarController extends Controller
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'name' => $request->name,
-                'status' => $request->status,
                 'updated_by' => Auth::id(),
             ]);
 
+            if($request->status == 'Lulus'){
+                // Ambil semua kelas yang sesuai dengan jenis kelas dan program studi
+                $availableKelas = Kelas::where('jenis_kelas_id', $pendaftar->jenis_id)
+                    ->where('prodi_id', $request->prodi_id)
+                    ->get();
+
+                $selectedKelas = null;
+                
+                // Loop untuk mencari kelas yang masih memiliki kapasitas tersedia
+                foreach($availableKelas as $kelas) {
+                    $countStudent = Mahasiswa::where('kelas_id', $kelas->id)->count();
+                    
+                    // Pilih kelas yang kapasitasnya masih lebih besar dari jumlah mahasiswa saat ini
+                    if($kelas->capacity > $countStudent) {
+                        $selectedKelas = $kelas;
+                        break;
+                    }
+                }
+
+                // Jika tidak ada kelas yang tersedia, buat error atau handling khusus
+                if(!$selectedKelas) {
+                    throw new \Exception('Tidak ada kelas yang tersedia dengan kapasitas mencukupi');
+                }
+
+                $mahasiswa->update([
+                    'type' => 1,
+                    'semester' => 1,
+                    'prodi_id' => $request->prodi_id,
+                    'kelas_id' => $selectedKelas->id,
+                    'taka_regist' => $pendaftar->gelombang->jalur->periode->taka_id,
+                    'taka_active' => $pendaftar->gelombang->jalur->periode->taka_id,
+                ]);
+            }
 
             DB::commit();
             return redirect()->back()->with('success', 'Data pendaftar berhasil diperbarui');

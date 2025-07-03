@@ -401,6 +401,16 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="edit_prodi{{ $pendaftar->code }}" class="form-label">Program Studi</label>
+                                <select class="form-select" name="prodi_id" id="edit_prodi{{ $pendaftar->code }}" required>
+                                    <option value="{{ $pendaftar->prodi_1 }}" {{ $pendaftar->prodi_1 == $pendaftar->prodi_id ? 'selected' : '' }}>{{ $pendaftar->prodi1->name }}</option>
+                                    <option value="{{ $pendaftar->prodi_2 }}" {{ $pendaftar->prodi_2 == $pendaftar->prodi_id ? 'selected' : '' }}>{{ $pendaftar->prodi2->name }}</option>
+                                </select>
+                                @error('prodi_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

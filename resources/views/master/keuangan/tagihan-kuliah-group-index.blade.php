@@ -485,7 +485,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="edit_due_date{{ $group->code }}" class="form-label">Tenggat Waktu</label>
-                                    <input type="date" class="form-control" name="due_date" id="edit_due_date{{ $group->code }}" value="{{ $group->due_date }}" required>
+                                    <input type="date" class="form-control" name="due_date" id="edit_due_date{{ $group->code }}" value="{{ \Carbon\Carbon::parse($group->due_date)->format('d-m-Y') }}" required>
                                     @error('due_date')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -588,7 +588,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-
     <script>
         // Initialize DataTable
         $(document).ready(function() {

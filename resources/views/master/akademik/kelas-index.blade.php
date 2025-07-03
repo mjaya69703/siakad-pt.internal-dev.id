@@ -292,7 +292,7 @@
                                         <td data-label="Program Studi">{{ $item->programStudi->name }}</td>
                                         <td data-label="Tahun Akademik">{{ $item->tahunAkademik->name }}</td>
                                         <td data-label="Jenis Kelas">{{ $item->jenisKelas->name }}</td>
-                                        <td data-label="Kapasitas">{{ $item->capacity }}</td>
+                                        <td data-label="Kapasitas">{{ $item->anggota->count() . " / " . $item->capacity }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#editData{{ $item->code }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit Kelas">

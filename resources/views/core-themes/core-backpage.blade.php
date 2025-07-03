@@ -15,6 +15,7 @@
     <link href="{{ asset('dashboard') }}/dist/css/tabler.css?1747482948" rel="stylesheet" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PLUGINS STYLES -->
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <link href="{{ asset('dashboard') }}/dist/css/tabler-flags.css?1747482948" rel="stylesheet" />
     <link href="{{ asset('dashboard') }}/dist/css/tabler-socials.css?1747482948" rel="stylesheet" />
     <link href="{{ asset('dashboard') }}/dist/css/tabler-payments.css?1747482948" rel="stylesheet" />
@@ -1039,6 +1040,12 @@
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="./preview/js/demo.min.js?1747482948" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("input[type='date']", {
+            dateFormat: "d-m-Y"
+        });
+    </script>
     <!-- END DEMO SCRIPTS -->
     <!-- BEGIN PAGE SCRIPTS -->
     @yield('custom-js')
