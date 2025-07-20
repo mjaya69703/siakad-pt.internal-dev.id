@@ -9,22 +9,21 @@
 
     <title>{{ (isset($menus) ? $menus . ' - ' : '') . $pages . ' - ' . $academy }}</title>
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="./libs/jsvectormap/dist/jsvectormap.css?1747482948" rel="stylesheet" />
+    <link href="./libs/jsvectormap/dist/jsvectormap.css" rel="stylesheet" />
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="{{ asset('dashboard') }}/dist/css/tabler.css?1747482948" rel="stylesheet" />
+    <link href="{{ asset('dashboard') }}/dist/css/tabler.css" rel="stylesheet" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PLUGINS STYLES -->
-    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-flags.css?1747482948" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-socials.css?1747482948" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-payments.css?1747482948" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-vendors.css?1747482948" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-marketing.css?1747482948" rel="stylesheet" />
-    <link href="{{ asset('dashboard') }}/dist/css/tabler-themes.css?1747482948" rel="stylesheet" />
+    <link href="{{ asset('dashboard') }}/dist/css/tabler-flags.css" rel="stylesheet" />
+    <link href="{{ asset('dashboard') }}/dist/css/tabler-socials.css" rel="stylesheet" />
+    <link href="{{ asset('dashboard') }}/dist/css/tabler-payments.css" rel="stylesheet" />
+    <link href="{{ asset('dashboard') }}/dist/css/tabler-vendors.css" rel="stylesheet" />
+    <link href="{{ asset('dashboard') }}/dist/css/tabler-marketing.css" rel="stylesheet" />
+    <link href="{{ asset('dashboard') }}/dist/css/tabler-themes.css" rel="stylesheet" />
     <!-- END PLUGINS STYLES -->
     <!-- BEGIN DEMO STYLES -->
-    <link href="./preview/css/demo.css?1747482948" rel="stylesheet" />
+    <link href="./preview/css/demo.css" rel="stylesheet" />
     <!-- END DEMO STYLES -->
     @yield('custom-css')
     <style>
@@ -44,7 +43,7 @@
 
 <body class="layout-fluid">
     <!-- BEGIN GLOBAL THEME SCRIPT -->
-    <script src="{{ asset('dashboard') }}/dist/js/tabler-theme.min.js?1747482948"></script>
+    <script src="{{ asset('dashboard') }}/dist/js/tabler-theme.min.js"></script>
     <!-- END GLOBAL THEME SCRIPT -->
     <div class="page">
         <!--  BEGIN SIDEBAR  -->
@@ -353,6 +352,18 @@
                                 <a class="dropdown-item {{ Route::is($spref . 'akademik.jadwal-kuliah-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.jadwal-kuliah-render') }}">
                                     Jadwal Kuliah
                                 </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.krs-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.krs-render') }}">
+                                    KRS (Kartu Rencana Studi)
+                                    <!-- <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span> -->
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.nilai-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.nilai-render') }}">
+                                    Nilai Mahasiswa
+                                    <!-- <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span> -->
+                                </a>
+                                <a class="dropdown-item {{ Route::is($spref . 'akademik.khs-*', request()->path()) ? 'active' : '' }}" href="{{ route($spref . 'akademik.khs-render') }}">
+                                    KHS (Kartu Hasil Studi)
+                                    <!-- <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span> -->
+                                </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -401,7 +412,7 @@
                                     Tagihan Kuliah
                                     <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                                 </a>
-       
+
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -1030,22 +1041,16 @@
     </div>
     <!-- BEGIN PAGE LIBRARIES -->
     @RegisterServiceWorkerScript
-    <script src="{{ asset('dashboard') }}/libs/apexcharts/dist/apexcharts.min.js?1747482948" defer></script>
-    <script src="{{ asset('dashboard') }}/libs/jsvectormap/dist/jsvectormap.min.js?1747482948" defer></script>
-    <script src="{{ asset('dashboard') }}/libs/jsvectormap/dist/maps/world.js?1747482948" defer></script>
-    <script src="{{ asset('dashboard') }}/libs/jsvectormap/dist/maps/world-merc.js?1747482948" defer></script>
+    <script src="{{ asset('dashboard') }}/libs/apexcharts/dist/apexcharts.min.js" defer></script>
+    <script src="{{ asset('dashboard') }}/libs/jsvectormap/dist/jsvectormap.min.js" defer></script>
+    <script src="{{ asset('dashboard') }}/libs/jsvectormap/dist/maps/world.js" defer></script>
+    <script src="{{ asset('dashboard') }}/libs/jsvectormap/dist/maps/world-merc.js" defer></script>
     <!-- END PAGE LIBRARIES -->
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="{{ asset('dashboard') }}/dist/js/tabler.min.js?1747482948" defer></script>
+    <script src="{{ asset('dashboard') }}/dist/js/tabler.min.js" defer></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <!-- BEGIN DEMO SCRIPTS -->
-    <script src="./preview/js/demo.min.js?1747482948" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        flatpickr("input[type='date']", {
-            dateFormat: "d-m-Y"
-        });
-    </script>
+    <script src="./preview/js/demo.min.js" defer></script>
     <!-- END DEMO SCRIPTS -->
     <!-- BEGIN PAGE SCRIPTS -->
     @yield('custom-js')
