@@ -7,25 +7,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasLogAktivitas;
 // USE MODELS
-use App\Models\Publikasi\Kategori;
 use App\Models\User;
 
-class Pengumuman extends Model
+class KalenderAkademik extends Model
 {
     use SoftDeletes, HasLogAktivitas;
     
-    protected $table = 'pengumumen';
+    protected $table = 'kalender_akademiks';
     protected $guarded = [];
-
-    
-    public function kategori()
-    {
-        return $this->belongsTo(Kategori::class);
-    }
 
     public function author()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }

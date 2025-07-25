@@ -10,14 +10,52 @@
         }
 
         .hero-section {
-            background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.25), rgba(var(--accent-color-rgb), 0.9)), url('https://images.unsplash.com/photo-1576495199011-eb94736d05d6?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.25), rgba(var(--accent-color-rgb), 0.9)), url('https://images.unsplash.com/photo-1576495199011-eb94736d05d6?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
             background-size: cover;
-            min-height: 90vh;
+            background-attachment: scroll;
+            min-height: 70vh;
+            height: auto;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
             border-radius: 0 0 3rem 3rem;
+        }
+
+        /* Desktop specific adjustments */
+        @media (min-width: 1200px) {
+            .hero-section {
+                min-height: 60vh;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .hero-section {
+                min-height: 65vh;
+            }
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 80vh;
+                background-position: center top;
+                border-radius: 0 0 2rem 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                min-height: 70vh;
+                background-position: center center;
+                border-radius: 0 0 1.5rem 1.5rem;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 600px) {
+            .hero-section {
+                min-height: 85vh;
+            }
         }
 
         .hero-section::before {
@@ -37,6 +75,32 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease-out forwards;
+            padding: 2rem 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem !important;
+            }
+            .hero-content p {
+                font-size: 1.25rem !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content {
+                padding: 1rem 0.5rem;
+            }
+            .hero-content h1 {
+                font-size: 2rem !important;
+            }
+            .hero-content p {
+                font-size: 1.1rem !important;
+            }
+            .hero-content .d-flex {
+                flex-direction: column;
+                gap: 0.75rem !important;
+            }
         }
 
         @keyframes fadeInUp {
@@ -56,12 +120,50 @@
             border: 1px solid var(--tblr-border-color);
             border-radius: 1.5rem;
             padding: 2.5rem;
-            margin-top: -7rem;
+            margin-top: -5rem;
             position: relative;
             z-index: 3;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(10px);
             transition: transform 0.3s ease;
+        }
+
+        /* Desktop specific floating stats adjustments */
+        @media (min-width: 1200px) {
+            .floating-stats {
+                margin-top: -4rem;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .floating-stats {
+                margin-top: -4.5rem;
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .floating-stats {
+                margin-top: -3rem;
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-stats {
+                margin-top: -3rem;
+                padding: 1.5rem;
+                border-radius: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .floating-stats {
+                margin-top: -2rem;
+                padding: 1rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
         }
 
         .floating-stats:hover {
@@ -154,6 +256,38 @@
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
+        
+        /* Improved announcement styling */
+        .list-group-item-action {
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+            padding: 0.85rem 1rem;
+        }
+        
+        .list-group-item-action:hover {
+            background-color: rgba(var(--primary-color-rgb), 0.05);
+            border-left-color: var(--primary-color);
+            transform: translateX(3px);
+        }
+        
+        .list-group-item-action .avatar {
+            font-weight: 600;
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+            color: var(--primary-color);
+        }
+        
+        .list-group-item-action .text-reset {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--tblr-body-color) !important;
+            margin-bottom: 0.25rem;
+        }
+        
+        .list-group-item-action .text-muted {
+            font-size: 0.875rem;
+            line-height: 1.4;
+            opacity: 0.8;
+        }
     </style>
 @endsection
 
@@ -177,15 +311,15 @@
                 <div class="col-lg-8">
                     <div class="row g-4 text-center">
                         <div class="col-md-3">
-                            <div class="achievement-counter">50+</div>
+                            <div class="achievement-counter">{{ \App\Models\Akademik\ProgramStudi::count() }}</div>
                             <div class="text-muted">Program Studi</div>
                         </div>
                         <div class="col-md-3">
-                            <div class="achievement-counter">15K+</div>
+                            <div class="achievement-counter">{{ \App\Models\Mahasiswa::count() }}</div>
                             <div class="text-muted">Mahasiswa Aktif</div>
                         </div>
                         <div class="col-md-3">
-                            <div class="achievement-counter">500+</div>
+                            <div class="achievement-counter">{{ \App\Models\Dosen::count() }}</div>
                             <div class="text-muted">Dosen Berkualitas</div>
                         </div>
                         <div class="col-md-3">
@@ -239,52 +373,31 @@
             <div class="row g-4">
                 <div class="col-lg-8">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header d-flex align-items-center justify-content-between">
                             <h3 class="card-title">Pengumuman Penting</h3>
+                            <a href="{{ route('root.pengumuman-index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
                         </div>
                         <div class="list-group list-group-flush">
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <span class="badge bg-red"></span>
+                            @forelse($pengumuman as $item)
+                                <a href="{{ route('root.pengumuman-view', $item->code) }}" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="badge bg-{{ $item->kategori->warna }}" style="width: 10px; height: 30px;"></span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <span class="avatar">{{ strtoupper(substr($item->name, 0, 3)) }}</span>
+                                        </div>
+                                        <div class="col text-truncate">
+                                            <span class="text-reset d-block fw-medium">{{ $item->name }}</span>
+                                            <div class="d-block text-muted text-truncate mt-1 fs-5">{{ $item->desc }}</div>
+                                        </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <span class="avatar">UTS</span>
-                                    </div>
-                                    <div class="col text-truncate">
-                                        <span class="text-reset d-block">Jadwal UTS Semester Ganjil 2024/2025</span>
-                                        <div class="d-block text-muted text-truncate mt-n1">Pelaksanaan UTS akan dimulai tanggal 15 Oktober 2024</div>
-                                    </div>
+                                </a>
+                            @empty
+                                <div class="list-group-item text-center">
+                                    <span class="text-muted">Tidak ada pengumuman terbaru</span>
                                 </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <span class="badge bg-yellow"></span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="avatar">REG</span>
-                                    </div>
-                                    <div class="col text-truncate">
-                                        <span class="text-reset d-block">Registrasi Semester Genap 2024/2025</span>
-                                        <div class="d-block text-muted text-truncate mt-n1">Pembayaran dan pengisian KRS dimulai 1 Januari 2025</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <span class="badge bg-green"></span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="avatar">BEA</span>
-                                    </div>
-                                    <div class="col text-truncate">
-                                        <span class="text-reset d-block">Program Beasiswa Prestasi 2024</span>
-                                        <div class="d-block text-muted text-truncate mt-n1">Pendaftaran beasiswa prestasi dibuka sampai 30 September 2024</div>
-                                    </div>
-                                </div>
-                            </a>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -292,57 +405,31 @@
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h3 class="card-title m-0">Kalender Akademik</h3>
-                            <a href="#" class="btn btn-sm btn-primary">Lihat Semua</a>
+                            <a href="{{ route('root.kalender-akademik-index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
                         </div>
                         <div class="list-group list-group-flush">
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <div class="avatar bg-primary-lt">
-                                            <span class="avatar-text">SEP</span>
+                            @forelse($kalender as $item)
+                                <a href="{{ route('root.kalender-akademik-view', $item->code) }}" class="list-group-item  list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="avatar bg-primary-lt">
+                                                <span class="avatar-text">{{ strtoupper(substr($item->name, 0, 3)) }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-truncate">{{ $item->name }}</div>
+                                            <div class="text-muted">{{ $item->desc }}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <span class="badge bg-primary-lt">{{ \Carbon\Carbon::parse($item->start_date)->format('d M') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="text-truncate">Awal Perkuliahan</div>
-                                        <div class="text-muted">Semester Ganjil 2024/2025</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="badge bg-primary-lt">4 Sep</span>
-                                    </div>
+                                </a>
+                            @empty
+                                <div class="list-group-item text-center">
+                                    <span class="text-muted">Tidak ada kalender akademik terbaru</span>
                                 </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <div class="avatar bg-yellow-lt">
-                                            <span class="avatar-text">OKT</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="text-truncate">Ujian Tengah Semester</div>
-                                        <div class="text-muted">15-26 Oktober 2024</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="badge bg-yellow-lt">15 Okt</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <div class="avatar bg-red-lt">
-                                            <span class="avatar-text">DES</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="text-truncate">Ujian Akhir Semester</div>
-                                        <div class="text-muted">11-22 Desember 2024</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="badge bg-red-lt">11 Des</span>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
