@@ -25,19 +25,19 @@ use Illuminate\Support\Facades\Route;
     Route::post('/akademik/kurikulum',[App\Http\Controllers\Master\Akademik\KurikulumController::class, 'handleKurikulum'])->name('akademik.kurikulum-handle');
     Route::patch('/akademik/kurikulum/{code}',[App\Http\Controllers\Master\Akademik\KurikulumController::class, 'updateKurikulum'])->name('akademik.kurikulum-update');
     Route::delete('/akademik/kurikulum/{code}',[App\Http\Controllers\Master\Akademik\KurikulumController::class, 'deleteKurikulum'])->name('akademik.kurikulum-delete');
-    
+
     // MASTER AKADEMIK => MATAKULIAH
     Route::get('/akademik/mata-kuliah',[App\Http\Controllers\Master\Akademik\MataKuliahController::class, 'renderMataKuliah'])->name('akademik.mata-kuliah-render');
     Route::post('/akademik/mata-kuliah',[App\Http\Controllers\Master\Akademik\MataKuliahController::class, 'handleMataKuliah'])->name('akademik.mata-kuliah-handle');
     Route::patch('/akademik/mata-kuliah/{code}',[App\Http\Controllers\Master\Akademik\MataKuliahController::class, 'updateMataKuliah'])->name('akademik.mata-kuliah-update');
     Route::delete('/akademik/mata-kuliah/{code}',[App\Http\Controllers\Master\Akademik\MataKuliahController::class, 'deleteMataKuliah'])->name('akademik.mata-kuliah-delete');
-    
+
     // MASTER AKADEMIK => KELAS
     Route::get('/akademik/kelas',[App\Http\Controllers\Master\Akademik\KelasController::class, 'renderKelas'])->name('akademik.kelas-render');
     Route::post('/akademik/kelas',[App\Http\Controllers\Master\Akademik\KelasController::class, 'handleKelas'])->name('akademik.kelas-handle');
     Route::patch('/akademik/kelas/{code}',[App\Http\Controllers\Master\Akademik\KelasController::class, 'updateKelas'])->name('akademik.kelas-update');
     Route::delete('/akademik/kelas/{code}',[App\Http\Controllers\Master\Akademik\KelasController::class, 'deleteKelas'])->name('akademik.kelas-delete');
-    
+
     // MASTER AKADEMIK => JADWAL KULIAH
     Route::get('/akademik/jadwal-kuliah',[App\Http\Controllers\Master\Akademik\JadwalKuliahController::class, 'renderJadwalKuliah'])->name('akademik.jadwal-kuliah-render');
     Route::post('/akademik/jadwal-kuliah',[App\Http\Controllers\Master\Akademik\JadwalKuliahController::class, 'handleJadwalKuliah'])->name('akademik.jadwal-kuliah-handle');
@@ -45,12 +45,58 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/akademik/jadwal-kuliah/{code}',[App\Http\Controllers\Master\Akademik\JadwalKuliahController::class, 'deleteJadwalKuliah'])->name('akademik.jadwal-kuliah-delete');
     Route::get('akademik/get-waktu-kuliah/{jenis_kelas_id}', [App\Http\Controllers\Master\Akademik\JadwalKuliahController::class, 'getWaktuKuliahByJenisKelas'])->name('akademik.get-waktu-kuliah');
 
+    // MASTER AKADEMIK => KRS (KARTU RENCANA STUDI)
+    Route::get('/akademik/krs',[App\Http\Controllers\Master\Akademik\KRSController::class, 'renderKRS'])->name('akademik.krs-render');
+    Route::post('/akademik/krs',[App\Http\Controllers\Master\Akademik\KRSController::class, 'handleKRS'])->name('akademik.krs-handle');
+    Route::get('/akademik/krs/{code}',[App\Http\Controllers\Master\Akademik\KRSController::class, 'viewKRS'])->name('akademik.krs-view');
+    Route::patch('/akademik/krs/{code}',[App\Http\Controllers\Master\Akademik\KRSController::class, 'updateKRS'])->name('akademik.krs-update');
+    Route::delete('/akademik/krs/{code}',[App\Http\Controllers\Master\Akademik\KRSController::class, 'deleteKRS'])->name('akademik.krs-delete');
+    Route::post('/akademik/krs/{code}/add-matakuliah',[App\Http\Controllers\Master\Akademik\KRSController::class, 'addMatakuliah'])->name('akademik.krs-add-matakuliah');
+    Route::delete('/akademik/krs/{code}/remove-matakuliah/{detailId}',[App\Http\Controllers\Master\Akademik\KRSController::class, 'removeMatakuliah'])->name('akademik.krs-remove-matakuliah');
+    Route::get('/akademik/krs/{code}/detail',[App\Http\Controllers\Master\Akademik\KRSController::class, 'detailKRS'])->name('akademik.krs-detail');
+    Route::post('/akademik/krs/{code}/approve',[App\Http\Controllers\Master\Akademik\KRSController::class, 'approveKRS'])->name('akademik.krs-approve');
+    Route::post('/akademik/krs/{code}/reject',[App\Http\Controllers\Master\Akademik\KRSController::class, 'rejectKRS'])->name('akademik.krs-reject');
+    Route::post('/akademik/krs/{code}/publish',[App\Http\Controllers\Master\Akademik\KRSController::class, 'publishKRS'])->name('akademik.krs-publish');
+    Route::post('/akademik/krs/{code}/lock',[App\Http\Controllers\Master\Akademik\KRSController::class, 'lockKRS'])->name('akademik.krs-lock');
+    Route::get('/akademik/krs/{code}/print',[App\Http\Controllers\Master\Akademik\KRSController::class, 'printKRS'])->name('akademik.krs-print');
+    Route::post('/akademik/krs/bulk-approve',[App\Http\Controllers\Master\Akademik\KRSController::class, 'bulkApprove'])->name('akademik.krs-bulk-approve');
+    Route::post('/akademik/krs/bulk-publish',[App\Http\Controllers\Master\Akademik\KRSController::class, 'bulkPublish'])->name('akademik.krs-bulk-publish');
+
+    // MASTER AKADEMIK => NILAI
+    Route::get('/akademik/nilai',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'renderNilai'])->name('akademik.nilai-render');
+    Route::get('/akademik/nilai/import',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'renderImportNilai'])->name('akademik.nilai-import');
+    Route::get('/akademik/nilai/export',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'exportNilai'])->name('akademik.nilai-export');
+    Route::post('/akademik/nilai',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'handleNilai'])->name('akademik.nilai-handle');
+    Route::get('/akademik/nilai/{code}',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'viewNilai'])->name('akademik.nilai-view');
+    Route::patch('/akademik/nilai/{code}',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'updateNilai'])->name('akademik.nilai-update');
+    Route::delete('/akademik/nilai/{code}',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'deleteNilai'])->name('akademik.nilai-delete');
+    Route::post('/akademik/nilai/import',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'importNilai'])->name('akademik.nilai-import-process');
+    Route::post('/akademik/nilai/bulk-update',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'bulkUpdate'])->name('akademik.nilai-bulk-update');
+    Route::post('/akademik/nilai/{code}/approve',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'approveNilai'])->name('akademik.nilai-approve');
+    Route::post('/akademik/nilai/{code}/publish',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'publishNilai'])->name('akademik.nilai-publish');
+    Route::post('/akademik/nilai/{code}/lock',[App\Http\Controllers\Master\Akademik\NilaiController::class, 'lockNilai'])->name('akademik.nilai-lock');
+
+    // MASTER AKADEMIK => KHS (KARTU HASIL STUDI)
+    Route::get('/akademik/khs',[App\Http\Controllers\Master\Akademik\KHSController::class, 'renderKHS'])->name('akademik.khs-render');
+    Route::post('/akademik/khs',[App\Http\Controllers\Master\Akademik\KHSController::class, 'handleKHS'])->name('akademik.khs-handle');
+    Route::get('/akademik/khs/{code}',[App\Http\Controllers\Master\Akademik\KHSController::class, 'viewKHS'])->name('akademik.khs-view');
+    Route::patch('/akademik/khs/{code}',[App\Http\Controllers\Master\Akademik\KHSController::class, 'updateKHS'])->name('akademik.khs-update');
+    Route::delete('/akademik/khs/{code}',[App\Http\Controllers\Master\Akademik\KHSController::class, 'deleteKHS'])->name('akademik.khs-delete');
+    Route::get('/akademik/khs/{code}/detail',[App\Http\Controllers\Master\Akademik\KHSController::class, 'detailKHS'])->name('akademik.khs-detail');
+    Route::post('/akademik/khs/generate',[App\Http\Controllers\Master\Akademik\KHSController::class, 'generateKHS'])->name('akademik.khs-generate');
+    Route::post('/akademik/khs/{code}/publish',[App\Http\Controllers\Master\Akademik\KHSController::class, 'publishKHS'])->name('akademik.khs-publish');
+    Route::post('/akademik/khs/{code}/lock',[App\Http\Controllers\Master\Akademik\KHSController::class, 'lockKHS'])->name('akademik.khs-lock');
+    Route::get('/akademik/khs/{code}/print',[App\Http\Controllers\Master\Akademik\KHSController::class, 'printKHS'])->name('akademik.khs-print');
+    Route::get('/akademik/khs/transkrip/{mahasiswa_code}',[App\Http\Controllers\Master\Akademik\KHSController::class, 'transkrip'])->name('akademik.khs-transkrip');
+    Route::post('/akademik/khs/bulk-generate',[App\Http\Controllers\Master\Akademik\KHSController::class, 'bulkGenerate'])->name('akademik.khs-bulk-generate');
+    Route::post('/akademik/khs/bulk-publish',[App\Http\Controllers\Master\Akademik\KHSController::class, 'bulkPublish'])->name('akademik.khs-bulk-publish');
+
     // MASTER AKADEMIK => JENIS KELAS
     Route::get('/akademik/jenis-kelas',[App\Http\Controllers\Master\Akademik\JenisKelasController::class, 'renderJenisKelas'])->name('akademik.jenis-kelas-render');
     Route::post('/akademik/jenis-kelas',[App\Http\Controllers\Master\Akademik\JenisKelasController::class, 'handleJenisKelas'])->name('akademik.jenis-kelas-handle');
     Route::patch('/akademik/jenis-kelas/{code}',[App\Http\Controllers\Master\Akademik\JenisKelasController::class, 'updateJenisKelas'])->name('akademik.jenis-kelas-update');
     Route::delete('/akademik/jenis-kelas/{code}',[App\Http\Controllers\Master\Akademik\JenisKelasController::class, 'deleteJenisKelas'])->name('akademik.jenis-kelas-delete');
-    
+
     // MASTER AKADEMIK => WAKTU KULIAH
     Route::get('/akademik/waktu-kuliah',[App\Http\Controllers\Master\Akademik\WaktuKuliahController::class, 'renderWaktuKuliah'])->name('akademik.waktu-kuliah-render');
     Route::post('/akademik/waktu-kuliah',[App\Http\Controllers\Master\Akademik\WaktuKuliahController::class, 'handleWaktuKuliah'])->name('akademik.waktu-kuliah-handle');
@@ -68,31 +114,31 @@ use Illuminate\Support\Facades\Route;
     Route::post('/pmb/jalur',[App\Http\Controllers\Master\PMB\JalurPendaftaranController::class, 'handleJalur'])->name('pmb.jalur-handle');
     Route::patch('/pmb/jalur/{code}',[App\Http\Controllers\Master\PMB\JalurPendaftaranController::class, 'updateJalur'])->name('pmb.jalur-update');
     Route::delete('/pmb/jalur/{code}',[App\Http\Controllers\Master\PMB\JalurPendaftaranController::class, 'deleteJalur'])->name('pmb.jalur-delete');
-    
+
     // MASTER PMB => BIAYA PENDAFTARAN
     Route::get('/pmb/biaya',[App\Http\Controllers\Master\PMB\BiayaPendaftaranController::class, 'renderBiaya'])->name('pmb.biaya-render');
     Route::post('/pmb/biaya',[App\Http\Controllers\Master\PMB\BiayaPendaftaranController::class, 'handleBiaya'])->name('pmb.biaya-handle');
     Route::patch('/pmb/biaya/{code}',[App\Http\Controllers\Master\PMB\BiayaPendaftaranController::class, 'updateBiaya'])->name('pmb.biaya-update');
     Route::delete('/pmb/biaya/{code}',[App\Http\Controllers\Master\PMB\BiayaPendaftaranController::class, 'deleteBiaya'])->name('pmb.biaya-delete');
-    
+
     // MASTER PMB => SYARAT PENDAFTARAN
     Route::get('/pmb/syarat',[App\Http\Controllers\Master\PMB\SyaratPendaftaranController::class, 'renderSyarat'])->name('pmb.syarat-render');
     Route::post('/pmb/syarat',[App\Http\Controllers\Master\PMB\SyaratPendaftaranController::class, 'handleSyarat'])->name('pmb.syarat-handle');
     Route::patch('/pmb/syarat/{code}',[App\Http\Controllers\Master\PMB\SyaratPendaftaranController::class, 'updateSyarat'])->name('pmb.syarat-update');
     Route::delete('/pmb/syarat/{code}',[App\Http\Controllers\Master\PMB\SyaratPendaftaranController::class, 'deleteSyarat'])->name('pmb.syarat-delete');
-    
+
     // MASTER PMB => GELOMBANG PENDAFTARAN
     Route::get('/pmb/gelombang',[App\Http\Controllers\Master\PMB\GelombangPendaftaranController::class, 'renderGelombang'])->name('pmb.gelombang-render');
     Route::post('/pmb/gelombang',[App\Http\Controllers\Master\PMB\GelombangPendaftaranController::class, 'handleGelombang'])->name('pmb.gelombang-handle');
     Route::patch('/pmb/gelombang/{code}',[App\Http\Controllers\Master\PMB\GelombangPendaftaranController::class, 'updateGelombang'])->name('pmb.gelombang-update');
     Route::delete('/pmb/gelombang/{code}',[App\Http\Controllers\Master\PMB\GelombangPendaftaranController::class, 'deleteGelombang'])->name('pmb.gelombang-delete');
-    
+
     // MASTER PMB => JADWAL PMB
     Route::get('/pmb/jadwal',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'renderJadwal'])->name('pmb.jadwal-render');
     Route::post('/pmb/jadwal',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'handleJadwal'])->name('pmb.jadwal-handle');
     Route::patch('/pmb/jadwal/{code}',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'updateJadwal'])->name('pmb.jadwal-update');
     Route::delete('/pmb/jadwal/{code}',[App\Http\Controllers\Master\PMB\JadwalPMBController::class, 'deleteJadwal'])->name('pmb.jadwal-delete');
-    
+
     // MASTER PMB => PENDAFTAR
     Route::get('/pmb/pendaftar', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'renderPendaftar'])->name('pmb.pendaftar-render');
     Route::post('/pmb/pendaftar', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'handlePendaftar'])->name('pmb.pendaftar-handle');
@@ -106,7 +152,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/pmb/pendaftar/batch/validasi', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'batchValidasiDokumen'])->name('pmb.pendaftar-batch-validasi');
     Route::post('/pmb/pendaftar/batch/status', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'batchUpdateStatus'])->name('pmb.pendaftar-batch-status');
 
-    // MASTER PENGGUNA => USERS 
+    // MASTER PENGGUNA => USERS
     Route::get('/pengguna/users',[App\Http\Controllers\Master\Pengguna\UsersController::class, 'renderUsers'])->name('pengguna.users-render');
     Route::get('/pengguna/users/{code}/views',[App\Http\Controllers\Master\Pengguna\UsersController::class, 'viewUsers'])->name('pengguna.users-views');
     Route::post('/pengguna/users',[App\Http\Controllers\Master\Pengguna\UsersController::class, 'handleUsers'])->name('pengguna.users-handle');
@@ -114,7 +160,7 @@ use Illuminate\Support\Facades\Route;
     Route::patch('/pengguna/users/{code}/profile', [App\Http\Controllers\Master\Pengguna\UsersController::class, 'handleProfile'])->name('pengguna.users-profile');
     Route::delete('/pengguna/users/{code}',[App\Http\Controllers\Master\Pengguna\UsersController::class, 'deleteUsers'])->name('pengguna.users-delete');
 
-    // MASTER PENGGUNA => USERS 
+    // MASTER PENGGUNA => USERS
     Route::get('/pengguna/dosen',[App\Http\Controllers\Master\Pengguna\DosenController::class, 'renderDosen'])->name('pengguna.dosen-render');
     Route::get('/pengguna/dosen/{code}/views',[App\Http\Controllers\Master\Pengguna\DosenController::class, 'viewDosen'])->name('pengguna.dosen-views');
     Route::post('/pengguna/dosen',[App\Http\Controllers\Master\Pengguna\DosenController::class, 'handleDosen'])->name('pengguna.dosen-handle');
@@ -220,7 +266,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/keuangan/saldo', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'handleSaldo'])->name('keuangan.saldo-handle');
     Route::patch('/keuangan/saldo/{code}', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'updateSaldo'])->name('keuangan.saldo-update');
     Route::delete('/keuangan/saldo/{code}', [App\Http\Controllers\Master\Keuangan\SaldoController::class, 'deleteSaldo'])->name('keuangan.saldo-delete');
-    
+
     // MASTER KEUANGAN => TAGIHAN KULIAH GROUP
     Route::get('/keuangan/tagihan-kuliah-group', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'renderTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-render');
     Route::post('/keuangan/tagihan-kuliah-group', [App\Http\Controllers\Master\Keuangan\TagihanKuliahGroupController::class, 'handleTagihanKuliahGroup'])->name('keuangan.tagihan-kuliah-group-handle');

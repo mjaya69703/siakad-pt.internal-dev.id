@@ -51,4 +51,10 @@ class MataKuliah extends Model
     {
         return $this->belongsTo(Dosen::class, 'dosen3_id');
     }
+
+    // ACCESSOR METHODS
+    public function getSksAttribute()
+    {
+        return (int) $this->bsks;
+    }
 }
