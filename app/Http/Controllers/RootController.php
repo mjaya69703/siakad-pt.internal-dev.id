@@ -12,6 +12,8 @@ use App\Models\Publikasi\Pengumuman;
 use App\Models\Publikasi\KalenderAkademik;
 use App\Models\Publikasi\Kategori;
 use App\Models\Publikasi\Berita;
+use App\Models\Publikasi\Galeri;
+use App\Models\Publikasi\GaleriFoto;
 use App\Models\Akademik\ProgramStudi;
 use App\Models\Akademik\Fakultas;
 // Use Plugins
@@ -51,6 +53,13 @@ class RootController extends Controller
             ->with(['kategori', 'author'])
             ->orderBy('created_at', 'desc')
             ->take(4)
+            ->get();
+            
+        // Galeri untuk homepage
+        $data['galeris'] = Galeri::where('status', 'Publish')
+            ->with(['kategori', 'fotos'])
+            ->orderBy('created_at', 'desc')
+            ->take(3)
             ->get();
 
         // Program Studi untuk homepage (grouped by fakultas)
@@ -310,5 +319,57 @@ class RootController extends Controller
             ->get();
 
         return view('central.pages.berita-view', $data, compact('user'));
+    }
+    
+    public function renderGaleri()
+    {
+        if (!Schema::hasTable('web_settings')) {
+            return $this->renderWelcome();
+        }
+        $user = Auth::user() ?: Auth::guard('dosen')->user() ?: Auth::guard('mahasiswa')->user();
+        $data['webs'] = WebSetting::first();
+        $data['spref'] = $user ? $user->prefix : '';
+        $data['menus'] = null;
+        $data['pages'] = "Galeri";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
+
+        // Get all published galleries with pagination
+        $data['galeris'] = Galeri::where('status', 'Publish')
+            ->with(['kategori', 'fotos'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
+
+        // Get categories for filter
+        $data['kategori'] = Kategori::all();
+
+        return view('central.pages.gallery-index', $data, compact('user'));
+    }
+
+    public function renderGaleriView($code)
+    {
+        if (!Schema::hasTable('web_settings')) {
+            return $this->renderWelcome();
+        }
+        $user = Auth::user() ?: Auth::guard('dosen')->user() ?: Auth::guard('mahasiswa')->user();
+        $data['webs'] = WebSetting::first();
+        $data['spref'] = $user ? $user->prefix : '';
+        $data['menus'] = null;
+        $data['pages'] = "Detail Galeri";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
+
+        // Get gallery by code
+        $data['galeri'] = Galeri::where('code', $code)
+            ->where('status', 'Publish')
+            ->with(['kategori', 'fotos'])
+            ->firstOrFail();
+        
+        // Get other recent galleries
+        $data['recent_galleries'] = Galeri::where('status', 'Publish')
+            ->where('id', '!=', $data['galeri']->id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('central.pages.gallery-view', $data, compact('user'));
     }
 }

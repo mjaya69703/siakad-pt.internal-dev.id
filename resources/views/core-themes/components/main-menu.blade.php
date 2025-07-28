@@ -69,6 +69,7 @@
             <a class="dropdown-item" href="{{ route('root.pengumuman-index') }}">Pengumuman</a>
             <a class="dropdown-item" href="{{ route('root.berita-index') }}">Berita Kampus</a>
             <a class="dropdown-item" href="{{ route('root.kalender-akademik-index') }}">Kalender Akademik</a>
+            <a class="dropdown-item" href="{{ route('root.galeri-index') }}">Galeri</a>
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -91,7 +92,7 @@
             <a class="dropdown-item" href="/visi-misi">Visi & Misi</a>
             <a class="dropdown-item" href="/struktur-organisasi">Struktur Organisasi</a>
             <a class="dropdown-item" href="/fasilitas">Fasilitas</a>
-            <a class="dropdown-item" href="/gallery">Galeri</a>
+            <a class="dropdown-item" href="{{ route('root.galeri-index') }}">Galeri</a>
         </div>
     </li>
     <li class="nav-item">

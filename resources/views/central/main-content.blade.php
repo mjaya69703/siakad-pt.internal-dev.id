@@ -230,6 +230,15 @@
             transform: scale(1.05);
         }
 
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
         .cta-section {
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             border-radius: 2rem;
@@ -576,36 +585,36 @@
                     <!-- Featured News - Main Card -->
                     @php $featuredBerita = $beritas->first(); @endphp
                     <div class="col-lg-6">
-                        <div class="card news-card h-100 position-relative overflow-hidden">
+                        <div class="card news-card h-100 shadow-lg">
                             <div class="position-relative">
                                 <img src="{{ $featuredBerita->photo ? asset('storage/' . $featuredBerita->photo) : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800&h=500' }}" 
                                      class="card-img-top" 
                                      alt="{{ $featuredBerita->name }}" 
-                                     style="height: 280px; object-fit: cover;">
-                                <div class="position-absolute top-0 start-0 p-3">
-                                    @if($featuredBerita->kategori)
-                                        <span class="badge bg-primary px-3 py-2 fs-6">{{ $featuredBerita->kategori->name }}</span>
-                                    @endif
-                                </div>
-                                <div class="position-absolute bottom-0 start-0 end-0 p-4" style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
-                                    <h3 class="text-white mb-2 fw-bold">{{ Str::limit($featuredBerita->name, 70) }}</h3>
-                                    <div class="d-flex align-items-center text-white-50 mb-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
-                                            <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
-                                            <path d="M16 3v4" />
-                                            <path d="M8 3v4" />
-                                            <path d="M4 11h16" />
-                                        </svg>
-                                        {{ \Carbon\Carbon::parse($featuredBerita->created_at)->format('d F Y') }}
+                                     style="height: 250px; object-fit: cover;">
+                                @if($featuredBerita->kategori)
+                                    <div class="position-absolute top-0 start-0 p-3">
+                                        <span class="badge bg-primary fs-6 px-3 py-2">{{ $featuredBerita->kategori->name }}</span>
                                     </div>
-                                    <p class="text-white mb-3 small" style="opacity: 0.9;">{{ Str::limit(strip_tags($featuredBerita->content), 120) }}</p>
-                                    <a href="{{ route('root.berita-view', $featuredBerita->slug) }}" class="btn btn-white btn-sm">
-                                        Baca Selengkapnya
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
-                                            <path d="M5 12l6 -6l-6 -6" />
-                                        </svg>
-                                    </a>
+                                @endif
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2 text-muted" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                                        <path d="M16 3v4" />
+                                        <path d="M8 3v4" />
+                                        <path d="M4 11h16" />
+                                    </svg>
+                                    <small class="text-muted">{{ \Carbon\Carbon::parse($featuredBerita->created_at)->format('d F Y') }}</small>
                                 </div>
+                                <h3 class="card-title h4 mb-3">{{ Str::limit($featuredBerita->name, 80) }}</h3>
+                                <p class="card-text text-muted mb-4">{{ Str::limit(strip_tags($featuredBerita->content), 120) }}</p>
+                                <a href="{{ route('root.berita-view', $featuredBerita->slug) }}" class="btn btn-primary">
+                                    Baca Selengkapnya
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path d="M5 12l6 -6l-6 -6" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -688,23 +697,23 @@
                 <!-- Fallback Content -->
                 <div class="row g-4">
                     <div class="col-lg-6">
-                        <div class="card news-card h-100 position-relative overflow-hidden">
+                        <div class="card news-card h-100 shadow-lg">
                             <div class="position-relative">
-                                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800&h=500" class="card-img-top" alt="Featured News" style="height: 280px; object-fit: cover;">
+                                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800&h=500" class="card-img-top" alt="Featured News" style="height: 250px; object-fit: cover;">
                                 <div class="position-absolute top-0 start-0 p-3">
-                                    <span class="badge bg-primary px-3 py-2 fs-6">Event</span>
+                                    <span class="badge bg-primary fs-6 px-3 py-2">Event</span>
                                 </div>
-                                <div class="position-absolute bottom-0 start-0 end-0 p-4" style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
-                                    <h3 class="text-white mb-2 fw-bold">International Technology Conference 2024</h3>
-                                    <div class="d-flex align-items-center text-white-50 mb-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
-                                            <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
-                                        </svg>
-                                        28 Juli 2025
-                                    </div>
-                                    <p class="text-white mb-3 small" style="opacity: 0.9;">Konferensi teknologi tahunan dengan pembicara dari perusahaan teknologi global terkemuka</p>
-                                    <a href="#" class="btn btn-white btn-sm">Baca Selengkapnya</a>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2 text-muted" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                                    </svg>
+                                    <small class="text-muted">28 Juli 2025</small>
                                 </div>
+                                <h3 class="card-title h4 mb-3">International Technology Conference 2024</h3>
+                                <p class="card-text text-muted mb-4">Konferensi teknologi tahunan dengan pembicara dari perusahaan teknologi global terkemuka</p>
+                                <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>
@@ -762,7 +771,7 @@
         <div class="container">
             <div class="d-flex align-items-center justify-content-between mb-5">
                 <h2 class="mb-0">Galeri Kampus</h2>
-                <a href="/gallery" class="btn btn-primary">
+                <a href="{{ route('root.galeri-index') }}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M15 8h.01"></path>
@@ -774,33 +783,55 @@
                 </a>
             </div>
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="card rounded-4 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800&h=600" class="card-img-top" alt="Campus Life">
-                        <div class="card-body">
-                            <h5 class="card-title">Kehidupan Kampus</h5>
-                            <p class="text-muted">Suasana akademik yang mendukung</p>
+                @if(isset($galeris) && $galeris->count() > 0)
+                    @foreach($galeris as $galeri)
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card rounded-4 overflow-hidden news-card">
+                                <div class="position-relative">
+                                    <img src="{{ asset('storage/images/galeri/' . $galeri->photo) }}" class="card-img-top" alt="{{ $galeri->name }}" style="height: 220px; object-fit: cover;">
+                                    <div class="position-absolute top-0 start-0 p-3">
+                                        <span class="badge bg-primary">{{ $galeri->fotos->count() }} foto</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="badge bg-{{ $galeri->kategori_id % 4 == 0 ? 'success' : ($galeri->kategori_id % 3 == 0 ? 'info' : ($galeri->kategori_id % 2 == 0 ? 'warning' : 'primary')) }}-lt">{{ $galeri->kategori->name ?? 'Umum' }}</span>
+                                        <small class="text-muted">{{ \Carbon\Carbon::parse($galeri->created_at)->format('d M Y') }}</small>
+                                    </div>
+                                    <h5 class="card-title mb-3">{{ $galeri->name }}</h5>
+                                    <p class="text-muted mb-4">{{ Str::limit(strip_tags($galeri->content), 70) }}</p>
+                                    <a href="{{ route('root.galeri-view', $galeri->code) }}" class="btn btn-primary">
+                                        Lihat Galeri
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card rounded-4 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800&h=600" class="card-img-top" alt="Library">
-                        <div class="card-body">
-                            <h5 class="card-title">Perpustakaan Modern</h5>
-                            <p class="text-muted">Pusat sumber daya pembelajaran</p>
+                    @endforeach
+                @else
+                    <div class="col-12 text-center py-5">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo-off text-muted" width="80" height="80" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M15 8h.01"></path>
+                                <path d="M7 3h10a3 3 0 0 1 3 3v10m-.59 3.41a3 3 0 0 1 -2.41 1.59h-10a3 3 0 0 1 -3 -3v-10c0 -1.087 .576 -2.037 1.437 -2.562"></path>
+                                <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path>
+                                <path d="M16.33 12.338c.574 -.054 1.155 .166 1.67 .662l3 3"></path>
+                                <path d="M3 3l18 18"></path>
+                            </svg>
                         </div>
+                        <h3 class="text-muted mb-3">Belum Ada Galeri</h3>
+                        <p class="text-muted mb-4 col-md-6 mx-auto">Galeri foto kampus akan segera hadir untuk menampilkan kegiatan dan fasilitas universitas.</p>
+                        <a href="{{ route('root.galeri-index') }}" class="btn btn-primary">
+                            Lihat Galeri
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </a>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card rounded-4 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800&h=600" class="card-img-top" alt="Laboratory">
-                        <div class="card-body">
-                            <h5 class="card-title">Laboratorium Canggih</h5>
-                            <p class="text-muted">Fasilitas penelitian terkini</p>
-                        </div>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>
