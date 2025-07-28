@@ -5,11 +5,13 @@
         .hero-section {
             background: linear-gradient(135deg, rgba(var(--tblr-success-rgb), 0.8), rgba(var(--tblr-primary-rgb), 0.9)), url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
             background-size: cover;
+            background-position: center;
             min-height: 50vh;
             display: flex;
             align-items: center;
             position: relative;
             border-radius: 0 0 3rem 3rem;
+            overflow: hidden;
         }
 
         .hero-section::before {

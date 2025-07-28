@@ -492,38 +492,65 @@
     <!-- Programs Section -->
     <section id="programs" class="py-6">
         <div class="container">
-            <h2 class="text-center mb-5">Program Studi Unggulan</h2>
+            <div class="d-flex align-items-center justify-content-between mb-5">
+                <h2 class="mb-0">Program Studi Unggulan</h2>
+                <a href="{{ route('root.prodi-index') }}" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-school" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                        <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2v-6"></path>
+                        <path d="M6 10.6v9.4a6 3 0 0 0 12 0v-9.4"></path>
+                    </svg>
+                    Lihat Semua Program
+                </a>
+            </div>
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card news-card h-100">
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Teknik Informatika">
-                        <div class="card-body">
-                            <h5 class="card-title">Fakultas Teknologi</h5>
-                            <p class="card-text">Teknik Informatika, Sistem Informasi, Data Science</p>
-                            <a href="#" class="btn btn-primary">Selengkapnya</a>
+                @forelse($fakultas ?? [] as $fak)
+                    <div class="col-md-4">
+                        <div class="card news-card h-100">
+                            <img src="https://images.unsplash.com/photo-{{ $fak->id % 2 == 0 ? '1517694712202-14dd9538aa97' : ($fak->id % 3 == 0 ? '1664575602276-acd073f104c1' : '1626785774573-4b799315345d') }}?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="{{ $fak->name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $fak->name }}</h5>
+                                <p class="card-text">
+                                    {{ Str::limit($fak->desc ?? 'Fakultas dengan program studi berkualitas dan terakreditasi', 80) }}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge bg-primary-lt">{{ $fak->program_studis_count }} Program Studi</span>
+                                </div>
+                                <a href="{{ route('root.prodi-index') }}?fakultas={{ $fak->id }}" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card news-card h-100">
-                        <img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Business">
-                        <div class="card-body">
-                            <h5 class="card-title">Fakultas Bisnis</h5>
-                            <p class="card-text">Manajemen, Akuntansi, Digital Business</p>
-                            <a href="#" class="btn btn-primary">Selengkapnya</a>
+                @empty
+                    <div class="col-md-4">
+                        <div class="card news-card h-100">
+                            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Teknik Informatika">
+                            <div class="card-body">
+                                <h5 class="card-title">Fakultas Teknologi</h5>
+                                <p class="card-text">Teknik Informatika, Sistem Informasi, Data Science</p>
+                                <a href="#" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card news-card h-100">
-                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Creative">
-                        <div class="card-body">
-                            <h5 class="card-title">Fakultas Industri Kreatif</h5>
-                            <p class="card-text">Desain Komunikasi Visual, Animasi, Game Development</p>
-                            <a href="#" class="btn btn-primary">Selengkapnya</a>
+                    <div class="col-md-4">
+                        <div class="card news-card h-100">
+                            <img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Business">
+                            <div class="card-body">
+                                <h5 class="card-title">Fakultas Bisnis</h5>
+                                <p class="card-text">Manajemen, Akuntansi, Digital Business</p>
+                                <a href="#" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-md-4">
+                        <div class="card news-card h-100">
+                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Creative">
+                            <div class="card-body">
+                                <h5 class="card-title">Fakultas Industri Kreatif</h5>
+                                <p class="card-text">Desain Komunikasi Visual, Animasi, Game Development</p>
+                                <a href="#" class="btn btn-primary">Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -531,53 +558,202 @@
     <!-- News Section -->
     <section class="py-6">
         <div class="container">
-            <h2 class="text-center mb-5">Berita & Kegiatan</h2>
-            <div class="row g-4">
-                <div class="col-lg-8">
-                    <div class="card news-card">
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1200&h=500" class="card-img-top" alt="Main Event">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-3">
-                                <span class="badge bg-primary me-2">Event</span>
-                                <small class="text-muted">21 Juli 2024</small>
-                            </div>
-                            <h3 class="card-title h4">International Technology Conference 2024</h3>
-                            <p class="card-text">Konferensi teknologi tahunan dengan pembicara dari perusahaan teknologi global</p>
-                            <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row g-4">
-                        <div class="col-12">
-                            <div class="card news-card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <span class="badge bg-success me-2">Prestasi</span>
-                                        <small class="text-muted">19 Juli 2024</small>
-                                    </div>
-                                    <h5 class="card-title">Tim Robotika Juara Internasional</h5>
-                                    <p class="card-text">Mahasiswa teknik meraih juara di kompetisi robotika internasional</p>
-                                    <a href="#" class="btn btn-primary btn-sm">Baca Selengkapnya</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="card news-card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <span class="badge bg-info me-2">Akademik</span>
-                                        <small class="text-muted">18 Juli 2024</small>
-                                    </div>
-                                    <h5 class="card-title">Pembukaan Program Magister AI</h5>
-                                    <p class="card-text">Program magister baru fokus pada Artificial Intelligence dan Machine Learning</p>
-                                    <a href="#" class="btn btn-primary btn-sm">Baca Selengkapnya</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="d-flex align-items-center justify-content-between mb-5">
+                <h2 class="mb-0">Berita & Kegiatan Terbaru</h2>
+                <a href="{{ route('root.berita-index') }}" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-news" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                        <path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11"></path>
+                        <path d="M8 8l4 0"></path>
+                        <path d="M8 12l4 0"></path>
+                        <path d="M8 16l4 0"></path>
+                    </svg>
+                    Lihat Semua Berita
+                </a>
             </div>
+            
+            @if(isset($beritas) && $beritas->count() > 0)
+                <div class="row g-4">
+                    <!-- Featured News - Main Card -->
+                    @php $featuredBerita = $beritas->first(); @endphp
+                    <div class="col-lg-6">
+                        <div class="card news-card h-100 position-relative overflow-hidden">
+                            <div class="position-relative">
+                                <img src="{{ $featuredBerita->photo ? asset('storage/' . $featuredBerita->photo) : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800&h=500' }}" 
+                                     class="card-img-top" 
+                                     alt="{{ $featuredBerita->name }}" 
+                                     style="height: 280px; object-fit: cover;">
+                                <div class="position-absolute top-0 start-0 p-3">
+                                    @if($featuredBerita->kategori)
+                                        <span class="badge bg-primary px-3 py-2 fs-6">{{ $featuredBerita->kategori->name }}</span>
+                                    @endif
+                                </div>
+                                <div class="position-absolute bottom-0 start-0 end-0 p-4" style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+                                    <h3 class="text-white mb-2 fw-bold">{{ Str::limit($featuredBerita->name, 70) }}</h3>
+                                    <div class="d-flex align-items-center text-white-50 mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                            <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                                            <path d="M16 3v4" />
+                                            <path d="M8 3v4" />
+                                            <path d="M4 11h16" />
+                                        </svg>
+                                        {{ \Carbon\Carbon::parse($featuredBerita->created_at)->format('d F Y') }}
+                                    </div>
+                                    <p class="text-white mb-3 small" style="opacity: 0.9;">{{ Str::limit(strip_tags($featuredBerita->content), 120) }}</p>
+                                    <a href="{{ route('root.berita-view', $featuredBerita->slug) }}" class="btn btn-white btn-sm">
+                                        Baca Selengkapnya
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                            <path d="M5 12l6 -6l-6 -6" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- News Grid -->
+                    <div class="col-lg-6">
+                        <div class="row g-3 h-100">
+                            @foreach($beritas->skip(1)->take(4) as $index => $berita)
+                                <div class="col-12">
+                                    <div class="card news-card border-0 bg-light h-100">
+                                        <div class="card-body p-4">
+                                            <div class="row g-3">
+                                                <div class="col-4">
+                                                    <img src="{{ $berita->photo ? asset('storage/' . $berita->photo) : 'https://images.unsplash.com/photo-' . (1504711434969 + $index) . '-e33886168f5c?auto=format&fit=crop&q=80&w=200&h=120' }}" 
+                                                         class="rounded" 
+                                                         alt="{{ $berita->name }}"
+                                                         style="width: 100%; height: 80px; object-fit: cover;">
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        @if($berita->kategori)
+                                                            <span class="badge bg-{{ $berita->kategori->id % 4 == 0 ? 'success' : ($berita->kategori->id % 3 == 0 ? 'info' : ($berita->kategori->id % 2 == 0 ? 'warning' : 'primary')) }}-lt me-2 small">
+                                                                {{ $berita->kategori->name }}
+                                                            </span>
+                                                        @endif
+                                                        <small class="text-muted">{{ \Carbon\Carbon::parse($berita->created_at)->format('d M Y') }}</small>
+                                                    </div>
+                                                    <h6 class="card-title mb-2 lh-sm">{{ Str::limit($berita->name, 60) }}</h6>
+                                                    <p class="text-muted small mb-2">{{ Str::limit(strip_tags($berita->content), 80) }}</p>
+                                                    <a href="{{ route('root.berita-view', $berita->slug) }}" class="btn btn-sm btn-primary">Baca</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional News Row -->
+                @if($beritas->count() > 5)
+                    <div class="row g-4 mt-4">
+                        @foreach($beritas->skip(5)->take(3) as $berita)
+                            <div class="col-lg-4">
+                                <div class="card news-card h-100">
+                                    <div class="position-relative">
+                                        <img src="{{ $berita->photo ? asset('storage/' . $berita->photo) : 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=400&h=250' }}" 
+                                             class="card-img-top" 
+                                             alt="{{ $berita->name }}"
+                                             style="height: 200px; object-fit: cover;">
+                                        @if($berita->kategori)
+                                            <div class="position-absolute top-0 start-0 p-3">
+                                                <span class="badge bg-primary">{{ $berita->kategori->name }}</span>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2 text-muted" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                                <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                                            </svg>
+                                            <small class="text-muted">{{ \Carbon\Carbon::parse($berita->created_at)->format('d F Y') }}</small>
+                                        </div>
+                                        <h5 class="card-title">{{ Str::limit($berita->name, 60) }}</h5>
+                                        <p class="card-text text-muted">{{ Str::limit(strip_tags($berita->content), 100) }}</p>
+                                        <a href="{{ route('root.berita-view', $berita->slug) }}" class="btn btn-primary">
+                                            Baca Selengkapnya
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                                <path d="M5 12l6 -6l-6 -6" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            @else
+                <!-- Fallback Content -->
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card news-card h-100 position-relative overflow-hidden">
+                            <div class="position-relative">
+                                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800&h=500" class="card-img-top" alt="Featured News" style="height: 280px; object-fit: cover;">
+                                <div class="position-absolute top-0 start-0 p-3">
+                                    <span class="badge bg-primary px-3 py-2 fs-6">Event</span>
+                                </div>
+                                <div class="position-absolute bottom-0 start-0 end-0 p-4" style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+                                    <h3 class="text-white mb-2 fw-bold">International Technology Conference 2024</h3>
+                                    <div class="d-flex align-items-center text-white-50 mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                            <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                                        </svg>
+                                        28 Juli 2025
+                                    </div>
+                                    <p class="text-white mb-3 small" style="opacity: 0.9;">Konferensi teknologi tahunan dengan pembicara dari perusahaan teknologi global terkemuka</p>
+                                    <a href="#" class="btn btn-white btn-sm">Baca Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row g-3 h-100">
+                            <div class="col-12">
+                                <div class="card news-card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <div class="row g-3">
+                                            <div class="col-4">
+                                                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=200&h=120" class="rounded" style="width: 100%; height: 80px; object-fit: cover;">
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="badge bg-success-lt me-2 small">Prestasi</span>
+                                                    <small class="text-muted">27 Jul 2025</small>
+                                                </div>
+                                                <h6 class="card-title mb-2 lh-sm">Tim Robotika Juara Internasional</h6>
+                                                <p class="text-muted small mb-2">Mahasiswa teknik meraih juara kompetisi robotika</p>
+                                                <a href="#" class="btn btn-sm btn-primary">Baca</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card news-card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <div class="row g-3">
+                                            <div class="col-4">
+                                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=200&h=120" class="rounded" style="width: 100%; height: 80px; object-fit: cover;">
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="badge bg-info-lt me-2 small">Akademik</span>
+                                                    <small class="text-muted">26 Jul 2025</small>
+                                                </div>
+                                                <h6 class="card-title mb-2 lh-sm">Program Magister AI Dibuka</h6>
+                                                <p class="text-muted small mb-2">Program studi baru AI dan Machine Learning</p>
+                                                <a href="#" class="btn btn-sm btn-primary">Baca</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 

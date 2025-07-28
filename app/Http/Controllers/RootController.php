@@ -11,6 +11,9 @@ use App\Models\Pengaturan\WebSetting;
 use App\Models\Publikasi\Pengumuman;
 use App\Models\Publikasi\KalenderAkademik;
 use App\Models\Publikasi\Kategori;
+use App\Models\Publikasi\Berita;
+use App\Models\Akademik\ProgramStudi;
+use App\Models\Akademik\Fakultas;
 // Use Plugins
 
 class RootController extends Controller
@@ -40,6 +43,28 @@ class RootController extends Controller
             ->get();
         $data['kalender'] = KalenderAkademik::where('status', 'Publish')
             ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        // Berita untuk homepage
+        $data['beritas'] = Berita::where('status', 'Publish')
+            ->with(['kategori', 'author'])
+            ->orderBy('created_at', 'desc')
+            ->take(4)
+            ->get();
+
+        // Program Studi untuk homepage (grouped by fakultas)
+        $data['programStudis'] = ProgramStudi::where('status', 'Aktif')
+            ->with(['fakultas'])
+            ->orderBy('fakultas_id')
+            ->take(6)
+            ->get();
+
+        // Fakultas untuk program studi section
+        $data['fakultas'] = Fakultas::withCount(['programStudis' => function($query) {
+            $query->where('status', 'Aktif');
+        }])
+            ->having('program_studis_count', '>', 0)
             ->take(3)
             ->get();
 
@@ -152,5 +177,138 @@ class RootController extends Controller
             ->get();
 
         return view('central.pages.kalender-view', $data, compact('user'));
+    }
+
+    public function renderProgramStudi()
+    {
+        if (!Schema::hasTable('web_settings')) {
+            return $this->renderWelcome();
+        }
+        $user = Auth::user() ?: Auth::guard('dosen')->user() ?: Auth::guard('mahasiswa')->user();
+        $data['webs'] = WebSetting::first();
+        $data['spref'] = $user ? $user->prefix : '';
+        $data['menus'] = null;
+        $data['pages'] = "Program Studi";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
+
+        // Get all active program studi with pagination
+        $data['programStudis'] = ProgramStudi::where('status', 'Aktif')
+            ->with(['fakultas', 'kaprodi'])
+            ->orderBy('name', 'asc')
+            ->paginate(12);
+
+        // Get level statistics
+        $data['levelStats'] = ProgramStudi::where('status', 'Aktif')
+            ->selectRaw('level, COUNT(*) as count')
+            ->groupBy('level')
+            ->pluck('count', 'level')
+            ->toArray();
+
+        // Get fakultas for sidebar
+        $data['fakultas'] = Fakultas::withCount(['programStudis' => function($query) {
+            $query->where('status', 'Aktif');
+        }])->get();
+
+        return view('central.pages.prodi-index', $data, compact('user'));
+    }
+
+    public function renderProgramStudiView($slug)
+    {
+        if (!Schema::hasTable('web_settings')) {
+            return $this->renderWelcome();
+        }
+        $user = Auth::user() ?: Auth::guard('dosen')->user() ?: Auth::guard('mahasiswa')->user();
+        $data['webs'] = WebSetting::first();
+        $data['spref'] = $user ? $user->prefix : '';
+        $data['menus'] = null;
+        $data['pages'] = "Detail Program Studi";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
+
+        // Get program studi by slug
+        $data['programStudi'] = ProgramStudi::where('slug', $slug)
+            ->where('status', 'Aktif')
+            ->with(['fakultas', 'kaprodi'])
+            ->firstOrFail();
+        
+        // Get related program studi from same faculty
+        $data['relatedProdi'] = ProgramStudi::where('status', 'Aktif')
+            ->where('fakultas_id', $data['programStudi']->fakultas_id)
+            ->where('id', '!=', $data['programStudi']->id)
+            ->orderBy('name', 'asc')
+            ->take(6)
+            ->get();
+
+        // Get other program studi with same level
+        $data['sameLevelProdi'] = ProgramStudi::where('status', 'Aktif')
+            ->where('level', $data['programStudi']->level)
+            ->where('id', '!=', $data['programStudi']->id)
+            ->orderBy('name', 'asc')
+            ->take(4)
+            ->get();
+
+        return view('central.pages.prodi-view', $data, compact('user'));
+    }
+
+    public function renderBerita()
+    {
+        if (!Schema::hasTable('web_settings')) {
+            return $this->renderWelcome();
+        }
+        $user = Auth::user() ?: Auth::guard('dosen')->user() ?: Auth::guard('mahasiswa')->user();
+        $data['webs'] = WebSetting::first();
+        $data['spref'] = $user ? $user->prefix : '';
+        $data['menus'] = null;
+        $data['pages'] = "Berita";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
+
+        // Get all published news with pagination
+        $data['beritas'] = Berita::where('status', 'Publish')
+            ->with(['kategori', 'author'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
+
+        // Get total count of published news
+        $data['totalBerita'] = Berita::where('status', 'Publish')->count();
+
+        // Get categories for sidebar
+        $data['kategoris'] = Kategori::withCount('beritas')
+            ->get();
+
+        // Get recent news for sidebar
+        $data['recentBerita'] = Berita::where('status', 'Publish')
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('central.pages.berita-index', $data, compact('user'));
+    }
+
+    public function renderBeritaView($slug)
+    {
+        if (!Schema::hasTable('web_settings')) {
+            return $this->renderWelcome();
+        }
+        $user = Auth::user() ?: Auth::guard('dosen')->user() ?: Auth::guard('mahasiswa')->user();
+        $data['webs'] = WebSetting::first();
+        $data['spref'] = $user ? $user->prefix : '';
+        $data['menus'] = null;
+        $data['pages'] = "Detail Berita";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
+
+        // Get news by slug
+        $data['berita'] = Berita::where('slug', $slug)
+            ->where('status', 'Publish')
+            ->with(['kategori', 'author'])
+            ->firstOrFail();
+        
+        // Get related news from same category
+        $data['relatedBerita'] = Berita::where('status', 'Publish')
+            ->where('kategori_id', $data['berita']->kategori_id)
+            ->where('id', '!=', $data['berita']->id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('central.pages.berita-view', $data, compact('user'));
     }
 }
