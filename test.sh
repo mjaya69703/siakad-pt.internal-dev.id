@@ -1,1 +1,1 @@
-Test N8N
+echo "Hello, World!"
