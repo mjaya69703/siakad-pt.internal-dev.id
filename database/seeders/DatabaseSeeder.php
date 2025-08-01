@@ -20,14 +20,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-
-
         \App\Models\Pengaturan\WebSetting::create([
             'school_apps' => 'Neco Siakad',
             'school_name' => 'ESEC Academy',
             'school_head' => 'Dr. Mulawarman Frietz, M.Kom',
             'school_desc' => 'Membentuk Pemimpin Digital untuk Era Transformasi Global',
-            'school_link' => 'https://instagram.com/mjaya69703',
+            'school_link' => 'https://mjaya69703.idev-fun.org',
             'school_email' => 'mjaya69703@gmail.com',
             'school_phone' => '+6281234567895',
             'school_address' => 'Jl. Raya Kedungjaya No. 1, Kedungjaya, Kec. Kedungjaya, Kabupaten Kedungjaya, Jawa Tengah 56271',

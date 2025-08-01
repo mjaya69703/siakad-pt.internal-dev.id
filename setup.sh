@@ -22,6 +22,6 @@ read -p "Press enter to continue"
 
 echo "Menjalankan Refresh Migrasi dengan Seeder..."
 php artisan migrate:refresh --seed
-read -p "Proses Installasi Telah Selesai, Have Fun Sir :)"
+read -p "Proses Installasi Telah Selesai, Have Fun :)"
 
 php artisan serve

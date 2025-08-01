@@ -10,14 +10,52 @@
         }
 
         .hero-section {
-            background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.25), rgba(var(--accent-color-rgb), 0.9)), url('https://images.unsplash.com/photo-1576495199011-eb94736d05d6?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.25), rgba(var(--accent-color-rgb), 0.9)), url('https://images.unsplash.com/photo-1576495199011-eb94736d05d6?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
             background-size: cover;
-            min-height: 90vh;
+            background-attachment: scroll;
+            min-height: 70vh;
+            height: auto;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
             border-radius: 0 0 3rem 3rem;
+        }
+
+        /* Desktop specific adjustments */
+        @media (min-width: 1200px) {
+            .hero-section {
+                min-height: 60vh;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .hero-section {
+                min-height: 65vh;
+            }
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 80vh;
+                background-position: center top;
+                border-radius: 0 0 2rem 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                min-height: 70vh;
+                background-position: center center;
+                border-radius: 0 0 1.5rem 1.5rem;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 600px) {
+            .hero-section {
+                min-height: 85vh;
+            }
         }
 
         .hero-section::before {
@@ -37,6 +75,32 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease-out forwards;
+            padding: 2rem 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem !important;
+            }
+            .hero-content p {
+                font-size: 1.25rem !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content {
+                padding: 1rem 0.5rem;
+            }
+            .hero-content h1 {
+                font-size: 2rem !important;
+            }
+            .hero-content p {
+                font-size: 1.1rem !important;
+            }
+            .hero-content .d-flex {
+                flex-direction: column;
+                gap: 0.75rem !important;
+            }
         }
 
         @keyframes fadeInUp {
@@ -56,12 +120,50 @@
             border: 1px solid var(--tblr-border-color);
             border-radius: 1.5rem;
             padding: 2.5rem;
-            margin-top: -7rem;
+            margin-top: -5rem;
             position: relative;
             z-index: 3;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(10px);
             transition: transform 0.3s ease;
+        }
+
+        /* Desktop specific floating stats adjustments */
+        @media (min-width: 1200px) {
+            .floating-stats {
+                margin-top: -4rem;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .floating-stats {
+                margin-top: -4.5rem;
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .floating-stats {
+                margin-top: -3rem;
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-stats {
+                margin-top: -3rem;
+                padding: 1.5rem;
+                border-radius: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .floating-stats {
+                margin-top: -2rem;
+                padding: 1rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
         }
 
         .floating-stats:hover {
@@ -128,6 +230,15 @@
             transform: scale(1.05);
         }
 
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
         .cta-section {
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             border-radius: 2rem;
@@ -154,6 +265,38 @@
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
+        
+        /* Improved announcement styling */
+        .list-group-item-action {
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+            padding: 0.85rem 1rem;
+        }
+        
+        .list-group-item-action:hover {
+            background-color: rgba(var(--primary-color-rgb), 0.05);
+            border-left-color: var(--primary-color);
+            transform: translateX(3px);
+        }
+        
+        .list-group-item-action .avatar {
+            font-weight: 600;
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+            color: var(--primary-color);
+        }
+        
+        .list-group-item-action .text-reset {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--tblr-body-color) !important;
+            margin-bottom: 0.25rem;
+        }
+        
+        .list-group-item-action .text-muted {
+            font-size: 0.875rem;
+            line-height: 1.4;
+            opacity: 0.8;
+        }
     </style>
 @endsection
 
@@ -177,15 +320,15 @@
                 <div class="col-lg-8">
                     <div class="row g-4 text-center">
                         <div class="col-md-3">
-                            <div class="achievement-counter">50+</div>
+                            <div class="achievement-counter">{{ \App\Models\Akademik\ProgramStudi::count() }}</div>
                             <div class="text-muted">Program Studi</div>
                         </div>
                         <div class="col-md-3">
-                            <div class="achievement-counter">15K+</div>
+                            <div class="achievement-counter">{{ \App\Models\Mahasiswa::count() }}</div>
                             <div class="text-muted">Mahasiswa Aktif</div>
                         </div>
                         <div class="col-md-3">
-                            <div class="achievement-counter">500+</div>
+                            <div class="achievement-counter">{{ \App\Models\Dosen::count() }}</div>
                             <div class="text-muted">Dosen Berkualitas</div>
                         </div>
                         <div class="col-md-3">
@@ -239,52 +382,31 @@
             <div class="row g-4">
                 <div class="col-lg-8">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header d-flex align-items-center justify-content-between">
                             <h3 class="card-title">Pengumuman Penting</h3>
+                            <a href="{{ route('root.pengumuman-index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
                         </div>
                         <div class="list-group list-group-flush">
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <span class="badge bg-red"></span>
+                            @forelse($pengumuman as $item)
+                                <a href="{{ route('root.pengumuman-view', $item->code) }}" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="badge bg-{{ $item->kategori->warna }}" style="width: 10px; height: 30px;"></span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <span class="avatar">{{ strtoupper(substr($item->name, 0, 3)) }}</span>
+                                        </div>
+                                        <div class="col text-truncate">
+                                            <span class="text-reset d-block fw-medium">{{ $item->name }}</span>
+                                            <div class="d-block text-muted text-truncate mt-1 fs-5">{{ $item->desc }}</div>
+                                        </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <span class="avatar">UTS</span>
-                                    </div>
-                                    <div class="col text-truncate">
-                                        <span class="text-reset d-block">Jadwal UTS Semester Ganjil 2024/2025</span>
-                                        <div class="d-block text-muted text-truncate mt-n1">Pelaksanaan UTS akan dimulai tanggal 15 Oktober 2024</div>
-                                    </div>
+                                </a>
+                            @empty
+                                <div class="list-group-item text-center">
+                                    <span class="text-muted">Tidak ada pengumuman terbaru</span>
                                 </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <span class="badge bg-yellow"></span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="avatar">REG</span>
-                                    </div>
-                                    <div class="col text-truncate">
-                                        <span class="text-reset d-block">Registrasi Semester Genap 2024/2025</span>
-                                        <div class="d-block text-muted text-truncate mt-n1">Pembayaran dan pengisian KRS dimulai 1 Januari 2025</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <span class="badge bg-green"></span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="avatar">BEA</span>
-                                    </div>
-                                    <div class="col text-truncate">
-                                        <span class="text-reset d-block">Program Beasiswa Prestasi 2024</span>
-                                        <div class="d-block text-muted text-truncate mt-n1">Pendaftaran beasiswa prestasi dibuka sampai 30 September 2024</div>
-                                    </div>
-                                </div>
-                            </a>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -292,57 +414,31 @@
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h3 class="card-title m-0">Kalender Akademik</h3>
-                            <a href="#" class="btn btn-sm btn-primary">Lihat Semua</a>
+                            <a href="{{ route('root.kalender-akademik-index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
                         </div>
                         <div class="list-group list-group-flush">
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <div class="avatar bg-primary-lt">
-                                            <span class="avatar-text">SEP</span>
+                            @forelse($kalender as $item)
+                                <a href="{{ route('root.kalender-akademik-view', $item->code) }}" class="list-group-item  list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="avatar bg-primary-lt">
+                                                <span class="avatar-text">{{ strtoupper(substr($item->name, 0, 3)) }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-truncate">{{ $item->name }}</div>
+                                            <div class="text-muted">{{ $item->desc }}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <span class="badge bg-primary-lt">{{ \Carbon\Carbon::parse($item->start_date)->format('d M') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="text-truncate">Awal Perkuliahan</div>
-                                        <div class="text-muted">Semester Ganjil 2024/2025</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="badge bg-primary-lt">4 Sep</span>
-                                    </div>
+                                </a>
+                            @empty
+                                <div class="list-group-item text-center">
+                                    <span class="text-muted">Tidak ada kalender akademik terbaru</span>
                                 </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <div class="avatar bg-yellow-lt">
-                                            <span class="avatar-text">OKT</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="text-truncate">Ujian Tengah Semester</div>
-                                        <div class="text-muted">15-26 Oktober 2024</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="badge bg-yellow-lt">15 Okt</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <div class="avatar bg-red-lt">
-                                            <span class="avatar-text">DES</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="text-truncate">Ujian Akhir Semester</div>
-                                        <div class="text-muted">11-22 Desember 2024</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <span class="badge bg-red-lt">11 Des</span>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -405,38 +501,65 @@
     <!-- Programs Section -->
     <section id="programs" class="py-6">
         <div class="container">
-            <h2 class="text-center mb-5">Program Studi Unggulan</h2>
+            <div class="d-flex align-items-center justify-content-between mb-5">
+                <h2 class="mb-0">Program Studi Unggulan</h2>
+                <a href="{{ route('root.prodi-index') }}" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-school" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                        <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2v-6"></path>
+                        <path d="M6 10.6v9.4a6 3 0 0 0 12 0v-9.4"></path>
+                    </svg>
+                    Lihat Semua Program
+                </a>
+            </div>
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card news-card h-100">
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Teknik Informatika">
-                        <div class="card-body">
-                            <h5 class="card-title">Fakultas Teknologi</h5>
-                            <p class="card-text">Teknik Informatika, Sistem Informasi, Data Science</p>
-                            <a href="#" class="btn btn-primary">Selengkapnya</a>
+                @forelse($fakultas ?? [] as $fak)
+                    <div class="col-md-4">
+                        <div class="card news-card h-100">
+                            <img src="https://images.unsplash.com/photo-{{ $fak->id % 2 == 0 ? '1517694712202-14dd9538aa97' : ($fak->id % 3 == 0 ? '1664575602276-acd073f104c1' : '1626785774573-4b799315345d') }}?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="{{ $fak->name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $fak->name }}</h5>
+                                <p class="card-text">
+                                    {{ Str::limit($fak->desc ?? 'Fakultas dengan program studi berkualitas dan terakreditasi', 80) }}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge bg-primary-lt">{{ $fak->program_studis_count }} Program Studi</span>
+                                </div>
+                                <a href="{{ route('root.prodi-index') }}?fakultas={{ $fak->id }}" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card news-card h-100">
-                        <img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Business">
-                        <div class="card-body">
-                            <h5 class="card-title">Fakultas Bisnis</h5>
-                            <p class="card-text">Manajemen, Akuntansi, Digital Business</p>
-                            <a href="#" class="btn btn-primary">Selengkapnya</a>
+                @empty
+                    <div class="col-md-4">
+                        <div class="card news-card h-100">
+                            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Teknik Informatika">
+                            <div class="card-body">
+                                <h5 class="card-title">Fakultas Teknologi</h5>
+                                <p class="card-text">Teknik Informatika, Sistem Informasi, Data Science</p>
+                                <a href="#" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card news-card h-100">
-                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Creative">
-                        <div class="card-body">
-                            <h5 class="card-title">Fakultas Industri Kreatif</h5>
-                            <p class="card-text">Desain Komunikasi Visual, Animasi, Game Development</p>
-                            <a href="#" class="btn btn-primary">Selengkapnya</a>
+                    <div class="col-md-4">
+                        <div class="card news-card h-100">
+                            <img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Business">
+                            <div class="card-body">
+                                <h5 class="card-title">Fakultas Bisnis</h5>
+                                <p class="card-text">Manajemen, Akuntansi, Digital Business</p>
+                                <a href="#" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-md-4">
+                        <div class="card news-card h-100">
+                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=400&h=250" class="card-img-top" alt="Creative">
+                            <div class="card-body">
+                                <h5 class="card-title">Fakultas Industri Kreatif</h5>
+                                <p class="card-text">Desain Komunikasi Visual, Animasi, Game Development</p>
+                                <a href="#" class="btn btn-primary">Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -444,53 +567,202 @@
     <!-- News Section -->
     <section class="py-6">
         <div class="container">
-            <h2 class="text-center mb-5">Berita & Kegiatan</h2>
-            <div class="row g-4">
-                <div class="col-lg-8">
-                    <div class="card news-card">
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1200&h=500" class="card-img-top" alt="Main Event">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-3">
-                                <span class="badge bg-primary me-2">Event</span>
-                                <small class="text-muted">21 Juli 2024</small>
-                            </div>
-                            <h3 class="card-title h4">International Technology Conference 2024</h3>
-                            <p class="card-text">Konferensi teknologi tahunan dengan pembicara dari perusahaan teknologi global</p>
-                            <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row g-4">
-                        <div class="col-12">
-                            <div class="card news-card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <span class="badge bg-success me-2">Prestasi</span>
-                                        <small class="text-muted">19 Juli 2024</small>
-                                    </div>
-                                    <h5 class="card-title">Tim Robotika Juara Internasional</h5>
-                                    <p class="card-text">Mahasiswa teknik meraih juara di kompetisi robotika internasional</p>
-                                    <a href="#" class="btn btn-primary btn-sm">Baca Selengkapnya</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="card news-card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <span class="badge bg-info me-2">Akademik</span>
-                                        <small class="text-muted">18 Juli 2024</small>
-                                    </div>
-                                    <h5 class="card-title">Pembukaan Program Magister AI</h5>
-                                    <p class="card-text">Program magister baru fokus pada Artificial Intelligence dan Machine Learning</p>
-                                    <a href="#" class="btn btn-primary btn-sm">Baca Selengkapnya</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="d-flex align-items-center justify-content-between mb-5">
+                <h2 class="mb-0">Berita & Kegiatan Terbaru</h2>
+                <a href="{{ route('root.berita-index') }}" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-news" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                        <path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11"></path>
+                        <path d="M8 8l4 0"></path>
+                        <path d="M8 12l4 0"></path>
+                        <path d="M8 16l4 0"></path>
+                    </svg>
+                    Lihat Semua Berita
+                </a>
             </div>
+            
+            @if(isset($beritas) && $beritas->count() > 0)
+                <div class="row g-4">
+                    <!-- Featured News - Main Card -->
+                    @php $featuredBerita = $beritas->first(); @endphp
+                    <div class="col-lg-6">
+                        <div class="card news-card h-100 shadow-lg">
+                            <div class="position-relative">
+                                <img src="{{ $featuredBerita->photo ? asset('storage/' . $featuredBerita->photo) : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800&h=500' }}" 
+                                     class="card-img-top" 
+                                     alt="{{ $featuredBerita->name }}" 
+                                     style="height: 250px; object-fit: cover;">
+                                @if($featuredBerita->kategori)
+                                    <div class="position-absolute top-0 start-0 p-3">
+                                        <span class="badge bg-primary fs-6 px-3 py-2">{{ $featuredBerita->kategori->name }}</span>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2 text-muted" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                                        <path d="M16 3v4" />
+                                        <path d="M8 3v4" />
+                                        <path d="M4 11h16" />
+                                    </svg>
+                                    <small class="text-muted">{{ \Carbon\Carbon::parse($featuredBerita->created_at)->format('d F Y') }}</small>
+                                </div>
+                                <h3 class="card-title h4 mb-3">{{ Str::limit($featuredBerita->name, 80) }}</h3>
+                                <p class="card-text text-muted mb-4">{{ Str::limit(strip_tags($featuredBerita->content), 120) }}</p>
+                                <a href="{{ route('root.berita-view', $featuredBerita->slug) }}" class="btn btn-primary">
+                                    Baca Selengkapnya
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path d="M5 12l6 -6l-6 -6" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- News Grid -->
+                    <div class="col-lg-6">
+                        <div class="row g-3 h-100">
+                            @foreach($beritas->skip(1)->take(4) as $index => $berita)
+                                <div class="col-12">
+                                    <div class="card news-card border-0 bg-light h-100">
+                                        <div class="card-body p-4">
+                                            <div class="row g-3">
+                                                <div class="col-4">
+                                                    <img src="{{ $berita->photo ? asset('storage/' . $berita->photo) : 'https://images.unsplash.com/photo-' . (1504711434969 + $index) . '-e33886168f5c?auto=format&fit=crop&q=80&w=200&h=120' }}" 
+                                                         class="rounded" 
+                                                         alt="{{ $berita->name }}"
+                                                         style="width: 100%; height: 80px; object-fit: cover;">
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        @if($berita->kategori)
+                                                            <span class="badge bg-{{ $berita->kategori->id % 4 == 0 ? 'success' : ($berita->kategori->id % 3 == 0 ? 'info' : ($berita->kategori->id % 2 == 0 ? 'warning' : 'primary')) }}-lt me-2 small">
+                                                                {{ $berita->kategori->name }}
+                                                            </span>
+                                                        @endif
+                                                        <small class="text-muted">{{ \Carbon\Carbon::parse($berita->created_at)->format('d M Y') }}</small>
+                                                    </div>
+                                                    <h6 class="card-title mb-2 lh-sm">{{ Str::limit($berita->name, 60) }}</h6>
+                                                    <p class="text-muted small mb-2">{{ Str::limit(strip_tags($berita->content), 80) }}</p>
+                                                    <a href="{{ route('root.berita-view', $berita->slug) }}" class="btn btn-sm btn-primary">Baca</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional News Row -->
+                @if($beritas->count() > 5)
+                    <div class="row g-4 mt-4">
+                        @foreach($beritas->skip(5)->take(3) as $berita)
+                            <div class="col-lg-4">
+                                <div class="card news-card h-100">
+                                    <div class="position-relative">
+                                        <img src="{{ $berita->photo ? asset('storage/' . $berita->photo) : 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=400&h=250' }}" 
+                                             class="card-img-top" 
+                                             alt="{{ $berita->name }}"
+                                             style="height: 200px; object-fit: cover;">
+                                        @if($berita->kategori)
+                                            <div class="position-absolute top-0 start-0 p-3">
+                                                <span class="badge bg-primary">{{ $berita->kategori->name }}</span>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2 text-muted" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                                <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                                            </svg>
+                                            <small class="text-muted">{{ \Carbon\Carbon::parse($berita->created_at)->format('d F Y') }}</small>
+                                        </div>
+                                        <h5 class="card-title">{{ Str::limit($berita->name, 60) }}</h5>
+                                        <p class="card-text text-muted">{{ Str::limit(strip_tags($berita->content), 100) }}</p>
+                                        <a href="{{ route('root.berita-view', $berita->slug) }}" class="btn btn-primary">
+                                            Baca Selengkapnya
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                                <path d="M5 12l6 -6l-6 -6" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            @else
+                <!-- Fallback Content -->
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card news-card h-100 shadow-lg">
+                            <div class="position-relative">
+                                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800&h=500" class="card-img-top" alt="Featured News" style="height: 250px; object-fit: cover;">
+                                <div class="position-absolute top-0 start-0 p-3">
+                                    <span class="badge bg-primary fs-6 px-3 py-2">Event</span>
+                                </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2 text-muted" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                                    </svg>
+                                    <small class="text-muted">28 Juli 2025</small>
+                                </div>
+                                <h3 class="card-title h4 mb-3">International Technology Conference 2024</h3>
+                                <p class="card-text text-muted mb-4">Konferensi teknologi tahunan dengan pembicara dari perusahaan teknologi global terkemuka</p>
+                                <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row g-3 h-100">
+                            <div class="col-12">
+                                <div class="card news-card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <div class="row g-3">
+                                            <div class="col-4">
+                                                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=200&h=120" class="rounded" style="width: 100%; height: 80px; object-fit: cover;">
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="badge bg-success-lt me-2 small">Prestasi</span>
+                                                    <small class="text-muted">27 Jul 2025</small>
+                                                </div>
+                                                <h6 class="card-title mb-2 lh-sm">Tim Robotika Juara Internasional</h6>
+                                                <p class="text-muted small mb-2">Mahasiswa teknik meraih juara kompetisi robotika</p>
+                                                <a href="#" class="btn btn-sm btn-primary">Baca</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card news-card border-0 bg-light h-100">
+                                    <div class="card-body p-4">
+                                        <div class="row g-3">
+                                            <div class="col-4">
+                                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=200&h=120" class="rounded" style="width: 100%; height: 80px; object-fit: cover;">
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="badge bg-info-lt me-2 small">Akademik</span>
+                                                    <small class="text-muted">26 Jul 2025</small>
+                                                </div>
+                                                <h6 class="card-title mb-2 lh-sm">Program Magister AI Dibuka</h6>
+                                                <p class="text-muted small mb-2">Program studi baru AI dan Machine Learning</p>
+                                                <a href="#" class="btn btn-sm btn-primary">Baca</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -499,7 +771,7 @@
         <div class="container">
             <div class="d-flex align-items-center justify-content-between mb-5">
                 <h2 class="mb-0">Galeri Kampus</h2>
-                <a href="/gallery" class="btn btn-primary">
+                <a href="{{ route('root.galeri-index') }}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M15 8h.01"></path>
@@ -511,33 +783,55 @@
                 </a>
             </div>
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="card rounded-4 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800&h=600" class="card-img-top" alt="Campus Life">
-                        <div class="card-body">
-                            <h5 class="card-title">Kehidupan Kampus</h5>
-                            <p class="text-muted">Suasana akademik yang mendukung</p>
+                @if(isset($galeris) && $galeris->count() > 0)
+                    @foreach($galeris as $galeri)
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card rounded-4 overflow-hidden news-card">
+                                <div class="position-relative">
+                                    <img src="{{ asset('storage/images/galeri/' . $galeri->photo) }}" class="card-img-top" alt="{{ $galeri->name }}" style="height: 220px; object-fit: cover;">
+                                    <div class="position-absolute top-0 start-0 p-3">
+                                        <span class="badge bg-primary">{{ $galeri->fotos->count() }} foto</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="badge bg-{{ $galeri->kategori_id % 4 == 0 ? 'success' : ($galeri->kategori_id % 3 == 0 ? 'info' : ($galeri->kategori_id % 2 == 0 ? 'warning' : 'primary')) }}-lt">{{ $galeri->kategori->name ?? 'Umum' }}</span>
+                                        <small class="text-muted">{{ \Carbon\Carbon::parse($galeri->created_at)->format('d M Y') }}</small>
+                                    </div>
+                                    <h5 class="card-title mb-3">{{ $galeri->name }}</h5>
+                                    <p class="text-muted mb-4">{{ Str::limit(strip_tags($galeri->content), 70) }}</p>
+                                    <a href="{{ route('root.galeri-view', $galeri->code) }}" class="btn btn-primary">
+                                        Lihat Galeri
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card rounded-4 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800&h=600" class="card-img-top" alt="Library">
-                        <div class="card-body">
-                            <h5 class="card-title">Perpustakaan Modern</h5>
-                            <p class="text-muted">Pusat sumber daya pembelajaran</p>
+                    @endforeach
+                @else
+                    <div class="col-12 text-center py-5">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo-off text-muted" width="80" height="80" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M15 8h.01"></path>
+                                <path d="M7 3h10a3 3 0 0 1 3 3v10m-.59 3.41a3 3 0 0 1 -2.41 1.59h-10a3 3 0 0 1 -3 -3v-10c0 -1.087 .576 -2.037 1.437 -2.562"></path>
+                                <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path>
+                                <path d="M16.33 12.338c.574 -.054 1.155 .166 1.67 .662l3 3"></path>
+                                <path d="M3 3l18 18"></path>
+                            </svg>
                         </div>
+                        <h3 class="text-muted mb-3">Belum Ada Galeri</h3>
+                        <p class="text-muted mb-4 col-md-6 mx-auto">Galeri foto kampus akan segera hadir untuk menampilkan kegiatan dan fasilitas universitas.</p>
+                        <a href="{{ route('root.galeri-index') }}" class="btn btn-primary">
+                            Lihat Galeri
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </a>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card rounded-4 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800&h=600" class="card-img-top" alt="Laboratory">
-                        <div class="card-body">
-                            <h5 class="card-title">Laboratorium Canggih</h5>
-                            <p class="text-muted">Fasilitas penelitian terkini</p>
-                        </div>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>

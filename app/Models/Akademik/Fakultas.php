@@ -19,4 +19,9 @@ class Fakultas extends Model
     {
         return $this->belongsTo(Dosen::class);
     }
+
+    public function programStudis()
+    {
+        return $this->hasMany(ProgramStudi::class);
+    }
 }
