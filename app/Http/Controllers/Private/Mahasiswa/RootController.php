@@ -15,16 +15,28 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class RootController extends Controller
 {
+
+    public function renderDashboard()
+    {
+        $user = Auth::guard('mahasiswa')->user();
+        $data['webs'] = WebSetting::first();
+        $data['spref'] = $user ? $user->prefix : '';
+        $data['menus'] = "Detail";
+        $data['pages'] = "Profile";
+        $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
+        
+        return view('central.back-content', $data, compact('user'));
+    }
     public function renderProfile()
     {
-        $mahasiswa = Auth::guard('mahasiswa')->user();
+        $user = Auth::guard('mahasiswa')->user();
         $data['webs'] = WebSetting::first();
-        $data['spref'] = $mahasiswa ? $mahasiswa->prefix : '';
+        $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Detail";
         $data['pages'] = "Profile Mahasiswa";
         $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
         
-        return view('central.backpage.profile-mahasiswa', $data, compact('mahasiswa'));
+        return view('central.backpage.profile-mahasiswa', $data, compact('user'));
     }
 
     public function handleProfile(Request $request)
@@ -128,18 +140,18 @@ class RootController extends Controller
                     ->withInput();
             }
 
-            $mahasiswa = Auth::guard('mahasiswa')->user();
+            $user = Auth::guard('mahasiswa')->user();
             $data = $validator->validated();
 
             // Handle photo upload
             if ($request->hasFile('photo')) {
                 // Delete old photo if exists
-                if ($mahasiswa->photo && $mahasiswa->photo !== 'default.jpg') {
-                    Storage::disk('public')->delete('images/profile/' . $mahasiswa->photo);
+                if ($user->photo && $user->photo !== 'default.jpg') {
+                    Storage::disk('public')->delete('images/profile/' . $user->photo);
                 }
 
                 // Kompres dan simpan foto profil
-                $photoName = time() . '-' . $mahasiswa->code . '-' . uniqid() . '-' . uniqid() . '.jpg';
+                $photoName = time() . '-' . $user->code . '-' . uniqid() . '-' . uniqid() . '.jpg';
                 
                 // Buat instance ImageManager dengan driver GD
                 $manager = new ImageManager(new Driver());
@@ -159,7 +171,7 @@ class RootController extends Controller
             }
 
             // Update mahasiswa information
-            $mahasiswa->update($data);
+            $user->update($data);
 
             return redirect()->back()->with('success', 'Profile updated successfully');
         } catch (\Exception $e) {

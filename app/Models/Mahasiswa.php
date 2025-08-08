@@ -21,10 +21,12 @@ class Mahasiswa extends Authenticatable
     public function getTypeAttribute($value)
     {
         $types = [
-            0 => 'Calon Mahasiswa Baru',               // => Prefix camaba      => For Calon Mahasiswa Baru
-            1 => 'Mahasiswa Aktif',                    // => Prefix mahasiswa   => For Mahasiswa Aktif
-            2 => 'Mahasiswa Non-Aktif',                // => Prefix nonaktif    => For Mahasiswa Non-Aktif
-            3 => 'Mahasiswa Alumni',                   // => Prefix alumni      => For Mahasiswa Alumni
+            0 => 'Calon Mahasiswa',               // => Prefix calon-mahasiswa
+            1 => 'Mahasiswa Aktif',               // => Prefix mahasiswa
+            2 => 'Mahasiswa Tidak Aktif',         // => Prefix mahasiswa-tidak-aktif
+            3 => 'Mahasiswa Lulus',               // => Prefix mahasiswa-lulus
+            4 => 'Mahasiswa Cuti',                // => Prefix mahasiswa-cuti
+            5 => 'Mahasiswa Pindah',              // => Prefix mahasiswa-pindah
         ];
 
         return isset($types[$value]) ? $types[$value] : 'Unknown';
@@ -53,35 +55,23 @@ class Mahasiswa extends Authenticatable
     public function getPrefixAttribute()
     {
         $prefixes = [
-            0 => 'camaba.',
+            0 => 'calon-mahasiswa.',
             1 => 'mahasiswa.',
-            2 => 'mahasiswa-nonaktif.',
-            3 => 'alumni.',
+            2 => 'mahasiswa-tidak-aktif.',
+            3 => 'mahasiswa-lulus.',
+            4 => 'mahasiswa-cuti.',
+            5 => 'mahasiswa-pindah.',
         ];
 
         // Jika type valid, kembalikan prefixnya, kalau tidak 'unknown'
         return isset($prefixes[$this->attributes['type']]) ? $prefixes[$this->attributes['type']] : 'unknown';
     }
 
-    // WILL BE DELETED
-    public function getMhsStatAttribute($value)
-    {
-        $mhsstats = [
-            0 => 'Calon Mahasiswa',
-            1 => 'Mahasiswa Aktif',
-            2 => 'Mahasiswa Non-Aktif',
-            3 => 'Mahasiswa Alumni',
-        ];
 
-        return isset($mhsstats[$value]) ? $mhsstats[$value] : 'Unknown';
-    }
-    public function getRawMhsStatAttribute()
-    {
-        return $this->attributes['mhs_stat'];
-    }
+    // WILL BE DELETED
     public function getAgamaAttribute($value)
     {
-        $mhsrelis = [
+        $agamas = [
             0 => 'Belum Memilih',
             1 => 'Agama Islam',
             2 => 'Agama Kristen Katholik',
@@ -92,16 +82,16 @@ class Mahasiswa extends Authenticatable
             7 => 'Kepercayaan Lainnya',
         ];
 
-        return isset($mhsrelis[$value]) ? $mhsrelis[$value] : 'Unknown';
+        return isset($agamas[$value]) ? $agamas[$value] : 'Unknown';
     }
 
 
-    public function getRawMhsReliAttribute()
+    public function getRawAgamaAttribute()
     {
-        return $this->attributes['mhs_reli'];
+        return $this->attributes['agama'];
     }
 
-    public function getMhsPhoneAttribute($value)
+    public function getPhoneAttribute($value)
     {
         // Periksa apakah nomor telepon dimulai dengan "0"
         if (strpos($value, '0') === 0) {
@@ -111,18 +101,5 @@ class Mahasiswa extends Authenticatable
 
         // Jika tidak dimulai dengan "0", biarkan seperti itu
         return $value;
-    }
-
-    public function prodi()
-    {
-        return $this->belongsTo(ProgramStudi::class, 'prodi_id');
-    }
-    public function kelas()
-    {
-        return $this->belongsTo(Kelas::class, 'kelas_id');
-    }
-    public function taka()
-    {
-        return $this->belongsTo(TahunAkademik::class, 'taka_id');
     }
 }

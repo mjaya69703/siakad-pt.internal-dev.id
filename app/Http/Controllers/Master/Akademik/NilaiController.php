@@ -2,30 +2,7 @@
 
 namespace App\Http\Controllers\Master\Akademik;
 
-use App\Http\Control            $request->validate([            $mataKuliah = MataKuliah::find($request->mata_kuliah_id);
-
-            $nilai = Nilai::create([
-                'code' => 'NIL-' . date('Ymd') . '-' . Str::random(8),
-                'mahasiswa_id' => $request->mahasiswa_id,
-                'matkul_id' => $request->mata_kuliah_id,
-                'taka_id' => $request->tahun_akademik_id,
-                'semester' => $request->semester,
-                'krs_detail_id' => $request->krs_detail_id,
-                'sks' => $mataKuliah->sks,
-                'created_by' => Auth::id(),
-            ]);     'mahasiswa_id' => 'required|exists:mahasiswas,id',
-                'mata_kuliah_id' => 'required|exists:mata_kuliahs,id',
-                'tahun_akademik_id' => 'required|exists:tahun_akademiks,id',
-                'semester' => 'required|integer|min:1|max:14',
-                'krs_detail_id' => 'nullable|exists:krs_details,id',
-            ]);
-
-            // Cek apakah nilai untuk kombinasi ini sudah ada
-            $existingNilai = Nilai::where('mahasiswa_id', $request->mahasiswa_id)
-                ->where('matkul_id', $request->mata_kuliah_id)
-                ->where('taka_id', $request->tahun_akademik_id)
-                ->where('semester', $request->semester)
-                ->first();r;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // Use System
 use Illuminate\Support\Facades\Auth;

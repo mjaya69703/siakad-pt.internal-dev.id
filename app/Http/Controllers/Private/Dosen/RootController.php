@@ -18,14 +18,14 @@ class RootController extends Controller
 {
     public function renderProfile()
     {
-        $dosen = Auth::guard('dosen')->user();
+        $user = Auth::guard('dosen')->user();
         $data['webs'] = WebSetting::first();
-        $data['spref'] = $dosen ? $dosen->prefix : '';
+        $data['spref'] = $user ? $user->prefix : '';
         $data['menus'] = "Detail";
         $data['pages'] = "Profile Dosen";
         $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
 
-        return view('central.backpage.profile-dosen', $data, compact('dosen'));
+        return view('central.backpage.profile-dosen', $data, compact('user'));
     }
 
     public function handleProfile(Request $request)
@@ -105,18 +105,18 @@ class RootController extends Controller
                     ->withInput();
             }
 
-            $dosen = Auth::guard('dosen')->user();
+            $user = Auth::guard('dosen')->user();
             $data = $validator->validated();
 
             // Handle photo upload
             if ($request->hasFile('photo')) {
                 // Delete old photo if exists
-                if ($dosen->photo && $dosen->photo !== 'default.jpg') {
-                    Storage::disk('public')->delete('images/profile/' . $dosen->photo);
+                if ($user->photo && $user->photo !== 'default.jpg') {
+                    Storage::disk('public')->delete('images/profile/' . $user->photo);
                 }
 
                 // Kompres dan simpan foto profil
-                $photoName = time() . '-' . $dosen->code . '-' . uniqid() . '-' . uniqid() . '.jpg';
+                $photoName = time() . '-' . $user->code . '-' . uniqid() . '-' . uniqid() . '.jpg';
                 
                 // Buat instance ImageManager dengan driver GD
                 $manager = new ImageManager(new Driver());
@@ -136,7 +136,7 @@ class RootController extends Controller
             }
 
             // Update dosen information
-            $dosen->update($data);
+            $user->update($data);
 
             return redirect()->back()->with('success', 'Profile updated successfully');
         } catch (\Exception $e) {
