@@ -217,7 +217,7 @@
                                         <select class="form-select" name="mahasiswa_id" id="mahasiswa_id" required>
                                             <option value="">Pilih Mahasiswa</option>
                                             @foreach ($mahasiswa as $m)
-                                                <option value="{{ $m->id }}">{{ $m->nim }} - {{ $m->name }}</option>
+                                                <option value="{{ $m->id }}">{{ $m->numb_nim }} - {{ $m->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('mahasiswa_id')
@@ -230,7 +230,7 @@
                                             <option value="">Pilih Tahun Akademik</option>
                                             @foreach ($tahun_akademik as $ta)
                                                 <option value="{{ $ta->id }}" {{ $ta->status == 'Aktif' ? 'selected' : '' }}>
-                                                    {{ $ta->name }} - {{ $ta->semester }}
+                                                    {{ $ta->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -255,7 +255,7 @@
                                         <select class="form-select" name="dosen_wali_id" id="dosen_wali_id">
                                             <option value="">Pilih Dosen Wali</option>
                                             @foreach ($dosens as $dosen)
-                                                <option value="{{ $dosen->id }}">{{ $dosen->nidn }} - {{ $dosen->name }}</option>
+                                                <option value="{{ $dosen->id }}">{{ $dosen->numb_nidn ?? 'NIDN Tidak Tersedia' }} - {{ $dosen->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('dosen_wali_id')
@@ -342,11 +342,11 @@
                                         <td data-label="Mahasiswa">
                                             <div class="d-flex flex-column">
                                                 <strong>{{ $krs->mahasiswa->name }}</strong>
-                                                <small class="text-muted">{{ $krs->mahasiswa->nim }}</small>
+                                                <small class="text-muted">{{ $krs->mahasiswa->numb_nim }}</small>
                                             </div>
                                         </td>
                                         <td data-label="Tahun Akademik">
-                                            {{ $krs->tahunAkademik->name }} - {{ $krs->tahunAkademik->semester }}
+                                            {{ $krs->tahunAkademik->name }}
                                         </td>
                                         <td class="text-center" data-label="Semester">
                                             {{ $krs->semester }}

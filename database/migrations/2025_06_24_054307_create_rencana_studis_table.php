@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('rencana_studis', function (Blueprint $table) {
             $table->id();
+            // INTI RELASI
             $table->integer('taka_regist');
             $table->integer('taka_active');
             $table->integer('semester');
             $table->integer('invoice_id')->nullable();
+
+            
             $table->string('name');
             $table->string('code')->unique();
             $table->integer('bsks');

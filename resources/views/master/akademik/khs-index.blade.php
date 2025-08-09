@@ -234,9 +234,10 @@
                                         <label for="tahun_akademik_id" class="form-label">Tahun Akademik</label>
                                         <select class="form-select" name="tahun_akademik_id" id="tahun_akademik_id" required>
                                             <option value="">Pilih Tahun Akademik</option>
+
                                             @foreach ($tahun_akademik as $ta)
                                                 <option value="{{ $ta->id }}" {{ $ta->status == 'Aktif' ? 'selected' : '' }}>
-                                                    {{ $ta->name }} - {{ $ta->semester }}
+                                                    {{ $ta->name }} - {{ $ta->type }}
                                                 </option>
                                             @endforeach
                                         </select>

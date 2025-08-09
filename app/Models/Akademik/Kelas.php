@@ -37,8 +37,8 @@ class Kelas extends Model
     {
         return $this->belongsTo(Mahasiswa::class, 'ketua_id');
     }
-    public function anggota()
+    public function mahasiswas()
     {
-        return $this->hasMany(Mahasiswa::class, 'kelas_id');
+        return $this->hasMany(Mahasiswa::class, 'kelas_id', 'id');
     }
 }

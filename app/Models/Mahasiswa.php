@@ -102,4 +102,28 @@ class Mahasiswa extends Authenticatable
         // Jika tidak dimulai dengan "0", biarkan seperti itu
         return $value;
     }
+
+    // Relasi dengan Program Studi
+    public function programStudi()
+    {
+        return $this->belongsTo(ProgramStudi::class, 'prodi_id');
+    }
+
+    // Relasi dengan Kelas
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id',);
+    }
+
+    // Relasi dengan Tahun Akademik Registrasi
+    public function tahunAkademikRegistrasi()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'taka_regist');
+    }
+
+    // Relasi dengan Tahun Akademik Aktif
+    public function tahunAkademikAktif()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'taka_active');
+    }
 }
