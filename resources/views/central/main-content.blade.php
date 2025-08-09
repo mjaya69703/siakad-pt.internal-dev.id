@@ -566,204 +566,169 @@
 
     <!-- News Section -->
     <section class="py-6">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-between mb-5">
-                <h2 class="mb-0">Berita & Kegiatan Terbaru</h2>
-                <a href="{{ route('root.berita-index') }}" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-news" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
-                        <path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11"></path>
-                        <path d="M8 8l4 0"></path>
-                        <path d="M8 12l4 0"></path>
-                        <path d="M8 16l4 0"></path>
-                    </svg>
-                    Lihat Semua Berita
-                </a>
-            </div>
-            
-            @if(isset($beritas) && $beritas->count() > 0)
-                <div class="row g-4">
-                    <!-- Featured News - Main Card -->
-                    @php $featuredBerita = $beritas->first(); @endphp
-                    <div class="col-lg-6">
-                        <div class="card news-card h-100 shadow-lg">
-                            <div class="position-relative">
-                                <img src="{{ $featuredBerita->photo ? asset('storage/' . $featuredBerita->photo) : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800&h=500' }}" 
-                                     class="card-img-top" 
-                                     alt="{{ $featuredBerita->name }}" 
-                                     style="height: 250px; object-fit: cover;">
-                                @if($featuredBerita->kategori)
-                                    <div class="position-absolute top-0 start-0 p-3">
-                                        <span class="badge bg-primary fs-6 px-3 py-2">{{ $featuredBerita->kategori->name }}</span>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="d-flex align-items-center mb-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2 text-muted" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
-                                        <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
-                                        <path d="M16 3v4" />
-                                        <path d="M8 3v4" />
-                                        <path d="M4 11h16" />
-                                    </svg>
-                                    <small class="text-muted">{{ \Carbon\Carbon::parse($featuredBerita->created_at)->format('d F Y') }}</small>
-                                </div>
-                                <h3 class="card-title h4 mb-3">{{ Str::limit($featuredBerita->name, 80) }}</h3>
-                                <p class="card-text text-muted mb-4">{{ Str::limit(strip_tags($featuredBerita->content), 120) }}</p>
-                                <a href="{{ route('root.berita-view', $featuredBerita->slug) }}" class="btn btn-primary">
-                                    Baca Selengkapnya
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
-                                        <path d="M5 12l6 -6l-6 -6" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Grid -->
-                    <div class="col-lg-6">
-                        <div class="row g-3 h-100">
-                            @foreach($beritas->skip(1)->take(4) as $index => $berita)
-                                <div class="col-12">
-                                    <div class="card news-card border-0 bg-light h-100">
-                                        <div class="card-body p-4">
-                                            <div class="row g-3">
-                                                <div class="col-4">
-                                                    <img src="{{ $berita->photo ? asset('storage/' . $berita->photo) : 'https://images.unsplash.com/photo-' . (1504711434969 + $index) . '-e33886168f5c?auto=format&fit=crop&q=80&w=200&h=120' }}" 
-                                                         class="rounded" 
-                                                         alt="{{ $berita->name }}"
-                                                         style="width: 100%; height: 80px; object-fit: cover;">
-                                                </div>
-                                                <div class="col-8">
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        @if($berita->kategori)
-                                                            <span class="badge bg-{{ $berita->kategori->id % 4 == 0 ? 'success' : ($berita->kategori->id % 3 == 0 ? 'info' : ($berita->kategori->id % 2 == 0 ? 'warning' : 'primary')) }}-lt me-2 small">
-                                                                {{ $berita->kategori->name }}
-                                                            </span>
-                                                        @endif
-                                                        <small class="text-muted">{{ \Carbon\Carbon::parse($berita->created_at)->format('d M Y') }}</small>
-                                                    </div>
-                                                    <h6 class="card-title mb-2 lh-sm">{{ Str::limit($berita->name, 60) }}</h6>
-                                                    <p class="text-muted small mb-2">{{ Str::limit(strip_tags($berita->content), 80) }}</p>
-                                                    <a href="{{ route('root.berita-view', $berita->slug) }}" class="btn btn-sm btn-primary">Baca</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Additional News Row -->
-                @if($beritas->count() > 5)
-                    <div class="row g-4 mt-4">
-                        @foreach($beritas->skip(5)->take(3) as $berita)
-                            <div class="col-lg-4">
-                                <div class="card news-card h-100">
-                                    <div class="position-relative">
-                                        <img src="{{ $berita->photo ? asset('storage/' . $berita->photo) : 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=400&h=250' }}" 
-                                             class="card-img-top" 
-                                             alt="{{ $berita->name }}"
-                                             style="height: 200px; object-fit: cover;">
-                                        @if($berita->kategori)
-                                            <div class="position-absolute top-0 start-0 p-3">
-                                                <span class="badge bg-primary">{{ $berita->kategori->name }}</span>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2 text-muted" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
-                                                <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
-                                            </svg>
-                                            <small class="text-muted">{{ \Carbon\Carbon::parse($berita->created_at)->format('d F Y') }}</small>
-                                        </div>
-                                        <h5 class="card-title">{{ Str::limit($berita->name, 60) }}</h5>
-                                        <p class="card-text text-muted">{{ Str::limit(strip_tags($berita->content), 100) }}</p>
-                                        <a href="{{ route('root.berita-view', $berita->slug) }}" class="btn btn-primary">
-                                            Baca Selengkapnya
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
-                                                <path d="M5 12l6 -6l-6 -6" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-            @else
-                <!-- Fallback Content -->
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="card news-card h-100 shadow-lg">
-                            <div class="position-relative">
-                                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800&h=500" class="card-img-top" alt="Featured News" style="height: 250px; object-fit: cover;">
-                                <div class="position-absolute top-0 start-0 p-3">
-                                    <span class="badge bg-primary fs-6 px-3 py-2">Event</span>
-                                </div>
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="d-flex align-items-center mb-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar me-2 text-muted" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
-                                        <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
-                                    </svg>
-                                    <small class="text-muted">28 Juli 2025</small>
-                                </div>
-                                <h3 class="card-title h4 mb-3">International Technology Conference 2024</h3>
-                                <p class="card-text text-muted mb-4">Konferensi teknologi tahunan dengan pembicara dari perusahaan teknologi global terkemuka</p>
-                                <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="row g-3 h-100">
-                            <div class="col-12">
-                                <div class="card news-card border-0 bg-light h-100">
-                                    <div class="card-body p-4">
-                                        <div class="row g-3">
-                                            <div class="col-4">
-                                                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=200&h=120" class="rounded" style="width: 100%; height: 80px; object-fit: cover;">
-                                            </div>
-                                            <div class="col-8">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <span class="badge bg-success-lt me-2 small">Prestasi</span>
-                                                    <small class="text-muted">27 Jul 2025</small>
-                                                </div>
-                                                <h6 class="card-title mb-2 lh-sm">Tim Robotika Juara Internasional</h6>
-                                                <p class="text-muted small mb-2">Mahasiswa teknik meraih juara kompetisi robotika</p>
-                                                <a href="#" class="btn btn-sm btn-primary">Baca</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="card news-card border-0 bg-light h-100">
-                                    <div class="card-body p-4">
-                                        <div class="row g-3">
-                                            <div class="col-4">
-                                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=200&h=120" class="rounded" style="width: 100%; height: 80px; object-fit: cover;">
-                                            </div>
-                                            <div class="col-8">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <span class="badge bg-info-lt me-2 small">Akademik</span>
-                                                    <small class="text-muted">26 Jul 2025</small>
-                                                </div>
-                                                <h6 class="card-title mb-2 lh-sm">Program Magister AI Dibuka</h6>
-                                                <p class="text-muted small mb-2">Program studi baru AI dan Machine Learning</p>
-                                                <a href="#" class="btn btn-sm btn-primary">Baca</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+        <h2 class="mb-0">Berita & Kegiatan Terbaru</h2>
+        <a href="{{ route('root.berita-index') }}" class="btn btn-primary d-inline-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-news me-1" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+            <path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11"/>
+            <path d="M8 8l4 0"/><path d="M8 12l4 0"/><path d="M8 16l4 0"/>
+            </svg>
+            Lihat Semua Berita
+        </a>
         </div>
+
+        @php
+        // Helper fallback image (reliable)
+        function news_fallback($w, $h, $text='Berita'){
+            return "https://placehold.co/{$w}x{$h}?text=".urlencode($text);
+        }
+        @endphp
+
+        @if(isset($beritas) && $beritas->count() > 0)
+        @php $featuredBerita = $beritas->first(); @endphp
+
+        <div class="row g-4">
+            <!-- Featured -->
+            <div class="col-lg-7">
+            <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                <div class="ratio ratio-16x9">
+                <img
+                    src="{{ $featuredBerita->photo ? asset('storage/'.$featuredBerita->photo) : news_fallback(900, 506, $featuredBerita->kategori->name ?? 'Berita Utama') }}"
+                    alt="{{ $featuredBerita->name }}"
+                    onerror="this.onerror=null;this.src='{{ news_fallback(900,506,'Berita Utama') }}'"
+                    class="w-100 h-100 object-fit-cover">
+                </div>
+                <div class="card-body p-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    @if($featuredBerita->kategori)
+                    <span class="badge bg-primary">{{ $featuredBerita->kategori->name }}</span>
+                    @endif
+                    <small class="text-muted">{{ \Carbon\Carbon::parse($featuredBerita->created_at)->format('d F Y') }}</small>
+                </div>
+                <h3 class="h4 mb-2">{{ Str::limit($featuredBerita->name, 100) }}</h3>
+                <p class="text-muted mb-3">{{ Str::limit(strip_tags($featuredBerita->content), 140) }}</p>
+                <a href="{{ route('root.berita-view', $featuredBerita->slug) }}" class="btn btn-primary">Baca Selengkapnya</a>
+                </div>
+            </div>
+            </div>
+
+            <!-- Right rail list -->
+            <div class="col-lg-5">
+            <div class="row g-3">
+                @foreach($beritas->skip(1)->take(4) as $i => $berita)
+                <div class="col-12">
+                    <div class="card border-0 bg-light h-100">
+                    <div class="card-body">
+                        <div class="d-flex gap-3">
+                        <div class="flex-shrink-0" style="width: 130px;">
+                            <div class="ratio ratio-16x9 rounded overflow-hidden">
+                            <img
+                                src="{{ $berita->photo ? asset('storage/'.$berita->photo) : news_fallback(320, 180, $berita->kategori->name ?? 'Berita') }}"
+                                alt="{{ $berita->name }}"
+                                onerror="this.onerror=null;this.src='{{ news_fallback(320,180,'Berita') }}'"
+                                class="w-100 h-100 object-fit-cover">
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                            @if($berita->kategori)
+                                <span class="badge bg-secondary">{{ $berita->kategori->name }}</span>
+                            @endif
+                            <small class="text-muted">{{ \Carbon\Carbon::parse($berita->created_at)->format('d M Y') }}</small>
+                            </div>
+                            <h6 class="mb-1">{{ Str::limit($berita->name, 80) }}</h6>
+                            <p class="text-muted small mb-2">{{ Str::limit(strip_tags($berita->content), 90) }}</p>
+                            <a href="{{ route('root.berita-view', $berita->slug) }}" class="btn btn-sm btn-outline-primary">Baca</a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            </div>
+        </div>
+
+        @if($beritas->count() > 5)
+            <div class="row g-4 mt-1">
+            @foreach($beritas->skip(5)->take(6) as $berita)
+                <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="ratio ratio-16x9">
+                    <img
+                        src="{{ $berita->photo ? asset('storage/'.$berita->photo) : news_fallback(600, 338, $berita->kategori->name ?? 'Berita') }}"
+                        alt="{{ $berita->name }}"
+                        onerror="this.onerror=null;this.src='{{ news_fallback(600,338,'Berita') }}'"
+                        class="w-100 h-100 object-fit-cover">
+                    </div>
+                    <div class="card-body">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        @if($berita->kategori)
+                        <span class="badge bg-primary-subtle text-primary">{{ $berita->kategori->name }}</span>
+                        @endif
+                        <small class="text-muted">{{ \Carbon\Carbon::parse($berita->created_at)->format('d F Y') }}</small>
+                    </div>
+                    <h5 class="mb-2">{{ Str::limit($berita->name, 70) }}</h5>
+                    <p class="text-muted small mb-3">{{ Str::limit(strip_tags($berita->content), 110) }}</p>
+                    <a href="{{ route('root.berita-view', $berita->slug) }}" class="btn btn-outline-primary">Baca Selengkapnya</a>
+                    </div>
+                </div>
+                </div>
+            @endforeach
+            </div>
+        @endif
+
+        @else
+        {{-- Fallback content when no beritas --}}
+        <div class="row g-4">
+            <div class="col-lg-7">
+            <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                <div class="ratio ratio-16x9">
+                <img src="{{ news_fallback(900,506,'Berita Utama') }}" alt="Featured News" class="w-100 h-100 object-fit-cover">
+                </div>
+                <div class="card-body p-4">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-primary">Event</span>
+                    <small class="text-muted">{{ now()->format('d F Y') }}</small>
+                </div>
+                <h3 class="h4 mb-2">Tidak ada berita untuk saat ini</h3>
+                <p class="text-muted mb-3">Konten berita akan muncul di sini ketika sudah tersedia.</p>
+                <a href="#" class="btn btn-primary disabled">Baca Selengkapnya</a>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-5">
+            <div class="row g-3">
+                @foreach(range(1,2) as $s)
+                <div class="col-12">
+                    <div class="card border-0 bg-light h-100">
+                    <div class="card-body">
+                        <div class="d-flex gap-3">
+                        <div class="flex-shrink-0" style="width:130px;">
+                            <div class="ratio ratio-16x9 rounded overflow-hidden">
+                            <img src="{{ news_fallback(320,180,'Berita') }}" class="w-100 h-100 object-fit-cover" alt="placeholder">
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                            <span class="badge bg-secondary">Info</span>
+                            <small class="text-muted">{{ now()->subDays($s)->format('d M Y') }}</small>
+                            </div>
+                            <h6 class="mb-1">Contoh judul berita</h6>
+                            <p class="text-muted small mb-2">Deskripsi singkat berita akan tampil di sini.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary disabled">Baca</a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            </div>
+        </div>
+        @endif
+    </div>
     </section>
 
     <!-- Gallery Section -->

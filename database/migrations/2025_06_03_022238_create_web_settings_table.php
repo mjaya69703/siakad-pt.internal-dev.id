@@ -47,6 +47,7 @@ return new class extends Migration
             $table->boolean('maintenance_mode')->default(false);      // MODE MAINTENANCE
             $table->boolean('enable_captcha')->default(false);        // AKTIFKAN CAPTCHA
             $table->integer('max_login_attempts')->default(5);        // BATAS PERCOBAAN LOGIN
+            $table->integer('login_decay_seconds')->default(60);      // WAKTU RESET PERCOBAAN LOGIN
 
             // AUDIT TRACKING
             $table->timestamps();

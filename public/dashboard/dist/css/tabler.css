@@ -16357,7 +16357,7 @@ a.avatar:hover {
   --tblr-badge-padding-y: 0.25em;
   --tblr-badge-font-size: 0.85714285em;
   --tblr-badge-font-weight: var(--tblr-font-weight-medium);
-  --tblr-badge-color: var(--tblr-secondary);
+  --tblr-badge-color: var(--tblr-white);
   --tblr-badge-border-radius: var(--tblr-border-radius);
   --tblr-badge-icon-size: 1em;
   --tblr-badge-line-height: 1;

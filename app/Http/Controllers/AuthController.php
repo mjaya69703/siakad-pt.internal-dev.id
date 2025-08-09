@@ -12,6 +12,8 @@ use App\Models\Pengaturan\WebSetting;
 use Illuminate\Support\Facades\Auth;
 // Plugins
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -36,6 +38,19 @@ class AuthController extends Controller
 
         $login = $request->input('login');
 
+        // ==== RATE LIMIT ====
+        $maxAttempts = WebSetting::first()->max_login_attempts ?? 5;     // Maksimal percobaan
+        $decaySeconds = WebSetting::first()->login_decay_seconds ?? 60;   // Waktu reset dalam detik
+        $key = 'login:'.Str::lower($request->input('login')).'|'.$request->ip();
+
+        if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
+            $seconds = RateLimiter::availableIn($key);
+            Alert::error('Terlalu banyak percobaan', "Coba lagi dalam {$seconds} detik.");
+            return back()
+                ->withErrors(['login' => "Terlalu banyak percobaan. Coba lagi dalam {$seconds} detik."])
+                ->onlyInput('login');
+        }
+
         // Check login input
         $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
@@ -55,6 +70,7 @@ class AuthController extends Controller
                 }
 
             }else{
+                RateLimiter::hit($key, $decaySeconds);
                 Alert::error('Error', 'Mohon Maaf, Username / Email atau password salah');
                 return back();
             }
@@ -69,6 +85,7 @@ class AuthController extends Controller
                     return redirect()->route(Auth::guard('dosen')->user()->prefix . 'profile-render');
                 }
             }else{
+                RateLimiter::hit($key, $decaySeconds);
                 Alert::error('Error', 'Mohon Maaf, Username / Email atau password salah');
                 return back();
             }
@@ -90,6 +107,7 @@ class AuthController extends Controller
                 }
 
             }else{
+                RateLimiter::hit($key, $decaySeconds);
                 Alert::error('Error', 'Mohon Maaf, Username / Email atau password salah');
                 return back();
             }

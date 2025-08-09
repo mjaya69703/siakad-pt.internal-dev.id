@@ -855,7 +855,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-8 text-lg-start text-center">
                         <ul class="list-inline list-inline-dots mb-0">
-                            <li class="list-inline-item">Copyright © {{ \Carbon\Carbon::now()->translatedFormat('F Y') }} <a href="." class="link-secondary">{{ $webs->school_apps }} - {{ $webs->school_name }} </a>. All rights reserved.</li>
+                            <li class="list-inline-item">Copyright © {{ \Carbon\Carbon::now()->translatedFormat('F Y') }} <a href="." class="link-secondary">{{ $webs->school_apps }} {{ config('app.version') }} - {{ $webs->school_name }} </a>. All rights reserved.</li>
                             <li class="list-inline-item"><a href="#" class="link-secondary">Kebijakan Privasi</a></li>
                             <li class="list-inline-item"><a href="#" class="link-secondary">Syarat & Ketentuan</a></li>
                         </ul>

@@ -25,9 +25,9 @@
         </a>
     </li>
 
-    @if ($user->prefix == 'web-admin')
+    @if ($user->prefix == 'web-admin.')
         @include('core-themes.components.navbar.web-admin')
-    @elseif ($user->prefix == 'mahasiswa')
+    @elseif ($user->prefix == 'mahasiswa.')
         @include('core-themes.components.navbar.mahasiswa')
     @endif
 

@@ -20,9 +20,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+        $this->call([
+            UserSeeder::class,
+            \Database\Seeders\Master\AkademikSeeder::class,
+            \Database\Seeders\Master\PublikasiSeeder::class,
+            \Database\Seeders\Master\PMBSeeder::class,
+            \Database\Seeders\Master\InfrastrukturSeeder::class,
+        ]);
+        
         \App\Models\Pengaturan\WebSetting::create([
-            'school_apps' => 'Neco Siakad',
-            'school_name' => 'ESEC Academy',
+            'school_apps' => 'Neco Siakad ' . config('app.version'),
+            'school_name' => 'IDev Fun',
             'school_head' => 'Dr. Mulawarman Frietz, M.Kom',
             'school_desc' => 'Membentuk Pemimpin Digital untuk Era Transformasi Global',
             'school_link' => 'https://mjaya69703.idev-fun.org',
@@ -37,13 +45,7 @@ class DatabaseSeeder extends Seeder
             'social_tw' => 'https://x.com/mjaya69703',
         ]);
 
-        $this->call([
-            UserSeeder::class,
-            \Database\Seeders\Master\AkademikSeeder::class,
-            \Database\Seeders\Master\PublikasiSeeder::class,
-            \Database\Seeders\Master\PMBSeeder::class,
-            \Database\Seeders\Master\InfrastrukturSeeder::class,
-        ]);
+
 
     }
 }
