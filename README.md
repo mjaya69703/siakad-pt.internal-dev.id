@@ -1,3 +1,13 @@
+> **🚨 PENTING - MIGRASI PROJECT 🚨**
+> 
+> **Siakad PT telah berkembang menjadi Neco Siakad v2.0** dan telah dipindahkan ke repository baru untuk pengembangan yang lebih terstruktur dan fitur yang lebih lengkap.
+> 
+> **📍 Repository Baru:** https://github.com/mjaya69703/neco-siakad
+> 
+> **⚠️ Status Repository Ini:** Repository ini akan tetap tersedia untuk referensi dan dokumentasi versi 1.x, namun pengembangan aktif telah berpindah ke repository baru.
+> 
+> **🔄 Untuk pengguna dan kontributor:** Silakan beralih ke repository baru untuk mendapatkan update terbaru, fitur baru, dan dukungan yang berkelanjutan.
+
 <p align="center"><a href="https://siakad-pt.idev-fun.org" target="_blank"><img src="./public/logo.png" width="400" alt="Neco Siakad"></a></p>
 
 <p align="center">
@@ -24,7 +34,27 @@
 
 
 ## Status Pengembangan
-> **Catatan Penting**: Proyek ini sedang dalam proses re-adaptasi total dan migrasi ke source code baru. Saat ini, fitur-fitur berikut yang sudah berfungsi penuh:
+> **📢 PENGUMUMAN PENTING**: 
+> 
+> Proyek **Siakad PT** telah berkembang menjadi **Neco Siakad v2.0** dengan arsitektur yang lebih modern dan fitur yang lebih lengkap. 
+> 
+> **🏠 Repository Utama:** https://github.com/mjaya69703/neco-siakad
+> 
+> **📋 Status Repository Ini (v1.x):**
+> - ✅ Stabil untuk penggunaan produksi
+> - 🔄 Maintenance mode (bug fixes only)
+> - 📚 Tersedia sebagai referensi dan dokumentasi
+> 
+> **🚀 Neco Siakad v2.0 (Repository Baru):**
+> - ✨ Arsitektur yang lebih modern
+> - 🎯 Fitur yang lebih lengkap dan terintegrasi
+> - 🔧 Pengembangan aktif dan berkelanjutan
+> - 🤝 Dukungan komunitas yang lebih baik
+> 
+> **Untuk mendapatkan versi terbaru dan fitur-fitur baru, silakan kunjungi:** 
+> **https://github.com/mjaya69703/neco-siakad**
+
+> **Catatan Fitur v1.x**: Fitur-fitur berikut yang sudah berfungsi penuh di versi ini:
 > - Dashboard/Home
 > - Manajemen Profil
 > - Sistem Absensi
@@ -454,15 +484,24 @@ setup.bat
 - SQL injection prevention
 
 ## Kontribusi
+> **🔄 MIGRASI KONTRIBUSI**
+> 
+> Kontribusi untuk pengembangan aktif telah berpindah ke repository baru:
+> **https://github.com/mjaya69703/neco-siakad**
+> 
+> Untuk kontribusi pada **Neco Siakad v2.0**:
+
 Kami sangat menghargai kontribusi dari komunitas untuk pengembangan Neco Siakad. Jika Anda ingin berkontribusi:
 
-1. Fork repositori ini
+1. Fork repositori baru di https://github.com/mjaya69703/neco-siakad
 2. Buat branch fitur baru (`git checkout -b fitur-baru`)
 3. Commit perubahan Anda (`git commit -m 'Menambahkan fitur baru'`)
 4. Push ke branch (`git push origin fitur-baru`)
 5. Buat Pull Request
 
-Jika Anda menemukan bug atau memiliki saran untuk peningkatan, silakan buat issue di [GitHub Issues](https://github.com/mjaya69703/siakad-pt.internal-dev.id/issues).
+Jika Anda menemukan bug pada versi v1.x ini atau memiliki saran untuk v2.0, silakan:
+- **Bug v1.x:** Buat issue di [GitHub Issues](https://github.com/mjaya69703/siakad-pt.internal-dev.id/issues)
+- **Saran v2.0:** Buat issue di [Neco Siakad v2.0 Issues](https://github.com/mjaya69703/neco-siakad/issues)
 
 Untuk melihat source code versi lama dari proyek ini, Anda dapat mengakses [branch oldest](https://github.com/mjaya69703/siakad-pt.internal-dev.id/tree/oldest).
 
