@@ -297,7 +297,7 @@
                                     @if($attendances->first()->bukti_izin)
                                         <div class="mt-3">
                                             <div class="text-muted mb-1">Bukti Izin:</div>
-                                            <a href="{{ Storage::url($attendances->first()->bukti_izin) }}" 
+                                            <a href="{{ asset('storage/' . $attendances->first()->bukti_izin) }}" 
                                                target="_blank" 
                                                class="btn btn-sm btn-outline-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

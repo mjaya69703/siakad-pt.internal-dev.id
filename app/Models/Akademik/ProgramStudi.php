@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\HasLogAktivitas;
 // USE MODELS
 use App\Models\Akademik\Fakultas;
+use App\Models\Akademik\JenjangPendidikan;
 use App\Models\Dosen;
 
 class ProgramStudi extends Model
@@ -23,5 +24,9 @@ class ProgramStudi extends Model
     public function kaprodi()
     {
         return $this->belongsTo(Dosen::class);
+    }
+    public function jenjang()
+    {
+        return $this->belongsTo(JenjangPendidikan::class, 'jenjang_id');
     }
 }

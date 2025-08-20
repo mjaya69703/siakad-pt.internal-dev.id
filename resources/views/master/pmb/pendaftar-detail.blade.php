@@ -242,7 +242,7 @@
                                 <div class="document-card">
                                     <div class="text-center">
                                         <i class="fas fa-file-pdf document-icon"></i>
-                                        <h6 class="mb-2">{{ $dokumen->syarat->name }}</h6>
+                                        <h6 class="mb-2">{{ $dokumen->nama_dokumen ?? $dokumen->syarat->name ?? 'Dokumen' }}</h6>
                                         <p class="text-muted small mb-2">
                                             {{ \Carbon\Carbon::parse($dokumen->created_at)->format('d M Y H:i') }}
                                         </p>
@@ -253,10 +253,10 @@
                                             </span>
                                         </div>
                                         <div class="d-flex justify-content-center">
-                                            <a href="{{ asset($dokumen->path) }}" class="btn btn-sm btn-primary me-2" target="_blank">
+                                            <a href="{{ asset('storage/' . ($dokumen->file_path ?? $dokumen->path)) }}" class="btn btn-sm btn-primary me-2" target="_blank">
                                                 <i class="fas fa-eye me-1"></i>Lihat
                                             </a>
-                                            <a href="{{ asset($dokumen->path) }}" class="btn btn-sm btn-success" download>
+                                            <a href="{{ asset('storage/' . ($dokumen->file_path ?? $dokumen->path)) }}" class="btn btn-sm btn-success" download>
                                                 <i class="fas fa-download me-1"></i>Download
                                             </a>
                                         </div>
@@ -309,11 +309,11 @@
                 </div>
                 <div class="card-body">
                     @foreach($pendaftar->dokumen as $dokumen)
-                        <form action="{{ route($spref . 'pmb.pendaftar-validasi', $dokumen->code) }}" method="POST" class="mb-4">
+                        <form action="{{ route($spref . 'pmb.pendaftar-validasi', $dokumen->code ?? $dokumen->id) }}" method="POST" class="mb-4">
                             @method('PATCH')
                             @csrf
                             <div class="mb-3">
-                                <label class="form-label">{{ $dokumen->syarat->name }}</label>
+                                <label class="form-label">{{ $dokumen->nama_dokumen ?? $dokumen->syarat->name ?? 'Dokumen' }}</label>
                                 <select class="form-select" name="status" required>
                                     <option value="Pending" {{ $dokumen->status == 'Pending' ? 'selected' : '' }}>Pending</option>
                                     <option value="Valid" {{ $dokumen->status == 'Valid' ? 'selected' : '' }}>Valid</option>

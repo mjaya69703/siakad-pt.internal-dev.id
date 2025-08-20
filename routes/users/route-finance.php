@@ -26,6 +26,11 @@ Route::group(['prefix' => 'finance', 'middleware' => ['user-access:Departement F
         Route::post('/data-pembayaran/store',[App\Http\Controllers\Admin\Pages\Finance\PembayaranController::class, 'store'])->name('finance.pembayaran-store');
         Route::patch('/data-pembayaran/{code}/update',[App\Http\Controllers\Admin\Pages\Finance\PembayaranController::class, 'update'])->name('finance.pembayaran-update');
         Route::delete('/data-pembayaran/{code}/destroy',[App\Http\Controllers\Admin\Pages\Finance\PembayaranController::class, 'destroy'])->name('finance.pembayaran-destroy');
+        
+        // MENU KHUSUS FINANCE DEPARTEMENT => VERIFIKASI PEMBAYARAN PMB
+        Route::get('/pmb-pembayaran',[App\Http\Controllers\Master\PMB\PendaftarController::class, 'pmbPembayaran'])->name('finance.pmb-pembayaran');
+        Route::patch('/pmb-pembayaran/{code}/verify',[App\Http\Controllers\Master\PMB\PendaftarController::class, 'verifyPembayaran'])->name('finance.pmb-pembayaran-verify');
+        Route::patch('/pmb-pembayaran/{code}/reject',[App\Http\Controllers\Master\PMB\PendaftarController::class, 'rejectPembayaran'])->name('finance.pmb-pembayaran-reject');
         // MENU KHUSUS FINANCE DEPARTEMENT => DATA KEUANGAN
         Route::get('/data-keuangan',[App\Http\Controllers\Admin\Pages\Finance\BalanceController::class, 'index'])->name('finance.keuangan-index');
         Route::post('/data-keuangan/store',[App\Http\Controllers\Admin\Pages\Finance\BalanceController::class, 'store'])->name('finance.keuangan-store');

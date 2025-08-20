@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
+            JenjangPendidikanSeeder::class, // Add this before AkademikSeeder
             \Database\Seeders\Master\AkademikSeeder::class,
             \Database\Seeders\Master\PublikasiSeeder::class,
             \Database\Seeders\Master\PMBSeeder::class,

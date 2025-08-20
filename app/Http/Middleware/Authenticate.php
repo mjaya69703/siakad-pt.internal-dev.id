@@ -12,6 +12,16 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : route('login');
+        if ($request->expectsJson()) {
+            return null;
+        }
+
+        // Check which guard is being used and redirect accordingly
+        if ($request->is('pendaftar/*')) {
+            return route('pendaftar.login');
+        }
+
+        // For other routes, redirect to signin
+        return route('auth.render-signin');
     }
 }

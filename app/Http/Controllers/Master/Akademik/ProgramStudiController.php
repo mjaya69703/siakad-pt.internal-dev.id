@@ -25,9 +25,10 @@ class ProgramStudiController extends Controller
         $data['menus'] = "Master";
         $data['pages'] = "Program Studi";
         $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
-        $data['prodi'] = ProgramStudi::with(['fakultas', 'kaprodi'])->get(); // Fetch all Program Studi with relationships
+        $data['prodi'] = ProgramStudi::with(['fakultas', 'kaprodi', 'jenjang'])->get(); // Fetch all Program Studi with relationships
         $data['fakultas'] = Fakultas::where('status', 'Aktif')->get(); // Fetch active Fakultas
         $data['dosens'] = Dosen::where('type', 1)->get(); // Fetch active Dosen for Kaprodi
+        $data['jenjangs'] = \App\Models\Akademik\JenjangPendidikan::all(); // Fetch all Jenjang Pendidikan
         
         return view('master.akademik.prodi-index', $data, compact('user'));
     }
@@ -39,9 +40,10 @@ class ProgramStudiController extends Controller
 
             $request->validate([
                 'name' => 'required|string|max:255',
+                'code' => 'required|string|max:10|unique:program_studis,code',
                 'fakultas_id' => 'required|exists:fakultas,id',
                 'kaprodi_id' => 'nullable|exists:dosens,id',
-                'level' => 'required|in:Diploma,Sarjana,Magister,Doktoral',
+                'jenjang_id' => 'required|exists:jenjang_pendidikans,id',
                 'title' => 'required|in:D3,S1,S2,S3',
                 'title_start' => 'nullable|string|max:50',
                 'title_ended' => 'nullable|string|max:50',
@@ -52,8 +54,8 @@ class ProgramStudiController extends Controller
                 'careers' => 'nullable|string',
             ]);
 
-            // Generate unique code
-            $code = 'PS-' . Str::random(8);
+            // Generate unique code if not provided
+            $code = $request->code ?: 'PS-' . Str::random(8);
             
             // Create new Program Studi
             ProgramStudi::create([
@@ -62,7 +64,8 @@ class ProgramStudiController extends Controller
                 'slug' => Str::slug($request->name),
                 'fakultas_id' => $request->fakultas_id,
                 'kaprodi_id' => $request->kaprodi_id,
-                'level' => $request->level,
+                'jenjang_id' => $request->jenjang_id,
+                'level' => \App\Models\Akademik\JenjangPendidikan::find($request->jenjang_id)->nama,
                 'title' => $request->title,
                 'title_start' => $request->title_start,
                 'title_ended' => $request->title_ended,
@@ -93,9 +96,10 @@ class ProgramStudiController extends Controller
 
             $request->validate([
                 'name' => 'required|string|max:255',
+                'code' => 'required|string|max:10|unique:program_studis,code,' . $code . ',code',
                 'fakultas_id' => 'required|exists:fakultas,id',
                 'kaprodi_id' => 'nullable|exists:dosens,id',
-                'level' => 'required|in:Diploma,Sarjana,Magister,Doktoral',
+                'jenjang_id' => 'required|exists:jenjang_pendidikans,id',
                 'title' => 'required|in:D3,S1,S2,S3',
                 'title_start' => 'nullable|string|max:50',
                 'title_ended' => 'nullable|string|max:50',
@@ -111,10 +115,12 @@ class ProgramStudiController extends Controller
 
             $prodi->update([
                 'name' => $request->name,
+                'code' => $request->code,
                 'slug' => Str::slug($request->name),
                 'fakultas_id' => $request->fakultas_id,
                 'kaprodi_id' => $request->kaprodi_id,
-                'level' => $request->level,
+                'jenjang_id' => $request->jenjang_id,
+                'level' => \App\Models\Akademik\JenjangPendidikan::find($request->jenjang_id)->nama,
                 'title' => $request->title,
                 'title_start' => $request->title_start,
                 'title_ended' => $request->title_ended,

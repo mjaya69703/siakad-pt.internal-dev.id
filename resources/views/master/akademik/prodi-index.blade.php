@@ -224,21 +224,20 @@
                                     </div>
                                      <div class="col-md-6 mb-3">
                                         <label for="code" class="form-label">Kode Program Studi</label>
-                                        <input type="text" class="form-control" name="code" id="code" placeholder="Contoh: TI" disabled>
+                                        <input type="text" class="form-control" name="code" id="code" placeholder="Contoh: TI" required>
                                         @error('code')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="level" class="form-label">Jenjang Pendidikan</label>
-                                        <select class="form-select" name="level" id="level">
+                                        <label for="jenjang_id" class="form-label">Jenjang Pendidikan</label>
+                                        <select class="form-select" name="jenjang_id" id="jenjang_id" required>
                                             <option value="">Pilih Jenjang</option>
-                                            <option value="Diploma">Diploma</option>
-                                            <option value="Sarjana">Sarjana</option>
-                                            <option value="Magister">Magister</option>
-                                            <option value="Doktoral">Doktoral</option>
+                                            @foreach($jenjangs as $jenjang)
+                                                <option value="{{ $jenjang->id }}">{{ $jenjang->nama }} ({{ $jenjang->singkatan }})</option>
+                                            @endforeach
                                         </select>
-                                        @error('level')
+                                        @error('jenjang_id')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -341,7 +340,7 @@
                                             </div>
                                         </td>
                                         <td data-label="Kode">{{ $item->code }}</td>
-                                        <td data-label="Jenjang">{{ $item->level }}</td>
+                                        <td data-label="Jenjang">{{ $item->jenjang ? $item->jenjang->nama : $item->level }}</td>
                                         <td data-label="Gelar">{{ $item->title }}</td>
                                         <td data-label="Status">
                                             <span class="badge {{ $item->status == 'Aktif' ? 'bg-light-success text-success' : 'bg-light-warning text-warning' }}">
@@ -458,20 +457,20 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="edit_code{{ $item->code }}" class="form-label">Kode Program Studi</label>
-                                    <input type="text" class="form-control" name="code" id="edit_code{{ $item->code }}" value="{{ $item->code }}" placeholder="Contoh: TI" disabled>
+                                    <input type="text" class="form-control" name="code" id="edit_code{{ $item->code }}" value="{{ $item->code }}" placeholder="Contoh: TI" required>
                                     @error('code')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                  <div class="col-md-6 mb-3">
-                                    <label for="edit_level{{ $item->code }}" class="form-label">Jenjang Pendidikan</label>
-                                    <select class="form-select" name="level" id="edit_level{{ $item->code }}">
-                                        <option value="Diploma" {{ $item->level == 'Diploma' ? 'selected' : '' }}>Diploma</option>
-                                        <option value="Sarjana" {{ $item->level == 'Sarjana' ? 'selected' : '' }}>Sarjana</option>
-                                        <option value="Magister" {{ $item->level == 'Magister' ? 'selected' : '' }}>Magister</option>
-                                        <option value="Doktoral" {{ $item->level == 'Doktoral' ? 'selected' : '' }}>Doktoral</option>
+                                    <label for="edit_jenjang_id{{ $item->code }}" class="form-label">Jenjang Pendidikan</label>
+                                    <select class="form-select" name="jenjang_id" id="edit_jenjang_id{{ $item->code }}" required>
+                                        <option value="">Pilih Jenjang</option>
+                                        @foreach($jenjangs as $jenjang)
+                                            <option value="{{ $jenjang->id }}" {{ $item->jenjang_id == $jenjang->id ? 'selected' : '' }}>{{ $jenjang->nama }} ({{ $jenjang->singkatan }})</option>
+                                        @endforeach
                                     </select>
-                                    @error('level')
+                                    @error('jenjang_id')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>

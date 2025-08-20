@@ -35,11 +35,36 @@ class PendaftarController extends Controller
         $data['menus'] = "Master";
         $data['pages'] = "Pendaftar";
         $data['academy'] = $data['webs']->school_apps . ' by ' . $data['webs']->school_name;
-        $data['pendaftars'] = Pendaftar::with(['dokumen.syarat', 'jalur', 'gelombang'])->get();
+        
+        // Load necessary data for filtering and display
+        $data['pendaftars'] = Pendaftar::with([
+            'dokumen.syarat', 
+            'jalur', 
+            'gelombang', 
+            'prodi1.jenjang', 
+            'prodi2.jenjang',
+            'jenisKelas',
+            'tahunAkademik'
+        ])->get();
+        
         $data['jalurs'] = JalurPendaftaran::all();
         $data['jenisKelas'] = JenisKelas::all();
-        $data['prodis'] = ProgramStudi::all();
+        $data['prodis'] = ProgramStudi::with('jenjang')->get();
         $data['gelombangs'] = GelombangPendaftaran::all();
+        
+        // Add missing variables for view
+        $data['activeTaka'] = \App\Models\Akademik\TahunAkademik::where('is_active', true)->first();
+        $data['takas'] = \App\Models\Akademik\TahunAkademik::orderBy('created_at', 'desc')->get();
+        
+        // Load periodes dengan relationship taka yang benar
+        if(class_exists(\App\Models\PMB\PeriodePendaftaran::class)) {
+            $data['periodes'] = \App\Models\PMB\PeriodePendaftaran::with('taka')->orderBy('created_at', 'desc')->get();
+        } else {
+            $data['periodes'] = collect([]); // Empty collection jika model tidak ada
+        }
+        
+        $data['selectedPeriodeId'] = request('periode_id');
+        $data['jenjangs'] = \App\Models\Akademik\JenjangPendidikan::all();
         
         return view('master.pmb.pendaftar-index', $data, compact('user'));
     }
@@ -469,4 +494,84 @@ class PendaftarController extends Controller
         }
     }
     */
+
+    /**
+     * Set active tahun akademik
+     */
+    public function setActiveTahunAkademik(Request $request)
+    {
+        try {
+            $request->validate([
+                'taka_id' => 'required|exists:tahun_akademiks,id',
+            ]);
+
+            // Set semua tahun akademik menjadi tidak aktif
+            \App\Models\Akademik\TahunAkademik::query()->update(['is_active' => false]);
+
+            // Set tahun akademik yang dipilih menjadi aktif
+            \App\Models\Akademik\TahunAkademik::where('id', $request->taka_id)->update(['is_active' => true]);
+
+            return back()->with('success', 'Tahun akademik aktif berhasil diperbarui!');
+
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memperbarui tahun akademik aktif: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * PMB Payment verification for Finance users
+     */
+    public function pmbPembayaran()
+    {
+        // Check if user is finance
+        $spref = 'finance.';
+        
+        $pendaftars = Pendaftar::with(['prodi1.jenjang', 'gelombang', 'jalur', 'tahunAkademik'])
+                              ->whereNotNull('bukti_pembayaran')
+                              ->orderBy('created_at', 'desc')
+                              ->get();
+
+        return view('finance.pmb-pembayaran', compact('pendaftars', 'spref'));
+    }
+
+    public function verifyPembayaran($code)
+    {
+        try {
+            $pendaftar = Pendaftar::where('code', $code)->firstOrFail();
+            
+            $pendaftar->update([
+                'status_pembayaran' => 'verified',
+                'tanggal_verifikasi_pembayaran' => now(),
+                'updated_by' => Auth::id(),
+            ]);
+
+            return back()->with('success', 'Pembayaran berhasil diverifikasi!');
+
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memverifikasi pembayaran: ' . $e->getMessage());
+        }
+    }
+
+    public function rejectPembayaran(Request $request, $code)
+    {
+        $request->validate([
+            'catatan_verifikasi' => 'required|string|max:500',
+        ]);
+
+        try {
+            $pendaftar = Pendaftar::where('code', $code)->firstOrFail();
+            
+            $pendaftar->update([
+                'status_pembayaran' => 'rejected',
+                'catatan_verifikasi' => $request->catatan_verifikasi,
+                'tanggal_verifikasi_pembayaran' => now(),
+                'updated_by' => Auth::id(),
+            ]);
+
+            return back()->with('success', 'Pembayaran berhasil ditolak!');
+
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal menolak pembayaran: ' . $e->getMessage());
+        }
+    }
 }

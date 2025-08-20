@@ -151,6 +151,10 @@ use Illuminate\Support\Facades\Route;
     Route::get('/pmb/pendaftar/export/pdf', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'exportPendaftarPDF'])->name('pmb.pendaftar-export-pdf');
     Route::post('/pmb/pendaftar/batch/validasi', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'batchValidasiDokumen'])->name('pmb.pendaftar-batch-validasi');
     Route::post('/pmb/pendaftar/batch/status', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'batchUpdateStatus'])->name('pmb.pendaftar-batch-status');
+    Route::post('/pmb/set-active-tahun', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'setActiveTahunAkademik'])->name('pmb.set-active-tahun');
+    // PMB Payment verification routes
+    Route::post('/pmb/pendaftar/{code}/verify-pembayaran', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'verifyPembayaran'])->name('pmb.verify-pembayaran');
+    Route::post('/pmb/pendaftar/{code}/reject-pembayaran', [App\Http\Controllers\Master\PMB\PendaftarController::class, 'rejectPembayaran'])->name('pmb.reject-pembayaran');
 
     // MASTER PENGGUNA => USERS
     Route::get('/pengguna/users',[App\Http\Controllers\Master\Pengguna\UsersController::class, 'renderUsers'])->name('pengguna.users-render');

@@ -107,9 +107,53 @@ class AkademikSeeder extends Seeder
 
         // Seed Program Studi
         $programStudi = [
+            // Jenjang D3 (id=1)
             [
                 'fakultas_id' => 1,
                 'kaprodi_id' => 3,
+                'jenjang_id' => 1, // D3
+                'name' => 'Manajemen Informatika',
+                'code' => 'MI',
+                'desc' => 'Program studi diploma tiga manajemen informatika',
+                'slug' => 'manajemen-informatika',
+                'level' => 'Diploma',
+                'title' => 'D3',
+                'title_start' => '',
+                'title_ended' => 'A.Md.Kom.',
+                'accreditation' => 'B',
+                'duration' => 6,
+                'objectives' => 'Menghasilkan lulusan yang kompeten dalam manajemen sistem informasi',
+                'careers' => 'IT Support, Network Administrator, Database Operator',
+                'status' => 'Aktif',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            // Jenjang D4 (id=2)
+            [
+                'fakultas_id' => 1,
+                'kaprodi_id' => 3,
+                'jenjang_id' => 2, // D4
+                'name' => 'Teknologi Rekayasa Perangkat Lunak',
+                'code' => 'TRPL',
+                'desc' => 'Program studi diploma empat teknologi rekayasa perangkat lunak',
+                'slug' => 'teknologi-rekayasa-perangkat-lunak',
+                'level' => 'Diploma',
+                'title' => 'D4',
+                'title_start' => '',
+                'title_ended' => 'S.Tr.Kom.',
+                'accreditation' => 'A',
+                'duration' => 8,
+                'objectives' => 'Menghasilkan lulusan yang kompeten dalam rekayasa perangkat lunak',
+                'careers' => 'Software Engineer, Mobile Developer, Web Developer',
+                'status' => 'Aktif',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            // Jenjang S1 (id=3)
+            [
+                'fakultas_id' => 1,
+                'kaprodi_id' => 3,
+                'jenjang_id' => 3, // S1
                 'name' => 'Teknik Informatika',
                 'code' => 'TI',
                 'desc' => 'Program studi yang fokus pada pengembangan software dan sistem informasi',
@@ -127,8 +171,29 @@ class AkademikSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'fakultas_id' => 1,
+                'kaprodi_id' => 4,
+                'jenjang_id' => 3, // S1
+                'name' => 'Sistem Informasi',
+                'code' => 'SI',
+                'desc' => 'Program studi yang fokus pada sistem informasi bisnis',
+                'slug' => 'sistem-informasi',
+                'level' => 'Sarjana',
+                'title' => 'S1',
+                'title_start' => '',
+                'title_ended' => 'S.Kom.',
+                'accreditation' => 'A',
+                'duration' => 8,
+                'objectives' => 'Menghasilkan lulusan yang kompeten dalam sistem informasi',
+                'careers' => 'Business Analyst, IT Consultant, Project Manager',
+                'status' => 'Aktif',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
                 'fakultas_id' => 2,
                 'kaprodi_id' => 4,
+                'jenjang_id' => 3, // S1
                 'name' => 'Manajemen',
                 'code' => 'MNJ',
                 'desc' => 'Program studi yang fokus pada pengembangan ilmu manajemen',
@@ -141,6 +206,67 @@ class AkademikSeeder extends Seeder
                 'duration' => 8,
                 'objectives' => 'Menghasilkan lulusan yang kompeten dalam bidang manajemen',
                 'careers' => 'Business Manager, Marketing Manager, HR Manager',
+                'status' => 'Aktif',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'fakultas_id' => 2,
+                'kaprodi_id' => 4,
+                'jenjang_id' => 3, // S1
+                'name' => 'Akuntansi',
+                'code' => 'AKT',
+                'desc' => 'Program studi yang fokus pada ilmu akuntansi',
+                'slug' => 'akuntansi',
+                'level' => 'Sarjana',
+                'title' => 'S1',
+                'title_start' => '',
+                'title_ended' => 'S.E.',
+                'accreditation' => 'B',
+                'duration' => 8,
+                'objectives' => 'Menghasilkan lulusan yang kompeten dalam bidang akuntansi',
+                'careers' => 'Accountant, Auditor, Tax Consultant',
+                'status' => 'Aktif',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            // Jenjang S2 (id=4)
+            [
+                'fakultas_id' => 1,
+                'kaprodi_id' => 3,
+                'jenjang_id' => 4, // S2
+                'name' => 'Magister Teknologi Informasi',
+                'code' => 'MTI',
+                'desc' => 'Program studi magister teknologi informasi',
+                'slug' => 'magister-teknologi-informasi',
+                'level' => 'Magister',
+                'title' => 'S2',
+                'title_start' => '',
+                'title_ended' => 'M.Kom.',
+                'accreditation' => 'A',
+                'duration' => 4,
+                'objectives' => 'Menghasilkan lulusan magister yang kompeten dalam teknologi informasi',
+                'careers' => 'IT Manager, Research Analyst, Technology Consultant',
+                'status' => 'Aktif',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'fakultas_id' => 2,
+                'kaprodi_id' => 4,
+                'jenjang_id' => 4, // S2
+                'name' => 'Magister Manajemen',
+                'code' => 'MM',
+                'desc' => 'Program studi magister manajemen',
+                'slug' => 'magister-manajemen',
+                'level' => 'Magister',
+                'title' => 'S2',
+                'title_start' => '',
+                'title_ended' => 'M.M.',
+                'accreditation' => 'A',
+                'duration' => 4,
+                'objectives' => 'Menghasilkan lulusan magister yang kompeten dalam manajemen',
+                'careers' => 'CEO, Strategic Manager, Business Consultant',
                 'status' => 'Aktif',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

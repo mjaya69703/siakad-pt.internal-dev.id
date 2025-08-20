@@ -15,84 +15,134 @@
                         <div class="card card-md">
                             <div class="card-body">
                                 <h2 class="h2 text-center mb-4">Login to your account</h2>
-                                <form action="{{ route('auth.handle-signin') }}" method="post" autocomplete="on" novalidate>
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label class="form-label">Email address</label>
-                                        <input type="text" class="form-control" name="login" placeholder="Email or Username" autocomplete="on" />
-                                        @error('login')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-2">
-                                        <label class="form-label">
-                                            Password
-                                            <span class="form-label-description">
-                                                <a href="./forgot-password.html">I forgot password</a>
-                                            </span>
-                                        </label>
-                                        <div class="input-group input-group-flat">
-                                            <input type="password" class="form-control" name="password" placeholder="Your password" autocomplete="off" />
-                                            <span class="input-group-text">
-                                                <a href="javascript:void(0)" class="link-secondary toggle-password" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler.io/icons/icon/eye -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
-                                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                        <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                                    </svg>
-                                                </a>
-                                            </span>
-                                            <br>
-                                        </div>
-                                        @error('password')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-2">
-                                        <label class="form-check">
-                                            <input type="checkbox" class="form-check-input" />
-                                            <span class="form-check-label">Remember me on this device</span>
-                                        </label>
-                                    </div>
-                                    @if($webs->enable_captcha == true || $webs->enable_captcha == 1 || $webs->enable_captcha == "1")
-                                    <div class="">
-                                        <x-turnstile-widget theme="auto" language="id"/>
-                                        @error('cf-turnstile-response')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                    @endif
-                                    <div class="form-footer">
-                                        <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                                
+                                <!-- Navigation Tabs -->
+                                <ul class="nav nav-tabs nav-fill mb-3" id="loginTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link {{ !isset($activePendaftarTab) ? 'active' : '' }}" id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin" type="button" role="tab" aria-controls="admin" aria-selected="{{ !isset($activePendaftarTab) ? 'true' : 'false' }}">
+                                            <i class="fas fa-user-tie me-1"></i> Admin/Staff
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link {{ isset($activePendaftarTab) ? 'active' : '' }}" id="pendaftar-tab" data-bs-toggle="tab" data-bs-target="#pendaftar" type="button" role="tab" aria-controls="pendaftar" aria-selected="{{ isset($activePendaftarTab) ? 'true' : 'false' }}">
+                                            <i class="fas fa-user-graduate me-1"></i> Calon Mahasiswa
+                                        </button>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab Content -->
+                                <div class="tab-content" id="loginTabContent">
+                                    <!-- Admin Login Tab -->
+                                    <div class="tab-pane fade {{ !isset($activePendaftarTab) ? 'show active' : '' }}" id="admin" role="tabpanel" aria-labelledby="admin-tab">
+                                        <form action="{{ route('auth.handle-signin') }}" method="post" autocomplete="on" novalidate>
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label class="form-label">Email address</label>
+                                                <input type="text" class="form-control" name="login" placeholder="Email or Username" autocomplete="on" />
+                                                @error('login')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label">
+                                                    Password
+                                                    <span class="form-label-description">
+                                                        <a href="./forgot-password.html">I forgot password</a>
+                                                    </span>
+                                                </label>
+                                                <div class="input-group input-group-flat">
+                                                    <input type="password" class="form-control" name="password" placeholder="Your password" autocomplete="off" />
+                                                    <span class="input-group-text">
+                                                        <a href="javascript:void(0)" class="link-secondary toggle-password" title="Show password" data-bs-toggle="tooltip">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                                <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                                                            </svg>
+                                                        </a>
+                                                    </span>
+                                                    <br>
+                                                </div>
+                                                @error('password')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-check">
+                                                    <input type="checkbox" class="form-check-input" />
+                                                    <span class="form-check-label">Remember me on this device</span>
+                                                </label>
+                                            </div>
+                                            @if($webs->enable_captcha == true || $webs->enable_captcha == 1 || $webs->enable_captcha == "1")
+                                            <div class="">
+                                                <x-turnstile-widget theme="auto" language="id"/>
+                                                @error('cf-turnstile-response')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            @endif
+                                            <div class="form-footer">
+                                                <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                                            </div>
+                                        </form>
                                     </div>
 
-                                </form>
-                            </div>
-                            <div class="hr-text">or</div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#" class="btn btn-4 w-100">
-                                            <!-- Download SVG icon from http://tabler.io/icons/icon/brand-github -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon text-github icon-2">
-                                                <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-                                            </svg>
-                                            Login with Github
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="btn btn-4 w-100">
-                                            <!-- Download SVG icon from http://tabler.io/icons/icon/brand-x -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon text-x icon-2">
-                                                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
-                                                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
-                                            </svg>
-                                            Login with X
-                                        </a>
+                                    <!-- Pendaftar Login Tab -->
+                                    <div class="tab-pane fade {{ isset($activePendaftarTab) ? 'show active' : '' }}" id="pendaftar" role="tabpanel" aria-labelledby="pendaftar-tab">
+                                        <form action="{{ route('pendaftar.login.submit') }}" method="post" autocomplete="on" novalidate>
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" class="form-control" name="email" placeholder="Email Anda" autocomplete="on" value="{{ old('email') }}" />
+                                                @error('email')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label">
+                                                    Password
+                                                    <span class="form-label-description">
+                                                        <a href="{{ route('pendaftar.password.request') }}">Lupa password?</a>
+                                                    </span>
+                                                </label>
+                                                <div class="input-group input-group-flat">
+                                                    <input type="password" class="form-control" name="password" placeholder="Password Anda" autocomplete="off" />
+                                                    <span class="input-group-text">
+                                                        <a href="javascript:void(0)" class="link-secondary toggle-password-pendaftar" title="Show password" data-bs-toggle="tooltip">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                                <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                                                            </svg>
+                                                        </a>
+                                                    </span>
+                                                </div>
+                                                @error('password')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-check">
+                                                    <input type="checkbox" class="form-check-input" name="remember" />
+                                                    <span class="form-check-label">Ingat saya</span>
+                                                </label>
+                                            </div>
+                                            <div class="form-footer">
+                                                <button type="submit" class="btn btn-primary w-100">
+                                                    <i class="fas fa-sign-in-alt me-1"></i> Masuk
+                                                </button>
+                                            </div>
+                                        </form>
+                                        
+                                        <div class="text-center mt-3">
+                                            <span class="text-muted">Belum punya akun?</span>
+                                            <a href="{{ route('pendaftar.register') }}" class="text-primary fw-bold">Daftar Sekarang</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center text-secondary mt-3">Don't have account yet? <a href="./sign-up.html" tabindex="-1">Sign up</a></div>
+                        <div class="text-center text-secondary mt-3">
+                            <span>Untuk akun admin/staff, gunakan tab "Admin/Staff" di atas</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg d-none d-lg-block">
@@ -169,9 +219,9 @@
 @section('custom-js')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Toggle password visibility
+        // Toggle password visibility for admin tab
         const togglePassword = document.querySelector('.toggle-password');
-        const passwordInput = document.querySelector('input[type="password"]');
+        const passwordInput = document.querySelector('#admin input[type="password"]');
         
         if (togglePassword && passwordInput) {
             togglePassword.addEventListener('click', function() {
@@ -195,6 +245,62 @@
                 }
             });
         }
+
+        // Toggle password visibility for pendaftar tab
+        const togglePasswordPendaftar = document.querySelector('.toggle-password-pendaftar');
+        const passwordInputPendaftar = document.querySelector('#pendaftar input[type="password"]');
+        
+        if (togglePasswordPendaftar && passwordInputPendaftar) {
+            togglePasswordPendaftar.addEventListener('click', function() {
+                // Toggle the type attribute
+                const type = passwordInputPendaftar.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInputPendaftar.setAttribute('type', type);
+                
+                // Toggle the eye icon
+                const icon = this.querySelector('svg');
+                if (type === 'password') {
+                    icon.innerHTML = `
+                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                        <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                    `;
+                } else {
+                    icon.innerHTML = `
+                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                        <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                        <path d="M3 3l18 18" />
+                    `;
+                }
+            });
+        }
+
+        // Handle tab switching to remember active tab
+        const triggerTabList = [].slice.call(document.querySelectorAll('#loginTabs button'))
+        triggerTabList.forEach(function (triggerEl) {
+            const tabTrigger = new bootstrap.Tab(triggerEl)
+            
+            triggerEl.addEventListener('click', function (event) {
+                event.preventDefault()
+                tabTrigger.show()
+                
+                // Store active tab in localStorage
+                localStorage.setItem('activeLoginTab', triggerEl.getAttribute('data-bs-target'))
+            })
+        })
+
+        // Restore active tab from localStorage
+        const activeTab = localStorage.getItem('activeLoginTab')
+        if (activeTab) {
+            const tabTrigger = document.querySelector(`#loginTabs button[data-bs-target="${activeTab}"]`)
+            if (tabTrigger) {
+                const tab = new bootstrap.Tab(tabTrigger)
+                tab.show()
+            }
+        }
+
+        // Clear localStorage when switching between tabs
+        window.addEventListener('beforeunload', function() {
+            localStorage.removeItem('activeLoginTab')
+        })
     });
 </script>
 @endsection

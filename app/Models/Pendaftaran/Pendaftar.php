@@ -11,6 +11,7 @@ use App\Models\PMB\JalurPendaftaran;
 use App\Models\PMB\GelombangPendaftaran;
 use App\Models\Akademik\JenisKelas;
 use App\Models\Akademik\ProgramStudi;
+use App\Models\Akademik\TahunAkademik;
 
 class Pendaftar extends Model
 {
@@ -49,5 +50,10 @@ class Pendaftar extends Model
     public function dokumen()
     {
         return $this->hasMany(DokumenPMB::class, 'pendaftar_id');
+    }
+
+    public function tahunAkademik()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'tahun_akademik_id');
     }
 }

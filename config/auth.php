@@ -47,6 +47,10 @@ return [
         'dosen' => [
             'driver' => 'session',
             'provider' => 'dosens',
+        ],
+        'pendaftar' => [
+            'driver' => 'session',
+            'provider' => 'pendaftar_users',
         ]
     ],
 
@@ -79,6 +83,10 @@ return [
         'dosens' => [
             'driver' => 'eloquent',
             'model' => App\Models\Dosen::class,
+        ],
+        'pendaftar_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\PendaftarUser::class,
         ]
 
         // 'users' => [

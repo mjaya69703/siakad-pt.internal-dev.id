@@ -110,6 +110,34 @@
             }
         }
 
+        /* Filter dropdown styling */
+        .dropdown-toggle.btn-outline-primary:hover {
+            background-color: #435ebe;
+            border-color: #435ebe;
+            color: white;
+        }
+
+        .dropdown-toggle.btn-outline-secondary:hover {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+
+        .dropdown-item.active {
+            background-color: #435ebe;
+            color: white;
+        }
+
+        .badge.bg-success {
+            background-color: #28a745 !important;
+        }
+
+        .alert-light-info {
+            background-color: rgba(23, 162, 184, 0.1);
+            border-color: rgba(23, 162, 184, 0.2);
+            color: #0c5460;
+        }
+
         @media (max-width: 768px) {
             .table-responsive table,
             .table-responsive thead,
@@ -145,6 +173,21 @@
                 color: #888;
                 content: attr(data-label);
             }
+            
+            /* Responsive filter section */
+            .filter-section {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+            }
+            
+            .filter-section .dropdown {
+                width: 100% !important;
+            }
+            
+            .filter-section .dropdown-toggle {
+                width: 100% !important;
+                justify-content: space-between !important;
+            }
         }
     </style>
 @endsection
@@ -156,34 +199,126 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">{{ $pages }}</h5>
-                    <div class="d-flex gap-2">
-                        <div class="dropdown">
-                            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-file-export me-2"></i>Export
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <form action="{{ route($spref . 'pmb.pendaftar-export-excel') }}" method="GET" class="d-inline">
-                                        <button type="submit" class="dropdown-item">
-                                            <i class="fas fa-file-excel me-2"></i>Export Excel
-                                        </button>
-                                    </form>
-                                </li>
-                                <li>
-                                    <form action="{{ route($spref . 'pmb.pendaftar-export-pdf') }}" method="GET" class="d-inline">
-                                        <button type="submit" class="dropdown-item">
-                                            <i class="fas fa-file-pdf me-2"></i>Export PDF
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
+                    <div class="d-flex gap-2 align-items-center">
+                        <!-- Filter Section -->
+                        <div class="d-flex gap-2 align-items-center me-3 filter-section">
+                            <!-- Tahun Akademik Aktif -->
+                            <div class="dropdown">
+                                <button class="btn btn-outline-primary dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-calendar-alt me-2"></i>
+                                    <span class="flex-grow-1">{{ $activeTaka ? $activeTaka->name : 'Pilih Tahun Aktif' }}</span>
+                                    @if($activeTaka) <span class="badge bg-success ms-1">Aktif</span> @endif
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @foreach($takas as $taka)
+                                        <li>
+                                            <form action="{{ route($spref . 'pmb.set-active-tahun') }}" method="POST" class="d-inline">
+                                                @csrf
+                                                <input type="hidden" name="taka_id" value="{{ $taka->id }}">
+                                                <button type="submit" class="dropdown-item {{ $activeTaka && $activeTaka->id == $taka->id ? 'active' : '' }}">
+                                                    {{ $taka->name }}
+                                                    @if($activeTaka && $activeTaka->id == $taka->id) 
+                                                        <span class="badge bg-success ms-1">Aktif</span> 
+                                                    @endif
+                                                </button>
+                                            </form>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+
+                            <!-- Filter Periode -->
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-filter me-2"></i>
+                                    <span class="flex-grow-1">Filter Periode</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item {{ !$selectedPeriodeId ? 'active' : '' }}" href="{{ route($spref . 'pmb.pendaftar-render') }}">
+                                            <i class="fas fa-globe me-2"></i>Semua Periode
+                                        </a>
+                                    </li>
+                                    @if($periodes->count() > 0)
+                                        <li><hr class="dropdown-divider"></li>
+                                        @foreach($periodes as $periode)
+                                            <li>
+                                                <a class="dropdown-item {{ $selectedPeriodeId == $periode->id ? 'active' : '' }}" 
+                                                   href="{{ route($spref . 'pmb.pendaftar-render', ['periode_id' => $periode->id]) }}">
+                                                    <i class="fas fa-calendar me-2"></i>{{ $periode->name }}
+                                                    @if($periode->taka)
+                                                        <small class="text-muted d-block ms-4">{{ $periode->taka->name }}</small>
+                                                    @else
+                                                        <small class="text-muted d-block ms-4">Tahun Akademik tidak ditemukan</small>
+                                                    @endif
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
                         </div>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-                            <i class="fas fa-plus-circle me-2"></i>Tambah Pendaftar
-                        </button>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex gap-2">
+                            <div class="dropdown">
+                                <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-file-export me-2"></i>Export
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <form action="{{ route($spref . 'pmb.pendaftar-export-excel') }}" method="GET" class="d-inline">
+                                            @if($selectedPeriodeId)
+                                                <input type="hidden" name="periode_id" value="{{ $selectedPeriodeId }}">
+                                            @endif
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="fas fa-file-excel me-2"></i>Export Excel
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form action="{{ route($spref . 'pmb.pendaftar-export-pdf') }}" method="GET" class="d-inline">
+                                            @if($selectedPeriodeId)
+                                                <input type="hidden" name="periode_id" value="{{ $selectedPeriodeId }}">
+                                            @endif
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="fas fa-file-pdf me-2"></i>Export PDF
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+                                <i class="fas fa-plus-circle me-2"></i>Tambah Pendaftar
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
+                    <!-- Filter Info -->
+                    @if($selectedPeriodeId || $activeTaka)
+                        <div class="alert alert-light-info mb-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <div>
+                                    <strong>Filter Aktif:</strong>
+                                    @if($selectedPeriodeId)
+                                        @php $selectedPeriode = $periodes->where('id', $selectedPeriodeId)->first(); @endphp
+                                        Menampilkan data untuk periode <strong>{{ $selectedPeriode->name ?? 'Tidak diketahui' }}</strong>
+                                        @if($selectedPeriode && $selectedPeriode->taka) 
+                                            ({{ $selectedPeriode->taka->name }}) 
+                                        @endif
+                                    @elseif($activeTaka)
+                                        Menampilkan data untuk tahun akademik aktif <strong>{{ $activeTaka->name }}</strong>
+                                    @endif
+                                    <a href="{{ route($spref . 'pmb.pendaftar-render') }}" class="btn btn-sm btn-outline-secondary ms-2">
+                                        <i class="fas fa-times me-1"></i>Reset Filter
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    
                     <!-- Quick Stats -->
                     <div class="row mb-4">
                         <div class="col-md-3 mb-2">
@@ -351,6 +486,18 @@
 
                                     <!-- Data Pendaftaran -->
                                     <div class="col-md-6 mb-3">
+                                        <label for="jenjang_id" class="form-label">Jenjang Pendidikan</label>
+                                        <select class="form-select" name="jenjang_id" id="jenjang_id" required>
+                                            <option value="">Pilih Jenjang Pendidikan</option>
+                                            @foreach($jenjangs as $jenjang)
+                                                <option value="{{ $jenjang->id }}">{{ $jenjang->nama }} ({{ $jenjang->singkatan }})</option>
+                                            @endforeach
+                                        </select>
+                                        @error('jenjang_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
                                         <label for="jalur_id" class="form-label">Jalur Pendaftaran</label>
                                         <select class="form-select" name="jalur_id" id="jalur_id" required>
                                             <option value="">Pilih Jalur</option>
@@ -391,7 +538,7 @@
                                         <select class="form-select" name="prodi_1" id="prodi_1" required>
                                             <option value="">Pilih Prodi Pilihan 1</option>
                                             @foreach($prodis as $prodi)
-                                                <option value="{{ $prodi->id }}">{{ $prodi->name }}</option>
+                                                <option value="{{ $prodi->id }}" data-jenjang="{{ $prodi->jenjang_id }}" style="display:none;">{{ $prodi->name }} ({{ $prodi->jenjang ? $prodi->jenjang->singkatan : $prodi->title }})</option>
                                             @endforeach
                                         </select>
                                         @error('prodi_1')
@@ -399,11 +546,11 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="prodi_2" class="form-label">Prodi Pilihan 1</label>
+                                        <label for="prodi_2" class="form-label">Prodi Pilihan 2</label>
                                         <select class="form-select" name="prodi_2" id="prodi_2" required>
                                             <option value="">Pilih Prodi Pilihan 2</option>
                                             @foreach($prodis as $prodi)
-                                                <option value="{{ $prodi->id }}">{{ $prodi->name }}</option>
+                                                <option value="{{ $prodi->id }}" data-jenjang="{{ $prodi->jenjang_id }}" style="display:none;">{{ $prodi->name }} ({{ $prodi->jenjang ? $prodi->jenjang->singkatan : $prodi->title }})</option>
                                             @endforeach
                                         </select>
                                         @error('prodi_2')
@@ -433,6 +580,7 @@
                                     <th>Jalur</th>
                                     <th>Gelombang</th>
                                     <th>Status</th>
+                                    <th>Verifikasi Pembayaran</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -465,6 +613,68 @@
                                                                 ($item->status == 'Gagal' ? 'bg-light-danger text-danger' : 'bg-light-secondary text-secondary')) }}">
                                                 {{ $item->status }}
                                             </span>
+                                        </td>
+                                        <td data-label="Verifikasi Pembayaran">
+                                            @if($item->bukti_pembayaran)
+                                                <div class="d-flex flex-column">
+                                                    @if($item->status_pembayaran == 'verified')
+                                                        <span class="badge bg-success mb-1">
+                                                            <i class="fas fa-check-circle me-1"></i>
+                                                            Terverifikasi
+                                                        </span>
+                                                        @if($item->tanggal_verifikasi_pembayaran)
+                                                            <small class="text-muted">{{ date('d M Y H:i', strtotime($item->tanggal_verifikasi_pembayaran)) }}</small>
+                                                        @endif
+                                                    @elseif($item->status_pembayaran == 'rejected')
+                                                        <span class="badge bg-danger mb-1">
+                                                            <i class="fas fa-times-circle me-1"></i>
+                                                            Ditolak
+                                                        </span>
+                                                        @if($item->catatan_verifikasi)
+                                                            <small class="text-danger">{{ $item->catatan_verifikasi }}</small>
+                                                        @endif
+                                                    @else
+                                                        <span class="badge bg-warning mb-1">
+                                                            <i class="fas fa-clock me-1"></i>
+                                                            Pending Verifikasi
+                                                        </span>
+                                                    @endif
+                                                    <small class="text-muted">
+                                                        <strong>Bank:</strong> {{ $item->bank_pengirim ?? '-' }} → {{ $item->bank_tujuan ?? '-' }}<br>
+                                                        <strong>Nama:</strong> {{ $item->nama_pengirim ?? '-' }}<br>
+                                                        <strong>Jumlah:</strong> Rp {{ number_format($item->jumlah_transfer ?? 0, 0, ',', '.') }}<br>
+                                                        <strong>Tanggal:</strong> {{ $item->tanggal_transfer ? date('d M Y', strtotime($item->tanggal_transfer)) : '-' }}
+                                                    </small>
+                                                    
+                                                    @if($item->bukti_pembayaran)
+                                                        <a href="{{ asset('storage/' . $item->bukti_pembayaran) }}" target="_blank" class="btn btn-sm btn-outline-info mt-1">
+                                                            <i class="fas fa-file-image me-1"></i>
+                                                            Lihat Bukti
+                                                        </a>
+                                                    @endif
+                                                    
+                                                    @if($item->status_pembayaran == 'pending' || is_null($item->status_pembayaran))
+                                                        <div class="btn-group mt-2" role="group">
+                                                            <form action="{{ route($spref . 'pmb.verify-pembayaran', $item->code) }}" method="POST" class="d-inline">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-sm btn-success" title="Verifikasi Pembayaran">
+                                                                    <i class="fas fa-check me-1"></i>
+                                                                    Verifikasi
+                                                                </button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rejectPayment{{ $item->code }}" title="Tolak Pembayaran">
+                                                                <i class="fas fa-times me-1"></i>
+                                                                Tolak
+                                                            </button>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            @else
+                                                <span class="badge bg-secondary">
+                                                    <i class="fas fa-upload me-1"></i>
+                                                    Belum Upload
+                                                </span>
+                                            @endif
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group">
@@ -535,6 +745,7 @@
 
     <!-- Edit Modals -->
     @foreach ($pendaftars as $item)
+        <!-- Edit Modal -->
         <div class="modal fade" id="editData{{ $item->code }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ $item->code }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
@@ -592,11 +803,66 @@
                 </div>
             </div>
         </div>
+
+        <!-- Reject Payment Modal -->
+        @if($item->bukti_pembayaran && ($item->status_pembayaran == 'pending' || is_null($item->status_pembayaran)))
+        <div class="modal fade" id="rejectPayment{{ $item->code }}" tabindex="-1" role="dialog" aria-labelledby="rejectPaymentLabel{{ $item->code }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form action="{{ route($spref . 'pmb.reject-pembayaran', $item->code) }}" method="POST">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="rejectPaymentLabel{{ $item->code }}">Tolak Pembayaran - {{ $item->name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-warning">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Anda akan menolak pembayaran dari <strong>{{ $item->name }}</strong>
+                            </div>
+                            <div class="mb-3">
+                                <label for="catatan_verifikasi{{ $item->code }}" class="form-label">Alasan Penolakan <span class="text-danger">*</span></label>
+                                <textarea class="form-control" name="catatan_verifikasi" id="catatan_verifikasi{{ $item->code }}" rows="4" required placeholder="Masukkan alasan penolakan pembayaran..."></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-times me-1"></i> Tolak Pembayaran
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endif
     @endforeach
 @endsection
 
 @section('custom-js')
     <script src="{{ asset('dist') }}/assets/extensions/jquery/jquery.min.js"></script>
+    <script>
+    // Filter prodi berdasarkan jenjang pendidikan
+    $(document).ready(function() {
+        function filterProdiByJenjang() {
+            var jenjangId = $('#jenjang_id').val();
+            $('#prodi_1 option, #prodi_2 option').each(function() {
+                var optionJenjang = $(this).data('jenjang');
+                if ($(this).val() === '') {
+                    $(this).show(); // Always show the default "Pilih" option
+                } else if (!jenjangId || jenjangId == optionJenjang) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+            $('#prodi_1').val('');
+            $('#prodi_2').val('');
+        }
+        $('#jenjang_id').on('change', filterProdiByJenjang);
+        filterProdiByJenjang();
+    });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
