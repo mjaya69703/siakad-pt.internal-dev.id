@@ -106,4 +106,15 @@
             <span class="nav-link-title">Kontak</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/signin">
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                    <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" />
+                    <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />
+                </svg>
+            </span>
+            <span class="nav-link-title">Portal</span>
+        </a>
+    </li>
 </ul>

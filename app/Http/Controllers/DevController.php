@@ -16,14 +16,8 @@ class DevController extends Controller
 {
     public function index()
     {
-        $user = Auth::user() ?: Auth::guard('dosen')->user() ?: Auth::guard('mahasiswa')->user();
-        $data['spref'] = $user ? $user->prefix : '';
-        $data['menus'] = "Index";
-        $data['pages'] = "Tahun Akademik";
-        $data['academy'] = "Siakad PT by Esec Academy";
-
-        // return view('core-themes.core-backpage', $data, compact('user'));
-        return view('central.back-content', $data, compact('user'));
+        // Redirect to the new leadership dashboard
+        return redirect()->route('dashboard.leadership');
     }
 
 }

@@ -28,9 +28,7 @@ class RootController extends Controller
 
     public function renderHomePage()
     {
-        if (!Schema::hasTable('web_settings')) {
-            return $this->renderWelcome();
-        }
+        // Skip web_settings table check and go directly to main content
         $user = Auth::user() ?: Auth::guard('dosen')->user() ?: Auth::guard('mahasiswa')->user();
         $data['webs'] = WebSetting::first();
         $data['spref'] = $user ? $user->prefix : '';

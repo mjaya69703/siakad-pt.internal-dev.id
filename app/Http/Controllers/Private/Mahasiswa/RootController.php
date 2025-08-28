@@ -244,6 +244,129 @@ class RootController extends Controller
     }
     
     /**
+     * Get quick action links for the dashboard
+     */
+    private function getQuickActions(&$data)
+    {
+        $data['quick_actions'] = [
+            [
+                'title' => 'KRS Online',
+                'description' => 'Pengajuan Kartu Rencana Studi',
+                'url' => route('mahasiswa.akademik.krs-render'),
+                'icon' => 'clipboard-list',
+                'color' => 'primary'
+            ],
+            [
+                'title' => 'Jadwal Kuliah',
+                'description' => 'Lihat jadwal perkuliahan',
+                'url' => route('mahasiswa.akademik.jadwal'),
+                'icon' => 'calendar',
+                'color' => 'info'
+            ],
+            [
+                'title' => 'Pembayaran',
+                'description' => 'Lihat tagihan dan riwayat',
+                'url' => route('mahasiswa.keuangan.tagihan'),
+                'icon' => 'credit-card',
+                'color' => 'success'
+            ],
+            [
+                'title' => 'Transkrip Nilai',
+                'description' => 'Download transkrip nilai',
+                'url' => route('mahasiswa.layanan.transkrip'),
+                'icon' => 'file-text',
+                'color' => 'warning'
+            ],
+            [
+                'title' => 'Presensi',
+                'description' => 'Lihat kehadiran kuliah',
+                'url' => route('mahasiswa.akademik.presensi'),
+                'icon' => 'map-pin',
+                'color' => 'purple'
+            ],
+            [
+                'title' => 'Layanan Mahasiswa',
+                'description' => 'Surat-surat dan legalisir',
+                'url' => route('mahasiswa.layanan.surat-keterangan'),
+                'icon' => 'file-certificate',
+                'color' => 'indigo'
+            ]
+        ];
+    }
+    
+    /**
+     * Get calendar events for the dashboard
+     */
+    private function getCalendarEvents(&$data)
+    {
+        $data['calendar_events'] = [
+            [
+                'title' => 'Batas Akhir KRS',
+                'date' => '2024-09-15',
+                'type' => 'deadline',
+                'description' => 'Batas waktu pengajuan KRS semester genap'
+            ],
+            [
+                'title' => 'UTS Semester Genap',
+                'date' => '2024-10-14',
+                'type' => 'exam',
+                'description' => 'Ujian Tengah Semester dimulai'
+            ],
+            [
+                'title' => 'Pembayaran UKT Gelombang 2',
+                'date' => '2024-09-30',
+                'type' => 'payment',
+                'description' => 'Batas pembayaran UKT gelombang ke-2'
+            ]
+        ];
+        
+        // Sort by date
+        usort($data['calendar_events'], function($a, $b) {
+            return strtotime($a['date']) - strtotime($b['date']);
+        });
+        
+        // Only show upcoming events (next 5)
+        $data['calendar_events'] = array_slice(array_filter($data['calendar_events'], function($event) {
+            return strtotime($event['date']) >= strtotime('today');
+        }), 0, 5);
+    }
+    
+    /**
+     * Get important notifications
+     */
+    private function getImportantNotifications(&$data)
+    {
+        $data['notifications'] = [
+            [
+                'type' => 'info',
+                'title' => 'Sistem Pembaruan',
+                'message' => 'Portal SIAKAD telah diperbarui dengan fitur-fitur baru untuk meningkatkan pengalaman pengguna.',
+                'time' => Carbon::now()->subHours(2),
+                'read' => false
+            ],
+            [
+                'type' => 'warning',
+                'title' => 'Pengingat Pembayaran',
+                'message' => 'Anda memiliki tagihan yang akan jatuh tempo dalam 7 hari. Segera lakukan pembayaran.',
+                'time' => Carbon::now()->subHours(4),
+                'read' => false
+            ],
+            [
+                'type' => 'success',
+                'title' => 'KRS Disetujui',
+                'message' => 'Kartu Rencana Studi Anda telah disetujui oleh dosen pembimbing akademik.',
+                'time' => Carbon::now()->subDay(),
+                'read' => true
+            ]
+        ];
+        
+        // Count unread notifications
+        $data['unread_notifications'] = count(array_filter($data['notifications'], function($notif) {
+            return !$notif['read'];
+        }));
+    }
+
+    /**
      * Get recent activities
      */
     private function getRecentActivities(&$data, $user)
@@ -327,7 +450,14 @@ class RootController extends Controller
             ];
         }
 
-        return view('private.mahasiswa.dashboard', $data);
+        // Get quick action links
+        $this->getQuickActions($data);
+        
+        // Get calendar events
+        $this->getCalendarEvents($data);
+        
+        // Get important notifications
+        $this->getImportantNotifications($data);
     }
 
     public function renderProfile()

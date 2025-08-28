@@ -20,7 +20,7 @@
                                 <ul class="nav nav-tabs nav-fill mb-3" id="loginTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link {{ !isset($activePendaftarTab) ? 'active' : '' }}" id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin" type="button" role="tab" aria-controls="admin" aria-selected="{{ !isset($activePendaftarTab) ? 'true' : 'false' }}">
-                                            <i class="fas fa-user-tie me-1"></i> Admin/Staff
+                                            <i class="fas fa-user-tie me-1"></i> Admin/Mahasiswa
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
@@ -37,7 +37,7 @@
                                         <form action="{{ route('auth.handle-signin') }}" method="post" autocomplete="on" novalidate>
                                             @csrf
                                             <div class="mb-3">
-                                                <label class="form-label">Email address</label>
+                                                <label class="form-label">Username/Email address</label>
                                                 <input type="text" class="form-control" name="login" placeholder="Email or Username" autocomplete="on" />
                                                 @error('login')
                                                     <small class="text-danger">{{ $message }}</small>
@@ -141,7 +141,7 @@
                             </div>
                         </div>
                         <div class="text-center text-secondary mt-3">
-                            <span>Untuk akun admin/staff, gunakan tab "Admin/Staff" di atas</span>
+                            <span>Login dengan Akun</span>
                         </div>
                     </div>
                 </div>
