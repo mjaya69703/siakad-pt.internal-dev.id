@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('kewarganegaraan')->after('numb_npwp')->default('ID'); // Citizenship
             
             // Guardian information
-            $table->string('par_mother_income');
+            $table->string('par_mother_income')->default(0);
             $table->string('par_guardian_name')->after('par_mother_income')->nullable();
             $table->string('par_guardian_job')->after('par_guardian_name')->nullable();
             $table->integer('par_guardian_income')->after('par_guardian_job')->nullable();
